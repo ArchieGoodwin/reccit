@@ -1,0 +1,286 @@
+//
+//  RCListFriendViewController.m
+//  Reccit
+//
+//  Created by Lee Way on 1/28/13.
+//  Copyright (c) 2013 leeway. All rights reserved.
+//
+
+#import "RCListFriendViewController.h"
+#import "RCPerson.h"
+#import "RCCommonUtils.h"
+#import "MBProgressHUD.h"
+#import "RCDefine.h"
+#import "RCAddPlaceViewController.h"
+#import "UIImageView+WebCache.h"
+#import "RCFriendCell.h"
+
+#define kRCAPIListFriend @"http://bizannouncements.com/Vega/services/app/friends.php?user=%@"
+
+@interface RCListFriendViewController ()
+{
+    UIGestureRecognizer *cancelGesture;
+}
+
+@end
+
+@implementation RCListFriendViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
+    self.listFriends = [[NSMutableArray alloc] init];
+    self.listFriendsFilter = [[NSMutableArray alloc] init];
+    
+    [self.tbFriends setSeparatorColor:[UIColor clearColor]];
+    
+    [self.view setBackgroundColor:kRCBackgroundView];
+    
+    [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self callAPIGetListFriends];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark - Webservice
+
+- (void)callAPIGetListFriends
+{
+    
+    if (![RCCommonUtils isLocationServiceOn])
+    {
+        [RCCommonUtils showMessageWithTitle:@"Warning" andContent:@"You must enable Location Service on App Setting to using this function!"];
+        return;
+    }
+    
+    // Cancel old request
+    if (self.request != nil && [self.request isExecuting])
+    {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.request clearDelegatesAndCancel];
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *urlString = [NSString stringWithFormat:kRCAPIListFriend, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    NSLog(@"REQUEST URL: %@", urlString);
+    
+    // Start new request
+    NSURL *url = [NSURL URLWithString:urlString];
+    self.request = [ASIHTTPRequest requestWithURL:url];
+    
+    [self.request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+        NSLog(@"%@", responseObject);
+        
+        [self.listFriends removeAllObjects];
+        for (NSDictionary *category in responseObject)
+        {
+            for (NSDictionary *dic in [responseObject objectForKey:[category description]])
+            {
+                NSDictionary *rs = [dic objectForKey:@"friend"];
+                RCPerson *friend = [[RCPerson alloc] init];
+                friend.name = [NSString stringWithFormat:@"%@ %@", [rs objectForKey:@"firstname"], [rs objectForKey:@"lastname"]];
+                friend.ID = [rs objectForKey:@"id"];
+                friend.photo = [rs objectForKey:@"photo"];
+                
+                if ([[category description] isEqualToString:@"FacebookFriends"])
+                {
+                    friend.source = RCFriendSourceFacebook;
+                } else {
+                    friend.source = RCFriendSourceTwitter;
+                }
+                
+                [self.listFriends addObject:friend];
+            }
+        }
+        
+        [self.listFriends sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            RCPerson *friend1 = (RCPerson *)obj1;
+            RCPerson *friend2 = (RCPerson *)obj2;
+            
+            return [friend1.name compare:friend2.name];
+        }];
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.tbFriends reloadData];
+    }];
+    
+    [self.request setFailedBlock:^{
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+    
+    [self.request startAsynchronous];
+}
+
+#pragma mark -
+#pragma mark - Button touched
+
+- (IBAction)btnBackTouched:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)btnDoneTouched:(id)sender
+{
+    NSMutableArray *listFriend = [[NSMutableArray alloc] init];
+    for (RCPerson *friend in self.listFriends) {
+        if (friend.isMark)
+        {
+            [listFriend addObject:friend];
+        }
+    }
+    
+    self.fatherVc.listFriends = listFriend;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)btnGoTouched:(id)sender
+{
+    [self.listFriendsFilter removeAllObjects];
+    for (RCPerson *friend in self.listFriends)
+    {
+        if ([friend.name rangeOfString:self.tfSearch.text options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+            [self.listFriendsFilter addObject:friend];
+        }
+    }
+    
+    [self.tbFriends reloadData];
+}
+
+#pragma mark -
+#pragma mark - TableView Datasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0)
+    return [self.listFriends count];
+    
+    return [self.listFriendsFilter count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RCFriendCell *cell = (RCFriendCell *)[tableView dequeueReusableCellWithIdentifier:@"RCFriendCell"];
+    
+    RCPerson *person = nil;    
+    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0) {
+        person = [self.listFriends objectAtIndex:indexPath.row];
+    } else {
+        person = [self.listFriendsFilter objectAtIndex:indexPath.row];
+    }
+
+    [cell.lbName setText:person.name];
+    [cell.lbName setTextColor:kRCTextColor];
+    
+    if (person.source == RCFriendSourceFacebook)
+    {
+        [cell.imgSource setImage:[UIImage imageNamed:@"ic_facebook.png"]];
+    } else {
+        [cell.imgSource setImage:[UIImage imageNamed:@"ic_twitter.ong"]];
+    }
+    NSLog(@"%@",person.photo);
+    [cell.imgAva setImageWithURL:[NSURL URLWithString:person.photo] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
+    
+    cell.checkBox.tag = indexPath.row;
+    
+    if (person.isMark) {
+        cell.checkBox.selected = YES;
+    } else {
+        cell.checkBox.selected = NO;
+    }
+    
+    if (indexPath.row %2 == 0) {
+        [cell.contentView setBackgroundColor:kRCTableViewCellColorHighLight];
+    } else {
+        [cell.contentView setBackgroundColor:kRCBackgroundView];
+    }
+    
+    return cell;
+}
+
+- (IBAction)btnCheckBoxTouched:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    
+    RCPerson *person = nil;
+    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0) {
+        person = [self.listFriends objectAtIndex:btn.tag];
+    } else {
+        person = [self.listFriendsFilter objectAtIndex:btn.tag];
+    }
+    
+    person.isMark = !person.isMark;
+    [self.tbFriends reloadData];
+}
+
+#pragma mark -
+#pragma mark - TableView delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RCPerson *person = nil;
+    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0) {
+        person = [self.listFriends objectAtIndex:indexPath.row];
+    } else {
+        person = [self.listFriendsFilter objectAtIndex:indexPath.row];
+    }
+
+    person.isMark = !person.isMark;
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+#pragma mark
+#pragma mark - SearchBar delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    cancelGesture = [UITapGestureRecognizer new];
+    [cancelGesture addTarget:self action:@selector(backgroundTouched:)];
+    [self.view addGestureRecognizer:cancelGesture];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    if (cancelGesture) {
+        [self.view removeGestureRecognizer:cancelGesture];;
+        cancelGesture = nil;
+    }
+}
+
+-(void) backgroundTouched:(id) sender {
+    [self.tfSearch resignFirstResponder];
+}
+
+@end

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ScrollView01" android:layout_width="fill_parent"
+	android:orientation="vertical" android:layout_height="fill_parent"
+	android:background="@color/white">
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    
+    android:orientation="vertical" >
+
+    <!--
+    <RelativeLayout
+        android:id="@+id/banner_layout"
+        style="@style/layout_fill_width"
+        android:layout_height="50dp"
+        android:padding="2dp" >
+
+        <com.reccit.androidapp.widget.AutoBGButton
+            android:id="@+id/btnLeft"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_back"
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layoutAvatar"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/imgUserAvatar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/ic_facebook"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </RelativeLayout>
+    -->
+
+    <include layout="@layout/layout_header_back_avatar" />
+
+    <LinearLayout
+        android:id="@+id/layoutContent"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp" >
+
+        <LinearLayout
+            android:id="@+id/layoutPlaceImage"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imgPlace"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/ic_twitter"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progressPlaceImage"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp" >
+
+            <TextView
+                android:id="@+id/lblPlaceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:text="Hhee"
+                android:textColor="#4544ff"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lblPlaceAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hhee"
+                android:textColor="@color/gray_place_name"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentTop="true"
+        android:apiKey="@string/mapkey"
+        android:clickable="true"
+        android:visibility="gone" >
+    </com.google.android.maps.MapView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        >
+
+<!--         <TextView
+            android:id="@+id/lblRateIt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:singleLine="true"
+            android:text="Rate this place :"
+            android:textColor="@color/gray_place_name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/placeRatingBarMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <ImageView
+            android:id="@+id/imgLike"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_like_normal" />
+
+        <ImageView
+            android:id="@+id/imgDisLike"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_dislike_normal" />
+ -->
+         <com.reccit.androidapp.widget.AutoBGButton
+            android:id="@+id/btnAddComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_review"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+ 
+     </LinearLayout> 
+
+    <LinearLayout
+        
+        style="@style/layout_fill_width"
+        android:layout_height="80dp"
+        android:layout_width="fill_parent"
+        android:background="@drawable/bg_add_friend"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="@string/who_are_you_with"
+            android:textColor="@color/blue_text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        
+        <com.reccit.androidapp.widget.AutoBGButton
+            android:id="@+id/btnAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_add_friend"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout_fill_width"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="#d7d7d7" >
+
+        <com.reccit.androidapp.widget.AutoBGButton
+            android:id="@+id/btnWhatRUDoing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_what_are_udoing"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout_fill_width_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal" >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_facebook"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/chkShareFacebook"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_checkbox_share_facebook"
+            android:button="@null"
+            android:checked="true" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_twitter"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/chkShareTwitter"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_checkbox_share_twitter"
+            android:button="@null"
+            android:checked="true" />
+    </LinearLayout>
+
+    <com.reccit.androidapp.widget.AutoBGButton
+            android:id="@+id/btnCheckin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_checkin"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    
+
+</LinearLayout>
+</ScrollView>
