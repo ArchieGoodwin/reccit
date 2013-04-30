@@ -10,10 +10,10 @@
     <file path="$PROJECT_DIR$/../../abouttimetech/FieldClockIOS/depot/iFieldClockDev/Classes/iFieldAPICaller.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366105815170" ignored="false" />
     <file path="/iFieldAPICaller.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366105684379" ignored="false" />
     <file path="$PROJECT_DIR$/../../abouttimetech/FieldClockIOS/depot/iFieldClockDev/Classes/MainScreenView.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366104901716" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367316548039" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367318072968" ignored="false" />
     <file path="/RCLoginViewController.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365851101684" ignored="false" />
     <file path="/RCLoginViewController.h" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365670864064" ignored="false" />
-    <file path="/facebookHelper.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366093742725" ignored="false" />
+    <file path="/facebookHelper.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367319706101" ignored="false" />
     <file path="/facebookHelper.h" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365841117716" ignored="false" />
     <file path="/RCWebService.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365952348968" ignored="false" />
     <file path="/RCMyReviewViewController.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365740423734" ignored="false" />
@@ -73,17 +73,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="facebookHelper.m" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m">
+      <file leaf-file-name="main.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/main.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="30" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.4744898">
+            <state line="15" column="0" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RCHomeViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCHomeViewController.m">
+      <file leaf-file-name="RCSearchResultViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCSearchResultViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="349" column="60" selection-start="11228" selection-end="11228" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCWebService.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/Web Service/RCWebService.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="49" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCLoginViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCLoginViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="109" column="5" selection-start="3227" selection-end="3227" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCRateViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCRateViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="55" selection-start="2009" selection-end="2009" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCAppDelegate.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCAppDelegate.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="1" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCMainTabbarController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/RCMainTabbarController.m">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -100,8 +145,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RCMainTabbarController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/RCMainTabbarController.m">
+      <file leaf-file-name="RCHomeViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCHomeViewController.m">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -109,55 +154,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RCAppDelegate.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/RCAppDelegate.m">
+      <file leaf-file-name="facebookHelper.m" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="1" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCRateViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/RCRateViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="55" selection-start="2009" selection-end="2009" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCLoginViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/RCLoginViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="5" selection-start="3227" selection-end="3227" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCWebService.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Web Service/RCWebService.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="49" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCSearchResultViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCSearchResultViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="349" column="60" selection-start="11228" selection-end="11228" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/main.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
+            <state line="487" column="0" selection-start="20997" selection-end="20997" vertical-scroll-proportion="0.5141509">
               <folding />
             </state>
           </provider>
@@ -230,7 +230,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="DirectoryView.Xcode" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -357,17 +356,18 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="DirectoryView.Xcode" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Reccit.xcodeproj" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="Reccit" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RestClientSettings">
     <option name="LAST_HOST" value="http://bizannouncements.com/bhavesh/getUser.php" />
@@ -518,11 +518,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m</url>
-          <line>599</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Reccit/Main Tab/Share/RCShareViewController.m</url>
           <line>111</line>
           <option name="timeStamp" value="13" />
@@ -567,8 +562,13 @@
           <line>163</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m</url>
+          <line>523</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="51" />
+      <option name="time" value="53" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -669,7 +669,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="30" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.4744898">
+        <state line="487" column="0" selection-start="20997" selection-end="20997" vertical-scroll-proportion="0.5141509">
           <folding />
         </state>
       </provider>

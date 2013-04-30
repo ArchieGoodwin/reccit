@@ -21,7 +21,7 @@
             @"{"
                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me() LIMIT 300 OFFSET %i',"
                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                    @"'query3':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                    @"'query3':'select page_id, name, type, food_styles, hours, location,  "
                     "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
@@ -43,7 +43,7 @@
         {
             NSLog(@"step recursiveQuery %i", iterations);
             iterations++;
-            NSLog(@"getFacebookQuery > 300: %@", [result objectForKey:@"data"]);
+            //NSLog(@"getFacebookQuery > 300: %@", [result objectForKey:@"data"]);
             [self buildArrays:[result objectForKey:@"data"]];
 
             if(iterations <= maxIterations)
@@ -107,7 +107,7 @@
                             @"{"
                                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me()',"
                                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                                    @"'query3':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                                    @"'query3':'select page_id, name, type, food_styles, hours, location,  "
                                     "phone, pic, price_range, website "
                                     "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
                                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
@@ -124,7 +124,7 @@
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         if(!error)
                         {
-                            NSLog(@"getFacebookQuery < 300 : %@", [result objectForKey:@"data"]);
+                           // NSLog(@"getFacebookQuery < 300 : %@", [result objectForKey:@"data"]);
                             NSLog(@"end query %@", [NSDate date]);
                             [self buildArrays:[result objectForKey:@"data"]];
                             [self buildResult];
@@ -191,7 +191,7 @@
                     @"{"
                                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me()',"
                                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1) AND timestamp > %li',"
-                            @"'query3':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                            @"'query3':'select page_id, name, type, food_styles, hours, location,  "
                             "phone, pic, price_range, website "
                             "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
                             "name FROM place WHERE page_id IN (SELECT page_id FROM #query2))',"
@@ -208,7 +208,7 @@
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         if(!error)
                         {
-                            NSLog(@"getFacebookQuery < 300 : %@", [result objectForKey:@"data"]);
+                            //NSLog(@"getFacebookQuery < 300 : %@", [result objectForKey:@"data"]);
                             NSLog(@"end query %@", [NSDate date]);
                             [self buildArrays:[result objectForKey:@"data"]];
                             [self buildResult];
@@ -341,10 +341,54 @@
                                                                         [self makeStringWithKeyAndValue2:@"coords" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
                                                                         nil];
 
-                NSString *item = [NSString stringWithFormat:@"{%@}", [friendCheckinArray componentsJoinedByString:@","]];
+                //place dictionary building
+                NSMutableArray *foodStyles = [NSMutableArray new];
+                for(NSString *style in [placeDict objectForKey:@"food_styles"])
+                {
+                    [foodStyles addObject:style];
+                }
+                NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":(%@)", [foodStyles componentsJoinedByString:@","]];
 
 
-                //NSLog(@"%@", item);
+                NSMutableArray *hours = [NSMutableArray new];
+                NSString *hoursString = @"\"hours\":{}";
+                if([((NSDictionary *) [placeDict objectForKey:@"hours"]) respondsToSelector:@selector(allKeys)])
+                {
+                    for(NSString *hour in ((NSDictionary *)[placeDict objectForKey:@"hours"]).allKeys)
+                    {
+                        [hours addObject:[self makeStringWithKeyAndValue:hour value:[((NSDictionary *)[placeDict objectForKey:@"hours"]) objectForKey:hour]]];
+                    }
+                }
+                hoursString = [NSString stringWithFormat:@"\"hours\":{%@}", [hours componentsJoinedByString:@","]];
+
+                NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"page_id"]],
+                                                                [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
+                                                                [self makeStringWithKeyAndValue:@"name" value:[placeName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                                                                [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
+                                                                [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
+                                                                [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
+                                                                [self makeStringWithKeyAndValue:@"street" value:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                                                                [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
+                                                                [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
+                                                                [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                                                                [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
+                                                                [self makeStringWithKeyAndValue:@"website" value:[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                                                                hoursString,
+                                                                foodStyleString,
+
+                                                                nil];
+                NSString *place = [NSString stringWithFormat:@"\"place\":{%@}", [placeArray componentsJoinedByString:@","]];
+
+
+
+
+
+
+
+                NSString *item = [NSString stringWithFormat:@"{%@,%@}", [friendCheckinArray componentsJoinedByString:@","], place];
+
+
+                NSLog(@"%@", item);
 
                 //NSLog(@"%@", placeName);
                 //[checkin setObject:placeName forKey:@"name"];
@@ -420,13 +464,44 @@
 
             NSArray *locArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[[checkin objectForKey:@"coords"] objectForKey:@"latitude"]],
                                                           [self makeStringWithKeyAndValue:@"longitude" value:[[checkin objectForKey:@"coords"] objectForKey:@"longitude"]],
-                                                          nil];
+                            nil];
 
+           //place dictionary building
+            NSMutableArray *foodStyles = [NSMutableArray new];
+            for(NSString *style in [placeDict objectForKey:@"food_styles"])
+            {
+                    [foodStyles addObject:style];
+            }
+            NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":(%@)", [foodStyles componentsJoinedByString:@","]];
+
+
+            NSMutableArray *hours = [NSMutableArray new];
+            NSString *hoursString = @"\"hours\":{}";
+            if([((NSDictionary *) [placeDict objectForKey:@"hours"]) respondsToSelector:@selector(allKeys)])
+            {
+                for(NSString *hour in ((NSDictionary *)[placeDict objectForKey:@"hours"]).allKeys)
+                {
+                    [hours addObject:[self makeStringWithKeyAndValue:hour value:[((NSDictionary *)[placeDict objectForKey:@"hours"]) objectForKey:hour]]];
+                }
+            }
+            hoursString = [NSString stringWithFormat:@"\"hours\":{%@}", [hours componentsJoinedByString:@","]];
 
             NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"page_id"]],
                                                             [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
                                                             [self makeStringWithKeyAndValue:@"name" value:[placeName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
-                                                            nil];
+                                                            [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
+                            [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
+                            [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
+                            [self makeStringWithKeyAndValue:@"street" value:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                            [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
+                            [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
+                            [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                            [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
+                            [self makeStringWithKeyAndValue:@"website" value:[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                            hoursString,
+                            foodStyleString,
+
+                    nil];
             NSString *place = [NSString stringWithFormat:@"\"place\":{%@}", [placeArray componentsJoinedByString:@","]];
 
 
@@ -446,7 +521,7 @@
 
 
 
-            //NSLog(@"%@", item);
+            NSLog(@"%@", item);
 
             //NSLog(@"%@", placeName);
             //[checkin setObject:placeName forKey:@"name"];
@@ -508,7 +583,7 @@
     NSString *query = [NSString stringWithFormat:
             @"{"
                     @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me()',"
-                    @"'query2':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                    @"'query2':'select page_id, name, type, food_styles, hours, location,  "
                     "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", "
                     "\"BAR\", "
@@ -555,7 +630,7 @@
     NSString *query = [NSString stringWithFormat:
             @"{"
                     @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li',"
-                    @"'query2':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                    @"'query2':'select page_id, name, type, food_styles, hours, location,  "
                     "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
                     "name FROM place WHERE page_id IN (SELECT page_id FROM #query1))',"
