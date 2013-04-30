@@ -21,7 +21,9 @@
             @"{"
                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me() LIMIT 300 OFFSET %i',"
                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                    @"'query3':'select page_id, name, type from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
+                    @"'query3':'select page_id, name, type, about, attire, categories, checkins, culinary_team, description, fan_count, food_styles, general_manager, hours, location, parking, "
+                    "payment_options, phone, pic, price_range, public_transit, restaurant_services, restaurant_specialties, website "
+                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
                     @"}", offset];
 
@@ -41,7 +43,7 @@
         {
             NSLog(@"step recursiveQuery %i", iterations);
             iterations++;
-            //NSLog(@"getFacebookQuery > 300: %@", [result objectForKey:@"data"]);
+            NSLog(@"getFacebookQuery > 300: %@", [result objectForKey:@"data"]);
             [self buildArrays:[result objectForKey:@"data"]];
 
             if(iterations <= maxIterations)
@@ -105,7 +107,9 @@
                             @"{"
                                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me()',"
                                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                                    @"'query3':'select page_id, name, type from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
+                                    @"'query3':'select page_id, name, type, about, attire, categories, checkins, culinary_team, description, fan_count, food_styles, general_manager, hours, location, parking, "
+                                    "payment_options, phone, pic, price_range, public_transit, restaurant_services, restaurant_specialties, website "
+                                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
                                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
                                     @"}";
 
@@ -313,7 +317,7 @@
         //NSLog(@"%@", checkin);
 
         NSDictionary *placeDict = [self getFriendPageIsFromCheckins:[checkin objectForKey:@"page_id"]];
-        NSLog(@"%@", placeDict);
+        //NSLog(@"%@", placeDict);
         if(placeDict)
         {
             if([[checkin objectForKey:@"coords"] isKindOfClass:[NSDictionary class]])
@@ -502,7 +506,12 @@
     NSString *query = [NSString stringWithFormat:
             @"{"
                     @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me()',"
-                    @"'query2':'select page_id, name, type from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, type "
+                    @"'query2':'select page_id, name, type, about, attire, categories, checkins, culinary_team, description, fan_count, food_styles, general_manager, hours, location, parking, "
+                    "payment_options, phone, pic, price_range, public_transit, restaurant_services, restaurant_specialties, website "
+                    "from page where type in (\"RESTAURANT/CAFE\", "
+                    "\"BAR\", "
+                    "\"HOTEL\") and page_id in (SELECT page_id, "
+                    "name, type "
                     " FROM place WHERE page_id IN (SELECT page_id FROM #query1))',"
                     @"}"];
 
