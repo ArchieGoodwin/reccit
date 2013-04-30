@@ -21,8 +21,8 @@
             @"{"
                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me() LIMIT 300 OFFSET %i',"
                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                    @"'query3':'select page_id, name, type, about, attire, categories, checkins, culinary_team, description, fan_count, food_styles, general_manager, hours, location, parking, "
-                    "payment_options, phone, pic, price_range, public_transit, restaurant_services, restaurant_specialties, website "
+                    @"'query3':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                    "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
                     @"}", offset];
@@ -107,8 +107,8 @@
                             @"{"
                                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me()',"
                                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                                    @"'query3':'select page_id, name, type, about, attire, categories, checkins, culinary_team, description, fan_count, food_styles, general_manager, hours, location, parking, "
-                                    "payment_options, phone, pic, price_range, public_transit, restaurant_services, restaurant_specialties, website "
+                                    @"'query3':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                                    "phone, pic, price_range, website "
                                     "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
                                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
                                     @"}";
@@ -191,7 +191,9 @@
                     @"{"
                                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me()',"
                                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1) AND timestamp > %li',"
-                                    @"'query3':'select page_id, name, type from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
+                            @"'query3':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                            "phone, pic, price_range, website "
+                            "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
                             "name FROM place WHERE page_id IN (SELECT page_id FROM #query2))',"
                                     @"}", millis];
                     NSLog(@"query: %@", query);
@@ -506,8 +508,8 @@
     NSString *query = [NSString stringWithFormat:
             @"{"
                     @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me()',"
-                    @"'query2':'select page_id, name, type, about, attire, categories, checkins, culinary_team, description, fan_count, food_styles, general_manager, hours, location, parking, "
-                    "payment_options, phone, pic, price_range, public_transit, restaurant_services, restaurant_specialties, website "
+                    @"'query2':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                    "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", "
                     "\"BAR\", "
                     "\"HOTEL\") and page_id in (SELECT page_id, "
@@ -553,7 +555,9 @@
     NSString *query = [NSString stringWithFormat:
             @"{"
                     @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li',"
-                    @"'query2':'select page_id, name, type from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
+                    @"'query2':'select page_id, name, type, about, description, food_styles, hours, location,  "
+                    "phone, pic, price_range, website "
+                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
                     "name FROM place WHERE page_id IN (SELECT page_id FROM #query1))',"
                     @"}", millis];
 
