@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
+
 
 @interface foursquareHelper : NSObject
 
 
-+(id)sharedInstance;
+@property (nonatomic, strong) NSMutableArray *checkins;
+@property (nonatomic, strong) NSMutableArray *places;
+@property (nonatomic, strong) NSString *stringUserCheckins;
 
++(id)sharedInstance;
+-(void)getCheckins:(NSString *)token completionBlock:(RCCompleteBlockWithResult)completionBlock;
 @end

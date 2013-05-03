@@ -10,7 +10,7 @@
 #import "ASIHTTPRequest.h"
 #import "RCDefine.h"
 #import "facebookHelper.h"
-
+#import "foursquareHelper.h"
 #define kUserUrl @"http://bizannouncements.com/Vega/services/app/getUser.php?auth=fbook&token=%@"
 #define kUserUrlTwitter @"http://bizannouncements.com/Vega/services/app/getUser.php?auth=twitter&token=%@"
 
@@ -196,6 +196,11 @@
     [request setCompletionBlock:^{
         NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         NSLog(@"%@", responseObject);
+        
+        [[foursquareHelper sharedInstance] getCheckins:token completionBlock:^(BOOL result, NSError *error) {
+            //result
+        }];
+        
         
     }];
     
