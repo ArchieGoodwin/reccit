@@ -17,7 +17,7 @@
 #import "RCDirectViewController.h"
 
 
-#define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d"
+#define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d&user_id=%@"
 
 @interface RCLocationDetailViewController ()
 
@@ -107,7 +107,7 @@
 - (void)callAPIGetListReview
 {
     // Start new request
-    NSString *urlString = [NSString stringWithFormat:kAPIGetComment, self.location.ID];
+    NSString *urlString = [NSString stringWithFormat:kAPIGetComment, self.location.ID, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

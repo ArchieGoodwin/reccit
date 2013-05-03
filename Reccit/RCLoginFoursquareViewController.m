@@ -115,6 +115,10 @@
 - (void)loginFoursquareSuccess
 {
     [self performSegueWithIdentifier:@"PushRate" sender:nil];
+    
+    
+    //get checkins
+    
     [HUD hide:YES];
 }
 @end

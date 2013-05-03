@@ -10,10 +10,10 @@
     <file path="$PROJECT_DIR$/../../abouttimetech/FieldClockIOS/depot/iFieldClockDev/Classes/iFieldAPICaller.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366105815170" ignored="false" />
     <file path="/iFieldAPICaller.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366105684379" ignored="false" />
     <file path="$PROJECT_DIR$/../../abouttimetech/FieldClockIOS/depot/iFieldClockDev/Classes/MainScreenView.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366104901716" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367318072968" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367468292787" ignored="false" />
     <file path="/RCLoginViewController.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365851101684" ignored="false" />
     <file path="/RCLoginViewController.h" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365670864064" ignored="false" />
-    <file path="/facebookHelper.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367319706101" ignored="false" />
+    <file path="/facebookHelper.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367470694486" ignored="false" />
     <file path="/facebookHelper.h" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365841117716" ignored="false" />
     <file path="/RCWebService.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365952348968" ignored="false" />
     <file path="/RCMyReviewViewController.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1365740423734" ignored="false" />
@@ -54,6 +54,8 @@
     <file path="/ClockInOutView.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366108478424" ignored="false" />
     <file path="$PROJECT_DIR$/../../abouttimetech/FieldClockIOS/depot/iFieldClockDev/Classes/MultiOptionsViewController.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366109331556" ignored="false" />
     <file path="/MultiOptionsViewController.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1366109187188" ignored="false" />
+    <file path="/a.dummy" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367470334690" ignored="false" />
+    <file path="$PROJECT_DIR$/../../abouttimetech/FieldClockIOS/iFieldClock4.5/Classes/SpotCheckView.m" changelist="4ed39436-542b-4794-bcea-e8e92940bb43" time="1367471280983" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,73 +75,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/main.m">
+      <file leaf-file-name="RCLoginTwitterViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCLoginTwitterViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCSearchResultViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCSearchResultViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="349" column="60" selection-start="11228" selection-end="11228" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCWebService.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Web Service/RCWebService.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="49" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCLoginViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/RCLoginViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="5" selection-start="3227" selection-end="3227" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCRateViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/RCRateViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="55" selection-start="2009" selection-end="2009" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCAppDelegate.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/RCAppDelegate.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="1" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCMainTabbarController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/RCMainTabbarController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RCSurpriseViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCSurpriseViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="36" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0">
+            <state line="107" column="37" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -157,7 +96,70 @@
       <file leaf-file-name="facebookHelper.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="487" column="0" selection-start="20997" selection-end="20997" vertical-scroll-proportion="0.5141509">
+            <state line="364" column="0" selection-start="14646" selection-end="14646" vertical-scroll-proportion="0.48536208">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCAppDelegate.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCAppDelegate.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="1" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCRateViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCRateViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="55" selection-start="2009" selection-end="2009" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCLoginFacebookViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCLoginFacebookViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="108" column="39" selection-start="3028" selection-end="3028" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCLoginViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/RCLoginViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="152" column="61" selection-start="7292" selection-end="7292" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCDefine.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/Common/RCDefine.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="0" selection-start="1460" selection-end="1460" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RCWebService.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/Web Service/RCWebService.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="99" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Reccit/main.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="28" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -350,7 +352,15 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Common" />
+              <option name="myItemId" value="Main Tab" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Home" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Location Detail" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -361,13 +371,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Reccit.xcodeproj" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="Reccit" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RestClientSettings">
     <option name="LAST_HOST" value="http://bizannouncements.com/bhavesh/getUser.php" />
@@ -434,14 +444,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1102" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="22" width="1920" height="1102" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32837301" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16710596" sideWeight="0.671627" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16710596" sideWeight="0.671627" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39980158" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33035713" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -450,7 +461,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5946237" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -563,25 +573,15 @@
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m</url>
-          <line>523</line>
-          <option name="timeStamp" value="52" />
+          <url>file://$PROJECT_DIR$/Reccit/Web Service/RCWebService.m</url>
+          <line>35</line>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="53" />
+      <option name="time" value="54" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Reccit/RCLoginFacebookViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="39" selection-start="3028" selection-end="3028" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Reccit/RCLoginFoursquareViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="40" selection-start="2432" selection-end="2432" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Reccit/Common/RCCommonUtils.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="139" column="8" selection-start="5479" selection-end="5479" vertical-scroll-proportion="0.0" />
@@ -594,11 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Reccit/Common/RCDefine.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1726" selection-end="1726" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Reccit/RCLoginFacebookViewController.h">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -607,13 +602,6 @@
     <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCSearchResultViewController.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="349" column="60" selection-start="11228" selection-end="11228" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCHomeViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -646,30 +634,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Reccit/Web Service/RCWebService.m">
+    <entry file="file://$PROJECT_DIR$/Reccit/main.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="49" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0">
+        <state line="15" column="28" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Reccit/RCLoginTwitterViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="37" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Reccit/RCLoginFacebookViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="39" selection-start="3028" selection-end="3028" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Reccit/Main Tab/Home/RCHomeViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Reccit/RCLoginViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="5" selection-start="3227" selection-end="3227" vertical-scroll-proportion="0.0">
+        <state line="152" column="61" selection-start="7292" selection-end="7292" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Reccit/main.m">
+    <entry file="file://$PROJECT_DIR$/Reccit/Web Service/RCWebService.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
+        <state line="58" column="99" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Reccit/Common/RCDefine.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="0" selection-start="1460" selection-end="1460" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Reccit/Common/facebookHelper.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="487" column="0" selection-start="20997" selection-end="20997" vertical-scroll-proportion="0.5141509">
+        <state line="364" column="0" selection-start="14646" selection-end="14646" vertical-scroll-proportion="0.48536208">
           <folding />
         </state>
       </provider>

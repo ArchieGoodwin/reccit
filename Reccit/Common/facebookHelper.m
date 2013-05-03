@@ -21,9 +21,9 @@
             @"{"
                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me() LIMIT 300 OFFSET %i',"
                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                    @"'query3':'select page_id, name, type, food_styles, hours, location,  "
+                    @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
                     "phone, pic, price_range, website "
-                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
+                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, name, "
                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
                     @"}", offset];
 
@@ -107,9 +107,9 @@
                             @"{"
                                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me()',"
                                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1)',"
-                                    @"'query3':'select page_id, name, type, food_styles, hours, location,  "
+                                    @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
                                     "phone, pic, price_range, website "
-                                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, name, "
+                                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, name, "
                                     "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
                                     @"}";
 
@@ -191,9 +191,9 @@
                     @"{"
                                     @"'query1':'SELECT uid2 FROM friend WHERE uid1 = me()',"
                                     @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM #query1) AND timestamp > %li',"
-                            @"'query3':'select page_id, name, type, food_styles, hours, location,  "
+                            @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
                             "phone, pic, price_range, website "
-                            "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
+                            "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
                             "name FROM place WHERE page_id IN (SELECT page_id FROM #query2))',"
                                     @"}", millis];
                     NSLog(@"query: %@", query);
@@ -314,6 +314,8 @@
         _stringFriendsCheckins = nil;
         return;
     }
+
+    NSLog(@"friends checkins total count: %i", _checkins.count);
     for(NSMutableDictionary *checkin in _checkins)
     {
         //NSLog(@"%@", checkin);
@@ -347,8 +349,15 @@
                 {
                     [foodStyles addObject:style];
                 }
-                NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":(%@)", [foodStyles componentsJoinedByString:@","]];
+                NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":\"%@\"", [foodStyles componentsJoinedByString:@","]];
 
+                
+                NSMutableArray *categories = [NSMutableArray new];
+                for(NSDictionary *cat in [placeDict objectForKey:@"categories"])
+                {
+                    [categories addObject:[[cat objectForKey:@"name"] stringByReplacingOccurrencesOfString:@"&" withString:@""]];
+                }
+                NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
 
                 NSMutableArray *hours = [NSMutableArray new];
                 NSString *hoursString = @"\"hours\":{}";
@@ -367,13 +376,16 @@
                                                                 [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
                                                                 [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
                                                                 [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
-                                                                [self makeStringWithKeyAndValue:@"street" value:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                                                                [self makeStringWithKeyAndValue:@"street" value:[[[[placeDict objectForKey:@"location"] objectForKey:@"street"]
+                                                                        stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@" "]],
                                                                 [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
                                                                 [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
-                                                                [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                                [self makeStringWithKeyAndValue:@"type" value:categoriesString],
+                        [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
                                                                 [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
-                                                                [self makeStringWithKeyAndValue:@"website" value:[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
-                                                                hoursString,
+                                [self makeStringWithKeyAndValue:@"website" value:[[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                        stringByReplacingOccurrencesOfString:@"&" withString:@""]],
+                                hoursString,
                                                                 foodStyleString,
 
                                                                 nil];
@@ -388,7 +400,7 @@
                 NSString *item = [NSString stringWithFormat:@"{%@,%@}", [friendCheckinArray componentsJoinedByString:@","], place];
 
 
-                NSLog(@"%@", item);
+               // NSLog(@"%@", item);
 
                 //NSLog(@"%@", placeName);
                 //[checkin setObject:placeName forKey:@"name"];
@@ -405,7 +417,7 @@
 
     NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
 
-    NSLog(@"result for friends send count %i:  %@", temp.count,  data);
+    NSLog(@"result for friends send count %i: ", temp.count);
     _stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
@@ -470,11 +482,19 @@
             NSMutableArray *foodStyles = [NSMutableArray new];
             for(NSString *style in [placeDict objectForKey:@"food_styles"])
             {
-                    [foodStyles addObject:style];
+                [foodStyles addObject:style];
             }
-            NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":(%@)", [foodStyles componentsJoinedByString:@","]];
+            NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":\"%@\"", [foodStyles componentsJoinedByString:@","]];
 
-
+            //place dictionary building
+            NSMutableArray *categories = [NSMutableArray new];
+            for(NSDictionary *cat in [placeDict objectForKey:@"categories"])
+            {
+                [categories addObject:[[cat objectForKey:@"name"] stringByReplacingOccurrencesOfString:@"&" withString:@""]];
+            }
+            NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
+            
+            
             NSMutableArray *hours = [NSMutableArray new];
             NSString *hoursString = @"\"hours\":{}";
             if([((NSDictionary *) [placeDict objectForKey:@"hours"]) respondsToSelector:@selector(allKeys)])
@@ -492,12 +512,15 @@
                                                             [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
                             [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
                             [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
-                            [self makeStringWithKeyAndValue:@"street" value:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                            [self makeStringWithKeyAndValue:@"street" value:[[[[placeDict objectForKey:@"location"] objectForKey:@"street"]
+                                    stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@" "]],
                             [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
                             [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
-                            [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                            [self makeStringWithKeyAndValue:@"type" value:categoriesString],
+                    [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
                             [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
-                            [self makeStringWithKeyAndValue:@"website" value:[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                            [self makeStringWithKeyAndValue:@"website" value:[[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                    stringByReplacingOccurrencesOfString:@"&" withString:@""]],
                             hoursString,
                             foodStyleString,
 
@@ -521,7 +544,7 @@
 
 
 
-            NSLog(@"%@", item);
+            //NSLog(@"%@", item);
 
             //NSLog(@"%@", placeName);
             //[checkin setObject:placeName forKey:@"name"];
@@ -583,11 +606,11 @@
     NSString *query = [NSString stringWithFormat:
             @"{"
                     @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me()',"
-                    @"'query2':'select page_id, name, type, food_styles, hours, location,  "
+                    @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
                     "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", "
                     "\"BAR\", "
-                    "\"HOTEL\") and page_id in (SELECT page_id, "
+                    "\"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
                     "name, type "
                     " FROM place WHERE page_id IN (SELECT page_id FROM #query1))',"
                     @"}"];
@@ -601,7 +624,7 @@
     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if(!error)
         {
-
+            //NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
             [self buildArraysForUser:[result objectForKey:@"data"]];
             [self buildResultForUser];
             if(completeBlockWithResult)
@@ -632,7 +655,7 @@
                     @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li',"
                     @"'query2':'select page_id, name, type, food_styles, hours, location,  "
                     "phone, pic, price_range, website "
-                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\") and page_id in (SELECT page_id, "
+                    "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
                     "name FROM place WHERE page_id IN (SELECT page_id FROM #query1))',"
                     @"}", millis];
 

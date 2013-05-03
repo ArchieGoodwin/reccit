@@ -349,6 +349,7 @@
 		D54CAECBB49164D066CD4D69 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D54CAF5A7E00654535D4CC31 /* AFXMLRequestOperation.m */; };
 		D54CAEE1C55E38AA7AF9E61B /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D54CA3DABB11B7B0A0E0CDCB /* AFImageRequestOperation.m */; };
 		DC3E48721704023800C48CB7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3E48711704023800C48CB7 /* FacebookSDK.framework */; };
+		DC5AE4161733946200773A13 /* foursquareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5AE4151733946200773A13 /* foursquareHelper.m */; };
 		DC5EA53B17080FB200579FED /* surprase.png in Resources */ = {isa = PBXBuildFile; fileRef = DC5EA53A17080FB200579FED /* surprase.png */; };
 		DC5EA556170BEC6E00579FED /* RCWhereAmIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5EA553170BEC6D00579FED /* RCWhereAmIViewController.xib */; };
 		DC5EA557170BEC6E00579FED /* RCWhereAmIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5EA554170BEC6D00579FED /* RCWhereAmIViewController.m */; };
@@ -852,6 +853,8 @@
 		D54CAEDE0AD09799A7A7F2A1 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
 		D54CAF5A7E00654535D4CC31 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		DC3E48711704023800C48CB7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		DC5AE4141733946200773A13 /* foursquareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = foursquareHelper.h; sourceTree = "<group>"; };
+		DC5AE4151733946200773A13 /* foursquareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = foursquareHelper.m; sourceTree = "<group>"; };
 		DC5EA53A17080FB200579FED /* surprase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = surprase.png; sourceTree = "<group>"; };
 		DC5EA553170BEC6D00579FED /* RCWhereAmIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCWhereAmIViewController.xib; sourceTree = "<group>"; };
 		DC5EA554170BEC6D00579FED /* RCWhereAmIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCWhereAmIViewController.m; sourceTree = "<group>"; };
@@ -985,8 +988,10 @@
 				A001ED7E16B336A5005F0C4D /* RCDataHolder.h */,
 				A001ED7F16B336A5005F0C4D /* RCDataHolder.m */,
 				D54CA73C406B4383C5D049B3 /* AFNetworking */,
-				D54CAE3EBEE092C44154EB7E /* facebookHelper.m */,
 				D54CA8459100753B1EC0A485 /* facebookHelper.h */,
+				D54CAE3EBEE092C44154EB7E /* facebookHelper.m */,
+				DC5AE4141733946200773A13 /* foursquareHelper.h */,
+				DC5AE4151733946200773A13 /* foursquareHelper.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2151,6 +2156,7 @@
 				D54CAC2DA5402954F3E153A2 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				DC5EA557170BEC6E00579FED /* RCWhereAmIViewController.m in Sources */,
 				D54CA745E141A12B1D01B1B3 /* facebookHelper.m in Sources */,
+				DC5AE4161733946200773A13 /* foursquareHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
