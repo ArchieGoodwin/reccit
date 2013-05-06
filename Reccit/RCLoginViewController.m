@@ -18,7 +18,7 @@
 #import "facebookHelper.h"
 #import "ASIHTTPRequest.h"
 
-
+#import "twitterHelper.h"
 
 
 @interface RCLoginViewController ()
@@ -111,6 +111,10 @@
 
         //[[facebookHelper sharedInstance] getFacebookRecentCheckins];
 
+
+        
+        
+        
         if([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn])
         {
             NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastDate"];
@@ -325,10 +329,22 @@
     [[NSUserDefaults standardUserDefaults] setObject:[_engine getAccessToken].secret forKey:@"tSecret"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [RCWebService authenticateTwitterWithToken:[_engine getAccessToken].key userId:nil];
+    
+    
+    
+
+    //NSString *str=[[NSString alloc]init];
+    //str =[_engine getFollowersIncludingCurrentStatus:YES];
+    //NSLog(@" string is %@ ",str);
+    
     //[self performSelector:@selector(loginTwitterSuccess) withObject:nil afterDelay:1.5];
 }
 
-
+-(void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier {
+    NSArray *mFollowerArray = nil;
+    mFollowerArray = userInfo;
+    NSLog(@"mfollwers arra is %@",mFollowerArray);
+}
 
 - (void) OAuthTwitterControllerFailed: (SA_OAuthTwitterController *) controller {
     [HUD hide:YES];

@@ -13,7 +13,7 @@
 #import "SA_OAuthTwitterEngine.h"
 #import "RCWebService.h"
 #import "OAToken.h"
-
+#import "twitterHelper.h"
 @interface RCLoginTwitterViewController ()
 {
     MBProgressHUD *HUD;
@@ -92,7 +92,7 @@
 
 - (void) OAuthTwitterController: (SA_OAuthTwitterController *) controller authenticatedWithUsername: (NSString *) username {
     [[NSUserDefaults standardUserDefaults] setObject:@"OK" forKey:kRCTwitterLoggedIn];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:kRCUserName];
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelFont = [UIFont boldSystemFontOfSize:12];
@@ -103,11 +103,17 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 
-    
+   
     
     [RCWebService authenticateTwitterWithToken:[_engine getAccessToken].key userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    
+
+    
+    
     [self performSelector:@selector(loginTwitterSuccess) withObject:nil afterDelay:1.5];
 }
+
+
 
 - (void) OAuthTwitterControllerFailed: (SA_OAuthTwitterController *) controller {
     [HUD hide:YES];

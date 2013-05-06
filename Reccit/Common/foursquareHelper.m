@@ -14,6 +14,9 @@
 {
     int iterations;
     int maxIterations;
+    NSDictionary *mySelf;
+    NSString *userid;
+    NSString *userName;
 }
 -(void)getCheckinsRecursive:(NSString *)token offset:(int)offset completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
@@ -52,6 +55,38 @@
     [operation start];
 }
 
+
+-(void)getSelf:(NSString *)token completionBlock:(RCCompleteBlockWithResult)completionBlock
+{
+    RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
+    
+    
+    
+    
+    NSString *connectionString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/users/self?oauth_token=%@", token];
+    NSLog(@"%@", connectionString);
+    NSURL *url = [NSURL URLWithString:connectionString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation;
+    operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"%@", JSON);
+        mySelf = JSON;
+        userid = [[[mySelf objectForKey:@"response"] objectForKey:@"user"] objectForKey:@"id"];
+        userName = [NSString stringWithFormat:@"%@ %@", [[[mySelf objectForKey:@"response"] objectForKey:@"user"] objectForKey:@"firstName"], [[[mySelf objectForKey:@"response"] objectForKey:@"user"] objectForKey:@"lastName"]];
+
+        completeBlockWithResult(YES, nil);
+   
+        
+        
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        completeBlockWithResult(nil, error);
+    }];
+    
+    [operation start];
+}
+
 -(void)getCheckins:(NSString *)token completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
     
@@ -62,39 +97,49 @@
     maxIterations = 1;
     NSLog(@"start query 4s %@", [NSDate date]);
     
-    NSString *connectionString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/users/self/checkins?oauth_token=%@&limit=250&offset=0", token];
-    NSLog(@"%@", connectionString);
-    NSURL *url = [NSURL URLWithString:connectionString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation *operation;
-    operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        //NSLog(@"%@", [[JSON objectForKey:@"response"] objectForKey:@"checkins"]);
-        int count = [[[[JSON objectForKey:@"response"] objectForKey:@"checkins"] objectForKey:@"count"] integerValue];
-        NSLog(@"Checkins count %i", count);
-        maxIterations = count / 250;
-
-        [self buildArrays:[[[JSON objectForKey:@"response"] objectForKey:@"checkins"] objectForKey:@"items"]];
-        
-        if(count > 250)
+    [self getSelf:token completionBlock:^(BOOL result, NSError *error) {
+        if(result)
         {
-            iterations++;
-            [self getCheckinsRecursive:token offset:iterations * 250 completionBlock:completeBlockWithResult];
+            NSString *connectionString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/users/self/checkins?oauth_token=%@&limit=250&offset=0", token];
+            NSLog(@"%@", connectionString);
+            NSURL *url = [NSURL URLWithString:connectionString];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            AFJSONRequestOperation *operation;
+            operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                //NSLog(@"%@", [[JSON objectForKey:@"response"] objectForKey:@"checkins"]);
+                int count = [[[[JSON objectForKey:@"response"] objectForKey:@"checkins"] objectForKey:@"count"] integerValue];
+                NSLog(@"Checkins count %i", count);
+                maxIterations = count / 250;
+                
+                [self buildArrays:[[[JSON objectForKey:@"response"] objectForKey:@"checkins"] objectForKey:@"items"]];
+                
+                if(count > 250)
+                {
+                    iterations++;
+                    [self getCheckinsRecursive:token offset:iterations * 250 completionBlock:completeBlockWithResult];
+                }
+                else
+                {
+                    [self buildResult];
+                    completeBlockWithResult(YES, nil);
+                    
+                }
+                
+                
+                
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                
+                completeBlockWithResult(nil, error);
+            }];
+            
+            [operation start];
         }
-        else
-        {
-            [self buildResult];
-            completeBlockWithResult(YES, nil);
-
-        }
-        
-        
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        
-        completeBlockWithResult(nil, error);
     }];
     
-    [operation start];
+    
+    
+    
+   
 }
 
 
@@ -127,19 +172,30 @@
         placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@" "];
         placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
 
-     
+        
+        
         NSDictionary *loc = [[checkin objectForKey:@"venue"] objectForKey:@"location"];
         NSArray *locArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[loc objectForKey:@"lat"]],
                              [self makeStringWithKeyAndValue:@"longitude" value:[loc objectForKey:@"lng"]],
                              nil];
         
-        NSArray *friendCheckinArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"author_uid" value:@"2"],//[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]],
+        
+        NSArray *fromArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"id" value:userid],
+                              [self makeStringWithKeyAndValue:@"name" value:userName],
+                              nil];
+        NSString *from = [NSString stringWithFormat:@"\"from\":{%@}", [fromArray componentsJoinedByString:@","]];
+        
+
+        
+        
+        
+        /*NSArray *friendCheckinArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"author_uid" value:@"2"],//[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]],
                                        [self makeStringWithKeyAndValue:@"checkin_id" value:[checkin objectForKey:@"id"]],
                                        [self makeStringWithKeyAndValue:@"name" value:[placeName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
                                        [self makeStringWithKeyAndValue:@"page_id" value:[[checkin objectForKey:@"venue"] objectForKey:@"id"]],
                                        [self makeStringWithKeyAndValue2:@"coords" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
                                        nil];
-        
+        */
         //place dictionary building
         NSMutableArray *foodStyles = [NSMutableArray new];
         for(NSDictionary *style in [[checkin objectForKey:@"venue"] objectForKey:@"categories"])
@@ -152,9 +208,10 @@
         NSMutableArray *categories = [NSMutableArray new];
         for(NSDictionary *style in [[checkin objectForKey:@"venue"] objectForKey:@"categories"])
         {
-            [categories addObject:[style objectForKey:@"shortName"]];
+            [categories addObject:[style objectForKey:@"name"]];
         }
         NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
+        
         
 
         
@@ -186,7 +243,7 @@
                                nil];
         NSString *place = [NSString stringWithFormat:@"\"place\":{%@}", [placeArray componentsJoinedByString:@","]];
         
-        NSString *item = [NSString stringWithFormat:@"{%@,%@}", [friendCheckinArray componentsJoinedByString:@","], place];
+        NSString *item = [NSString stringWithFormat:@"{%@,%@,%@}", from, [self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"id"]], place];
         [temp addObject:item];
 
         

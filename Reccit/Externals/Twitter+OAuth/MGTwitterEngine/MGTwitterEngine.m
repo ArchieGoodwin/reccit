@@ -37,7 +37,7 @@
 	#endif
 #endif
 
-#define TWITTER_DOMAIN          @"api.twitter.com/1"
+#define TWITTER_DOMAIN          @"api.twitter.com/1.1"
 #if YAJL_AVAILABLE
 	#define TWITTER_SEARCH_DOMAIN	@"search.twitter.com"
 #endif
@@ -52,7 +52,7 @@
 #define DEFAULT_CLIENT_NAME     @"MGTwitterEngine"
 #define DEFAULT_CLIENT_VERSION  @"1.0"
 #define DEFAULT_CLIENT_URL      @"http://mattgemmell.com/source"
-#define DEFAULT_CLIENT_TOKEN	@"376302446-MkszEjQJAgPALnXePdj3VvcacXNoyQcNG8mWVzBB"
+#define DEFAULT_CLIENT_TOKEN	@"50275459-6JTNAgpdSs1W2enGyXRi2fLFDIyRnifhu2Z5hSjpe"
 
 #define URL_REQUEST_TIMEOUT     25.0 // Twitter usually fails quickly if it's going to fail at all.
 
@@ -461,6 +461,9 @@
     if (params) {
         fullPath = [self _queryStringWithBase:fullPath parameters:params prefixed:YES];
     }
+    
+    NSLog(@"connectionType = %@", fullPath);
+
 
 #if YAJL_AVAILABLE
 	NSString *domain = nil;
@@ -482,6 +485,8 @@
 			connectionType = @"http";
 		}
 	}
+    NSLog(@"connectionType = %@", connectionType);
+    
 #else
 	NSString *domain = _APIDomain;
 	NSString *connectionType = nil;

@@ -11,6 +11,7 @@
 #import "RCDefine.h"
 #import "facebookHelper.h"
 #import "foursquareHelper.h"
+#import "twitterHelper.h"
 #define kUserUrl @"http://bizannouncements.com/Vega/services/app/getUser.php?auth=fbook&token=%@"
 #define kUserUrlTwitter @"http://bizannouncements.com/Vega/services/app/getUser.php?auth=twitter&token=%@"
 
@@ -177,6 +178,12 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"tLogin" object:self userInfo:nil];
 
         }
+        
+        [[twitterHelper sharedInstance] storeAccountWithAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"] secret:[[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"] completionBlock:^(BOOL result, NSError *error) {
+            [[twitterHelper sharedInstance] getFollowers:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName] completionBlock:^(BOOL result, NSError *error) {
+                //here
+            }];
+        }];
 
     }];
     

@@ -417,7 +417,7 @@
 
     NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
 
-    NSLog(@"result for friends send count %i: ", temp.count);
+    NSLog(@"result for friends send count %i:  data: %@ ", temp.count, data);
     _stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
