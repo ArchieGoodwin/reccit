@@ -166,7 +166,7 @@
     {
         
         NSString *placeName = [[checkin objectForKey:@"venue"] objectForKey:@"name"];
-        //NSLog(@"%@", placeName);
+        //NSLog(@"%@", checkin);
         placeName = [placeName stringByReplacingOccurrencesOfString:@"(" withString:@" "];
         placeName = [placeName stringByReplacingOccurrencesOfString:@")" withString:@" "];
         placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@" "];
@@ -206,9 +206,14 @@
         
         
         NSMutableArray *categories = [NSMutableArray new];
+
         for(NSDictionary *style in [[checkin objectForKey:@"venue"] objectForKey:@"categories"])
         {
-            [categories addObject:[style objectForKey:@"name"]];
+            for(NSString *str in  [style objectForKey:@"parents"])
+            {
+                [categories addObject:[str stringByReplacingOccurrencesOfString:@"&" withString:@""]];
+
+            }
         }
         NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
         
@@ -243,7 +248,7 @@
                                nil];
         NSString *place = [NSString stringWithFormat:@"\"place\":{%@}", [placeArray componentsJoinedByString:@","]];
         
-        NSString *item = [NSString stringWithFormat:@"{%@,%@,%@}", from, [self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"id"]], place];
+        NSString *item = [NSString stringWithFormat:@"{%@,%@,%@}", from, [self makeStringWithKeyAndValue:@"id" value:[checkin objectForKey:@"id"]], place];
         [temp addObject:item];
 
         

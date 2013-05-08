@@ -15,7 +15,7 @@
 #define kUserUrl @"http://bizannouncements.com/Vega/services/app/getUser.php?auth=fbook&token=%@"
 #define kUserUrlTwitter @"http://bizannouncements.com/Vega/services/app/getUser.php?auth=twitter&token=%@"
 
-
+#define kTwitterFriendsUrl @"http://bizannouncements.com/Vega/services/app/twitter.php"
 
 
 @implementation RCWebService
@@ -34,7 +34,7 @@
     //[request setRequestMethod:@"POST"];
     [request setCompletionBlock:^{
         NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"register user %@", responseObject);
+        NSLog(@"register user %@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
         
         if(!userId)
         {
@@ -182,8 +182,37 @@
         [[twitterHelper sharedInstance] storeAccountWithAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"] secret:[[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"] completionBlock:^(BOOL result, NSError *error) {
             [[twitterHelper sharedInstance] getFollowers:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName] completionBlock:^(BOOL result, NSError *error) {
                 //here
+                
+                if([[twitterHelper sharedInstance] stringFriends])
+                {
+                    NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kTwitterFriendsUrl]];
+                    __weak ASIHTTPRequest *userCheckinRequest = [ASIHTTPRequest requestWithURL:userCheckinUrl];
+                    [userCheckinRequest setRequestMethod:@"POST"];
+                    [userCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
+                    [userCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[twitterHelper sharedInstance] stringFriends].length]];
+                    [userCheckinRequest setPostBody:[[[twitterHelper sharedInstance] stringFriends] dataUsingEncoding:NSUTF8StringEncoding]];
+                    
+                    [userCheckinRequest setFailedBlock:^{
+                        //[[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];
+                        NSLog(@"[userCheckinRequest responseData] error: %@", [[NSString alloc] initWithData:[userCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
+
+                        
+                    }];
+                    [userCheckinRequest setCompletionBlock:^{
+                        
+
+                        NSLog(@"[userCheckinRequest responseData]: %@", [[NSString alloc] initWithData:[userCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
+
+                        
+                    }];
+                    
+                    
+                    [userCheckinRequest startAsynchronous];
+                }
             }];
         }];
+        
+        
 
     }];
     
@@ -206,6 +235,42 @@
         
         [[foursquareHelper sharedInstance] getCheckins:token completionBlock:^(BOOL result, NSError *error) {
             //result
+            
+            if(result)
+            {
+                if([[foursquareHelper sharedInstance] stringUserCheckins])
+                {
+                    NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]];
+                    NSLog(@"get userCheckinRequest 4s: %@", [NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]);
+                    __weak ASIHTTPRequest *userCheckinRequest = [ASIHTTPRequest requestWithURL:userCheckinUrl];
+                    [userCheckinRequest setRequestMethod:@"POST"];
+                    [userCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
+                    [userCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[foursquareHelper sharedInstance] stringUserCheckins].length]];
+                    [userCheckinRequest setPostBody:[[[foursquareHelper sharedInstance] stringUserCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                    
+                    [userCheckinRequest setFailedBlock:^{
+                        //[[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];
+                        NSLog(@"[userCheckinRequest responseData]  4s error: %@", [[NSString alloc] initWithData:[userCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
+
+                    }];
+                    [userCheckinRequest setCompletionBlock:^{
+                        
+                        
+                        NSLog(@"[userCheckinRequest responseData]  4s: %@", [[NSString alloc] initWithData:[userCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
+
+                        
+                    }];
+                    
+                    
+                    [userCheckinRequest startAsynchronous];
+                }
+                else
+                {
+                    
+                }
+            }
+            
+            
         }];
         
         

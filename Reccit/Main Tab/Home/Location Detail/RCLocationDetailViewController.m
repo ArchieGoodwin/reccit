@@ -54,7 +54,7 @@
     self.rateView.rate = self.location.rating;
     self.lbCity.text = self.location.city;
     
-    if (self.location.phoneNumber == nil || [self.location.phoneNumber length] == 0)
+    if (self.location.phoneNumber == nil)
     {
         self.btnCall.hidden = YES;
     }

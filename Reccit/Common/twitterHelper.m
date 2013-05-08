@@ -17,6 +17,7 @@
     NSMutableArray *friends;
     int iterations;
     int maxIterations;
+    NSString *userName;
 }
 
 
@@ -24,9 +25,7 @@
 {
     
     RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
-    
-   
-    
+
     
     NSString *connectionString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/friends/ids.json?screen_name=%@&oauth_token=%@&oauth_token_secret=%@",[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName], [[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"], [[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"]];
     NSLog(@"%@", connectionString);
@@ -115,12 +114,12 @@
 -(void)getFollowers:(NSString *)username completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
     // Request access to the Twitter accounts
-    
+    userName = username;
     
     iterations = 0;
     maxIterations = 1;
     
-    
+    NSLog(@"username: %@", username);
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error){
@@ -139,8 +138,7 @@
                         break;
                     }
                 }
-              //cursor=-1&screen_name=%@
-                //NSString *url2get =  [[NSString stringWithFormat:@"https://api.twitter.com/1.1/friends/ids.json?cursor=-1&screen_name=%@", username];
+
                 SLRequest *twitterInfoRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/friends/ids.json?"] parameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", username], @"screen_name", @"-1", @"cursor", nil]];
                 [twitterInfoRequest setAccount:twitterAccount];
                 // Making the request
@@ -160,9 +158,7 @@
                         if (responseData) {
                             NSError *error = nil;
                             NSArray *TWData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
-                            // Filter the preferred data
-                            //NSLog(@"TWData: %@", TWData);
-                            
+
                             
                             ids = [((NSDictionary *)TWData) objectForKey:@"ids"];
                             
@@ -197,6 +193,7 @@
                              [self makeStringWithKeyAndValue:@"profile_image_url" value:[friend objectForKey:@"profile_image_url"]],
                             [self makeStringWithKeyAndValue:@"name" value:[friend objectForKey:@"name"]],
                             [self makeStringWithKeyAndValue:@"screen_name" value:[friend objectForKey:@"screen_name"]],
+                            [self makeStringWithKeyAndValue:@"user_screen_name" value:userName],
                              nil];
         NSString *fr = [NSString stringWithFormat:@"{%@}", [frArray componentsJoinedByString:@","]];
 
@@ -300,8 +297,7 @@
 {
     
     return [NSString stringWithFormat:@"\"%@\":%@", key, value];
-    
-    
+
     
 }
 

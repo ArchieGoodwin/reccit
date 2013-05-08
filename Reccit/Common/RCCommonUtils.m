@@ -123,7 +123,11 @@
     location.category =  [locationDic objectForKey:@"type"];
     location.state = [locationDic objectForKey:@"state"];
     location.city = [locationDic objectForKey:@"city"];
-    location.phoneNumber = [locationDic objectForKey:@"tel"];
+    
+    if ([locationDic objectForKey:@"phone"] != nil && [locationDic objectForKey:@"phone"] != [NSNull null]) {
+        location.phoneNumber = [locationDic objectForKey:@"phone"];
+
+    }
     location.comment = [((NSArray *)[locationDic objectForKey:@"comments"]) componentsJoinedByString:@","];
     location.priceRange = [locationDic objectForKey:@"price_range"];
     //location.recommendation = [[locationDic objectForKey:@"recommended"] intValue] == 1;
