@@ -330,7 +330,9 @@
                 //NSLog(@"%@", placeName);
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"(" withString:@" "];
                 placeName = [placeName stringByReplacingOccurrencesOfString:@")" withString:@" "];
-                placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@" "];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+
 
                 NSArray *locArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[[checkin objectForKey:@"coords"] objectForKey:@"latitude"]],
                                                               [self makeStringWithKeyAndValue:@"longitude" value:[[checkin objectForKey:@"coords"] objectForKey:@"longitude"]],
@@ -377,14 +379,14 @@
                                                                 [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
                                                                 [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
                                                                 [self makeStringWithKeyAndValue:@"street" value:[[[[placeDict objectForKey:@"location"] objectForKey:@"street"]
-                                                                        stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@" "]],
+                                                                        stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@"%26"]],
                                                                 [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
                                                                 [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
                                 [self makeStringWithKeyAndValue:@"type" value:categoriesString],
-                        [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
-                                                                [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
-                                [self makeStringWithKeyAndValue:@"website" value:[[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                                        stringByReplacingOccurrencesOfString:@"&" withString:@""]],
+                                       [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic"]]],
+
+                                [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
+                                [self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
                                 hoursString,
                                                                 foodStyleString,
 
@@ -418,7 +420,9 @@
     NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
 
     NSLog(@"result for friends send count %i:  data: %@ ", temp.count, data);
-    _stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //_stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _stringFriendsCheckins = data;
+
 }
 
 -(NSDictionary *)getUserPageIsFromCheckins:(NSString *)pageId
@@ -446,6 +450,10 @@
     return nil;
 }
 
+-(NSString*)stringWithPercentEscape:(NSString *)str {
+    return (NSString *) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[str mutableCopy], NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"),kCFStringEncodingUTF8));
+}
+
 
 -(void)buildResultForUser
 {
@@ -465,7 +473,8 @@
             NSString *placeName = [placeDict objectForKey:@"name"];
             placeName = [placeName stringByReplacingOccurrencesOfString:@"(" withString:@" "];
             placeName = [placeName stringByReplacingOccurrencesOfString:@")" withString:@" "];
-            placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@" "];
+            placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+            placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
 
 
             NSArray *fromArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]],
@@ -513,14 +522,13 @@
                             [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
                             [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
                             [self makeStringWithKeyAndValue:@"street" value:[[[[placeDict objectForKey:@"location"] objectForKey:@"street"]
-                                    stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@" "]],
+                                    stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@"%26"]],
                             [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
                             [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
                             [self makeStringWithKeyAndValue:@"type" value:categoriesString],
-                    [self makeStringWithKeyAndValue:@"pic" value:[[placeDict objectForKey:@"pic"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                            [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic"]]],
                             [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
-                            [self makeStringWithKeyAndValue:@"website" value:[[[placeDict objectForKey:@"website"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                                    stringByReplacingOccurrencesOfString:@"&" withString:@""]],
+                            [self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
                             hoursString,
                             foodStyleString,
 
@@ -560,7 +568,9 @@
 
 
     NSLog(@"result for user send:  %@",  data);
-    _stringUserCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //_stringUserCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _stringUserCheckins = data;
+
     //_resultUserCheckins = @{@"fb_usercheckin" : [NSMutableDictionary dictionaryWithObject:temp forKey:@"data"]};
 }
 

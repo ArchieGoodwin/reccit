@@ -142,6 +142,9 @@
    
 }
 
+-(NSString*)stringWithPercentEscape:(NSString *)str {
+    return (NSString *) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[str mutableCopy], NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"),kCFStringEncodingUTF8));
+}
 
 
 -(void)buildArrays:(NSMutableArray *)array
@@ -239,9 +242,9 @@
                                [self makeStringWithKeyAndValue:@"zip" value:[loc objectForKey:@"postalCode"]],
                                [self makeStringWithKeyAndValue:@"phone" value:phone],
                                [self makeStringWithKeyAndValue:@"type" value:categoriesString],
-                               [self makeStringWithKeyAndValue:@"pic" value:[[[checkin objectForKey:@"venue"] objectForKey:@"canonicalUrl"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                               [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[[checkin objectForKey:@"venue"] objectForKey:@"canonicalUrl"]]],
                                [self makeStringWithKeyAndValue:@"price_range" value:@""],
-                               [self makeStringWithKeyAndValue:@"website" value:[[[[checkin objectForKey:@"venue"] objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@""]],
+                               [self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[[checkin objectForKey:@"venue"] objectForKey:@"url"]]],
                                hoursString,
                                foodStyleString,
                                
@@ -258,7 +261,7 @@
     NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
     
     NSLog(@"result for friends 4s send count %i: %@", temp.count, data);
-    _stringUserCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _stringUserCheckins = data;
     
 }
 

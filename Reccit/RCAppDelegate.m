@@ -12,7 +12,7 @@
 #import "RCLoginFoursquareViewController.h"
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
-
+#import "TestFlight.h"
 NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStateChangedNotification";
 
 @implementation RCAppDelegate
@@ -20,7 +20,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
+    [TestFlight takeOff:@"a4640385-1ded-4fae-b4fb-f2b2060da251"];
     // get current location
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;

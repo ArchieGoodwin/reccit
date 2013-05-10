@@ -110,6 +110,10 @@
 }
 
 
+-(NSString*)stringWithPercentEscape:(NSString *)str {
+    return (NSString *) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[str mutableCopy], NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"),kCFStringEncodingUTF8));
+}
+
 
 -(void)getFollowers:(NSString *)username completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
@@ -190,7 +194,7 @@
     for(NSDictionary *friend in friends)
     {
         NSArray *frArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[friend objectForKey:@"id"]],
-                             [self makeStringWithKeyAndValue:@"profile_image_url" value:[friend objectForKey:@"profile_image_url"]],
+                             [self makeStringWithKeyAndValue:@"profile_image_url" value:[self stringWithPercentEscape:[friend objectForKey:@"profile_image_url"]]],
                             [self makeStringWithKeyAndValue:@"name" value:[friend objectForKey:@"name"]],
                             [self makeStringWithKeyAndValue:@"screen_name" value:[friend objectForKey:@"screen_name"]],
                             [self makeStringWithKeyAndValue:@"user_screen_name" value:userName],
@@ -204,7 +208,7 @@
     NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
     
     NSLog(@"result for friends twitter send count %i: %@", temp.count, data);
-    _stringFriends = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _stringFriends = data;
 }
 
 
