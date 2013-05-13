@@ -24,7 +24,7 @@ typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *stringUserCheckins;
 @property (nonatomic, strong) NSString *stringFriendsCheckins;
-
+@property (nonatomic, assign) NSInteger friendsCount;
 
 
 
@@ -33,4 +33,5 @@ typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
 -(void)getFacebookMe;
 -(void)getFacebookRecentCheckins;
 -(void)getFacebookQueryRecent:(NSDate *)lastDate  completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(void)getFacebookUserCheckins:(RCCompleteBlockWithResult)completionBlock;
 @end

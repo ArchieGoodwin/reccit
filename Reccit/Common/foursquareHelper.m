@@ -170,10 +170,10 @@
         
         NSString *placeName = [[checkin objectForKey:@"venue"] objectForKey:@"name"];
         //NSLog(@"%@", checkin);
-        placeName = [placeName stringByReplacingOccurrencesOfString:@"(" withString:@" "];
-        placeName = [placeName stringByReplacingOccurrencesOfString:@")" withString:@" "];
-        placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@" "];
+        placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+        placeName = [self stringWithPercentEscape:placeName];
+
 
         
         
@@ -233,12 +233,11 @@
         
         NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"id" value:[[checkin objectForKey:@"venue"] objectForKey:@"id"]],
                                [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
-                               [self makeStringWithKeyAndValue:@"name" value:[placeName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
+                               [self makeStringWithKeyAndValue:@"name" value:placeName],
                                [self makeStringWithKeyAndValue:@"city" value:[loc objectForKey:@"city"]],
                                [self makeStringWithKeyAndValue:@"country" value:[loc objectForKey:@"country"]],
                                [self makeStringWithKeyAndValue:@"state" value:[loc objectForKey:@"state"]],
-                               [self makeStringWithKeyAndValue:@"street" value:[[[loc objectForKey:@"address"]
-                                                                                 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@" "]],
+                               [self makeStringWithKeyAndValue:@"street" value:[[self stringWithPercentEscape:[loc objectForKey:@"address"]] stringByReplacingOccurrencesOfString:@"\"" withString:@""]],
                                [self makeStringWithKeyAndValue:@"zip" value:[loc objectForKey:@"postalCode"]],
                                [self makeStringWithKeyAndValue:@"phone" value:phone],
                                [self makeStringWithKeyAndValue:@"type" value:categoriesString],
