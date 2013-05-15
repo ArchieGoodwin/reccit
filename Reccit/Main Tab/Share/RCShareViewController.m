@@ -50,6 +50,8 @@
     self.tfCity.inputView = self.picker;
     self.tfCity.inputAccessoryView = self.toolbarDone;
     self.tfCity.delegate = self;
+    
+    
 }
 
 
@@ -189,6 +191,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self startRequest];
+
     
     /*if ([RCDataHolder getListCountry] == nil)
     {
@@ -282,7 +285,7 @@
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-    
+    self.request.timeOutSeconds = 120;
     [self.request startAsynchronous];
 }
 

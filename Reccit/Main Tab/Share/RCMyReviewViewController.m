@@ -51,11 +51,11 @@
     
     if (self.location.recommendation == true)
     {
-        self.btnReccit.selected = NO;
-        self.btnNotReccit.selected = YES;
+        self.btnReccit.alpha = 1;
+        self.btnNotReccit.alpha = 0.3;
     } else {
-        self.btnReccit.selected = YES;
-        self.btnNotReccit.selected = NO;
+        self.btnReccit.alpha = 0.3;
+        self.btnNotReccit.alpha = 1;
     }
     
     self.txtComment.editable = NO;
@@ -77,14 +77,14 @@
 
 - (IBAction)btnReccitTouched:(id)sender
 {
-    self.btnReccit.selected = NO;
-    self.btnNotReccit.selected = YES;
+    self.btnReccit.alpha = 1;
+    self.btnNotReccit.alpha = 0.3;
 }
 
 - (IBAction)btnNoneReccitTouched:(id)sender
 {
-    self.btnReccit.selected = YES;
-    self.btnNotReccit.selected = NO;
+    self.btnReccit.alpha = 0.3;
+    self.btnNotReccit.alpha = 1;
 }
 
 - (IBAction)btnShareTouched:(id)sender

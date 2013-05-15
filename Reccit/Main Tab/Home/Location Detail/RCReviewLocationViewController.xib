@@ -101,14 +101,11 @@
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MC41AA</bytes>
 										</object>
-										<object class="NSCustomResource" key="IBUISelectedImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">btn-like-press.png</string>
-										</object>
-										<object class="NSCustomResource" key="IBUINormalImage">
+										<object class="NSCustomResource" key="IBUISelectedImage" id="669553108">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">review_thumbs_up.png</string>
 										</object>
+										<reference key="IBUINormalImage" ref="669553108"/>
 										<object class="IBUIFontDescription" key="IBUIFontDescription" id="784067117">
 											<int key="type">2</int>
 											<double key="pointSize">15</double>
@@ -138,14 +135,11 @@
 											<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 										</object>
 										<reference key="IBUINormalTitleShadowColor" ref="201263793"/>
-										<object class="NSCustomResource" key="IBUISelectedImage">
+										<object class="NSCustomResource" key="IBUISelectedImage" id="767599441">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">btn-dislike-press.png</string>
+											<string key="NSResourceName">review_thumbs_down_.png</string>
 										</object>
-										<object class="NSCustomResource" key="IBUINormalImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">review_thumbs_down.png</string>
-										</object>
+										<reference key="IBUINormalImage" ref="767599441"/>
 										<reference key="IBUIFontDescription" ref="784067117"/>
 										<reference key="IBUIFont" ref="743120133"/>
 									</object>
@@ -505,9 +499,11 @@
 				<reference key="5.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="5.showNotes"/>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="6.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<reference key="6.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="6.showNotes"/>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="7.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<reference key="7.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="7.showNotes"/>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -583,12 +579,10 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="IphoneRetinaBknd.jpg">{640, 1136}</string>
-			<string key="btn-dislike-press.png">{26, 27}</string>
-			<string key="btn-like-press.png">{26, 27}</string>
 			<string key="done_button.png">{171, 68}</string>
 			<string key="review-shape.png">{495, 292}</string>
 			<string key="review_close.png">{47, 47}</string>
-			<string key="review_thumbs_down.png">{73, 73}</string>
+			<string key="review_thumbs_down_.png">{73, 73}</string>
 			<string key="review_thumbs_up.png">{73, 73}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

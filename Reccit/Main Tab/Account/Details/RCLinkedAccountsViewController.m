@@ -169,11 +169,19 @@
 
 - (void) OAuthTwitterController: (SA_OAuthTwitterController *) controller authenticatedWithUsername: (NSString *) username {
     [[NSUserDefaults standardUserDefaults] setObject:@"OK" forKey:kRCTwitterLoggedIn];
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:kRCUserName];
+    
+    NSString *img = [NSString stringWithFormat:@"https://api.twitter.com/1/users/profile_image?screen_name=%@&size=bigger", username];
+    [[NSUserDefaults standardUserDefaults] setObject:img forKey:kRCUserImageUrl];
     
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelFont = [UIFont boldSystemFontOfSize:12];
     HUD.labelText = @"Login Successfully!";
+    NSLog(@"%@ %@", [_engine getAccessToken].key, [_engine getAccessToken].secret);
+    [[NSUserDefaults standardUserDefaults] setObject:[_engine getAccessToken].key forKey:@"tKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:[_engine getAccessToken].secret forKey:@"tSecret"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     self.imgTwitterConnect.hidden = NO;
     self.btnTwitterUpdate.hidden = YES;

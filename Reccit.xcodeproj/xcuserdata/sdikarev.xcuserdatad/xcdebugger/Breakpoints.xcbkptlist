@@ -123,11 +123,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/Main Tab/Share/RCShareViewController.m"
-         timestampString = "387007969.758475"
+         timestampString = "390306494.82743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "549"
-         endingLineNumber = "549"
+         startingLineNumber = "552"
+         endingLineNumber = "552"
          landmarkName = "-touchMe:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -136,11 +136,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/Main Tab/Share/RCShareViewController.m"
-         timestampString = "387007969.758475"
+         timestampString = "390306494.82743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "540"
-         endingLineNumber = "540"
+         startingLineNumber = "543"
+         endingLineNumber = "543"
          landmarkName = "-handleTap:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -155,6 +155,19 @@
          startingLineNumber = "460"
          endingLineNumber = "460"
          landmarkName = "-_sendRequestWithMethod:path:queryParameters:body:requestType:responseType:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Reccit/RCLoginTwitterViewController.m"
+         timestampString = "390305001.319646"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
+         landmarkName = "-OAuthTwitterController:authenticatedWithUsername:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
