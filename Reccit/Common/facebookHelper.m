@@ -320,6 +320,7 @@
     }
 
     NSLog(@"friends checkins total count: %i", _checkins.count);
+    int i = 0;
     for(NSMutableDictionary *checkin in _checkins)
     {
         //NSLog(@"%@", checkin);
@@ -334,6 +335,7 @@
                 //NSLog(@"%@", placeName);
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@""];
 
                 placeName = [self stringWithPercentEscape:placeName];
                 
@@ -386,13 +388,13 @@
                                        [self makeStringWithKeyAndValue:@"street" value:[self stringWithPercentEscape:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByReplacingOccurrencesOfString:@"\"" withString:@""]]],
 
                                                                 [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
-                                                                [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
+                                                                [self makeStringWithKeyAndValue:@"phone" value:[[placeDict objectForKey:@"phone"] stringByReplacingOccurrencesOfString:@"&" withString:@"" ]],
                                 [self makeStringWithKeyAndValue:@"type" value:categoriesString],
                                        [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic"]]],
 
                                 [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
                                 //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
-                                hoursString,
+                                //hoursString,
                                                                 foodStyleString,
 
                                                                 nil];
@@ -412,6 +414,16 @@
                 //NSLog(@"%@", placeName);
                 //[checkin setObject:placeName forKey:@"name"];
                 [temp addObject:item];
+                
+                
+               /* i++;
+                
+                if(i >= 500)
+                {
+                    NSString *dataTemp = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
+                    [_friendsCheckinsArray addObject:dataTemp];
+                }*/
+                
             }
         }
 
@@ -422,8 +434,13 @@
 
     }
 
+    //NSArray *tt = [temp objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 500)]];
+    
+    
+    
     NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
 
+    
     NSLog(@"result for friends send count %i:  data: %@ ", temp.count, data);
     //_stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     _stringFriendsCheckins = data;
@@ -533,7 +550,7 @@
                             [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic"]]],
                             [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
                             //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
-                            hoursString,
+                            //hoursString,
                             foodStyleString,
 
                     nil];
@@ -786,6 +803,7 @@
     _userCheckins = [NSMutableArray new];
     _userPlaces = [NSMutableArray new];
     _friends = [NSArray new];
+    _friendsCheckinsArray = [NSMutableArray new];
 
 #if !(TARGET_IPHONE_SIMULATOR)
 

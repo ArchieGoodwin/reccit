@@ -172,6 +172,8 @@
         //NSLog(@"%@", checkin);
         placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+        placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@""];
+
         placeName = [self stringWithPercentEscape:placeName];
 
 

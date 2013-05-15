@@ -50,8 +50,8 @@
         [[facebookHelper sharedInstance] getFacebookUserCheckins:^(BOOL result, NSError *error) {
             if([[facebookHelper sharedInstance] stringUserCheckins])
             {
-                NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]];
-                NSLog(@"get userCheckinRequest: %@", [NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]);
+                NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                NSLog(@"get userCheckinRequest: %@", [NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
                 __weak ASIHTTPRequest *userCheckinRequest = [ASIHTTPRequest requestWithURL:userCheckinUrl];
                 [userCheckinRequest setRequestMethod:@"POST"];
                 userCheckinRequest.timeOutSeconds = 120;
@@ -87,8 +87,8 @@
                 {
 
                         NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekins,
-                                                                                              [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]];
-                        NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]);
+                                                                                              [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                        NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
                         __weak ASIHTTPRequest *frCheckinRequest = [ASIHTTPRequest requestWithURL:frCheckinUrl];
                         frCheckinRequest.requestMethod = @"POST";
                         frCheckinRequest.timeOutSeconds = 240;

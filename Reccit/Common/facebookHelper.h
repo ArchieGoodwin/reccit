@@ -21,6 +21,7 @@ typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
 @property (nonatomic, strong) NSMutableDictionary *resultUserCheckins;
 @property (nonatomic, strong) NSMutableDictionary *resultFriendsCheckins;
 @property (nonatomic, strong)  NSArray* friends;
+@property (nonatomic, strong)  NSMutableArray* friendsCheckinsArray;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *stringUserCheckins;
 @property (nonatomic, strong) NSString *stringFriendsCheckins;

@@ -115,7 +115,7 @@
         
         
         
-        if([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn])
+        /*if([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn])
         {
             NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastDate"];
             if(!date)
@@ -186,7 +186,7 @@
 
 
             }];
-        }
+        }*/
 
 
 
