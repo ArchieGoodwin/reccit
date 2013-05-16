@@ -149,61 +149,65 @@
         NSMutableString *fri = [NSMutableString new];
         NSMutableString *sat = [NSMutableString new];
         NSMutableString *sun = [NSMutableString new];
-        for(NSString *hour in [locationDic objectForKey:@"happyhours"])
+        if([[locationDic objectForKey:@"happyhours"] respondsToSelector:@selector(count)])
         {
-
-            if([hour hasPrefix:@"Mon"])
+            for(NSString *hour in [locationDic objectForKey:@"happyhours"])
             {
-                [mon appendString:hour];
-                [mon appendString:@" "];
+                
+                if([hour hasPrefix:@"Mon"])
+                {
+                    [mon appendString:hour];
+                    [mon appendString:@" "];
+                    
+                }
+                if([hour hasPrefix:@"Tue"])
+                {
+                    [tue appendString:hour];
+                    [tue appendString:@" "];
+                    
+                }
+                if([hour hasPrefix:@"Wed"])
+                {
+                    [wed appendString:hour];
+                    [wed appendString:@" "];
+                    
+                }
+                if([hour hasPrefix:@"Thu"])
+                {
+                    [thu appendString:hour];
+                    [thu appendString:@" "];
+                    
+                }
+                if([hour hasPrefix:@"Fri"])
+                {
+                    [fri appendString:hour];
+                    [fri appendString:@" "];
+                    
+                }
+                if([hour hasPrefix:@"Sat"])
+                {
+                    [sat appendString:hour];
+                    [sat appendString:@" "];
+                    
+                }
+                if([hour hasPrefix:@"Sun"])
+                {
+                    [sun appendString:hour];
+                    [sun appendString:@" "];
+                    
+                }
+                
                 
             }
-            if([hour hasPrefix:@"Tue"])
-            {
-                [tue appendString:hour];
-                [tue appendString:@" "];
-                
-            }
-            if([hour hasPrefix:@"Wed"])
-            {
-                [wed appendString:hour];
-                [wed appendString:@" "];
-                
-            }
-            if([hour hasPrefix:@"Thu"])
-            {
-                [thu appendString:hour];
-                [thu appendString:@" "];
-                
-            }
-            if([hour hasPrefix:@"Fri"])
-            {
-                [fri appendString:hour];
-                [fri appendString:@" "];
-                
-            }
-            if([hour hasPrefix:@"Sat"])
-            {
-                [sat appendString:hour];
-                [sat appendString:@" "];
-                
-            }
-            if([hour hasPrefix:@"Sun"])
-            {
-                [sun appendString:hour];
-                [sun appendString:@" "];
-                
-            }
-
-
+            [hours addObject:sun];
+            [hours addObject:mon];
+            [hours addObject:tue];
+            [hours addObject:wed];
+            [hours addObject:thu];
+            [hours addObject:fri];
+            [hours addObject:sat];
         }
-        [hours addObject:sun];
-        [hours addObject:mon];
-        [hours addObject:tue];
-        [hours addObject:wed];
-        [hours addObject:thu];
-        [hours addObject:fri];
-        [hours addObject:sat];
+        
         
         
         

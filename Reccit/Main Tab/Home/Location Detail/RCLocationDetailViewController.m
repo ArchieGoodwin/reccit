@@ -13,7 +13,7 @@
 #import "RCCommonUtils.h"
 #import "RCReview.h"
 #import "RCWebViewController.h"
-#import "RCReviewLocationViewController.h"
+#import "RCReviewInDetailsViewController.h"
 #import "RCDirectViewController.h"
 
 
@@ -166,7 +166,7 @@
 
 - (IBAction)btnReviewTouched:(id)sender
 {
-    self.reviewVc = [[RCReviewLocationViewController alloc] initWithNibName:@"RCReviewLocationViewController" bundle:nil];
+    self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = self.location;
     self.reviewVc.shouldSendImmediately = YES;

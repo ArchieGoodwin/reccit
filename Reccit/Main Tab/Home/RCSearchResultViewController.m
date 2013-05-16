@@ -110,12 +110,15 @@
         self.listLocationReccit = [[NSMutableArray alloc] init];
 
 
-        NSDictionary *listLocation = [responseObject objectForKey:@"Reccits"];
+        NSArray *listLocation = [responseObject objectForKey:@"Reccits"];
         if (listLocation != [NSNull null])
-        for (NSDictionary *locationDic in listLocation)
         {
-            [_listLocationReccit addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+            for (NSDictionary *locationDic in listLocation)
+            {
+                [_listLocationReccit addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+            }
         }
+        
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationReccit count] == 0)
@@ -148,13 +151,13 @@
         //NSLog(@"favs: %@", responseObject);
         self.listLocationFriend = [[NSMutableArray alloc] init];
 
-        NSDictionary *listLocation = [responseObject objectForKey:@"Reccits"];
-        if (listLocation != [NSNull null])
+        NSArray *listLocation = [responseObject objectForKey:@"Reccits"];
+        if (listLocation != [NSNull null]){
             for (NSDictionary *locationDic in listLocation)
             {
                 [_listLocationFriend addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
             }
-        
+        }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationFriend count] == 0)
         {
@@ -185,11 +188,15 @@
         NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
         NSLog(@"popular: %@", responseObject);
         self.listLocationPopular = [[NSMutableArray alloc] init];
-        NSDictionary *listLocation = [responseObject objectForKey:@"Reccits"];
-        for (NSDictionary *locationDic in listLocation)
-        {
-            [_listLocationPopular addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+        NSArray *listLocation = [responseObject objectForKey:@"Reccits"];
+        if (listLocation != [NSNull null]){
+            
+            for (NSDictionary *locationDic in listLocation)
+            {
+                [_listLocationPopular addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+            }
         }
+        
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationPopular count] == 0)
@@ -380,14 +387,18 @@
         for (int i = 0; i < [location.listFriends count]; ++i)
         {
             NSString *imgUrl = [location.listFriends objectAtIndex:i];
-            UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
-            [imgView setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = imgView.frame;
-            [btn setBackgroundColor:[UIColor clearColor]];
-            btn.tag = indexPath.row;
-            [btn addTarget:self action:@selector(showFriendName:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.contentView addSubview:btn];
+            if(imgUrl != [NSNull null])
+            {
+                UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
+                [imgView setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                btn.frame = imgView.frame;
+                [btn setBackgroundColor:[UIColor clearColor]];
+                btn.tag = indexPath.row;
+                [btn addTarget:self action:@selector(showFriendName:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.contentView addSubview:btn];
+            }
+           
             
             
         }

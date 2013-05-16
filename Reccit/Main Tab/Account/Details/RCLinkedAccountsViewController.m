@@ -147,9 +147,15 @@
         HUD.labelFont = [UIFont boldSystemFontOfSize:12];
         HUD.labelText = @"Login Successfully!";
         
+        
+        
         self.imgFacebookConnect.hidden = NO;
         self.btnFacebookUpdate.hidden = YES;
+        // Call webservice authenticate
+        //NSLog(@"%@", [[FBSession activeSession] accessTokenData]);
+        [RCWebService authenticateFacebookWithToken:[[[FBSession activeSession] accessTokenData]accessToken]  userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
         
+
         [self performSelector:@selector(loginFacebookSuccess) withObject:nil afterDelay:1.5];
     } else {
         [HUD hide:YES];
@@ -228,6 +234,7 @@
     
     // Call Webservice
     [RCWebService authenticateFoursquareWithToken:foursquare.accessToken userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+
     
     [self performSelector:@selector(loginFoursquareSuccess) withObject:nil afterDelay:1.5];
 }

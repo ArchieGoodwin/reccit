@@ -13,7 +13,7 @@
 #import "ASIHTTPRequest.h"
 #import "RCBaseViewController.h"
 
-@class RCReviewLocationViewController;
+@class RCReviewInDetailsViewController;
 @interface RCLocationDetailViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -38,6 +38,6 @@
 @property (strong, nonatomic) ASIHTTPRequest *request;
 @property (strong, nonatomic) NSMutableArray *listComment;
 
-@property (strong, nonatomic) RCReviewLocationViewController *reviewVc;
+@property (strong, nonatomic) RCReviewInDetailsViewController *reviewVc;
 
 @end
