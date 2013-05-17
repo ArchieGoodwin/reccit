@@ -61,13 +61,13 @@
 								<reference key="NSNextResponder" ref="1005492412"/>
 								<int key="NSvFlags">292</int>
 								<array class="NSMutableArray" key="NSSubviews">
-									<object class="IBUIImageView" id="871273241">
+									<object class="IBUIImageView" id="313754281">
 										<reference key="NSNextResponder" ref="497831840"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrameSize">{289, 217}</string>
 										<reference key="NSSuperview" ref="497831840"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="332490228"/>
+										<reference key="NSNextKeyView" ref="718681960"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -80,7 +80,7 @@
 										<reference key="NSNextResponder" ref="497831840"/>
 										<int key="NSvFlags">1316</int>
 										<object class="NSPSMatrix" key="NSFrameMatrix"/>
-										<string key="NSFrame">{{189, 27}, {36, 36}}</string>
+										<string key="NSFrame">{{200, 27}, {36, 36}}</string>
 										<reference key="NSSuperview" ref="497831840"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="831836713"/>
@@ -120,7 +120,7 @@
 										<reference key="NSNextResponder" ref="497831840"/>
 										<int key="NSvFlags">1316</int>
 										<object class="NSPSMatrix" key="NSFrameMatrix"/>
-										<string key="NSFrame">{{227, 27}, {36, 36}}</string>
+										<string key="NSFrame">{{237, 27}, {36, 36}}</string>
 										<reference key="NSSuperview" ref="497831840"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="785808658"/>
@@ -171,7 +171,7 @@
 										<string key="NSFrame">{{62, 177}, {85, 34}}</string>
 										<reference key="NSSuperview" ref="497831840"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="173389365"/>
+										<reference key="NSNextKeyView" ref="1006267466"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
@@ -189,7 +189,7 @@
 										<reference key="IBUIFontDescription" ref="784067117"/>
 										<reference key="IBUIFont" ref="743120133"/>
 									</object>
-									<object class="IBUIButton" id="173389365">
+									<object class="IBUIButton" id="1006267466">
 										<reference key="NSNextResponder" ref="497831840"/>
 										<int key="NSvFlags">1316</int>
 										<object class="NSPSMatrix" key="NSFrameMatrix"/>
@@ -213,20 +213,6 @@
 										</object>
 										<reference key="IBUIFontDescription" ref="784067117"/>
 										<reference key="IBUIFont" ref="743120133"/>
-									</object>
-									<object class="IBUIView" id="958374914">
-										<reference key="NSNextResponder" ref="497831840"/>
-										<int key="NSvFlags">1316</int>
-										<object class="NSPSMatrix" key="NSFrameMatrix"/>
-										<string key="NSFrame">{{50, 28}, {100, 20}}</string>
-										<reference key="NSSuperview" ref="497831840"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="450773746"/>
-										<object class="NSColor" key="IBUIBackgroundColor" id="570416992">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MCAwAA</bytes>
-										</object>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 									<object class="IBUITextView" id="489337099">
 										<reference key="NSNextResponder" ref="497831840"/>
@@ -262,10 +248,10 @@
 											<int key="NSfFlags">16</int>
 										</object>
 									</object>
-									<object class="IBUIImageView" id="332490228">
+									<object class="IBUIImageView" id="718681960">
 										<reference key="NSNextResponder" ref="497831840"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{21, 33}, {164, 24}}</string>
+										<string key="NSFrame">{{14, 31}, {184, 28}}</string>
 										<reference key="NSSuperview" ref="497831840"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="958374914"/>
@@ -277,13 +263,27 @@
 											<string key="NSResourceName">review_indetails_labels.png</string>
 										</object>
 									</object>
+									<object class="IBUIView" id="958374914">
+										<reference key="NSNextResponder" ref="497831840"/>
+										<int key="NSvFlags">1316</int>
+										<object class="NSPSMatrix" key="NSFrameMatrix"/>
+										<string key="NSFrame">{{45, 27}, {100, 20}}</string>
+										<reference key="NSSuperview" ref="497831840"/>
+										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="450773746"/>
+										<object class="NSColor" key="IBUIBackgroundColor" id="93970993">
+											<int key="NSColorSpace">3</int>
+											<bytes key="NSWhite">MCAwAA</bytes>
+										</object>
+										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+									</object>
 								</array>
 								<string key="NSFrame">{{16, 25}, {289, 235}}</string>
 								<reference key="NSSuperview" ref="1005492412"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="871273241"/>
+								<reference key="NSNextKeyView" ref="313754281"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<reference key="IBUIBackgroundColor" ref="570416992"/>
+								<reference key="IBUIBackgroundColor" ref="93970993"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
@@ -420,7 +420,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">btnCancelTouched:</string>
-						<reference key="source" ref="173389365"/>
+						<reference key="source" ref="1006267466"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -467,14 +467,14 @@
 						<int key="objectID">22</int>
 						<reference key="object" ref="497831840"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="871273241"/>
+							<reference ref="313754281"/>
 							<reference ref="489337099"/>
 							<reference ref="431550840"/>
-							<reference ref="173389365"/>
+							<reference ref="1006267466"/>
 							<reference ref="785808658"/>
 							<reference ref="450773746"/>
 							<reference ref="831836713"/>
-							<reference ref="332490228"/>
+							<reference ref="718681960"/>
 							<reference ref="958374914"/>
 						</array>
 						<reference key="parent" ref="1005492412"/>
@@ -506,7 +506,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">42</int>
-						<reference key="object" ref="871273241"/>
+						<reference key="object" ref="313754281"/>
 						<reference key="parent" ref="497831840"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -516,7 +516,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">43</int>
-						<reference key="object" ref="173389365"/>
+						<reference key="object" ref="1006267466"/>
 						<reference key="parent" ref="497831840"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -526,7 +526,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">46</int>
-						<reference key="object" ref="332490228"/>
+						<reference key="object" ref="718681960"/>
 						<reference key="parent" ref="497831840"/>
 					</object>
 				</array>
@@ -638,7 +638,7 @@
 			<string key="IphoneRetinaBknd.jpg">{640, 1136}</string>
 			<string key="cancel_button.png">{172, 68}</string>
 			<string key="review_indetails_back.png">{579, 435}</string>
-			<string key="review_indetails_labels.png">{329, 49}</string>
+			<string key="review_indetails_labels.png">{369, 57}</string>
 			<string key="review_thumbs_down_.png">{73, 73}</string>
 			<string key="review_thumbs_up.png">{73, 73}</string>
 			<string key="submit_button.png">{171, 68}</string>

@@ -93,7 +93,12 @@
                 NSLog(@"%@", category);
 
                     NSLog(@"%@", category);
-                    [self.listLocation addObject:[RCCommonUtils getLocationFromDictionary:category]];
+                RCLocation *l = [RCCommonUtils getLocationFromDictionary:category];
+                if(l)
+                {
+                    [self.listLocation addObject:l];
+
+                }
                
             }
         } else {
@@ -101,7 +106,13 @@
             {
                 for (NSDictionary *locationDic in [responseObject objectForKey:[category description]])
                 {
-                    [self.listLocation addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+                    RCLocation *l = [RCCommonUtils getLocationFromDictionary:locationDic];
+                    if(l)
+                    {
+                        [self.listLocation addObject:l];
+                        
+                    }
+                    
                 }
             }
         }

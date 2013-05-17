@@ -115,7 +115,12 @@
         {
             for (NSDictionary *locationDic in listLocation)
             {
-                [_listLocationReccit addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+                RCLocation *l = [RCCommonUtils getLocationFromDictionary:locationDic];
+                if(l)
+                {
+                    [_listLocationReccit addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+
+                }
             }
         }
         
@@ -155,7 +160,13 @@
         if (listLocation != [NSNull null]){
             for (NSDictionary *locationDic in listLocation)
             {
-                [_listLocationFriend addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+                
+                RCLocation *l = [RCCommonUtils getLocationFromDictionary:locationDic];
+                if(l)
+                {
+                    [_listLocationFriend addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+                    
+                }
             }
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -193,7 +204,13 @@
             
             for (NSDictionary *locationDic in listLocation)
             {
-                [_listLocationPopular addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+                
+                RCLocation *l = [RCCommonUtils getLocationFromDictionary:locationDic];
+                if(l)
+                {
+                    [_listLocationPopular addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
+                    
+                }
             }
         }
         

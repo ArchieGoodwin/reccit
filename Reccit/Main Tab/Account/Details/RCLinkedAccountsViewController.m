@@ -42,10 +42,14 @@
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFoursquareLoggedIn] == nil)
     {
+        
         self.foursquare = [[BZFoursquare alloc] initWithClientID:kRCFoursquareClientID callbackURL:kRCFoursquareCallbackURL];
         self.foursquare.version = @"20111119";
         self.foursquare.locale = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
         self.foursquare.sessionDelegate = self;
+        
+        
+
         
         self.btnFoursquareUpdate.hidden = NO;
         self.imgFoursquareConnect.hidden = YES;
@@ -233,6 +237,7 @@
     self.btnFoursquareUpdate.hidden = YES;
     
     // Call Webservice
+    
     [RCWebService authenticateFoursquareWithToken:foursquare.accessToken userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
 
     

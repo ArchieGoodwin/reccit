@@ -81,8 +81,12 @@
         for (NSDictionary *locationDic in responseObject)
         {
             RCLocation *location = [RCCommonUtils getLocationFromDictionary:locationDic];
-            location.ID = [[locationDic objectForKey:@"id"] intValue];
-            [self.listLocation addObject:location];
+            if(location)
+            {
+                location.ID = [[locationDic objectForKey:@"id"] intValue];
+                [self.listLocation addObject:location];
+            }
+
         }
         
         if ([self.listLocation count] == 0)

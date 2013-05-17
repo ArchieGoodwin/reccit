@@ -205,7 +205,14 @@
         NSMutableArray *foodStyles = [NSMutableArray new];
         for(NSDictionary *style in [[checkin objectForKey:@"venue"] objectForKey:@"categories"])
         {
-            [foodStyles addObject:[style objectForKey:@"shortName"]];
+            
+            NSString *s = [[style objectForKey:@"shortName"] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            s = [s stringByReplacingOccurrencesOfString:@"&" withString:@""];
+            s = [s stringByReplacingOccurrencesOfString:@"/" withString:@""];
+            
+            
+            
+            [foodStyles addObject:s];
         }
         NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":\"%@\"", [foodStyles componentsJoinedByString:@","]];
         
@@ -216,7 +223,11 @@
         {
             for(NSString *str in  [style objectForKey:@"parents"])
             {
-                [categories addObject:[str stringByReplacingOccurrencesOfString:@"&" withString:@""]];
+                NSString *s = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                s = [s stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                s = [s stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                
+                [categories addObject:s];
 
             }
         }

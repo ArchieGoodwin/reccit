@@ -27,8 +27,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "DYRateView.h"
 
-static NSString *DefaultFullStarImageFilename = @"StarFullLarge.png";
-static NSString *DefaultEmptyStarImageFilename = @"StarEmptyLarge.png";
+static NSString *DefaultFullStarImageFilename = @"StarFullLarge1.png";
+static NSString *DefaultEmptyStarImageFilename = @"StarEmptyLarge1.png";
 
 @interface DYRateView ()
 

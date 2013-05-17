@@ -197,7 +197,7 @@
 										<reference key="NSNextResponder" ref="497831840"/>
 										<int key="NSvFlags">1316</int>
 										<object class="NSPSMatrix" key="NSFrameMatrix"/>
-										<string key="NSFrame">{{26, 4}, {100, 20}}</string>
+										<string key="NSFrame">{{26, 4}, {158, 24}}</string>
 										<reference key="NSSuperview" ref="497831840"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="831836713"/>
@@ -214,7 +214,6 @@
 										<string key="NSFrame">{{27, 68}, {235, 113}}</string>
 										<reference key="NSSuperview" ref="497831840"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<object class="NSColor" key="IBUIBackgroundColor">
 											<int key="NSColorSpace">1</int>
 											<bytes key="NSRGB">MSAxIDEAA</bytes>

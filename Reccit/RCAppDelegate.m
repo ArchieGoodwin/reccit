@@ -13,6 +13,9 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 #import "TestFlight.h"
+#import "RCLinkedAccountsViewController.h"
+#import "RCMainTabbarController.h"
+#import "RCAccountViewController.h"
 NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStateChangedNotification";
 
 @implementation RCAppDelegate
@@ -73,9 +76,24 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     UINavigationController *navi = (UINavigationController *)self.window.rootViewController;
     for (UIViewController *controller in navi.viewControllers)
     {
+        NSLog(@"%@", [controller class]);
         if ([controller isKindOfClass:[RCLoginFoursquareViewController class]]) {
             BZFoursquare *foursquare = ((RCLoginFoursquareViewController *)controller).foursquare;
             return [foursquare handleOpenURL:url];
+        }
+        if ([controller isKindOfClass:[RCMainTabbarController class]]) {
+            NSLog(@"%@", ((RCMainTabbarController *)controller).selectedViewController);
+            for (UIViewController *contr in ((UINavigationController *)((RCMainTabbarController *)controller).selectedViewController).viewControllers)
+            {
+                if([contr isKindOfClass:[RCLinkedAccountsViewController class]])
+                {
+                    
+                    BZFoursquare *foursquare = ((RCLinkedAccountsViewController *)contr).foursquare;
+                    return [foursquare handleOpenURL:url];
+                }
+            }
+            
+            
         }
     }
     

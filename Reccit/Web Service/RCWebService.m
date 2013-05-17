@@ -220,8 +220,8 @@
             {
                 if([[foursquareHelper sharedInstance] stringUserCheckins])
                 {
-                    NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]];
-                    NSLog(@"get userCheckinRequest 4s: %@", [NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], token]);
+                    NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                    NSLog(@"get userCheckinRequest 4s: %@", [NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId],  @"null"]);
                     __weak ASIHTTPRequest *userCheckinRequest = [ASIHTTPRequest requestWithURL:userCheckinUrl];
                     [userCheckinRequest setRequestMethod:@"POST"];
                     userCheckinRequest.timeOutSeconds = 720;

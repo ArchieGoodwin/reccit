@@ -44,8 +44,8 @@
     self.recommendation = YES;
     self.rateView.editable = YES;
     
-    self.btnLike.selected = NO;
-    self.btnUnLike.selected = YES;
+    self.btnLike.alpha = 0.3;
+    self.btnUnLike.alpha = 0.3;
     
     [self.tvReview becomeFirstResponder];
 }
@@ -96,7 +96,7 @@
                 }
                 
                 
-                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You reviewed sucessfully!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alerView show];
             }];
             
@@ -127,7 +127,7 @@
                 
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 
-                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You reviewed sucessfully!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alerView show];
             }];
             
@@ -267,16 +267,16 @@
 
 - (IBAction)btnLikeTouched:(id)sender
 {
-    self.btnLike.selected = NO;
-    self.btnUnLike.selected = YES;
+    self.btnLike.alpha = 1;
+    self.btnUnLike.alpha = 0.3;
     self.recommendation = YES;
 }
 
 - (IBAction)btnUnLikeTouched:(id)sender
 {
     self.recommendation = NO;
-    self.btnUnLike.selected = NO;
-    self.btnLike.selected = YES;
+    self.btnUnLike.alpha = 1;
+    self.btnLike.alpha = 0.3;
 }
 
 #pragma mark -

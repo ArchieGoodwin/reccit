@@ -77,162 +77,168 @@
     if ([locationDic objectForKey:@"name"] != nil && [locationDic objectForKey:@"name"] != [NSNull null]) {
         location.name = [locationDic objectForKey:@"name"];
 
-    }
-    else
-    {
-        location.name = @"";
-    }
-    if ([locationDic objectForKey:@"place_id"] != nil && [locationDic objectForKey:@"place_id"] != [NSNull null]) {
-        location.ID = [[locationDic objectForKey:@"place_id"] integerValue];
         
-    }
-    else
-    {
-        location.ID = 0;
-    }
-    location.genre = [locationDic objectForKey:@"genre"];
-    if ([locationDic objectForKey:@"rating"] != nil && [locationDic objectForKey:@"rating"] != [NSNull null]) {
-        location.rating = [[locationDic objectForKey:@"rating"] doubleValue];
-    } else {
-        location.rating = 0;
-    }
-    if ([locationDic objectForKey:@"count"] != nil && [locationDic objectForKey:@"count"] != [NSNull null]) {
-        location.reccitCount = [[locationDic objectForKey:@"count"] integerValue];
-    } else {
-        location.reccitCount = 0;
-    }
-    if ([locationDic objectForKey:@"price"] != nil && [locationDic objectForKey:@"price"] != [NSNull null]) {
-        location.price = [[locationDic objectForKey:@"price"] intValue];
-    } else {
-        location.price = 0;
-    }
-    location.zipCode = [locationDic objectForKey:@"zipcode"];
-    if ([locationDic objectForKey:@"longitude"] != nil && [locationDic objectForKey:@"longitude"] != [NSNull null]) {
-        location.longitude = [[locationDic objectForKey:@"longitude"] doubleValue];
-        location.latitude = [[locationDic objectForKey:@"latitude"] doubleValue];
-    }
-
-    if ([locationDic objectForKey:@"address"] != nil && [locationDic objectForKey:@"address"] != [NSNull null]) {
-        location.address = [locationDic objectForKey:@"address"];
-        
-    }
-    else
-    {
-        location.address = @"";
-    }
-    location.category =  [locationDic objectForKey:@"type"];
-    location.state = [locationDic objectForKey:@"state"];
-    location.city = [locationDic objectForKey:@"city"];
-    
-    if ([locationDic objectForKey:@"phone"] != nil && [locationDic objectForKey:@"phone"] != [NSNull null]) {
-        location.phoneNumber = [locationDic objectForKey:@"phone"];
-
-    }
-    location.comment = [((NSArray *)[locationDic objectForKey:@"comments"]) componentsJoinedByString:@","];
-    location.priceRange = [locationDic objectForKey:@"price_range"];
-    //location.recommendation = [[locationDic objectForKey:@"recommended"] intValue] == 1;
-    
-    if ([locationDic objectForKey:@"reccit"] != nil && [locationDic objectForKey:@"reccit"] != [NSNull null]) {
-        location.recommendation = [[locationDic objectForKey:@"reccit"] boolValue];
-    } else {
-        location.recommendation = NO;
-    }
-    
-    
-    if ([locationDic objectForKey:@"happyhours"] != [NSNull null])
-    {
-        NSMutableArray *hours = [NSMutableArray new];
-        NSMutableString *mon = [NSMutableString new];
-        NSMutableString *tue = [NSMutableString new];
-        NSMutableString *wed = [NSMutableString new];
-        NSMutableString *thu = [NSMutableString new];
-        NSMutableString *fri = [NSMutableString new];
-        NSMutableString *sat = [NSMutableString new];
-        NSMutableString *sun = [NSMutableString new];
-        if([[locationDic objectForKey:@"happyhours"] respondsToSelector:@selector(count)])
+        if ([locationDic objectForKey:@"place_id"] != nil && [locationDic objectForKey:@"place_id"] != [NSNull null]) {
+            location.ID = [[locationDic objectForKey:@"place_id"] integerValue];
+            
+        }
+        else
         {
-            for(NSString *hour in [locationDic objectForKey:@"happyhours"])
+            location.ID = 0;
+        }
+        location.genre = [locationDic objectForKey:@"genre"];
+        if ([locationDic objectForKey:@"rating"] != nil && [locationDic objectForKey:@"rating"] != [NSNull null]) {
+            location.rating = [[locationDic objectForKey:@"rating"] doubleValue];
+        } else {
+            location.rating = 0;
+        }
+        if ([locationDic objectForKey:@"count"] != nil && [locationDic objectForKey:@"count"] != [NSNull null]) {
+            location.reccitCount = [[locationDic objectForKey:@"count"] integerValue];
+        } else {
+            location.reccitCount = 0;
+        }
+        if ([locationDic objectForKey:@"price"] != nil && [locationDic objectForKey:@"price"] != [NSNull null]) {
+            location.price = [[locationDic objectForKey:@"price"] intValue];
+        } else {
+            location.price = 0;
+        }
+        location.zipCode = [locationDic objectForKey:@"zipcode"];
+        if ([locationDic objectForKey:@"longitude"] != nil && [locationDic objectForKey:@"longitude"] != [NSNull null]) {
+            location.longitude = [[locationDic objectForKey:@"longitude"] doubleValue];
+            location.latitude = [[locationDic objectForKey:@"latitude"] doubleValue];
+        }
+        
+        if ([locationDic objectForKey:@"address"] != nil && [locationDic objectForKey:@"address"] != [NSNull null]) {
+            location.address = [locationDic objectForKey:@"address"];
+            
+        }
+        else
+        {
+            location.address = @"";
+        }
+        location.category =  [locationDic objectForKey:@"type"];
+        location.state = [locationDic objectForKey:@"state"];
+        location.city = [locationDic objectForKey:@"city"];
+        
+        if ([locationDic objectForKey:@"phone"] != nil && [locationDic objectForKey:@"phone"] != [NSNull null]) {
+            location.phoneNumber = [locationDic objectForKey:@"phone"];
+            
+        }
+        location.comment = [((NSArray *)[locationDic objectForKey:@"comments"]) componentsJoinedByString:@","];
+        location.priceRange = [locationDic objectForKey:@"price_range"];
+        //location.recommendation = [[locationDic objectForKey:@"recommended"] intValue] == 1;
+        
+        if ([locationDic objectForKey:@"reccit"] != nil && [locationDic objectForKey:@"reccit"] != [NSNull null]) {
+            location.recommendation = [[locationDic objectForKey:@"reccit"] boolValue];
+        } else {
+            location.recommendation = NO;
+        }
+        
+        
+        if ([locationDic objectForKey:@"happyhours"] != [NSNull null])
+        {
+            NSMutableArray *hours = [NSMutableArray new];
+            NSMutableString *mon = [NSMutableString new];
+            NSMutableString *tue = [NSMutableString new];
+            NSMutableString *wed = [NSMutableString new];
+            NSMutableString *thu = [NSMutableString new];
+            NSMutableString *fri = [NSMutableString new];
+            NSMutableString *sat = [NSMutableString new];
+            NSMutableString *sun = [NSMutableString new];
+            if([[locationDic objectForKey:@"happyhours"] respondsToSelector:@selector(count)])
             {
-                
-                if([hour hasPrefix:@"Mon"])
+                for(NSString *hour in [locationDic objectForKey:@"happyhours"])
                 {
-                    [mon appendString:hour];
-                    [mon appendString:@" "];
+                    
+                    if([hour hasPrefix:@"Mon"])
+                    {
+                        [mon appendString:hour];
+                        [mon appendString:@" "];
+                        
+                    }
+                    if([hour hasPrefix:@"Tue"])
+                    {
+                        [tue appendString:hour];
+                        [tue appendString:@" "];
+                        
+                    }
+                    if([hour hasPrefix:@"Wed"])
+                    {
+                        [wed appendString:hour];
+                        [wed appendString:@" "];
+                        
+                    }
+                    if([hour hasPrefix:@"Thu"])
+                    {
+                        [thu appendString:hour];
+                        [thu appendString:@" "];
+                        
+                    }
+                    if([hour hasPrefix:@"Fri"])
+                    {
+                        [fri appendString:hour];
+                        [fri appendString:@" "];
+                        
+                    }
+                    if([hour hasPrefix:@"Sat"])
+                    {
+                        [sat appendString:hour];
+                        [sat appendString:@" "];
+                        
+                    }
+                    if([hour hasPrefix:@"Sun"])
+                    {
+                        [sun appendString:hour];
+                        [sun appendString:@" "];
+                        
+                    }
+                    
                     
                 }
-                if([hour hasPrefix:@"Tue"])
-                {
-                    [tue appendString:hour];
-                    [tue appendString:@" "];
-                    
-                }
-                if([hour hasPrefix:@"Wed"])
-                {
-                    [wed appendString:hour];
-                    [wed appendString:@" "];
-                    
-                }
-                if([hour hasPrefix:@"Thu"])
-                {
-                    [thu appendString:hour];
-                    [thu appendString:@" "];
-                    
-                }
-                if([hour hasPrefix:@"Fri"])
-                {
-                    [fri appendString:hour];
-                    [fri appendString:@" "];
-                    
-                }
-                if([hour hasPrefix:@"Sat"])
-                {
-                    [sat appendString:hour];
-                    [sat appendString:@" "];
-                    
-                }
-                if([hour hasPrefix:@"Sun"])
-                {
-                    [sun appendString:hour];
-                    [sun appendString:@" "];
-                    
-                }
-                
+                [hours addObject:sun];
+                [hours addObject:mon];
+                [hours addObject:tue];
+                [hours addObject:wed];
+                [hours addObject:thu];
+                [hours addObject:fri];
+                [hours addObject:sat];
+            }
+            
+            
+            
+            
+            location.happyhours = hours;
+        }
+        
+        if ([locationDic objectForKey:@"friends"] != [NSNull null])
+        {
+            NSMutableArray *listFriend = [[NSMutableArray alloc] init];
+            NSMutableArray *listFriendName = [[NSMutableArray alloc] init];
+            
+            for (NSDictionary *friend in [locationDic objectForKey:@"friends"])
+            {
+                NSLog(@"Friend Image: %@", [friend objectForKey:@"image"]);
+                [listFriend addObject:[friend objectForKey:@"image"]];
+                [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"firstName"], [friend objectForKey:@"lastName"]]];
                 
             }
-            [hours addObject:sun];
-            [hours addObject:mon];
-            [hours addObject:tue];
-            [hours addObject:wed];
-            [hours addObject:thu];
-            [hours addObject:fri];
-            [hours addObject:sat];
+            
+            location.listFriends = listFriend;
+            location.listFriendsName = listFriendName;
+            
         }
         
+        return location;
+
         
-        
-        
-        location.happyhours = hours;
     }
-    
-    if ([locationDic objectForKey:@"friends"] != [NSNull null])
+    else
     {
-        NSMutableArray *listFriend = [[NSMutableArray alloc] init];
-        NSMutableArray *listFriendName = [[NSMutableArray alloc] init];
-
-        for (NSDictionary *friend in [locationDic objectForKey:@"friends"])
-        {
-            NSLog(@"Friend Image: %@", [friend objectForKey:@"image"]);
-            [listFriend addObject:[friend objectForKey:@"image"]];
-            [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"firstName"], [friend objectForKey:@"lastName"]]];
-
-        }
-        
-        location.listFriends = listFriend;
-        location.listFriendsName = listFriendName;
-
+        return nil;
     }
+
     
-    return location;
+    
 }
 
 + (void)drawListLocationToPDF:(NSArray *)listLocation

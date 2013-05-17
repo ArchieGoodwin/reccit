@@ -356,7 +356,13 @@
                 NSMutableArray *foodStyles = [NSMutableArray new];
                 for(NSString *style in [placeDict objectForKey:@"food_styles"])
                 {
-                    [foodStyles addObject:style];
+                    NSString *s = [style stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                    s = [s stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                    s = [s stringByReplacingOccurrencesOfString:@"/" withString:@""];
+
+
+                    
+                    [foodStyles addObject:s];
                 }
                 NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":\"%@\"", [foodStyles componentsJoinedByString:@","]];
 

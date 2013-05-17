@@ -247,14 +247,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="296" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1001" contentMode="left" text="Gyu-Kuku" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Ul-fh-FF4">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1001" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Ul-fh-FF4">
                                                     <rect key="frame" x="8" y="1" width="281" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1002" contentMode="left" text="Gyu-Kuku" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ryC-IN-Xp1">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1002" contentMode="left" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ryC-IN-Xp1">
                                                     <rect key="frame" x="8" y="20" width="187" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -730,10 +730,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e2l-yG-3Q0">
-                                <rect key="frame" x="118" y="364" width="85" height="34"/>
+                                <rect key="frame" x="118" y="364" width="88" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="done_button.png">
+                                <state key="normal" image="btn-share.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -992,7 +992,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1006" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G4J-xy-1Mg">
-                                <rect key="frame" x="249" y="159" width="30" height="30"/>
+                                <rect key="frame" x="124" y="160" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="review_thumbs_down_.png">
@@ -1007,7 +1007,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9J8-r1-tvN">
-                                <rect key="frame" x="213" y="159" width="30" height="30"/>
+                                <rect key="frame" x="88" y="160" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="review_thumbs_up.png">
@@ -1038,11 +1038,6 @@
                                     <action selector="btnCloseTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="XUq-2H-a0O"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="gi2-pn-3qb" customClass="DYRateView">
-                                <rect key="frame" x="88" y="140" width="125" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fEU-Fd-EGa">
                                 <rect key="frame" x="49" y="197" width="223" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1061,6 +1056,11 @@
                                 <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="gi2-pn-3qb" customClass="DYRateView">
+                                <rect key="frame" x="88" y="137" width="165" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1595,7 +1595,7 @@
                                         <rect key="frame" x="48" y="107" width="225" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Hanoi, Vietnam" minimumFontSize="17" id="ZS7-Y4-NIz">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="city, country" minimumFontSize="17" id="ZS7-Y4-NIz">
                                         <rect key="frame" x="84" y="25" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -1833,7 +1833,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <view tag="1002" contentMode="scaleToFill" id="2eH-XU-clX" customClass="DYRateView">
-                                                    <rect key="frame" x="222" y="4" width="96" height="25"/>
+                                                    <rect key="frame" x="193" y="4" width="125" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -1874,11 +1874,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-hours.png" id="639-x2-5gR">
-                                                    <rect key="frame" x="206" y="17" width="112" height="25"/>
+                                                    <rect key="frame" x="200" y="18" width="112" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="6000" contentMode="left" text="Thurs 4pm-8pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g06-ep-KPm">
-                                                    <rect key="frame" x="212" y="18" width="98" height="21"/>
+                                                    <rect key="frame" x="206" y="19" width="98" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -2047,7 +2047,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <view tag="1002" contentMode="scaleToFill" id="neN-Ho-osm" customClass="DYRateView">
-                                                    <rect key="frame" x="225" y="7" width="96" height="25"/>
+                                                    <rect key="frame" x="212" y="11" width="106" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -2719,6 +2719,7 @@
         <image name="btn-popular.png" width="114" height="31"/>
         <image name="btn-reccit.png" width="94" height="31"/>
         <image name="btn-search.png" width="41" height="40"/>
+        <image name="btn-share.png" width="88" height="30"/>
         <image name="btn-submit.png" width="90" height="28"/>
         <image name="btn-term.png" width="301" height="50"/>
         <image name="btn-transit.png" width="115" height="32"/>
@@ -2938,11 +2939,6 @@
         <class className="RCRateViewController" superclassName="RCBaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCRateViewController.h"/>
             <relationships>
-                <relationship kind="action" name="btnDoneTouched:"/>
-                <relationship kind="action" name="btnLikeTouched:"/>
-                <relationship kind="action" name="btnRateTouched:"/>
-                <relationship kind="action" name="btnSkipTouched:"/>
-                <relationship kind="action" name="btnUnLikeTouched:"/>
                 <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
             </relationships>
         </class>

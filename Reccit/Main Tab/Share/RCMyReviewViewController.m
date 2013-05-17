@@ -38,7 +38,7 @@
     
     self.btnShare.hidden = YES;
     self.btnCancel.hidden = YES;
-    
+    self.rateView.editable = NO;
     self.txtComment.inputAccessoryView = self.toolbar;
 }
 
@@ -77,12 +77,26 @@
 
 - (IBAction)btnReccitTouched:(id)sender
 {
+    if(!self.btnEdit.hidden)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please tap edit button to make any changes" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    
     self.btnReccit.alpha = 1;
     self.btnNotReccit.alpha = 0.3;
 }
 
 - (IBAction)btnNoneReccitTouched:(id)sender
 {
+    if(!self.btnEdit.hidden)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please tap edit button to make any changes" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
     self.btnReccit.alpha = 0.3;
     self.btnNotReccit.alpha = 1;
 }
@@ -123,6 +137,7 @@
     self.btnShare.hidden = NO;
     self.btnCancel.hidden = NO;
     self.txtComment.editable = YES;
+    self.rateView.editable = YES;
 }
 
 
@@ -132,6 +147,7 @@
     self.btnShare.hidden = YES;
     self.btnCancel.hidden = YES;
     self.txtComment.editable = NO;
+    self.rateView.editable = NO;
 }
 
 - (IBAction)btnDoneTouched:(id)sender

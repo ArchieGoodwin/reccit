@@ -243,24 +243,28 @@
         {
             RCLocation *location =  [RCCommonUtils getLocationFromDictionary:[locationDic objectForKey:@"place"]];
             
-            //NSLog(@"COMMENT %@", location.comment);
-            //NSLog(@"category %@", location.category);
-            [self.listReview addObject:location];
-            
-            if ([location.city isEqualToString:@""]) continue;
-            
-            BOOL isExist = FALSE;
-            for (NSString *str in self.listCity)
+            if(location)
             {
-                if ([str isEqualToString:location.city])
+                //NSLog(@"COMMENT %@", location.comment);
+                //NSLog(@"category %@", location.category);
+                [self.listReview addObject:location];
+                
+                if ([location.city isEqualToString:@""]) continue;
+                
+                BOOL isExist = FALSE;
+                for (NSString *str in self.listCity)
                 {
-                    isExist = TRUE;
-                    break;
+                    if ([str isEqualToString:location.city])
+                    {
+                        isExist = TRUE;
+                        break;
+                    }
+                }
+                if (!isExist) {
+                    [self.listCity addObject:location.city];
                 }
             }
-            if (!isExist) {
-                [self.listCity addObject:location.city];
-            }
+            
             
 
         }
