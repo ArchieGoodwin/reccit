@@ -35,4 +35,5 @@ typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
 -(void)getFacebookRecentCheckins;
 -(void)getFacebookQueryRecent:(NSDate *)lastDate  completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(void)getFacebookUserCheckins:(RCCompleteBlockWithResult)completionBlock;
+-(void)getFacebookQueryWithTimePaging:(RCCompleteBlockWithResult)completionBlock;
 @end

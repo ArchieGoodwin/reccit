@@ -112,7 +112,9 @@
         //[[facebookHelper sharedInstance] getFacebookRecentCheckins];
 
 
-        
+        /*[[facebookHelper sharedInstance] getFacebookQueryWithTimePaging:^(BOOL result, NSError *error) {
+            NSLog(@"getFacebookQueryWithTimePaging: %@", @"done");
+        }];*/
         
         
         /*if([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn])

@@ -13,6 +13,7 @@
 @implementation facebookHelper {
     int iterations;
     int maxIterations;
+    int period;
 }
 
 -(void)recursiveQuery:(int)offset completionBlock:(RCCompleteBlockWithResult)completionBlock
@@ -72,6 +73,79 @@
             }
         }
     }];
+}
+
+-(void)recursiveFacebookQueryWithTimePaging:(long)offset completionBlock:(RCCompleteBlockWithResult)completionBlock
+{
+    NSLog(@"step recursiveQuery %i", iterations);
+
+    long millis = [[NSDate date] timeIntervalSince1970];
+    long down_t = millis - offset;
+    long upper_t = down_t + period;
+    NSLog(@"period: %li   %li   , current time %li", down_t, upper_t, millis);
+    NSString *query = [NSString stringWithFormat:
+                       @"{"
+                       @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND timestamp > %li AND timestamp < %li',"
+                       @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
+                       "phone, pic, price_range, website "
+                       "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, name, "
+                       "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
+                       @"}", down_t, upper_t];
+    
+    
+
+    // Set up the query parameter
+    NSDictionary *queryParam =
+    [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+    
+    FBRequest *postRequest = [FBRequest requestWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET"];
+    postRequest.session = FBSession.activeSession;
+    
+    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if(!error)
+        {
+            iterations++;
+            [self buildArrays:[result objectForKey:@"data"]];
+            
+            if(iterations <= maxIterations)
+            {
+                [self recursiveFacebookQueryWithTimePaging:iterations * period completionBlock:completionBlock];
+                
+            }
+            else
+            {
+                [self buildResult];
+                NSLog(@"end query %@", [NSDate date]);
+                [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+                
+                if(completionBlock)
+                {
+                    completionBlock(YES, nil);
+                }
+            }
+        }
+        else
+        {
+            NSLog(@"error: %@", [error description]);
+            if(completionBlock)
+            {
+                completionBlock(NO, error);
+            }
+        }
+    }];
+}
+
+-(void)getFacebookQueryWithTimePaging:(RCCompleteBlockWithResult)completionBlock
+{
+    RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
+    
+    iterations = 1;
+    maxIterations = 4;
+
+    NSLog(@"start query %@", [NSDate date]);
+    
+    [self recursiveFacebookQueryWithTimePaging:iterations * period completionBlock:completeBlockWithResult];
+    
 }
 
 -(void)getFacebookQuery:(RCCompleteBlockWithResult)completionBlock
@@ -160,7 +234,7 @@
 {
 
 
-    int millis = [lastDate timeIntervalSince1970];
+    long millis = [lastDate timeIntervalSince1970];
 
     //millis = 1349845200;
     RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
@@ -257,7 +331,7 @@
         }
     }
 
-    NSLog(@"result arrays :%i   %i", _checkins.count, _places.count);
+    NSLog(@"result arrays checkins: %i   places: %i", _checkins.count, _places.count);
 
 
 }
@@ -644,7 +718,7 @@
 
     NSString *query = [NSString stringWithFormat:
             @"{"
-                    @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me()',"
+                    @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me() limit 0, 100',"
                     @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
                     "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", "
@@ -812,6 +886,8 @@
     _userPlaces = [NSMutableArray new];
     _friends = [NSArray new];
     _friendsCheckinsArray = [NSMutableArray new];
+    //eriod = 31536000;
+    period = 15768000;
 
 #if !(TARGET_IPHONE_SIMULATOR)
 

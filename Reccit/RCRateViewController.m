@@ -133,7 +133,7 @@
     self.reviewVc.location = location;
     self.reviewVc.shouldSendImmediately = YES;
 
-    [self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
+    //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
     
     [self presentSemiModalViewController:self.reviewVc];
 }
@@ -235,7 +235,7 @@
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = location;
     self.reviewVc.shouldSendImmediately = YES;
-    [self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
+    //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
     
     [self presentSemiModalViewController:self.reviewVc];
     

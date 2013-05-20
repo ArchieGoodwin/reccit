@@ -71,6 +71,40 @@
                     NSLog(@"[userCheckinRequest responseData]: %@", [[NSString alloc] initWithData:[userCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
                     //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                     [TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                    
+                    
+                    [[facebookHelper sharedInstance] getFacebookQueryWithTimePaging:^(BOOL result, NSError *error) {
+                        if([[facebookHelper sharedInstance] stringFriendsCheckins])
+                        {
+                            
+                            NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekins,
+                                                                        [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                            NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
+                            __weak ASIHTTPRequest *frCheckinRequest = [ASIHTTPRequest requestWithURL:frCheckinUrl];
+                            frCheckinRequest.requestMethod = @"POST";
+                            frCheckinRequest.timeOutSeconds = 240;
+                            
+                            [frCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
+                            [frCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
+                            [frCheckinRequest setPostBody:[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                            [frCheckinRequest setFailedBlock:^{
+                                //[[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];
+                                NSLog(@"error frCheckinRequest %@", [frCheckinRequest.error description]);
+                                [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [frCheckinRequest.error description]]];
+                                
+                            }];
+                            [frCheckinRequest setCompletionBlock:^{
+                                NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:[frCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
+                                [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                                
+                            }];
+                            
+                            [frCheckinRequest startAsynchronous];
+                        }
+                    }];
+                    
+                    
+                    
                 }];
                 
                 
@@ -78,42 +112,7 @@
             }
 
         }];
-        
 
-            [[facebookHelper sharedInstance] getFacebookQuery:^(BOOL result, NSError *error) {
-                //upload checkins to server
-
-                if([[facebookHelper sharedInstance] stringFriendsCheckins])
-                {
-
-                        NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekins,
-                                                                                              [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
-                        NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
-                        __weak ASIHTTPRequest *frCheckinRequest = [ASIHTTPRequest requestWithURL:frCheckinUrl];
-                        frCheckinRequest.requestMethod = @"POST";
-                        frCheckinRequest.timeOutSeconds = 240;
-
-                        [frCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
-                        [frCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                        [frCheckinRequest setPostBody:[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [frCheckinRequest setFailedBlock:^{
-                            //[[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];
-                            NSLog(@"error frCheckinRequest %@", [frCheckinRequest.error description]);
-                            [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [frCheckinRequest.error description]]];
-
-                        }];
-                        [frCheckinRequest setCompletionBlock:^{
-                            NSDictionary *responseObjectFR = [NSJSONSerialization JSONObjectWithData:[frCheckinRequest responseData] options:kNilOptions error:nil];
-                            NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:[frCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
-                            [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
-
-                        }];
-
-                        [frCheckinRequest startAsynchronous];
-                }
-
-
-            }];
 
     }];
     

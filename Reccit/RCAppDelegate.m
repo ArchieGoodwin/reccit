@@ -16,6 +16,7 @@
 #import "RCLinkedAccountsViewController.h"
 #import "RCMainTabbarController.h"
 #import "RCAccountViewController.h"
+#import "GAI.h"
 NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStateChangedNotification";
 
 @implementation RCAppDelegate
@@ -24,6 +25,18 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 {
     // Override point for customization after application launch.
     [TestFlight takeOff:@"a4640385-1ded-4fae-b4fb-f2b2060da251"];
+    
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    // Optional: set debug to YES for extra debugging information.
+    [GAI sharedInstance].debug = YES;
+    // Create tracker instance.
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41067905-1"];
+    
+    //id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
     // get current location
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;

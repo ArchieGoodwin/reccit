@@ -35,6 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIColor *bg = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6];
+    self.view.backgroundColor = bg;
 	// Do any additional setup after loading the view.
     
     _viewRound.layer.cornerRadius = 5;

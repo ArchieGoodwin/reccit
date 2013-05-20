@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/RCAppDelegate.m"
-         timestampString = "390461062.320364"
+         timestampString = "390716639.37769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "263"
-         endingLineNumber = "263"
+         startingLineNumber = "276"
+         endingLineNumber = "276"
          landmarkName = "-requestBasicPermissionsForFacebookAccount"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/RCLoginViewController.m"
-         timestampString = "389509797.606503"
+         timestampString = "390634761.048664"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "401"
-         endingLineNumber = "401">
+         startingLineNumber = "403"
+         endingLineNumber = "403">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"

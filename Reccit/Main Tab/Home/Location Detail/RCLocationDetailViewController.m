@@ -170,7 +170,7 @@
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = self.location;
     self.reviewVc.shouldSendImmediately = YES;
-    [self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
+    //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
     
     [self presentSemiModalViewController:self.reviewVc];
 }

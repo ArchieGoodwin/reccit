@@ -13,6 +13,7 @@
 #import "ASIHTTPRequest.h"
 
 @interface RCReviewInDetailsViewController : RCBaseViewController <UITextViewDelegate, UIAlertViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *lblPlaceName;
 
 @property (strong, nonatomic) RCLocation *location;
 @property (weak, nonatomic) IBOutlet UIView *viewRound;

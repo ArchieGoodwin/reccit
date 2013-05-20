@@ -169,7 +169,7 @@
     {
         
         NSString *placeName = [[checkin objectForKey:@"venue"] objectForKey:@"name"];
-        //NSLog(@"%@", checkin);
+        NSLog(@"%@", checkin);
         placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
         placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@""];
@@ -272,7 +272,9 @@
     
     NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
     
-    NSLog(@"result for friends 4s send count %i: %@", temp.count, data);
+   // NSLog(@"result for friends 4s send count %i: %@", temp.count, data);
+    NSLog(@"result for friends 4s send count %i:", temp.count);
+
     _stringUserCheckins = data;
     
 }

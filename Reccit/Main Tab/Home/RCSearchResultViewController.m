@@ -149,7 +149,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     self.request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST : %@", urlString);
+    NSLog(@"REQUEST callAPIGetListFriendFav: %@", urlString);
     
     [self.request setCompletionBlock:^{
         NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
