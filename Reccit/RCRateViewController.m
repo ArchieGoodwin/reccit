@@ -53,6 +53,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //[[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"view" withAction:@"viewWillAppear" withLabel:@"RCRateViewController" withValue:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning

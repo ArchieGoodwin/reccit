@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RCBaseViewController : UIViewController
+#import "GAITrackedViewController.h"
+@interface RCBaseViewController : GAITrackedViewController
 
 @property (nonatomic, strong) UIView *coverView;
 

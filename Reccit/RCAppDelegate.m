@@ -31,9 +31,11 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
     [GAI sharedInstance].dispatchInterval = 20;
     // Optional: set debug to YES for extra debugging information.
-    [GAI sharedInstance].debug = YES;
+    [GAI sharedInstance].debug = NO;
     // Create tracker instance.
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41067905-1"];
+//    
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41076620-1"];
+    //id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41067905-1"];
     
     //id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     

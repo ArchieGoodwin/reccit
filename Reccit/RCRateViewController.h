@@ -13,7 +13,7 @@
 #import "RCBaseViewController.h"
 #import "RCReviewLocationViewController.h"
 
-@interface RCRateViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, DYRateViewDelegate>
+@interface RCRateViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, DYRateViewDelegate> 
 
 @property (strong, nonatomic) NSMutableArray *listLocation;
 @property (strong, nonatomic) ASIHTTPRequest *request;

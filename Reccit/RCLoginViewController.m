@@ -206,6 +206,8 @@
     [super viewWillAppear:animated];    
     [self.navigationController setNavigationBarHidden:YES];
     
+    //[[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"view" withAction:@"viewWillAppear" withLabel:@"RCLoginViewController" withValue:nil];
+
    
 }
 

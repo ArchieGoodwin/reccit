@@ -2026,14 +2026,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1001" contentMode="left" text="place name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9f-j8-J81">
-                                                    <rect key="frame" x="12" y="2" width="215" height="21"/>
+                                                    <rect key="frame" x="12" y="2" width="305" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="997" contentMode="left" text="# of reccs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uaE-xJ-zMN">
-                                                    <rect key="frame" x="212" y="45" width="66" height="21"/>
+                                                    <rect key="frame" x="212" y="49" width="66" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2047,12 +2047,12 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <view tag="1002" contentMode="scaleToFill" id="neN-Ho-osm" customClass="DYRateView">
-                                                    <rect key="frame" x="212" y="11" width="106" height="25"/>
+                                                    <rect key="frame" x="212" y="20" width="106" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <button opaque="NO" tag="995" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pNm-k8-ZYd">
-                                                    <rect key="frame" x="280" y="34" width="37" height="37"/>
+                                                    <rect key="frame" x="280" y="38" width="37" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="review_thumbs_up.png">
@@ -3035,8 +3035,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ceO-xc-Gio"/>
         <segue reference="0gG-q4-5bW"/>
-        <segue reference="iQq-30-Fua"/>
+        <segue reference="ceO-xc-Gio"/>
+        <segue reference="Xcg-p9-p62"/>
     </inferredMetricsTieBreakers>
 </document>

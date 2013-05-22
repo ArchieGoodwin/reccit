@@ -12,7 +12,7 @@
 
 @end
 
-@implementation RCBaseViewController
+@implementation RCBaseViewController 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +26,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    self.trackedViewName = NSStringFromClass([self class]);
 	// Do any additional setup after loading the view.
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //NSLog(NSStringFromClass([self class]));
+    //[[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"view" withAction:@"viewWillAppear" withLabel:NSStringFromClass([self class]) withValue:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
