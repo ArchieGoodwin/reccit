@@ -20,7 +20,9 @@
 #define kAPISearchPopular @"http://bizannouncements.com/Vega/services/app/otherPlaces.php?user=%@&%@"
 
 @interface RCSearchResultViewController ()
-
+{
+    
+}
 @end
 
 @implementation RCSearchResultViewController
@@ -60,7 +62,7 @@
         _imgSurprise.hidden =  NO;
         _c1.hidden  =YES;
         _c2.hidden = YES;
-        _c3.hidden = YES;
+        _searchBar.hidden = YES;
             _btn1.hidden = YES;
             _btn2.hidden = YES;
             _btn3.hidden = YES;
@@ -70,7 +72,7 @@
         _imgSurprise.hidden =  YES;
         _c1.hidden  =NO;
         _c2.hidden = NO;
-        _c3.hidden = NO;
+        _searchBar.hidden = NO;
         if(!_showTabs)
         {
             _btn1.hidden = YES;
@@ -128,7 +130,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationReccit count] == 0)
         {
-            [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+            //[RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
         }
         [self.tbResult reloadData];
     }];
@@ -252,7 +254,7 @@
         } else {
             if ([self.listLocationReccit count] == 0)
             {
-                [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+                //[RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
             }
         }
     }
@@ -299,7 +301,15 @@
 {
     switch (self.currentTab) {
         case 1:
-            return [self.listLocationReccit count];
+            if(self.listLocationReccit.count > 0)
+            {
+                return [self.listLocationReccit count];
+
+            }
+            else
+            {
+                return 1;
+            }
         case 2:
             return [self.listLocationFriend count];
         case 3:
@@ -315,7 +325,19 @@
     RCLocation *location = nil;
     switch (self.currentTab) {
         case 1:
-            location = [self.listLocationReccit objectAtIndex:indexPath.row];
+            
+            if(self.listLocationReccit.count > 0)
+            {
+                location = [self.listLocationReccit objectAtIndex:indexPath.row];
+
+            }
+            else
+            {
+                UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
+                [(UILabel *)[cell viewWithTag:300] setText:@"Unfortunately at this time none of your friends have recommended any places that match your search parameters. Please select the friendsfav tab to see the places your friends have visited"];
+                return cell;
+            }
+            
             break;
         case 2:
             location = [self.listLocationFriend objectAtIndex:indexPath.row];
@@ -348,31 +370,43 @@
 
     if(self.currentTab == 1)
     {
-        ((UILabel *)[cell viewWithTag:997]).hidden = NO;
-
-
-
-
-        if(location.reccitCount > 0)
+        if(!self.showTabs && !self.isSurprase)
         {
-            ((UIImageView *)[cell viewWithTag:995]).hidden = NO;
-            if(location.reccitCount == 1)
-            {
-                [(UILabel *)[cell viewWithTag:997] setText:[NSString stringWithFormat:@"%i reccit", location.reccitCount]];
-
-            }
-            else
-            {
-                [(UILabel *)[cell viewWithTag:997] setText:[NSString stringWithFormat:@"%i reccits", location.reccitCount]];
-
-            }
-
+            ((UIImageView *)[cell viewWithTag:995]).hidden = YES;
+            ((UILabel *)[cell viewWithTag:997]).hidden = YES;
 
         }
         else
         {
-            [(UILabel *)[cell viewWithTag:997] setText:@""];
+            ((UILabel *)[cell viewWithTag:997]).hidden = NO;
+            
+            
+            
+            
+            if(location.reccitCount > 0)
+            {
+                ((UIImageView *)[cell viewWithTag:995]).hidden = NO;
+                if(location.reccitCount == 1)
+                {
+                    [(UILabel *)[cell viewWithTag:997] setText:[NSString stringWithFormat:@"%i reccit", location.reccitCount]];
+                    
+                }
+                else
+                {
+                    [(UILabel *)[cell viewWithTag:997] setText:[NSString stringWithFormat:@"%i reccits", location.reccitCount]];
+                    
+                }
+                
+                
+            }
+            else
+            {
+                [(UILabel *)[cell viewWithTag:997] setText:@""];
+            }
         }
+        
+        
+        
     }
     else
     {
@@ -497,7 +531,7 @@
     [self setImgSurprise:nil];
     [self setC1:nil];
     [self setC2:nil];
-    [self setC3:nil];
+    [self setSearchBar:nil];
     [self setBtn1:nil];
     [self setBtn2:nil];
     [self setBtn3:nil];

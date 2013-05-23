@@ -110,11 +110,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-         timestampString = "386835059.559297"
+         timestampString = "390980922.495852"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "272"
-         endingLineNumber = "272"
+         startingLineNumber = "284"
+         endingLineNumber = "284"
          landmarkName = "-swTwitterChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -168,6 +168,19 @@
          startingLineNumber = "94"
          endingLineNumber = "94"
          landmarkName = "-OAuthTwitterController:authenticatedWithUsername:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Reccit/Main Tab/Home/Location Detail/RCReviewInDetailsViewController.m"
+         timestampString = "390981382.039524"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
+         landmarkName = "-btnSubmitTouched:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

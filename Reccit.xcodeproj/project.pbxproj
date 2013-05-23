@@ -347,6 +347,7 @@
 		DC3E48721704023800C48CB7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3E48711704023800C48CB7 /* FacebookSDK.framework */; };
 		DC564A4A1749DB1A0023A09F /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC564A491749DB1A0023A09F /* libGoogleAnalytics.a */; };
 		DC564A4C1749DB3C0023A09F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC564A4B1749DB3C0023A09F /* CoreData.framework */; };
+		DC564A7A174DD1340023A09F /* Sequencer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC564A79174DD1340023A09F /* Sequencer.m */; };
 		DC5AE4161733946200773A13 /* foursquareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5AE4151733946200773A13 /* foursquareHelper.m */; };
 		DC5AE4191734C28100773A13 /* twitterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5AE4181734C28100773A13 /* twitterHelper.m */; };
 		DC5AE42617365F9D00773A13 /* MGTwitterMessagesYAJLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5AE41B17365F9C00773A13 /* MGTwitterMessagesYAJLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -923,6 +924,8 @@
 		DC564A481749DB1A0023A09F /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
 		DC564A491749DB1A0023A09F /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		DC564A4B1749DB3C0023A09F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DC564A78174DD1330023A09F /* Sequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sequencer.h; sourceTree = "<group>"; };
+		DC564A79174DD1340023A09F /* Sequencer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sequencer.m; sourceTree = "<group>"; };
 		DC5AE4141733946200773A13 /* foursquareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = foursquareHelper.h; sourceTree = "<group>"; };
 		DC5AE4151733946200773A13 /* foursquareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = foursquareHelper.m; sourceTree = "<group>"; };
 		DC5AE4171734C28100773A13 /* twitterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twitterHelper.h; sourceTree = "<group>"; };
@@ -1145,6 +1148,8 @@
 		A001ED3C16B33124005F0C4D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DC564A78174DD1330023A09F /* Sequencer.h */,
+				DC564A79174DD1340023A09F /* Sequencer.m */,
 				A0F0D0CB16CE3009003267A9 /* PDFService */,
 				A001ED3E16B33132005F0C4D /* RCDefine.h */,
 				A001ED7716B33411005F0C4D /* RCCommonUtils.h */,
@@ -2535,6 +2540,7 @@
 				DC5AE44B1736600F00773A13 /* yajl_parser.c in Sources */,
 				DC5AE44C1736600F00773A13 /* yajl_version.c in Sources */,
 				DCB5E72C1744E109002F7F59 /* RCReviewInDetailsViewController.m in Sources */,
+				DC564A7A174DD1340023A09F /* Sequencer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2613,8 +2619,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2632,8 +2638,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8CD93AC8-3493-42F1-9DB5-BDD236C32340";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8CD93AC8-3493-42F1-9DB5-BDD236C32340";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2641,8 +2647,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2660,8 +2666,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8CD93AC8-3493-42F1-9DB5-BDD236C32340";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8CD93AC8-3493-42F1-9DB5-BDD236C32340";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

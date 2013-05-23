@@ -1247,17 +1247,9 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="7pr-0B-orX">
-                                <rect key="frame" x="0.0" y="45" width="320" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-checkin-friend.png" id="3AW-b9-z45">
                                 <rect key="frame" x="-3" y="400" width="323" height="99"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="ERr-5z-Lj1">
-                                <rect key="frame" x="283" y="7" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N63-eo-qCX">
                                 <rect key="frame" x="86" y="453" width="148" height="39"/>
@@ -1296,6 +1288,97 @@
                                 <rect key="frame" x="163" y="410" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jeY-DW-IaN">
+                                <rect key="frame" x="166" y="223" width="148" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" backgroundImage="add_friend_button.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnAddFriendTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="1lI-FI-1jU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8KE-iO-hb2">
+                                <rect key="frame" x="166" y="268" width="148" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" backgroundImage="what_areyoudoing_button.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnWhereTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="vCp-68-bF9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dgr-4t-ef5">
+                                <rect key="frame" x="166" y="178" width="148" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" backgroundImage="write_review_button.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnReviewTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="Uny-Cp-9p0"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="jNT-qf-MHN">
+                                <rect key="frame" x="-3" y="104" width="322" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TI9-76-Mer">
+                                        <rect key="frame" x="13" y="0.0" width="299" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.82617083170000005" green="0.48650285570000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Address" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gFT-CU-XSl">
+                                        <rect key="frame" x="13" y="37" width="299" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Phone: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6x1-Rc-G4G">
+                                        <rect key="frame" x="172" y="21" width="165" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RRA-qN-8It">
+                                        <rect key="frame" x="13" y="20" width="139" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_notfound.jpg" id="uL1-nN-eYZ">
+                                <rect key="frame" x="7" y="181" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="7pr-0B-orX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="U8i-Vf-cQO" id="vyJ-sZ-BFf"/>
+                                </connections>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="onm-Jx-G3s">
                                 <rect key="frame" x="5" y="3" width="32" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1312,88 +1395,8 @@
                                     <action selector="btnCloseTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="hW0-JR-NLM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jeY-DW-IaN">
-                                <rect key="frame" x="169" y="198" width="148" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="add_friend_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnAddFriendTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="1lI-FI-1jU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8KE-iO-hb2">
-                                <rect key="frame" x="169" y="243" width="148" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="what_areyoudoing_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnWhereTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="vCp-68-bF9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dgr-4t-ef5">
-                                <rect key="frame" x="169" y="153" width="148" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="write_review_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnReviewTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="Uny-Cp-9p0"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" id="jNT-qf-MHN">
-                                <rect key="frame" x="-2" y="45" width="322" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TI9-76-Mer">
-                                        <rect key="frame" x="13" y="0.0" width="299" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <color key="textColor" red="0.82617083170000005" green="0.48650285570000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Address" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gFT-CU-XSl">
-                                        <rect key="frame" x="13" y="40" width="299" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Phone: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6x1-Rc-G4G">
-                                        <rect key="frame" x="13" y="79" width="299" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RRA-qN-8It">
-                                        <rect key="frame" x="13" y="20" width="299" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_notfound.jpg" id="uL1-nN-eYZ">
-                                <rect key="frame" x="10" y="156" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="ERr-5z-Lj1">
+                                <rect key="frame" x="283" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -1929,6 +1932,11 @@
                                 <rect key="frame" x="218" y="4" width="41" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="surprase.png" id="ntN-zQ-ZKQ">
+                                <rect key="frame" x="60" y="4" width="200" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="keyword search" minimumFontSize="17" id="Xjd-9h-LtW">
                                 <rect key="frame" x="88" y="9" width="130" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1938,11 +1946,6 @@
                                     <outlet property="delegate" destination="Kqy-Mf-YWE" id="AM2-rE-40m"/>
                                 </connections>
                             </textField>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="surprase.png" id="ntN-zQ-ZKQ">
-                                <rect key="frame" x="60" y="4" width="200" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="YiM-qu-CUg">
                                 <rect key="frame" x="283" y="8" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2091,6 +2094,25 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="EmptyCell" rowHeight="107" id="dIl-uB-e79">
+                                        <rect key="frame" x="0.0" y="97" width="320" height="107"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="300" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="I6F-6V-gHO">
+                                                    <rect key="frame" x="10" y="13" width="299" height="92"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Kqy-Mf-YWE" id="mJ5-NO-cBt"/>
@@ -2107,7 +2129,6 @@
                         <outlet property="btn3" destination="IHK-ce-HX9" id="6eB-SH-7uN"/>
                         <outlet property="c1" destination="jV4-El-fj6" id="hBt-SO-zFT"/>
                         <outlet property="c2" destination="llZ-lZ-rrN" id="xdH-Ww-gvB"/>
-                        <outlet property="c3" destination="Xjd-9h-LtW" id="5yN-eJ-6lw"/>
                         <outlet property="imgAvatar" destination="YiM-qu-CUg" id="dC0-Qq-l1e"/>
                         <outlet property="imgSurprise" destination="ntN-zQ-ZKQ" id="ADB-MC-pHf"/>
                         <outlet property="searchBar" destination="Xjd-9h-LtW" id="Yjg-bI-H8e"/>
@@ -2779,256 +2800,6 @@
         <image name="what_areyoudoing_button.png" width="297" height="78"/>
         <image name="write_review_button.png" width="297" height="78"/>
     </resources>
-    <classes>
-        <class className="DYRateView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DYRateView.h"/>
-        </class>
-        <class className="MapView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapView.h"/>
-        </class>
-        <class className="RCAccountViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCAccountViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnAboutTouched:"/>
-                <relationship kind="action" name="btnTermsTouched:"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RCAddPlaceViewController" superclassName="RCBaseViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCAddPlaceViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnUnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgLocation" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbCity" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbPhone" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-                <relationship kind="outlet" name="swFacebook" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="swTwitter" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="viewInfo" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RCBaseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCBaseViewController.h"/>
-        </class>
-        <class className="RCCheckInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCCheckInViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCDirectViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCDirectViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbEnd" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbStart" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MapView"/>
-                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCFriendCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCFriendCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="checkBox" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAva" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgSource" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RCHomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCHomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tfSearch" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RCLinkedAccountsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLinkedAccountsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnFacebookUpdate" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnFoursquareUpdate" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTwitterUpdate" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgFacebookConnect" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgFoursquareConnect" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgTwitterConnect" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="RCListFriendViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCListFriendViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tbFriends" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tfSearch" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RCLocationDetailViewController" superclassName="RCBaseViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLocationDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnCall" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbCity" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbNoReview" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbPrice" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbReviews" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-                <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCLoginFacebookViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFacebookViewController.h"/>
-        </class>
-        <class className="RCLoginFoursquareViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFoursquareViewController.h"/>
-        </class>
-        <class className="RCLoginTwitterViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginTwitterViewController.h"/>
-        </class>
-        <class className="RCLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginViewController.h"/>
-        </class>
-        <class className="RCMainTabbarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCMainTabbarController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnTab1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTab2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTab3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTab4" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="viewButton" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RCMyReviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCMyReviewViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnEdit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnNotReccit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnReccit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnShare" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="txtComment" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="RCRateCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCRateCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnReview" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnUnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-            </relationships>
-        </class>
-        <class className="RCRateViewController" superclassName="RCBaseViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCRateViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCSearchResultViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchResultViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btn1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btn2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btn3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="c1" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="c2" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="c3" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgSurprise" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblNumberOfFriends" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblNumberOfReccits" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tbResult" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bgGenre" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="bgSearchGenre" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="btnGo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnIncrease" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnReduce" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSearch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSuprise" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="progressDistance" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="sliderDistance" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="tfGenre" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfLocation" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="viewContent" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RCShareCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="checkBox" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RCShareViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="handleTap:" candidateClass="UITapGestureRecognizer"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="picker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tfBackGenre" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tfCity" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfGenre" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfType" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="toolbarDone" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="RCSurpriseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSurpriseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgHappyHour" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tbResult" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCTermsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCTermsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnBackTouched:"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbTitle" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RCWebViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCWebViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

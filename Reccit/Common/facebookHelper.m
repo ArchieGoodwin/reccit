@@ -135,6 +135,62 @@
     }];
 }
 
+-(void)facebookQueryWithTimePaging:(long)offset completionBlock:(RCCompleteBlockWithResult)completionBlock
+{
+    NSLog(@"step recursiveQuery %i", iterations);
+    
+    [_checkins removeAllObjects];
+    [_places removeAllObjects];
+    _stringFriendsCheckins = @"";
+    
+    long millis = [[NSDate date] timeIntervalSince1970];
+    long down_t = millis - offset;
+    long upper_t = down_t + period;
+    NSLog(@"period: %li   %li   , current time %li", down_t, upper_t, millis);
+    NSString *query = [NSString stringWithFormat:
+                       @"{"
+                       @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND timestamp > %li AND timestamp < %li',"
+                       @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
+                       "phone, pic, price_range, website "
+                       "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, name, "
+                       "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
+                       @"}", down_t, upper_t];
+    
+    
+    
+    // Set up the query parameter
+    NSDictionary *queryParam =
+    [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+    
+    FBRequest *postRequest = [FBRequest requestWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET"];
+    postRequest.session = FBSession.activeSession;
+    
+    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if(!error)
+        {
+            iterations++;
+            [self buildArrays:[result objectForKey:@"data"]];
+            
+            [self buildResult];
+            NSLog(@"end query %@", [NSDate date]);
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+            
+            if(completionBlock)
+            {
+                completionBlock(YES, nil);
+            }
+        }
+        else
+        {
+            NSLog(@"error: %@", [error description]);
+            if(completionBlock)
+            {
+                completionBlock(NO, error);
+            }
+        }
+    }];
+}
+
 -(void)getFacebookQueryWithTimePaging:(RCCompleteBlockWithResult)completionBlock
 {
     RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
@@ -410,6 +466,7 @@
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"," withString:@""];
 
                 placeName = [self stringWithPercentEscape:placeName];
                 
@@ -577,6 +634,7 @@
             NSString *placeName = [placeDict objectForKey:@"name"];
             placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
             placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+            placeName = [placeName stringByReplacingOccurrencesOfString:@"," withString:@""];
 
             placeName = [self stringWithPercentEscape:placeName];
 

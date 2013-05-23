@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 #import "SA_OAuthTwitterController.h"
 #import "ASIHTTPRequest.h"
-#import "RCReviewLocationViewController.h"
+#import "RCReviewInDetailsViewController.h"
 #import "RCBaseViewController.h"
 #import "MGTwitterEngine.h"
 #import "RCWhereAmIViewController.h"
@@ -25,7 +25,7 @@
 @property (strong, nonatomic) NSString *locationName;
 @property (strong, nonatomic) RCLocation *location;
 
-@property (strong, nonatomic) RCReviewLocationViewController *reviewVc;
+@property (strong, nonatomic) RCReviewInDetailsViewController *reviewVc;
 @property (strong, nonatomic) RCWhereAmIViewController *messageVc;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;

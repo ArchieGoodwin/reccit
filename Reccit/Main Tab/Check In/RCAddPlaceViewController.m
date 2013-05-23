@@ -88,7 +88,7 @@
         
         if (!self.isAddNew) {
             self.imgLocation.hidden = NO;
-            self.mapView.hidden = YES;
+            self.mapView.hidden = NO;
             self.viewInfo.hidden = NO;
             NSLog(@"%@", self.location.category);
             
@@ -131,6 +131,18 @@
             } else {
                 self.btnUnLike.selected = NO;
             }
+            
+            CLLocationCoordinate2D currentLocation = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
+            MKCoordinateRegion region = {{0,0},{.001,.001}};
+            region.center = currentLocation;
+            
+            MKPointAnnotation *userLocation = [[MKPointAnnotation alloc] init];
+            userLocation.coordinate = currentLocation;
+            [self.mapView addAnnotation:userLocation];
+            
+            [self.mapView setRegion:region animated:NO];
+            self.mapView.showsUserLocation = YES;
+            
             
         } else {
             
@@ -211,7 +223,7 @@
         
         
         
-        self.reviewVc = [[RCReviewLocationViewController alloc] initWithNibName:@"RCReviewLocationViewController" bundle:nil];
+        self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
         self.reviewVc.vsParrent = self;
         self.reviewVc.location = self.location;
         self.reviewVc.shouldSendImmediately = NO;
