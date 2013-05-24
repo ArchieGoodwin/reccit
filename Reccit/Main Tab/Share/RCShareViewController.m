@@ -20,6 +20,9 @@
 #define kAPIListReview @"http://bizannouncements.com/Vega/services/app/profile.php?user=%@&city=%@&rating=%@&type=%@&genre=%@"
 
 @interface RCShareViewController ()
+{
+    NSMutableArray *types;
+}
 
 @end
 
@@ -113,14 +116,93 @@
 {
     if(!type)return YES;
     
-    if([loc.category isEqualToString:type])
+    if([self isTypeInLocation:type loc:loc])
     {
         return YES;
     }
+    //if([loc.category isEqualToString:type])
+    //{
+     //   return YES;
+    //}
     
     return NO;
 }
 
+
+
+
+
+-(BOOL)isTypeInLocation:(NSString *)type loc:(RCLocation *)loc
+{
+
+    NSMutableArray *allTypesSplit = [NSMutableArray new];
+    
+    NSArray *typeSplit = [loc.category componentsSeparatedByString:@","];
+    
+    for(NSString *split in typeSplit)
+    {
+        NSArray *temp = [split componentsSeparatedByString:@" "];
+
+        for(NSString *s in temp)
+        {
+            [allTypesSplit addObject:s];
+        }
+    }
+
+   if([type isEqualToString:@"eat"])
+   {
+       for(NSString *split in allTypesSplit)
+       {
+
+           if([[split lowercaseString] isEqualToString:@"restaurant"])
+           {
+               return YES;
+           }
+           if([[split lowercaseString] isEqualToString:@"food"])
+           {
+               return YES;
+           }
+       }
+   }
+    if([type isEqualToString:@"drink"])
+    {
+        for(NSString *split in allTypesSplit)
+        {
+            if([[split lowercaseString] isEqualToString:@"bar"])
+            {
+                return YES;
+            }
+            if([[split lowercaseString] isEqualToString:@"nightlife"])
+            {
+                return YES;
+            }
+            if([[split lowercaseString] isEqualToString:@"club"])
+            {
+                return YES;
+            }
+        }
+    }
+    if([type isEqualToString:@"stay"])
+    {
+        for(NSString *split in allTypesSplit)
+        {
+            if([[split lowercaseString] isEqualToString:@"hotel"])
+            {
+                return YES;
+            }
+            if([[split lowercaseString] isEqualToString:@"travel"])
+            {
+                return YES;
+            }
+            if([[split lowercaseString] isEqualToString:@"recreation"])
+            {
+                return YES;
+            }
+        }
+    }
+    return NO;
+
+}
 
 - (void)loadGerne
 {
@@ -307,15 +389,15 @@
     NSString *type = nil;
     if ([self.tfType.text isEqualToString:@"eat"])
     {
-        type = @"restaurant";
+        type = @"eat";
     }
     if ([self.tfType.text isEqualToString:@"stay"])
     {
-        type = @"hotel";
+        type = @"stay";
     }
     if ([self.tfType.text isEqualToString:@"drink"])
     {
-        type = @"bar";
+        type = @"drink";
     }
     
     NSString *genre = nil;

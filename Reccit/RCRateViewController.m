@@ -143,6 +143,11 @@
 
 - (IBAction)btnLikeTouched:(id)sender
 {
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(menuButtonClicked)];
+
+    
 //    UIButton *btn = (UIButton *)sender;
 //    RCLocation *location = [self.listLocation objectAtIndex:btn.tag];
 //    location.recommendation = YES;
