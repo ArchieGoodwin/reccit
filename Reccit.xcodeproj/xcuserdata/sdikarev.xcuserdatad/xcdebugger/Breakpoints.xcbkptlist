@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/RCAppDelegate.m"
-         timestampString = "390807834.432271"
+         timestampString = "391081081.774281"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "278"
-         endingLineNumber = "278"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
          landmarkName = "-requestBasicPermissionsForFacebookAccount"
          landmarkType = "5">
       </FileBreakpoint>
@@ -110,11 +110,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-         timestampString = "390980922.495852"
+         timestampString = "391083217.63589"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "284"
-         endingLineNumber = "284"
+         startingLineNumber = "288"
+         endingLineNumber = "288"
          landmarkName = "-swTwitterChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -181,6 +181,19 @@
          startingLineNumber = "82"
          endingLineNumber = "82"
          landmarkName = "-btnSubmitTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
+         timestampString = "391083383.443438"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "345"
+         endingLineNumber = "345"
+         landmarkName = "-Publish:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
