@@ -263,6 +263,10 @@
 
 - (IBAction)swFacebookChange:(id)sender
 {
+    RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+    [appDelegate openSessionWithAllowLoginUI:NO];
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn] == nil && self.swFacebook.isOn)
     {
         if (FBSession.activeSession.isOpen) {
@@ -339,41 +343,85 @@
                 }
                 
                 FBRequest *postRequest = [FBRequest requestWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"];
-                postRequest.session = FBSession.activeSession;
-                [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                    
-                    NSLog(@"%@", [error description]);
-                    
-                }];
+                postRequest.session = [FBSession activeSession];
                 
-                
+                if(![postRequest.session.permissions containsObject:@"publish_checkins"])
+                {
+                    [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                        [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                            
+                            NSLog(@"%@", [error description]);
+                            
+                        }];
+                    }];
+                }
+                else
+                {
+                    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                        
+                        NSLog(@"%@", [error description]);
+                        
+                    }];
+                }
+
             }
             else
             {
                 FBRequest *postRequest = [FBRequest requestForPostStatusUpdate:message];
-                postRequest.session = FBSession.activeSession;
-                [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                    
-                    NSLog(@"%@", [error description]);
-                    
-                }];
+                postRequest.session = [FBSession activeSession];
+                
+                
+                if(![postRequest.session.permissions containsObject:@"publish_checkins"])
+                {
+                    [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                        [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                            
+                            NSLog(@"%@", [error description]);
+                            
+                        }];
+                    }];
+                }
+                else
+                {
+                    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                        
+                        NSLog(@"%@", [error description]);
+                        
+                    }];
+                }
+
+               
             }
             
-            
-            
+
         }
         else
         {
             NSLog(@"postLocRequest err %@", [error description]);
             
             FBRequest *postRequest = [FBRequest requestForPostStatusUpdate:message];
-            postRequest.session = FBSession.activeSession;
-            [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                
-                NSLog(@"%@", [error description]);
-                
-            }];
+            postRequest.session = [FBSession activeSession];
             
+            
+            if(![postRequest.session.permissions containsObject:@"publish_checkins"])
+            {
+                [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                        
+                        NSLog(@"%@", [error description]);
+                        
+                    }];
+                }];
+            }
+            else
+            {
+                [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                    
+                    NSLog(@"%@", [error description]);
+                    
+                }];
+            }
+
         }
         
         
@@ -727,7 +775,7 @@
         [self.swFacebook setOn:YES];
         
         // Call webservice authenticate
-        [RCWebService authenticateFacebookWithToken:[[FBSession activeSession] accessToken] userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+        //[RCWebService authenticateFacebookWithToken:[[FBSession activeSession] accessToken] userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
 
         
         [self performSelector:@selector(loginFacebookSuccess) withObject:nil afterDelay:1.5];

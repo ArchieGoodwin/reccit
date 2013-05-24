@@ -231,10 +231,25 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
                                   }];
     
     */
-    return [FBSession openActiveSessionWithPermissions:[NSArray arrayWithObjects:@"publish_actions", @"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", @"publish_checkins", nil] allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+    
+    [FBSession openActiveSessionWithReadPermissions:[NSArray arrayWithObjects:@"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", nil] allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+       
         [self sessionStateChanged:session state:status error:error];
 
+       
     }];
+    
+    
+      
+    
+    /*return [FBSession openActiveSessionWithPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        [self sessionStateChanged:session state:status error:error];
+    }];*/
+    
+    /*return [FBSession openActiveSessionWithPermissions:[NSArray arrayWithObjects:@"publish_actions", @"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", @"publish_checkins", nil] allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        [self sessionStateChanged:session state:status error:error];
+
+    }];*/
     
     /*return [FBSession openActiveSessionWithPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
         [self sessionStateChanged:session state:status error:error];
@@ -263,8 +278,8 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         case FBErrorNonTextMimeTypeReturned:{
             return @"FBErrorNonTextMimeTypeReturned";
         }
-        case FBErrorNativeDialog:{
-            return @"FBErrorNativeDialog";
+        case FBErrorDialog:{
+            return @"FBErrorDialog";
         }
         default:
             return @"[Unknown]";
