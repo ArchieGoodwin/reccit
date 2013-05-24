@@ -9,7 +9,7 @@
 #import "RCDefine.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "TestFlight.h"
-
+#import <FacebookSDK/FacebookSDK.h>
 @implementation facebookHelper {
     int iterations;
     int maxIterations;
@@ -149,11 +149,11 @@
     NSLog(@"period: %li   %li   , current time %li", down_t, upper_t, millis);
     NSString *query = [NSString stringWithFormat:
                        @"{"
-                       @"'query2':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND timestamp > %li AND timestamp < %li',"
+                       @"'query2':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND timestamp > %li AND timestamp < %li',"
                        @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
                        "phone, pic, price_range, website "
                        "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, name, "
-                       "type FROM place WHERE page_id IN (SELECT page_id FROM #query2)) ',"
+                       "type FROM place WHERE page_id IN (SELECT target_id FROM #query2)) ',"
                        @"}", down_t, upper_t];
     
     
@@ -455,13 +455,13 @@
     {
         //NSLog(@"%@", checkin);
 
-        NSDictionary *placeDict = [self getFriendPageIsFromCheckins:[checkin objectForKey:@"page_id"]];
+        NSDictionary *placeDict = [self getFriendPageIsFromCheckins:[checkin objectForKey:@"target_id"]];
         //NSLog(@"%@", placeDict);
         if(placeDict)
         {
             if([[checkin objectForKey:@"coords"] isKindOfClass:[NSDictionary class]])
             {
-                NSString *placeName = [self getPlaceNameFromPlaceId:[checkin objectForKey:@"page_id"]];
+                NSString *placeName = [self getPlaceNameFromPlaceId:[checkin objectForKey:@"target_id"]];
                 //NSLog(@"%@", placeName);
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
@@ -479,7 +479,7 @@
                 NSArray *friendCheckinArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"author_uid" value:[checkin objectForKey:@"author_uid"]],
                                                                         [self makeStringWithKeyAndValue2:@"checkin_id" value:[checkin objectForKey:@"checkin_id"]],
                                                                         [self makeStringWithKeyAndValue:@"name" value:placeName],
-                                                                        [self makeStringWithKeyAndValue2:@"page_id" value:[checkin objectForKey:@"page_id"]],
+                                                                        [self makeStringWithKeyAndValue2:@"page_id" value:[checkin objectForKey:@"target_id"]],
                                                                         [self makeStringWithKeyAndValue2:@"coords" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
                                                                         nil];
 
@@ -516,7 +516,7 @@
                 }
                 hoursString = [NSString stringWithFormat:@"\"hours\":{%@}", [hours componentsJoinedByString:@","]];
 
-                NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"page_id"]],
+                NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"target_id"]],
                                                                 [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
                                                                 [self makeStringWithKeyAndValue:@"name" value:placeName],
                                                                 [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
@@ -627,7 +627,9 @@
     }
     for(NSMutableDictionary *checkin in _userCheckins)
     {
-        NSDictionary *placeDict = [self getUserPageIsFromCheckins:[checkin objectForKey:@"page_id"]];
+        //NSLog(@"%@", checkin);
+
+        NSDictionary *placeDict = [self getUserPageIsFromCheckins:[checkin objectForKey:@"target_id"]];
         //NSLog(@"%@", placeDict);
         if(placeDict)
         {
@@ -677,7 +679,7 @@
             }
             hoursString = [NSString stringWithFormat:@"\"hours\":{%@}", [hours componentsJoinedByString:@","]];
 
-            NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"page_id"]],
+            NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"target_id"]],
                                                             [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
                                                             [self makeStringWithKeyAndValue:@"name" value:placeName],
                                                             [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
@@ -772,48 +774,54 @@
 -(void)getFacebookUserCheckins:(RCCompleteBlockWithResult)completionBlock
 {
 
-    RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
-
-    NSString *query = [NSString stringWithFormat:
-            @"{"
-                    @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me() limit 0, 100',"
-                    @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
-                    "phone, pic, price_range, website "
-                    "from page where type in (\"RESTAURANT/CAFE\", "
-                    "\"BAR\", "
-                    "\"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
-                    "name, type "
-                    " FROM place WHERE page_id IN (SELECT page_id FROM #query1))',"
-                    @"}"];
-
-    // Set up the query parameter
-    NSDictionary *queryParam =
-            [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
-    // Make the API request that uses FQL
-    FBRequest *postRequest = [FBRequest requestWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET"];
-    postRequest.session = FBSession.activeSession;
-    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if(!error)
-        {
-            //NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
-            [self buildArraysForUser:[result objectForKey:@"data"]];
-            [self buildResultForUser];
-            if(completeBlockWithResult)
+        RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
+        
+        NSString *query = [NSString stringWithFormat:
+                           @"{"
+                           @"'query1':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid = me() limit 0, 100',"
+                           @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
+                           "phone, pic, price_range, website "
+                           "from page where type in (\"RESTAURANT/CAFE\", "
+                           "\"BAR\", "
+                           "\"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
+                           "name, type "
+                           " FROM place WHERE page_id IN (SELECT target_id FROM #query1))',"
+                           @"}"];
+        
+        // Set up the query parameter
+        NSDictionary *queryParam =
+        [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+        // Make the API request that uses FQL
+        FBRequest *postRequest = [FBRequest requestWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET"];
+        postRequest.session = FBSession.activeSession;
+        [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            if(!error)
             {
-                completeBlockWithResult(YES, nil);
+                NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
+                [self buildArraysForUser:[result objectForKey:@"data"]];
+                [self buildResultForUser];
+                if(completeBlockWithResult)
+                {
+                    completeBlockWithResult(YES, nil);
+                }
+                
             }
-
-        }
-        else
-        {
-
-            NSLog(@"error: %@", [error description]);
-            if(completeBlockWithResult)
+            else
             {
-                completeBlockWithResult(NO, error);
+                
+                NSLog(@"error: %@", [error description]);
+                if(completeBlockWithResult)
+                {
+                    completeBlockWithResult(NO, error);
+                }
             }
-        }
-    }];
+        }];
+
+    
+
+    
+
+    
 }
 
 -(void)getFacebookUserCheckinsRecent:(int)millis completionBlock:(RCCompleteBlockWithResult)completionBlock
