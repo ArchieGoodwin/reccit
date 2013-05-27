@@ -60,14 +60,27 @@
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:[[CLLocation alloc] initWithLatitude:currentLocation.latitude longitude:currentLocation.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (error == nil) {   
-//            [RCDataHolder setCurrentCity:[NSString stringWithFormat:@"%@,%@", [[placemarks objectAtIndex:0] locality], [[placemarks objectAtIndex:0] country]]];            
+        if (error == nil) {
+            //            [RCDataHolder setCurrentCity:[NSString stringWithFormat:@"%@,%@", [[placemarks objectAtIndex:0] locality], [[placemarks objectAtIndex:0] country]]];
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            NSLog(@"%@", placemark.addressDictionary);
+        
             [RCDataHolder setCurrentCity:[[placemarks objectAtIndex:0] locality]];
+            //self.location.address = ABCreateStringWithAddressDictionary([[placemarks objectAtIndex:0] addressDictionary], NO);
+            
+
         }
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
     }];
+    
+    
+    
+   
 }
 
 - (void)didReceiveMemoryWarning

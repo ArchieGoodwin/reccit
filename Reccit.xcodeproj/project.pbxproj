@@ -2627,8 +2627,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2646,8 +2646,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7AA790E1-8B71-4219-B496-6C53618C089A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AA790E1-8B71-4219-B496-6C53618C089A";
+				PROVISIONING_PROFILE = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2655,8 +2655,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2674,8 +2674,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7AA790E1-8B71-4219-B496-6C53618C089A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AA790E1-8B71-4219-B496-6C53618C089A";
+				PROVISIONING_PROFILE = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

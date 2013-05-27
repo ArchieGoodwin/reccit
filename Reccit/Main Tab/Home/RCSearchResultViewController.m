@@ -389,7 +389,6 @@
                 if(location.reccitCount == 1)
                 {
                     [(UILabel *)[cell viewWithTag:997] setText:[NSString stringWithFormat:@"%i reccit", location.reccitCount]];
-                    
                 }
                 else
                 {
@@ -455,7 +454,6 @@
         }
     }
 
-    
     
     return cell;
 }

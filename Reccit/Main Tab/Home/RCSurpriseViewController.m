@@ -72,6 +72,22 @@
 #pragma mark -
 #pragma mark - Webservice
 
+-(void)clearHappyHours
+{
+    NSMutableArray *temp = [NSMutableArray new];
+    
+    for(RCLocation *loc in self.listLocation)
+    {
+        if(![[self getHappyHour:loc] isEqualToString:@""])
+        {
+            [temp addObject:loc];
+        }
+    }
+    
+    [self.listLocation removeAllObjects];
+    [self.listLocation addObjectsFromArray:temp];
+}
+
 - (void)callAPIGetListLocation
 {
     // Start new request
@@ -101,6 +117,8 @@
                 }
                
             }
+            
+            [self clearHappyHours];
         } else {
             for (NSDictionary *category in responseObject)
             {
@@ -178,7 +196,12 @@
 {
     if(loc.happyhours)
     {
-        return loc.happyhours[weekday - 1];
+        
+        if(loc.happyhours.count > 0)
+        {
+            return loc.happyhours[weekday - 1];
+
+        }
     }
 
     return @"";
