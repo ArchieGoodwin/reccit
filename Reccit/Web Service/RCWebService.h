@@ -13,5 +13,4 @@
 + (void)authenticateFacebookWithToken:(NSString *)token userId:(NSString *)userId;
 + (void)authenticateTwitterWithToken:(NSString *)token userId:(NSString *)userId;
 + (void)authenticateFoursquareWithToken:(NSString *)token userId:(NSString *)userId;
-+ (void)authenticateFacebookWithTokenAndSecret:(NSString *)token secret:(NSString *)secret;
 @end

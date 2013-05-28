@@ -450,7 +450,7 @@
     }
 
     NSLog(@"friends checkins total count: %i", _checkins.count);
-    int i = 0;
+   // int i = 0;
     for(NSMutableDictionary *checkin in _checkins)
     {
         //NSLog(@"%@", checkin);
@@ -831,7 +831,7 @@
 
     NSString *query = [NSString stringWithFormat:
             @"{"
-                    @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li',"
+                    @"'query1':'SELECT coords, author_uid, page_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %i',"
                     @"'query2':'select page_id, name, type, food_styles, hours, location,  "
                     "phone, pic, price_range, website "
                     "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "

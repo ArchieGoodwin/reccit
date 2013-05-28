@@ -35,6 +35,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     // Create tracker instance.
 //    
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41076620-1"];
+    
     //id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41067905-1"];
     
     //id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];

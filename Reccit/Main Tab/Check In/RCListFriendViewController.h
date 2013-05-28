@@ -19,7 +19,6 @@
 @property (strong, nonatomic) NSMutableArray *listFriends;
 @property (strong, nonatomic) NSMutableArray *listFriendsFilter;
 
-@property (strong, nonatomic) ASIHTTPRequest *request;
 
 @property (strong, nonatomic) RCAddPlaceViewController *fatherVc;
 

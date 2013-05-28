@@ -75,12 +75,7 @@
         return;
     }
     
-    // Cancel old request
-    if (self.request != nil && [self.request isExecuting])
-    {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.request clearDelegatesAndCancel];
-    }
+    
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *urlString = [NSString stringWithFormat:kRCAPIListFriend, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
@@ -88,10 +83,10 @@
     
     // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         NSLog(@"%@", responseObject);
         
         [self.listFriends removeAllObjects];
@@ -127,12 +122,12 @@
         [self.tbFriends reloadData];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 #pragma mark -

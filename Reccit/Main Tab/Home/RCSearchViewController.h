@@ -39,9 +39,6 @@
 @property (strong, nonatomic) NSMutableArray *listLocation;
 @property (strong, nonatomic) NSMutableArray *listAnnotation;
 
-@property (strong, nonatomic) ASIHTTPRequest *request;
-@property (strong, nonatomic) ASIHTTPRequest *cRequest;
-
 @property (strong, nonatomic) NSString *categoryName;
 
 @end

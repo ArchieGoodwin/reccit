@@ -35,7 +35,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tbReview;
 
 @property (strong, nonatomic) RCLocation *location;
-@property (strong, nonatomic) ASIHTTPRequest *request;
 @property (strong, nonatomic) NSMutableArray *listComment;
 
 @property (strong, nonatomic) RCReviewInDetailsViewController *reviewVc;

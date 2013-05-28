@@ -149,14 +149,7 @@
         [RCCommonUtils showMessageWithTitle:@"Warning" andContent:@"You must enable Location Service on App Setting to using this function!"];
         return;
     }
-    
-    // Cancel old request
-    if (self.request != nil && [self.request isExecuting])
-    {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.request clearDelegatesAndCancel];
-    }
-    
+
 
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
     NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArround, currentLocation.latitude, currentLocation.longitude, self.categoryName];
@@ -164,10 +157,10 @@
     
     // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         
         [self.listLocation removeAllObjects];
         [self.mapView removeAnnotations:self.listAnnotation];
@@ -223,12 +216,12 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         //[MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 - (void)centerMap2{
@@ -305,12 +298,12 @@
 {
     // Start request gerne
     NSURL *url = [NSURL URLWithString:kAPIGetGenres];
-    self.cRequest = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *cRequest = [ASIHTTPRequest requestWithURL:url];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [self.cRequest setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.cRequest responseData] options:kNilOptions error:nil];
+    [cRequest setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[cRequest responseData] options:kNilOptions error:nil];
         
         NSMutableArray *listCountry = [[NSMutableArray alloc] init];
         for (NSString *country in [responseObject objectForKey:@"cuisine"])
@@ -323,12 +316,12 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [self.cRequest setFailedBlock:^{
+    [cRequest setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [self.cRequest startAsynchronous];
+    [cRequest startAsynchronous];
 }
 
 - (void)loadCurrentCity

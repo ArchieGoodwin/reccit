@@ -165,7 +165,7 @@
 -(NSMutableData *)buildAddChaingeString
 {
     
-    NSMutableString *sendStr = [[NSMutableString alloc] initWithString:@""];
+   // NSMutableString *sendStr = [[NSMutableString alloc] initWithString:@""];
     
     NSDictionary *review = @{@"placeid" : [NSString stringWithFormat:@"%i", self.location.ID], @"rating" : [NSString stringWithFormat:@"%f", self.rateView.rate], @"comment" : self.tvReview.text, @"reccit" : self.recommendation ? @"true" : @"false"};
     
