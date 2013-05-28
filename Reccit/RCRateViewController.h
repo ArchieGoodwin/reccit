@@ -16,7 +16,6 @@
 @interface RCRateViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, DYRateViewDelegate> 
 
 @property (strong, nonatomic) NSMutableArray *listLocation;
-@property (strong, nonatomic) ASIHTTPRequest *request;
 
 @property (strong, nonatomic) MBProgressHUD *HUD;
 @property (strong, nonatomic) RCReviewLocationViewController *reviewVc;

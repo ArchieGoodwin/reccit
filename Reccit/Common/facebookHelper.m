@@ -873,7 +873,6 @@
 -(void)getFacebookMe {
 
 
-
     FBRequest *postRequest = [FBRequest requestForGraphPath:@"me"];
     postRequest.session = FBSession.activeSession;
 

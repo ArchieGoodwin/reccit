@@ -206,7 +206,6 @@
 
 -(IBAction)showMapApp:(id)sender
 {
-    CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.location.latitude,self.location.longitude);
     

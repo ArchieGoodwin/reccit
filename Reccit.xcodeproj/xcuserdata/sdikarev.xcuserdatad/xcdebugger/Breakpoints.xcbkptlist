@@ -59,19 +59,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Reccit/RCAppDelegate.m"
-         timestampString = "391081081.774281"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
-         landmarkName = "-requestBasicPermissionsForFacebookAccount"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Reccit/RCLoginFacebookViewController.m"
          timestampString = "386761700.235734"
          startingColumnNumber = "9223372036854775807"
@@ -116,32 +103,6 @@
          startingLineNumber = "288"
          endingLineNumber = "288"
          landmarkName = "-swTwitterChange:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Reccit/Main Tab/Share/RCShareViewController.m"
-         timestampString = "391067557.856192"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "638"
-         endingLineNumber = "638"
-         landmarkName = "-touchMe:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Reccit/Main Tab/Share/RCShareViewController.m"
-         timestampString = "391067557.856192"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "629"
-         endingLineNumber = "629"
-         landmarkName = "-handleTap:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

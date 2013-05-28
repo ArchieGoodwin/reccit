@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Accounts/Accounts.h>
-typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
-
+#import "RCDefine.h"
 @interface twitterHelper : NSObject
 
 @property(nonatomic, strong)    ACAccountStore *store;

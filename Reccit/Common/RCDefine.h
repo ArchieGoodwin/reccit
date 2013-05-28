@@ -60,4 +60,8 @@
 #define kRCTableViewCellColorHighLight [UIColor colorWithRed:243.0/255 green:243.0/255 blue:243.0/255 alpha:1.0]
 #define kRCTextColor [UIColor colorWithRed:58.0/255 green:76.0/255 blue:153.0/255 alpha:1.0]
 
+
+typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
+
+
 #endif

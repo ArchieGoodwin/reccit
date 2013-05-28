@@ -232,7 +232,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
     */
     
-    [FBSession openActiveSessionWithReadPermissions:[NSArray arrayWithObjects:@"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", nil] allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+    return [FBSession openActiveSessionWithReadPermissions:[NSArray arrayWithObjects:@"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", nil] allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
        
         [self sessionStateChanged:session state:status error:error];
 
@@ -286,67 +286,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     }
 }
 
--(void)requestBasicPermissionsForFacebookAccount {
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType * facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSArray * permissions = @[@"email"];
-    NSDictionary * options = @{ACFacebookAppIdKey : @"343928219036680", ACFacebookPermissionsKey : permissions, ACFacebookAudienceKey : ACFacebookAudienceEveryone};
-    //FacebookAccountManager * fbMgr = [[FacebookAccountManager alloc] init];
-    [accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL granted, NSError *error) {
-        if (granted) {
-            NSArray * accounts = [accountStore accountsWithAccountType:facebookAccountType];
-            //fbMgr.account = [accounts lastObject];
-            //fbMgr.isBasicPermissionsGranted = YES;
-            //[self.accountManagers addObject:fbMgr];
-            NSLog(@"granted!");
-            
-            
-            NSArray *permissions2 = [NSArray arrayWithObjects:@"publish_actions", @"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", @"publish_checkins", nil];
-             
-             [[FBSession activeSession] reauthorizeWithPublishPermissions:permissions2
-             defaultAudience:FBSessionDefaultAudienceFriends
-             completionHandler:^(FBSession *session, NSError *error) {
-             
-             
-                 if(!error)
-                 {
-                     [self sessionStateChanged:session state:FBSessionStateOpen error:error];
 
-                 }
-             
-             
-             }];
-             
-             
-            
-        }
-        else {
-            //fbMgr.account = nil;
-            //fbMgr.isBasicPermissionsGranted = NO;
-            switch ([error code]) {
-                case 1:
-                    [self showErrorAlertWithMessage:@"Unknown error occured, try again later!"];
-                    break;
-                case 3:
-                    [self showErrorAlertWithMessage:@"Authentication failed, try again later!"];
-                    break;
-                case 6:
-                    //[self showErrorAlertWithMessage:@"Facebook account does not exists. Please create it in Settings and come back!"];
-                    [self openSessionWithAllowLoginUI:YES];
-                    
-                    
-                    
-                    break;
-                case 7:
-                    [self showErrorAlertWithMessage:@"Permission request failed. You won't be able to share information to Facebook"];
-                    break;
-                default:
-                    break;
-            }
-            NSLog(@"error is: %@", error);
-        }
-    }];
-}
 
 - (void)showErrorAlertWithMessage:(NSString *)message {
     dispatch_async(dispatch_get_main_queue(), ^{

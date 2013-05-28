@@ -75,10 +75,13 @@
     self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
-    self.request = [ASIHTTPRequest requestWithURL:url];
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+
+    
+     __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         NSLog(@"%@", responseObject);
         [self.listLocation removeAllObjects];
         for (NSDictionary *locationDic in responseObject)
@@ -110,12 +113,12 @@
         }
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 - (void)noRateLocation

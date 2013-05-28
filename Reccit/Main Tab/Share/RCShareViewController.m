@@ -301,22 +301,17 @@
 
 - (void)startRequest
 {
-    // Start request gerne
-    if (self.request != nil)
-    {
-        [self.request clearDelegatesAndCancel];
-        self.request = nil;
-    }
+
     
     NSString *urlString = [NSString stringWithFormat:@"http://bizannouncements.com/Vega/services/app/profile.php?user=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     NSLog(@"REQUEST URL %@", urlString);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         
         NSLog(@"%@", [responseObject description]);
         self.listReview  = [[NSMutableArray alloc] init];
@@ -367,12 +362,12 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-    self.request.timeOutSeconds = 120;
-    [self.request startAsynchronous];
+    request.timeOutSeconds = 120;
+    [request startAsynchronous];
 }
 
 #pragma mark -
@@ -420,47 +415,7 @@
     }
     
     [self.tbReview reloadData];
-    // Start request gerne
-    /*NSString *urlString = [NSString stringWithFormat:kAPIListReview,
-                           [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId],
-                           self.tfCity.text,
-                           price,
-                           type,
-                           self.tfGenre.text];
-    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    self.request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST URL %@", urlString);
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
-        
-        NSLog(@"%@", [responseObject description]);
-        self.listReview  = [[NSMutableArray alloc] init];
-        for (NSDictionary *locationDic in [responseObject objectForKey:@"Profile"])
-        {
-            RCLocation *location =  [RCCommonUtils getLocationFromDictionary:[locationDic objectForKey:@"place"]];
-            
-            NSLog(@"COMMENT %@", location.comment);
-            [self.listReview addObject:location];
-        }
-        
-        if ([self.listReview count] == 0)
-        {
-            [RCCommonUtils showMessageWithTitle:@"Warning" andContent:@"Currently there exists no place based on your filter parameters!"];
-        }
-    
-        [self.tbReview reloadData];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    }];
-    
-    [self.request setFailedBlock:^{
-        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    }];
-    
-    [self.request startAsynchronous];*/
+   
 }
 
 - (IBAction)btnShareTouched:(id)sender

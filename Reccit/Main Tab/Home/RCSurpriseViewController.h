@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgHappyHour;
 
 @property (strong, nonatomic) NSMutableArray *listLocation;
-@property (strong, nonatomic) ASIHTTPRequest *request;
 
 @property (strong, nonatomic) NSString *querySearch;
 

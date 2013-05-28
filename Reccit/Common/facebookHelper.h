@@ -6,8 +6,7 @@
 
 
 #import <Foundation/Foundation.h>
-
-typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
+#import "RCDefine.h"
 
 @interface facebookHelper : NSObject
 

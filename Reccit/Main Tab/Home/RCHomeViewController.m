@@ -102,7 +102,7 @@
     {
         RCSurpriseViewController *surpsrice = (RCSurpriseViewController *)segue.destinationViewController;
         
-        surpsrice.querySearch = [NSString stringWithFormat:@"user=%@&type=happyhours&city=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [RCDataHolder getCurrentCity]];
+        surpsrice.querySearch = [NSString stringWithFormat:@"user=%@&type=happyhours&city=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [[RCDataHolder getCurrentCity] stringByReplacingOccurrencesOfString:@" " withString:@"%20"] ];
         surpsrice.isHappyHour = YES;
     }
 }

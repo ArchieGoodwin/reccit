@@ -19,6 +19,5 @@
 
 @property (strong, nonatomic) NSMutableArray *listLocation;
 @property (strong, nonatomic) NSMutableArray *listAnnotation;
-@property (strong, nonatomic) ASIHTTPRequest *request;
 
 @end

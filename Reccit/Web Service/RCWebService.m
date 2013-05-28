@@ -66,7 +66,7 @@
                     [userCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                     //NSString *str = [@"fb_usercheckin={\"data\":[{\"from\":{\"id\":715246241,\"name\":\"Sergey Dikarev\"},\"id\":10151385996696242,\"place\":{\"id\":276390062443754,\"location\":{\"latitude\":\"47.210743021951\",\"longitude\":\"38.932179656663\"},\"name\":\"qqqqq\"}}]}" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                     [userCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringUserCheckins].length]];
-                    [userCheckinRequest setPostBody:[[[facebookHelper sharedInstance] stringUserCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                    [userCheckinRequest setPostBody:[[[[facebookHelper sharedInstance] stringUserCheckins] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
                     
                     
                     [userCheckinRequest setFailedBlock:^{
@@ -113,7 +113,7 @@
                      
                      [frCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                      [frCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                     [frCheckinRequest setPostBody:[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                     [frCheckinRequest setPostBody:[[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
                      [frCheckinRequest setFailedBlock:^{
                          NSLog(@"error frCheckinRequest %@", [frCheckinRequest.error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest step %i %@  %@", iterations, [NSDate date], [frCheckinRequest.error description]]];
@@ -154,7 +154,7 @@
                      
                      [frCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                      [frCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                     [frCheckinRequest setPostBody:[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                     [frCheckinRequest setPostBody:[[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
                      [frCheckinRequest setFailedBlock:^{
                          NSLog(@"error frCheckinRequest %@", [frCheckinRequest.error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest step %i %@  %@", iterations, [NSDate date], [frCheckinRequest.error description]]];
@@ -196,7 +196,7 @@
                      
                      [frCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                      [frCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                     [frCheckinRequest setPostBody:[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                     [frCheckinRequest setPostBody:[[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
                      [frCheckinRequest setFailedBlock:^{
                          NSLog(@"error frCheckinRequest %@", [frCheckinRequest.error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest step %i %@  %@", iterations, [NSDate date], [frCheckinRequest.error description]]];
@@ -237,7 +237,7 @@
                      
                      [frCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                      [frCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                     [frCheckinRequest setPostBody:[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                     [frCheckinRequest setPostBody:[[[[facebookHelper sharedInstance] stringFriendsCheckins] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
                      [frCheckinRequest setFailedBlock:^{
                          NSLog(@"error frCheckinRequest %@", [frCheckinRequest.error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest step %i %@  %@", iterations, [NSDate date], [frCheckinRequest.error description]]];
@@ -307,7 +307,9 @@
     NSLog(@"twitter %@", urlString);
     if (userId != nil)
     {
-        urlString = [NSString stringWithFormat:@"%@&user=%@", [NSString stringWithFormat:kRCAPITwitterAuthenticate, token], userId];
+        NSString *strTemp = [NSString stringWithFormat:kRCAPITwitterAuthenticate, [[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"], [[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"]];
+        
+        urlString = [NSString stringWithFormat:@"%@&user=%@", strTemp, userId];
     }
     NSURL *url = [NSURL URLWithString:urlString];
     __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -345,7 +347,7 @@
 
                     [userCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                     [userCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[twitterHelper sharedInstance] stringFriends].length]];
-                    [userCheckinRequest setPostBody:[[[twitterHelper sharedInstance] stringFriends] dataUsingEncoding:NSUTF8StringEncoding]];
+                    [userCheckinRequest setPostBody:[[[[twitterHelper sharedInstance] stringFriends] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
                     
                     [userCheckinRequest setFailedBlock:^{
                         //[[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];
@@ -403,7 +405,7 @@
 
                     [userCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                     [userCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[foursquareHelper sharedInstance] stringUserCheckins].length]];
-                    [userCheckinRequest setPostBody:[[[foursquareHelper sharedInstance] stringUserCheckins] dataUsingEncoding:NSUTF8StringEncoding]];
+                    [userCheckinRequest setPostBody:[[[[foursquareHelper sharedInstance] stringUserCheckins] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
                     
                     [userCheckinRequest setFailedBlock:^{
                         //[[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];

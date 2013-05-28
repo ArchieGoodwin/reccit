@@ -31,7 +31,6 @@
 @property (strong, nonatomic) NSMutableArray *listReviewResult;
 
 @property (strong, nonatomic) NSMutableArray *listCity;
-@property (strong, nonatomic) ASIHTTPRequest *request;
 
 - (IBAction)handleTap:(UITapGestureRecognizer *)sender;
 @end
