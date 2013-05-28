@@ -90,12 +90,12 @@
             
             
             NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            self.request = [ASIHTTPRequest requestWithURL:url];
-            [self.request setRequestMethod:@"POST"];
-            [self.request setCompletionBlock:^{
+            __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+            [request setRequestMethod:@"POST"];
+            [request setCompletionBlock:^{
                 
-                NSLog(@"%@", [[NSString alloc] initWithData:[self.request responseData] encoding:NSUTF8StringEncoding]);
-                NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+                NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
+                NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
                 NSLog(@"responseObject %@", responseObject);
                 
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -112,12 +112,12 @@
                 [alerView show];
             }];
             
-            [self.request setFailedBlock:^{
+            [request setFailedBlock:^{
                 [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             }];
             
-            [self.request startAsynchronous];
+            [request startAsynchronous];
         }
         else
         {
@@ -128,13 +128,13 @@
             
             
             NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            self.request = [ASIHTTPRequest requestWithURL:url];
-            [self.request setRequestMethod:@"POST"];
+            __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+            [request setRequestMethod:@"POST"];
 
-            [self.request setCompletionBlock:^{
+            [request setCompletionBlock:^{
                 
-                NSLog(@"%@", [[NSString alloc] initWithData:[self.request responseData] encoding:NSUTF8StringEncoding]);
-                NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+                NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
+                NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
                 NSLog(@"responseObject %@", responseObject);
                 
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -143,12 +143,12 @@
                 [alerView show];
             }];
             
-            [self.request setFailedBlock:^{
+            [request setFailedBlock:^{
                 [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             }];
             
-            [self.request startAsynchronous];
+            [request startAsynchronous];
 
         }
     }
@@ -256,7 +256,7 @@
 -(NSMutableData *)buildAddChaingeString
 {
     
-    NSMutableString *sendStr = [[NSMutableString alloc] initWithString:@""];
+   // NSMutableString *sendStr = [[NSMutableString alloc] initWithString:@""];
     
     NSDictionary *review = @{@"placeid" : [NSString stringWithFormat:@"%i", self.location.ID], @"rating" : [NSString stringWithFormat:@"%f", self.rateView.rate], @"comment" : self.tvReview.text, @"reccit" : self.recommendation ? @"true" : @"false"};
     

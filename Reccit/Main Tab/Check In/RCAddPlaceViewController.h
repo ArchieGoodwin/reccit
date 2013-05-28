@@ -52,6 +52,5 @@
 
 @property (assign, nonatomic) BOOL isAddNew;
 
-@property (strong, nonatomic) ASIHTTPRequest *request;
 
 @end

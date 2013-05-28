@@ -103,11 +103,11 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:urlString];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     NSLog(@"callAPIGetListReccit REQUEST : %@", urlString);
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         NSLog(@"%@", responseObject);
         self.listLocationReccit = [[NSMutableArray alloc] init];
 
@@ -135,12 +135,12 @@
         [self.tbResult reloadData];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 - (void)callAPIGetListFriendFav
@@ -150,11 +150,11 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     NSLog(@"REQUEST callAPIGetListFriendFav: %@", urlString);
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         //NSLog(@"favs: %@", responseObject);
         self.listLocationFriend = [[NSMutableArray alloc] init];
 
@@ -179,12 +179,12 @@
         [self.tbResult reloadData];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 - (void)callAPIGetListPopular
@@ -194,11 +194,11 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     NSLog(@"REQUEST : %@", urlString);
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         NSLog(@"popular: %@", responseObject);
         self.listLocationPopular = [[NSMutableArray alloc] init];
         NSArray *listLocation = [responseObject objectForKey:@"Reccits"];
@@ -225,12 +225,12 @@
         [self.tbResult reloadData];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 #pragma mark -

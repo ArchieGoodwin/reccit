@@ -109,10 +109,10 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // Start new request
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         NSLog(@"%@", responseObject);
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -123,12 +123,12 @@
         [self btnCancelTouched:nil];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 - (IBAction)btnEditTouched:(id)sender

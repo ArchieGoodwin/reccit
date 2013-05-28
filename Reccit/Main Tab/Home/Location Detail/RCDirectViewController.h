@@ -26,6 +26,5 @@
 @property (weak, nonatomic) IBOutlet MapView *mapView;
 @property (nonatomic, assign) NSInteger mode;
 @property (strong, nonatomic) MapView *mainMap;
-@property (strong, nonatomic) ASIHTTPRequest *request;
 
 @end

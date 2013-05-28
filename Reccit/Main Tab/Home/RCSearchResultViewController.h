@@ -26,7 +26,6 @@
 @property (strong, nonatomic) NSMutableArray *listLocationReccit;
 @property (strong, nonatomic) NSMutableArray *listLocationFriend;
 @property (strong, nonatomic) NSMutableArray *listLocationPopular;
-@property (strong, nonatomic) ASIHTTPRequest *request;
 @property (assign, nonatomic) BOOL isSurprase;
 @property (assign, nonatomic) BOOL showTabs;
 

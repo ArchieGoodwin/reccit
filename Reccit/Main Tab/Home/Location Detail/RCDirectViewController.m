@@ -127,11 +127,11 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    self.request = [ASIHTTPRequest requestWithURL:url];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     NSLog(@"REQUEST : %@", urlString);
     
-    [self.request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[self.request responseData] options:kNilOptions error:nil];
+    [request setCompletionBlock:^{
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
         NSLog(@"%@", responseObject);
         if(![[responseObject objectForKey:@"status"] isEqualToString:@"INVALID_REQUEST"] && ![[responseObject objectForKey:@"status"] isEqualToString:@"ZERO_RESULTS"])
         {
@@ -195,12 +195,12 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request setFailedBlock:^{
+    [request setFailedBlock:^{
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [self.request startAsynchronous];
+    [request startAsynchronous];
 }
 
 

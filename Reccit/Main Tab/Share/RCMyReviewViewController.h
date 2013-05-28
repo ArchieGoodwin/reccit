@@ -29,6 +29,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnEdit;
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 
-@property (nonatomic, strong) ASIHTTPRequest *request;
 
 @end

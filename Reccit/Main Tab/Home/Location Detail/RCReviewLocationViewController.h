@@ -25,7 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *tvReview;
 
-@property (strong, nonatomic) ASIHTTPRequest *request;
 @property (nonatomic, assign) BOOL shouldSendImmediately;
 @property (assign) BOOL recommendation;
 
