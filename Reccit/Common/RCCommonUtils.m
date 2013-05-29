@@ -116,6 +116,14 @@
         {
             location.address = @"";
         }
+        if ([locationDic objectForKey:@"street"] != nil && [locationDic objectForKey:@"street"] != [NSNull null]) {
+            location.street = [locationDic objectForKey:@"street"];
+            
+        }
+        else
+        {
+            location.street = @"";
+        }
         location.category =  [locationDic objectForKey:@"type"];
         location.state = [locationDic objectForKey:@"state"];
         location.city = [locationDic objectForKey:@"city"];
@@ -217,7 +225,7 @@
             
             for (NSDictionary *friend in [locationDic objectForKey:@"friends"])
             {
-                NSLog(@"Friend Image: %@", [friend objectForKey:@"image"]);
+                //NSLog(@"Friend Image: %@", [friend objectForKey:@"image"]);
                 [listFriend addObject:[friend objectForKey:@"image"]];
                 [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"firstName"], [friend objectForKey:@"lastName"]]];
                 

@@ -8,7 +8,6 @@
 
 #import "RCCheckInViewController.h"
 #import "RCAppDelegate.h"
-#import "ASIHTTPRequest.h"
 #import "MBProgressHUD.h"
 #import "RCLocation.h"
 #import "RCCommonUtils.h"
@@ -17,7 +16,7 @@
 #import "RCAddPlaceViewController.h"
 #import "RCMapAnnotationView.h"
 #import "RCMapAnnotation.h"
-
+#import "AFNetworking.h"
 #define kRCAPICheckInGetLocationArround @"http://bizannouncements.com/Vega/services/app/appCheckin.php?lat=%lf&long=%lf"
 
 @interface RCCheckInViewController ()
@@ -116,18 +115,20 @@
     
     // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
-    __weak ASIHTTPRequest  *request = [ASIHTTPRequest requestWithURL:url];
-
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
         [self.listLocation removeAllObjects];
         [self.mapView removeAnnotations:self.listAnnotation];
         [self.listAnnotation removeAllObjects];
         
-        for (NSDictionary *category in responseObject)
+        for (NSDictionary *category in rO)
         {
-            for (NSDictionary *locationDic in [responseObject objectForKey:[category description]])
+            for (NSDictionary *locationDic in [rO objectForKey:[category description]])
             {
                 NSLog(@"%@", locationDic);
                 RCLocation *location = [[RCLocation alloc] init];
@@ -135,7 +136,7 @@
                 location.name = [locationDic objectForKey:@"name"];
                 location.city = [locationDic objectForKey:@"city"];
                 location.state = [locationDic objectForKey:@"state"];
-
+                
                 location.address = [locationDic objectForKey:@"address"];
                 if ([locationDic objectForKey:@"country"] != nil && [locationDic objectForKey:@"country"] != [NSNull null]) {
                     location.country  = [locationDic objectForKey:@"country"];
@@ -168,20 +169,21 @@
                 [self.listAnnotation addObject:annotation];
             }
             
-//            [RCCommonUtils zoomToFitMapAnnotations:self.mapView annotations:self.mapView.annotations];
+            //            [RCCommonUtils zoomToFitMapAnnotations:self.mapView annotations:self.mapView.annotations];
         }
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.tbLocation reloadData];
         self.tbLocation.hidden = NO;
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+    
+    
 }
 
 #pragma mark -

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIHTTPRequest.h"
 
 @interface RCSearchResultViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *c1;

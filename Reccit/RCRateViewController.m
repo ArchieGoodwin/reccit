@@ -11,11 +11,11 @@
 #import "RCLocation.h"
 #import "MBProgressHUD.h"
 #import "DYRateView.h"
-#import "RCReviewLocationViewController.h"
+#import "RCReviewInDetailsViewController.h"
 #import "RCRateCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "RCDefine.h"
-
+#import "AFNetworking.h"
 #define kRCAPICheckInGetLocationRate @"http://bizannouncements.com/bhavesh/deltaservice.php?userid=%@"
 
 @interface RCRateViewController ()
@@ -42,12 +42,14 @@
 
 
     self.listLocation = [[NSMutableArray alloc] init];
-    [self performSelector:@selector(callAPIGetListLocationRate) withObject:nil afterDelay:0.1f];
+    //[self performSelector:@selector(callAPIGetListLocationRate) withObject:nil afterDelay:0.1f];
     
     self.tbLocation.layer.borderWidth = 1.5f;
     self.tbLocation.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self.view setBackgroundColor:kRCBackgroundView];
+    
+    [self callAPIGetListLocationRate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -76,9 +78,63 @@
     // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
     
-
     
-     __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    
+    
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"%@", responseObject);
+        
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+
+        [self.listLocation removeAllObjects];
+        for (NSDictionary *locationDic in rO)
+        {
+            RCLocation *location = [RCCommonUtils getLocationFromDictionary:locationDic];
+            if(location)
+            {
+                location.ID = [[locationDic objectForKey:@"id"] intValue];
+                [self.listLocation addObject:location];
+            }
+            
+        }
+        
+        if ([self.listLocation count] == 0)
+        {
+            
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
+            [self performSelector:@selector(noRateLocation) withObject:nil afterDelay:0.0];
+            
+            //self.HUD.customView = nil;
+            //self.HUD.mode = MBProgressHUDModeCustomView;
+            //self.HUD.labelText = @"There's no recommend place for you";
+            //self.HUD.labelFont = [UIFont boldSystemFontOfSize:12];
+        } else
+        {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self.tbLocation reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+    
+    [operation start];
+    
+    
+    
+    
+    
+    
+    
+    
+
+    /*
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     
     [request setCompletionBlock:^{
         NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
@@ -117,8 +173,8 @@
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
-    
-    [request startAsynchronous];
+    request.timeOutSeconds = 20;
+    [request startAsynchronous];*/
 }
 
 - (void)noRateLocation
@@ -134,7 +190,7 @@
 {
     UIButton *btnLocation = (UIButton *)sender;
     RCLocation *location = [self.listLocation objectAtIndex:btnLocation.tag];
-    self.reviewVc = [[RCReviewLocationViewController alloc] initWithNibName:@"RCReviewLocationViewController" bundle:nil];
+    self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = location;
     self.reviewVc.shouldSendImmediately = YES;
@@ -242,7 +298,7 @@
 {
     
     RCLocation *location = [self.listLocation objectAtIndex:indexPath.row];
-    self.reviewVc = [[RCReviewLocationViewController alloc] initWithNibName:@"RCReviewLocationViewController" bundle:nil];
+    self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = location;
     self.reviewVc.shouldSendImmediately = YES;

@@ -14,6 +14,7 @@
 #import "RCLocation.h"
 #import "DYRateView.h"
 #import "RCLocationDetailViewController.h"
+#import "AFNetworking.h"
 
 #define kAPISearchReccit @"http://bizannouncements.com/Vega/services/app/getReccit.php?user=%@&%@"
 #define kAPISearchFriendFac @"http://bizannouncements.com/Vega/services/app/friendFavorites.php?user=%@&%@"
@@ -103,16 +104,18 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:urlString];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"callAPIGetListReccit REQUEST : %@", urlString);
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"%@", responseObject);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        //NSLog(@"%@", responseObject);
         self.listLocationReccit = [[NSMutableArray alloc] init];
-
-
-        NSArray *listLocation = [responseObject objectForKey:@"Reccits"];
+        
+        
+        NSArray *listLocation = [rO objectForKey:@"Reccits"];
         if (listLocation != [NSNull null])
         {
             for (NSDictionary *locationDic in listLocation)
@@ -121,7 +124,7 @@
                 if(l)
                 {
                     [_listLocationReccit addObject:[RCCommonUtils getLocationFromDictionary:locationDic]];
-
+                    
                 }
             }
         }
@@ -133,14 +136,15 @@
             //[RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
         }
         [self.tbResult reloadData];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+    
+    
 }
 
 - (void)callAPIGetListFriendFav
@@ -150,15 +154,17 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST callAPIGetListFriendFav: %@", urlString);
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         //NSLog(@"favs: %@", responseObject);
         self.listLocationFriend = [[NSMutableArray alloc] init];
-
-        NSArray *listLocation = [responseObject objectForKey:@"Reccits"];
+        
+        NSArray *listLocation = [rO objectForKey:@"Reccits"];
         if (listLocation != [NSNull null]){
             for (NSDictionary *locationDic in listLocation)
             {
@@ -177,14 +183,16 @@
             [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
         }
         [self.tbResult reloadData];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+    
+    
+    
 }
 
 - (void)callAPIGetListPopular
@@ -194,14 +202,16 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST : %@", urlString);
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"popular: %@", responseObject);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        //NSLog(@"popular: %@", rO);
         self.listLocationPopular = [[NSMutableArray alloc] init];
-        NSArray *listLocation = [responseObject objectForKey:@"Reccits"];
+        NSArray *listLocation = [rO objectForKey:@"Reccits"];
         if (listLocation != [NSNull null]){
             
             for (NSDictionary *locationDic in listLocation)
@@ -223,14 +233,16 @@
             [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
         }
         [self.tbResult reloadData];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+    
+    
+    
 }
 
 #pragma mark -

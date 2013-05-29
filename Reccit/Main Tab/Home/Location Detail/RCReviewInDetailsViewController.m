@@ -17,7 +17,7 @@
 #import "RCRateViewController.h"
 #define kRCAPIUpdateComment @"http://bizannouncements.com/bhavesh/reviewsupdate.php"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
-@interface RCReviewLocationViewController ()
+@interface RCReviewInDetailsViewController ()
 
 @end
 

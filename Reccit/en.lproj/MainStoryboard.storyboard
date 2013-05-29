@@ -1561,7 +1561,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Kxb-QW-PbQ">
-                                        <rect key="frame" x="86" y="339" width="146" height="31"/>
+                                        <rect key="frame" x="28" y="294" width="146" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" backgroundImage="surpriseme_button.png">
@@ -1575,17 +1575,6 @@
                                             <action selector="btnSupriseMeTouched:" destination="bbC-ke-gQQ" eventType="touchUpInside" id="waO-So-Xkf"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="- select distance +" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ght-VS-Ggf">
-                                        <rect key="frame" x="20" y="288" width="130" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" id="VlU-Pc-QNc">
-                                        <rect key="frame" x="26" y="312" width="118" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    </slider>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="ir0-OR-EtF">
                                         <rect key="frame" x="48" y="22" width="225" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1738,7 +1727,6 @@
                         <outlet property="mapView" destination="qnm-8N-zvh" id="cI4-wY-WWj"/>
                         <outlet property="pickerView" destination="vrh-7P-hcy" id="oAN-la-tvu"/>
                         <outlet property="searchBar" destination="VBa-nw-52w" id="X0k-XL-FpV"/>
-                        <outlet property="sliderDistance" destination="VlU-Pc-QNc" id="dEf-bE-9GN"/>
                         <outlet property="tfGenre" destination="3mx-u2-CvF" id="phZ-pZ-vty"/>
                         <outlet property="tfLocation" destination="ZS7-Y4-NIz" id="UFh-SW-Ntz"/>
                         <outlet property="tfPrice" destination="oDk-ZU-31p" id="8id-2z-DtD"/>
@@ -2898,6 +2886,11 @@
         <class className="RCLocationDetailViewController" superclassName="RCBaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLocationDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="btnBackTouched:"/>
+                <relationship kind="action" name="btnCallTouched:"/>
+                <relationship kind="action" name="btnDirectionTouched:"/>
+                <relationship kind="action" name="btnReserveTouched:"/>
+                <relationship kind="action" name="btnReviewTouched:"/>
                 <relationship kind="outlet" name="btnCall" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
@@ -3061,6 +3054,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="ceO-xc-Gio"/>
         <segue reference="0gG-q4-5bW"/>
-        <segue reference="iQq-30-Fua"/>
+        <segue reference="Xcg-p9-p62"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -15,7 +15,7 @@
 #import "RCCommonUtils.h"
 #import "RCLocation.h"
 #import "RCMyReviewViewController.h"
-
+#import "AFNetworking.h"
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
 #define kAPIListReview @"http://bizannouncements.com/Vega/services/app/profile.php?user=%@&city=%@&rating=%@&type=%@&genre=%@"
 
@@ -229,45 +229,7 @@
     }
     [RCDataHolder setListCountry:genres];
     
-    // Start request gerne
-    /*NSURL *url = [NSURL URLWithString:kAPIGetGenres];
-    ASIHTTPRequest *requestGerne = [ASIHTTPRequest requestWithURL:url];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [requestGerne setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[requestGerne responseData] options:kNilOptions error:nil];
-        
-        NSMutableArray *listCountry = [[NSMutableArray alloc] init];
-        for (NSString *genre in [responseObject objectForKey:@"cuisine"])
-        {
-
-            if ([self isGEnreExistInList:genre])
-            {
-                BOOL isExist = FALSE;
-                for (NSString *str in listCountry)
-                {
-                    if ([str isEqualToString:genre])
-                    {
-                        isExist = TRUE;
-                        break;
-                    }
-                }
-                if (!isExist) {
-                    [listCountry addObject:genre];
-                }
-            }
-
-            
-        }
-        
-        [RCDataHolder setListCountry:listCountry];
-    }];
-    
-    [requestGerne setFailedBlock:^{
-    }];
-    
-    [requestGerne startAsynchronous];*/
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -301,22 +263,22 @@
 
 - (void)startRequest
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     
     NSString *urlString = [NSString stringWithFormat:@"http://bizannouncements.com/Vega/services/app/profile.php?user=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST URL %@", urlString);
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
-        NSLog(@"%@", [responseObject description]);
+        NSLog(@"%@", [rO description]);
         self.listReview  = [[NSMutableArray alloc] init];
         self.listCity = [[NSMutableArray alloc] init];
-        for (NSDictionary *locationDic in [responseObject objectForKey:@"Profile"])
+        for (NSDictionary *locationDic in [rO objectForKey:@"Profile"])
         {
             RCLocation *location =  [RCCommonUtils getLocationFromDictionary:[locationDic objectForKey:@"place"]];
             
@@ -343,7 +305,7 @@
             }
             
             
-
+            
         }
         
         if ([self.listReview count] == 0)
@@ -360,14 +322,14 @@
         
         [self.tbReview reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-    request.timeOutSeconds = 120;
-    [request startAsynchronous];
+    
+    [operation start];
+    
+    
 }
 
 #pragma mark -

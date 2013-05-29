@@ -16,7 +16,6 @@
 #import "RCWebService.h"
 #import "OAToken.h"
 #import "facebookHelper.h"
-#import "ASIHTTPRequest.h"
 
 #import "twitterHelper.h"
 

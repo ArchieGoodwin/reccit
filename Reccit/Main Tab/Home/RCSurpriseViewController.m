@@ -14,7 +14,7 @@
 #import "RCLocation.h"
 #import "DYRateView.h"
 #import "RCLocationDetailViewController.h"
-
+#import "AFNetworking.h"
 //#define kAPISearchSurprise @"http://bizannouncements.com/Vega/services/app/recommendation.php?%@"
 
 #define kAPISearchSurprise @"http://bizannouncements.com/Vega/services/app/getReccit.php?%@"
@@ -94,47 +94,48 @@
     NSString *urlString = [NSString stringWithFormat:kAPISearchSurprise, self.querySearch];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST : %@", urlString);
     
-    [request setCompletionBlock:^{
-        
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         //NSString *str = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
-
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-
-        /*if([str hasPrefix:@"hi"])
-        {
-            str = [str substringFromIndex:2];
-            responseObject = [NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
-        }*/
         
-
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        
+        /*if([str hasPrefix:@"hi"])
+         {
+         str = [str substringFromIndex:2];
+         responseObject = [NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+         }*/
+        
+        
         
         //NSLog(@"happy hour: %@", responseObject);
         self.listLocation = [[NSMutableArray alloc] init];
         if (self.isHappyHour)
         {
-            NSArray * rObject = [responseObject objectForKey:@"Reccits"];
+            NSArray * rObject = [rO objectForKey:@"Reccits"];
             for (NSDictionary *category in rObject)
             {
                 NSLog(@"%@", category);
-
-                    NSLog(@"%@", category);
+                
+                NSLog(@"%@", category);
                 RCLocation *l = [RCCommonUtils getLocationFromDictionary:category];
                 if(l)
                 {
                     [self.listLocation addObject:l];
-
+                    
                 }
-               
+                
             }
             
             [self clearHappyHours];
         } else {
-            for (NSDictionary *category in responseObject)
+            for (NSDictionary *category in rO)
             {
-                for (NSDictionary *locationDic in [responseObject objectForKey:[category description]])
+                for (NSDictionary *locationDic in [rO objectForKey:[category description]])
                 {
                     RCLocation *l = [RCCommonUtils getLocationFromDictionary:locationDic];
                     if(l)
@@ -153,14 +154,14 @@
             [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
         }
         [self.tbResult reloadData];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+
 }
 
 

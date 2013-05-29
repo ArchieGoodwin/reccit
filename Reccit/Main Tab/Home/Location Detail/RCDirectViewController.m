@@ -13,7 +13,7 @@
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
 #import "RCAppDelegate.h"
-
+#import "AFNetworking.h"
 #define kAPIGetDirection @"http://bizannouncements.com/Vega/services/app/getDirections.php?origlat=%lf&origlong=%lf&destlat=%lf&destlong=%lf"
 
 @interface RCDirectViewController ()
@@ -127,21 +127,22 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST : %@", urlString);
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"%@", responseObject);
-        if(![[responseObject objectForKey:@"status"] isEqualToString:@"INVALID_REQUEST"] && ![[responseObject objectForKey:@"status"] isEqualToString:@"ZERO_RESULTS"])
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        NSLog(@"%@", rO);
+        if(![[rO objectForKey:@"status"] isEqualToString:@"INVALID_REQUEST"] && ![[rO objectForKey:@"status"] isEqualToString:@"ZERO_RESULTS"])
         {
             
             
             //OVER_QUERY_LIMIT
             
-            if(![[responseObject objectForKey:@"status"] isEqualToString:@"OVER_QUERY_LIMIT"])
+            if(![[rO objectForKey:@"status"] isEqualToString:@"OVER_QUERY_LIMIT"])
             {
-                NSArray *routes = [responseObject objectForKey:@"routes"];
+                NSArray *routes = [rO objectForKey:@"routes"];
                 
                 
                 NSArray *legs = [routes[0] objectForKey:@"legs"];
@@ -179,28 +180,28 @@
             else
             {
                 [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Directions service is down. Please try again a bit later!"];
-
+                
             }
             
         }
         else
         {
             [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"There are no directions available!"];
-
+            
         }
         
         
         
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+   
 }
 
 

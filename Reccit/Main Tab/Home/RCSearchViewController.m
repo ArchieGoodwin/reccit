@@ -18,6 +18,7 @@
 #import "RCLocation.h"
 #import "RCMapAnnotation.h"
 #import "RCMapAnnotationView.h"
+#import "AFNetworking.h"
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
 
 
@@ -155,20 +156,24 @@
     NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArround, currentLocation.latitude, currentLocation.longitude, self.categoryName];
     NSLog(@"REQUEST URL: %@", urlString);
     
-    // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+    
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
         [self.listLocation removeAllObjects];
         [self.mapView removeAnnotations:self.listAnnotation];
         [self.listAnnotation removeAllObjects];
         
-        for (NSDictionary *category in responseObject)
+        for (NSDictionary *category in rO)
         {
-            for (NSDictionary *locationDic in [responseObject objectForKey:[category description]])
+            for (NSDictionary *locationDic in [rO objectForKey:[category description]])
             {
                 NSLog(@"locationDic - %@",locationDic);
                 RCLocation *location = [[RCLocation alloc] init];
@@ -214,14 +219,15 @@
         }
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        //[MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+
+    
 }
 
 - (void)centerMap2{
@@ -298,15 +304,16 @@
 {
     // Start request gerne
     NSURL *url = [NSURL URLWithString:kAPIGetGenres];
-    __weak ASIHTTPRequest *cRequest = [ASIHTTPRequest requestWithURL:url];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [cRequest setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[cRequest responseData] options:kNilOptions error:nil];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
         NSMutableArray *listCountry = [[NSMutableArray alloc] init];
-        for (NSString *country in [responseObject objectForKey:@"cuisine"])
+        for (NSString *country in [rO objectForKey:@"cuisine"])
         {
             [listCountry addObject:country];
         }
@@ -314,14 +321,15 @@
         [RCDataHolder setListCountry:listCountry];
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    }];
-    
-    [cRequest setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [cRequest startAsynchronous];
+    [operation start];
+    
+
+   
 }
 
 - (void)loadCurrentCity

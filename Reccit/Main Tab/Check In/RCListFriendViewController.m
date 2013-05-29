@@ -14,7 +14,7 @@
 #import "RCAddPlaceViewController.h"
 #import "UIImageView+WebCache.h"
 #import "RCFriendCell.h"
-
+#import "AFNetworking.h"
 #define kRCAPIListFriend @"http://bizannouncements.com/Vega/services/app/friends.php?user=%@"
 
 @interface RCListFriendViewController ()
@@ -83,16 +83,19 @@
     
     // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"%@", responseObject);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        NSLog(@"%@", rO);
         
         [self.listFriends removeAllObjects];
-        for (NSDictionary *category in responseObject)
+        for (NSDictionary *category in rO)
         {
-            for (NSDictionary *dic in [responseObject objectForKey:[category description]])
+            for (NSDictionary *dic in [rO objectForKey:[category description]])
             {
                 NSDictionary *rs = [dic objectForKey:@"friend"];
                 RCPerson *friend = [[RCPerson alloc] init];
@@ -120,14 +123,15 @@
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.tbFriends reloadData];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+    
+    
 }
 
 #pragma mark -

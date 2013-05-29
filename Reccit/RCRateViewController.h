@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIHTTPRequest.h"
 #import "DYRateView.h"
 #import "MBProgressHUD.h"
 #import "RCBaseViewController.h"
-#import "RCReviewLocationViewController.h"
+#import "RCReviewInDetailsViewController.h"
 
 @interface RCRateViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, DYRateViewDelegate> 
 
 @property (strong, nonatomic) NSMutableArray *listLocation;
 
 @property (strong, nonatomic) MBProgressHUD *HUD;
-@property (strong, nonatomic) RCReviewLocationViewController *reviewVc;
+@property (strong, nonatomic) RCReviewInDetailsViewController *reviewVc;
 
 @property (weak, nonatomic) IBOutlet UITableView *tbLocation;
 - (void)callAPIGetListLocationRate;

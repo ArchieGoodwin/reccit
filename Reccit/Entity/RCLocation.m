@@ -14,6 +14,7 @@
 
 @synthesize name;
 @synthesize address;
+@synthesize street;
 @synthesize locality;
 @synthesize country;
 @synthesize longitude;

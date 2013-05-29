@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *street;
 @property (nonatomic, copy) NSString *locality;
 @property (nonatomic, copy) NSString *country;
 @property (nonatomic, assign) double longitude;

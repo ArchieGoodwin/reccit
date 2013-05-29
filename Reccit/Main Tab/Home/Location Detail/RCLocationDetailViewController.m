@@ -15,7 +15,7 @@
 #import "RCWebViewController.h"
 #import "RCReviewInDetailsViewController.h"
 #import "RCDirectViewController.h"
-
+#import "AFNetworking.h"
 
 #define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d&user_id=%@"
 
@@ -49,7 +49,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.lbName.text = self.location.name;
-    self.lbAddress.text = self.location.address;
+    self.lbAddress.text = self.location.street;
     
     self.rateView.rate = self.location.rating;
     self.lbCity.text = self.location.city;
@@ -111,15 +111,17 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST : %@", urlString);
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"%@", [responseObject description]);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        NSLog(@"%@", rO);
         
         self.listComment = [[NSMutableArray alloc] init];
-        for (NSDictionary *dic in [responseObject objectForKey:@"comments"])
+        for (NSDictionary *dic in [rO objectForKey:@"comments"])
         {
             RCReview *review = [[RCReview alloc] init];
             review.content = [dic objectForKey:@"comment"];
@@ -146,14 +148,14 @@
         }
         
         [self.tbReview reloadData];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    [operation start];
+    
+    
 }
 
 #pragma mark -
@@ -191,31 +193,32 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"REQUEST : %@", urlString);
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"%@", [responseObject description]);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        NSLog(@"%@", rO);
         
-        if ([[responseObject objectForKey:@"restaurants"] count] == 0)
+        if ([[rO objectForKey:@"restaurants"] count] == 0)
         {
             [RCCommonUtils showMessageWithTitle:@"Failed" andContent:@"Reserving is not available."];
         } else {
             // Open Webview
-            NSString *stringUrl = [[[responseObject objectForKey:@"restaurants"] objectAtIndex:0] objectForKey:@"mobile_reserve_url"];
+            NSString *stringUrl = [[[rO objectForKey:@"restaurants"] objectAtIndex:0] objectForKey:@"mobile_reserve_url"];
             [self performSegueWithIdentifier:@"PushWebView" sender:stringUrl];
         }
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request setFailedBlock:^{
-        [RCCommonUtils showMessageWithTitle:@"Failed" andContent:@"Reserving is not available."];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
+    [operation start];
     
-    [request startAsynchronous];
 }
 
 - (IBAction)btnDirectionTouched:(id)sender

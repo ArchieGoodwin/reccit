@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIHTTPRequest.h"
 
 @interface RCSurpriseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
