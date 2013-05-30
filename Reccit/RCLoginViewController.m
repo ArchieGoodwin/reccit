@@ -271,10 +271,29 @@
         
         // Call webservice authenticate
         //NSLog(@"%@", [[FBSession activeSession] accessTokenData]);
-        [RCWebService authenticateFacebookWithToken:[[[FBSession activeSession] accessTokenData]accessToken]  userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+        
         
         // Get facebook id to show image
-        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *error) {
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+             if (!error) {
+                 NSString *img = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", user.id];
+                 [[NSUserDefaults standardUserDefaults] setObject:img forKey:kRCUserImageUrl];
+                 [[NSUserDefaults standardUserDefaults] setObject:user.username forKey:kRCUserName];
+                 [[NSUserDefaults standardUserDefaults] setObject:user.id forKey:kRCUserFacebookId];
+                 NSString *name = [NSString stringWithFormat:@"%@ %@", user.first_name, user.last_name];
+                 
+                 [[NSUserDefaults standardUserDefaults] setObject:name forKey:kRCUserFacebookName];
+             } else {
+                 NSLog(@"error: %@", error);
+             }
+             
+             [RCWebService authenticateFacebookWithToken:[[[FBSession activeSession] accessTokenData]accessToken]  userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+             
+         }];
+        
+        
+        /*[FBRequest startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *error) {
             NSString *img = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", user.id];
             [[NSUserDefaults standardUserDefaults] setObject:img forKey:kRCUserImageUrl];
             [[NSUserDefaults standardUserDefaults] setObject:user.username forKey:kRCUserName];
@@ -284,7 +303,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:name forKey:kRCUserFacebookName];
 
 
-        }];
+        }];*/
         
         //[self performSelector:@selector(loginFacebookSuccess) withObject:nil afterDelay:1.5];
     } else {

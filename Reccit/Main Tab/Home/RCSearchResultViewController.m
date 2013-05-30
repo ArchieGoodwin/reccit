@@ -16,13 +16,14 @@
 #import "RCLocationDetailViewController.h"
 #import "AFNetworking.h"
 
-#define kAPISearchReccit @"http://bizannouncements.com/Vega/services/app/getReccit.php?user=%@&%@"
+#define kAPIReccit @"http://bizannouncements.com/Vega/services/app/friendReccit.php?user=%@&%@"
+#define kAPISearchReccit  @"http://bizannouncements.com/Vega/services/app/getReccit.php?user=%@&%@"
 #define kAPISearchFriendFac @"http://bizannouncements.com/Vega/services/app/friendFavorites.php?user=%@&%@"
 #define kAPISearchPopular @"http://bizannouncements.com/Vega/services/app/otherPlaces.php?user=%@&%@"
 
 @interface RCSearchResultViewController ()
 {
-    
+    BOOL firstTime ;
 }
 @end
 
@@ -31,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    firstTime = YES;
     self.listLocationReccit = nil;
     self.listLocationFriend = nil;
     self.listLocationPopular = nil;
@@ -45,13 +46,29 @@
     [self.tbResult setSeparatorColor:[UIColor clearColor]];
     
     self.searchBar.text = self.searchString;
-    [self.searchBar setEnabled:NO];
+    [self.searchBar setEnabled:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)searchByButton:(id)sender {
+    _isSearch = YES;
+    
+    NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
+    
+    if ([self.searchBar.text length] > 0)
+    {
+        query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+    }
+
+    self.querySearch = query;
+    [self performSelector:@selector(callAPIGetListReccit) withObject:nil afterDelay:0.1];
+    [self.searchBar resignFirstResponder];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -100,12 +117,13 @@
 - (void)callAPIGetListReccit
 {
     // Start new request
-    NSString *urlString = [NSString stringWithFormat:kAPISearchReccit, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccit : kAPIReccit, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    
+    NSLog(@"url for reccits: %@", urlString);
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
@@ -133,6 +151,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationReccit count] == 0)
         {
+            firstTime = NO;
             //[RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
         }
         [self.tbResult reloadData];
@@ -155,13 +174,14 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
-    
+    NSLog(@"url for callAPIGetListFriendFav: %@", urlString);
+
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        //NSLog(@"favs: %@", responseObject);
+        NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
         NSArray *listLocation = [rO objectForKey:@"Reccits"];
@@ -203,7 +223,8 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
-    
+    NSLog(@"url for callAPIGetListPopular: %@", urlString);
+
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
@@ -320,6 +341,10 @@
             }
             else
             {
+                if(firstTime)
+                {
+                    return 0;
+                }
                 return 1;
             }
         case 2:

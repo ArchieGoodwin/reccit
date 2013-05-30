@@ -365,14 +365,14 @@
     {
         RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
         
-        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@&dist=%d", self.tfLocation.text, self.categoryName, (int)self.sliderDistance.value];
+        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation.text, self.categoryName];
         
         result.isSurprase = NO;
         result.showTabs = YES;
-        if ([self.searchBar.text length] > 0)
+        /*if ([self.searchBar.text length] > 0)
         {
             query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
-        }
+        }*/
         if ([self.tfGenre.text length] > 0)
         {
             query = [NSString stringWithFormat:@"%@&cuisine=%@", query, self.tfGenre.text];
@@ -382,6 +382,9 @@
         {
             query = [NSString stringWithFormat:@"%@&price=%d", query, [self.tfPrice.text length]];
         }
+        result.isSearch = NO;
+        result.tfLocation = self.tfLocation.text;
+        result.categoryName = self.categoryName;
         result.querySearch = query;
     }
     
@@ -389,10 +392,12 @@
     {
         RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
         
-        NSString *query = [NSString stringWithFormat:@"filter=surpriseme&city=%@&type=%@&dist=%d", self.tfLocation.text , self.categoryName, (int)self.sliderDistance.value];
+        NSString *query = [NSString stringWithFormat:@"filter=surpriseme&city=%@&type=%@", self.tfLocation.text , self.categoryName];
         
         result.isSurprase = YES;
         result.showTabs = NO;
+        result.tfLocation = self.tfLocation.text;
+        result.categoryName = self.categoryName;
         if ([self.searchBar.text length] > 0)
         {
             query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
@@ -406,6 +411,8 @@
         {
             query = [NSString stringWithFormat:@"%@&price=%d", query, [self.tfPrice.text length]];
         }
+        result.isSearch = NO;
+
         result.querySearch = query;
     }
     
@@ -416,10 +423,13 @@
         NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation.text, self.categoryName];
         result.isSurprase = NO;
         result.showTabs = NO;
+        result.tfLocation = self.tfLocation.text;
+        result.categoryName = self.categoryName;
         if ([self.searchBar.text length] > 0)
         {
             query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
         }
+        result.isSearch = YES;
         result.querySearch = query;
         result.searchString = self.searchBar.text;
     }

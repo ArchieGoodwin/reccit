@@ -112,11 +112,15 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
-    
+    NSLog(@"callAPIGetListReview  url %@", urlString);
+
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"callAPIGetListReview  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         NSLog(@"%@", rO);
         
@@ -269,12 +273,19 @@
 
 -(CGFloat)getLabelSize:(NSString *)text fontSize:(NSInteger)fontSize
 {
-  
-    UIFont *cellFont = [UIFont boldSystemFontOfSize:fontSize];
-	CGSize constraintSize = CGSizeMake(243, MAXFLOAT);
-	CGSize labelSize = [text sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+    if(text != [NSNull null])
+    {
+        UIFont *cellFont = [UIFont boldSystemFontOfSize:fontSize];
+        CGSize constraintSize = CGSizeMake(243, MAXFLOAT);
+        CGSize labelSize = [text sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+        
+        return labelSize.height;
+    }
+    else
+    {
+        return 20;
+    }
     
-    return labelSize.height;
 }
 
 
@@ -284,19 +295,23 @@
     
     RCReview *review = [self.listComment objectAtIndex:indexPath.row];
     
-    [(UILabel *)[cell viewWithTag:1003] setText:review.content];
-    
-    ((UILabel *)[cell viewWithTag:1003]).frame = CGRectMake(((UILabel *)[cell viewWithTag:1003]).frame .origin.x, ((UILabel *)[cell viewWithTag:1003]).frame .origin.y, 243, [self getLabelSize:review.content fontSize:13]);
-    
-    
-    UIImageView *img = (UIImageView *)[cell viewWithTag:1001];
-    [img setImageWithURL:[NSURL URLWithString:review.image] placeholderImage:[UIImage imageNamed:@"ic_me.png"]];
-    
-    if (indexPath.row % 2 == 0) {
-        [cell.contentView setBackgroundColor:kRCCheckInCellColorHighLight];
-    } else {
-        [cell.contentView setBackgroundColor:kRCBackgroundView];
+    if (review.content != [NSNull null]) {
+        [(UILabel *)[cell viewWithTag:1003] setText:review.content];
+        
+        ((UILabel *)[cell viewWithTag:1003]).frame = CGRectMake(((UILabel *)[cell viewWithTag:1003]).frame .origin.x, ((UILabel *)[cell viewWithTag:1003]).frame .origin.y, 243, [self getLabelSize:review.content fontSize:13]);
+        
+        
+        UIImageView *img = (UIImageView *)[cell viewWithTag:1001];
+        [img setImageWithURL:[NSURL URLWithString:review.image] placeholderImage:[UIImage imageNamed:@"ic_me.png"]];
+        
+        if (indexPath.row % 2 == 0) {
+            [cell.contentView setBackgroundColor:kRCCheckInCellColorHighLight];
+        } else {
+            [cell.contentView setBackgroundColor:kRCBackgroundView];
+        }
     }
+    
+   
     
     return cell;
 }

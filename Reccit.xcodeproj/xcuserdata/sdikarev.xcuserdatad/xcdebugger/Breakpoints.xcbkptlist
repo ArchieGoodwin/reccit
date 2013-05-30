@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/RCLoginViewController.m"
-         timestampString = "391523692.949196"
+         timestampString = "391607544.776916"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "404"
-         endingLineNumber = "404">
+         startingLineNumber = "423"
+         endingLineNumber = "423">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
