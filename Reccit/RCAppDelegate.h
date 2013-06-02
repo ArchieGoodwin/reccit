@@ -18,8 +18,9 @@ extern NSString *const SCSessionStateChangedNotification;
 {
     CLLocationManager *locationManager;
     CLLocationCoordinate2D currentLocation;
+    
 }
-
+@property (nonatomic, strong) UIStoryboard *initalStoryboard;
 @property (strong, nonatomic) UIWindow *window;
 
 - (CLLocationCoordinate2D)getCurrentLocation;
@@ -29,4 +30,5 @@ extern NSString *const SCSessionStateChangedNotification;
 // the user to be logged in to Facebook in order to do anything interesting -- if there is no valid
 // FBSession, a login screen is displayed.
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
+- (void)resetWindowToInitialView;
 @end

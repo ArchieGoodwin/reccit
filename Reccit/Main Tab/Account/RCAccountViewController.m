@@ -10,7 +10,7 @@
 #import "RCDefine.h"
 #import "UIImageView+WebCache.h"
 #import "RCTermsViewController.h"
-
+#import "RCAppDelegate.h"
 @interface RCAccountViewController ()
 
 @end
@@ -39,6 +39,47 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:YES];
+}
+
+
+-(void)reallyLogout
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFirstTimeLogin];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFacebookLoggedIn];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCTwitterLoggedIn];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserImageUrl];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserName];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserFacebookId];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserId];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFoursquareLoggedIn];
+
+    
+    
+    [[NSUserDefaults standardUserDefaults]  synchronize];
+    
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate resetWindowToInitialView];
+}
+
+- (IBAction)btnLogOut:(id)sender {
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Are you sure you want to logout?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    [alert show];
+    
+    
+    
+  
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        [self reallyLogout];
+    }
 }
 
 - (void)didReceiveMemoryWarning

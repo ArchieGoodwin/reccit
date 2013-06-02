@@ -24,7 +24,7 @@
 {
     MBProgressHUD *HUD;
 
-    BOOL isFirstTime;
+    //BOOL isFirstTime;
 
 
 }
@@ -55,28 +55,20 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginTwitterSuccess) name:@"tLogin" object:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:@"fRegisterError" object:nil];
+
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin] == nil)
     {
-        isFirstTime = YES;
 
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:kRCFirstTimeLogin];
-        [[NSUserDefaults standardUserDefaults]  synchronize];
+
     }
     else
     {
-        isFirstTime = NO;
-
-    }
-    
-    [self.view setBackgroundColor:kRCBackgroundView];
-    
-    
-    if (isFirstTime) {
-        isFirstTime = NO;
+        [self performSegueWithIdentifier:@"PushRate" sender:nil];
         
-        // Check authentication
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn] != nil)
+        
+        /*if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn] != nil)
         {
             if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCTwitterLoggedIn] != nil)
             {
@@ -88,9 +80,19 @@
             } else {
                 [self performSegueWithIdentifier:@"PushTwitter" sender:nil];
             }
-        }
+        }*/
+
+    }
+    
+    [self.view setBackgroundColor:kRCBackgroundView];
+    
+    
+
         
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCTwitterLoggedIn] != nil)
+        // Check authentication
+        
+        
+        /*if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCTwitterLoggedIn] != nil)
         {
             [[NSNotificationCenter defaultCenter] removeObserver:self];
             if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn] != nil)
@@ -103,10 +105,7 @@
             } else {
                 [self performSegueWithIdentifier:@"PushFacebook" sender:nil];
             }
-        }
-    }
-    else
-    {
+        }*/
 
         //[[facebookHelper sharedInstance] getFacebookRecentCheckins];
 
@@ -192,12 +191,17 @@
 
 
 
-        
-        [self performSegueWithIdentifier:@"PushRate" sender:nil];
-    }
 }
 
+-(void)registerFailed:(NSNotification*) notification
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserId];
 
+    [HUD hide:YES];
+    NSString *str = (NSString*) [notification object];
+    
+    [RCCommonUtils showMessageWithTitle:@"Error" andContent:str];
+}
 
 
 - (void)viewWillAppear:(BOOL)animated

@@ -269,6 +269,7 @@
     NSString *urlString = [NSString stringWithFormat:@"http://bizannouncements.com/Vega/services/app/profile.php?user=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
+    NSLog(@"shre link: %@", urlString);
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
@@ -280,7 +281,7 @@
         self.listCity = [[NSMutableArray alloc] init];
         for (NSDictionary *locationDic in [rO objectForKey:@"Profile"])
         {
-            RCLocation *location =  [RCCommonUtils getLocationFromDictionary:[locationDic objectForKey:@"place"]];
+            RCLocation *location =  [RCCommonUtils getLocationFromDictionary:locationDic];
             
             if(location)
             {
@@ -318,7 +319,10 @@
         }
         
         self.listReviewResult = [NSMutableArray new];
-        self.listReviewResult = [self.listReview mutableCopy];
+        for(RCLocation *loc in self.listReview)
+        {
+            [self.listReviewResult addObject:loc];
+        }
         
         [self.tbReview reloadData];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

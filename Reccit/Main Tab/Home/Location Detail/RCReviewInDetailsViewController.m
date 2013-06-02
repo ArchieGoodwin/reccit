@@ -90,13 +90,14 @@
             
             
             NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-            [request setRequestMethod:@"POST"];
-            [request setCompletionBlock:^{
-                
-                NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
-                NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-                NSLog(@"responseObject %@", responseObject);
+            
+            
+            AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+            [client setParameterEncoding:AFFormURLParameterEncoding];
+            [client postPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"self.location.ID = %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+                NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+                NSLog(@"responseObject %@", rO);
                 
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 
@@ -104,20 +105,49 @@
                 if([self.vsParrent isKindOfClass:[RCRateViewController class]])
                 {
                     [((RCRateViewController *)self.vsParrent) callAPIGetListLocationRate];
-                   
+                    
                 }
                 
                 
-                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You reviewed sucessfully!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alerView show];
-            }];
-            
-            [request setFailedBlock:^{
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             }];
             
-            [request startAsynchronous];
+            
+            
+            
+            
+            /*__weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+             [request setRequestMethod:@"POST"];
+             [request setCompletionBlock:^{
+             
+             NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
+             NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+             NSLog(@"responseObject %@", responseObject);
+             
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             
+             
+             if([self.vsParrent isKindOfClass:[RCRateViewController class]])
+             {
+             [((RCRateViewController *)self.vsParrent) callAPIGetListLocationRate];
+             
+             }
+             
+             
+             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alerView show];
+             }];
+             
+             [request setFailedBlock:^{
+             [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             }];
+             
+             [request startAsynchronous];*/
         }
         else
         {
@@ -128,28 +158,49 @@
             
             
             NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-            [request setRequestMethod:@"POST"];
-
-            [request setCompletionBlock:^{
-                
-                NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
-                NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-                NSLog(@"responseObject %@", responseObject);
+            
+            AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+            [client setParameterEncoding:AFFormURLParameterEncoding];
+            [client postPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+                NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+                NSLog(@"other responseObject %@", rO);
                 
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 
                 UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alerView show];
-            }];
-            
-            [request setFailedBlock:^{
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             }];
             
-            [request startAsynchronous];
-
+            
+            
+            
+            
+            /*__weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+             [request setRequestMethod:@"POST"];
+             
+             [request setCompletionBlock:^{
+             
+             NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
+             NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+             NSLog(@"responseObject %@", responseObject);
+             
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             
+             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alerView show];
+             }];
+             
+             [request setFailedBlock:^{
+             [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             }];
+             
+             [request startAsynchronous];*/
+            
         }
     }
     else
@@ -161,6 +212,7 @@
             [alerView show];
         }
     }
+    
     
     
 }

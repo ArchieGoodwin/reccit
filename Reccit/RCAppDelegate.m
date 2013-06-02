@@ -47,7 +47,22 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [locationManager startUpdatingLocation];
     
+    _initalStoryboard = self.window.rootViewController.storyboard;
+
+    
     return YES;
+}
+
+
+- (void)resetWindowToInitialView
+{
+    for (UIView* view in self.window.subviews)
+    {
+        [view removeFromSuperview];
+    }
+    
+    UIViewController* initialScene = [_initalStoryboard instantiateInitialViewController];
+    self.window.rootViewController = initialScene;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

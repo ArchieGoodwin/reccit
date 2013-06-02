@@ -119,6 +119,27 @@
     }
 }
 
+- (IBAction)btnLogOut:(id)sender {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFirstTimeLogin];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFacebookLoggedIn];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCTwitterLoggedIn];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserImageUrl];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserName];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserFacebookId];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserId];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFoursquareLoggedIn];
+
+    
+
+    [[NSUserDefaults standardUserDefaults]  synchronize];
+    
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate resetWindowToInitialView];
+    
+}
+
 - (IBAction)btnTwitterLogin:(id)sender
 {
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

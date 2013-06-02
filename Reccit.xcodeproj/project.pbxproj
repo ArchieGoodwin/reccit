@@ -382,6 +382,8 @@
 		DC84E4EC170460E600D6EF8D /* rate-review.png in Resources */ = {isa = PBXBuildFile; fileRef = DC84E4EB170460E600D6EF8D /* rate-review.png */; };
 		DC84E4EF1704616B00D6EF8D /* rate-down.png in Resources */ = {isa = PBXBuildFile; fileRef = DC84E4ED1704616A00D6EF8D /* rate-down.png */; };
 		DC84E4F01704616B00D6EF8D /* rate-up.png in Resources */ = {isa = PBXBuildFile; fileRef = DC84E4EE1704616B00D6EF8D /* rate-up.png */; };
+		DC87DADA1758CA6900C9CBD9 /* back_for_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = DC87DAD91758CA6900C9CBD9 /* back_for_logout.png */; };
+		DC87DADC1758CDCB00C9CBD9 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = DC87DADB1758CDCB00C9CBD9 /* logout.png */; };
 		DC8934EE17435351008922EC /* f_login.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8934EA17435351008922EC /* f_login.png */; };
 		DC8934F017435351008922EC /* login_with_sign.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8934EC17435351008922EC /* login_with_sign.png */; };
 		DC8934F117435351008922EC /* t_login.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8934ED17435351008922EC /* t_login.png */; };
@@ -986,6 +988,8 @@
 		DC84E4EB170460E600D6EF8D /* rate-review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-review.png"; sourceTree = "<group>"; };
 		DC84E4ED1704616A00D6EF8D /* rate-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-down.png"; sourceTree = "<group>"; };
 		DC84E4EE1704616B00D6EF8D /* rate-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-up.png"; sourceTree = "<group>"; };
+		DC87DAD91758CA6900C9CBD9 /* back_for_logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_for_logout.png; sourceTree = "<group>"; };
+		DC87DADB1758CDCB00C9CBD9 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		DC8934EA17435351008922EC /* f_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f_login.png; sourceTree = "<group>"; };
 		DC8934EC17435351008922EC /* login_with_sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_with_sign.png; sourceTree = "<group>"; };
 		DC8934ED17435351008922EC /* t_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_login.png; sourceTree = "<group>"; };
@@ -2024,6 +2028,8 @@
 		DC8934E91743533F008922EC /* newdesign */ = {
 			isa = PBXGroup;
 			children = (
+				DC87DADB1758CDCB00C9CBD9 /* logout.png */,
+				DC87DAD91758CA6900C9CBD9 /* back_for_logout.png */,
 				DCEB813F174738AF0048FE92 /* review_upper.png */,
 				DCB5E7451745FA1A002F7F59 /* review_indetails_labels.png */,
 				DCB5E7431744E982002F7F59 /* checkin_new_button.png */,
@@ -2413,6 +2419,8 @@
 				DCB5E74E1745FE7F002F7F59 /* StarFullLarge1@2x.png in Resources */,
 				DCEB8140174738AF0048FE92 /* review_upper.png in Resources */,
 				DC73EBED174F63F300DBAB1C /* FacebookSDKResources.bundle in Resources */,
+				DC87DADA1758CA6900C9CBD9 /* back_for_logout.png in Resources */,
+				DC87DADC1758CDCB00C9CBD9 /* logout.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2627,8 +2635,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2646,8 +2654,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2655,8 +2663,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2674,8 +2682,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

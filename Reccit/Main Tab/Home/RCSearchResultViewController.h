@@ -30,6 +30,7 @@
 @property (assign, nonatomic) BOOL showTabs;
 @property (assign, nonatomic) BOOL isSearch;
 @property (assign) NSInteger currentTab;
+@property (weak, nonatomic) IBOutlet UIButton *btnSearchInside;
 
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;
 

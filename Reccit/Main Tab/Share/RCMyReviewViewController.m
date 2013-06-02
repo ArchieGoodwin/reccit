@@ -11,7 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "RCCommonUtils.h"
 #import "MBProgressHUD.h"
-
+#import "AFNetworking.h"
 #define kRCAPIUpdateComment @"http://bizannouncements.com/bhavesh/updatereview.php?userid=%@&placeid=%d&recommend=%@&rating=%lf&review=%@"
 
 @interface RCMyReviewViewController ()
@@ -49,7 +49,7 @@
     NSLog(@"%@", self.location.comment);
     self.txtComment.text = self.location.comment;
     
-    if (self.location.recommendation == true)
+    if (self.location.recommendation == YES )
     {
         self.btnReccit.alpha = 1;
         self.btnNotReccit.alpha = 0.3;
@@ -103,17 +103,21 @@
 
 - (IBAction)btnShareTouched:(id)sender
 {
-    NSString *urlString = [NSString stringWithFormat:kRCAPIUpdateComment, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.location.ID, self.btnNotReccit.selected ? @"true" : @"false", self.rateView.rate, self.txtComment.text];
+    NSString *urlString = [NSString stringWithFormat:kRCAPIUpdateComment, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.location.ID, self.btnReccit.alpha == 1.0 ? @"true" : @"false", self.rateView.rate, self.txtComment.text];
     NSLog(@"REQUEST URL: %@", urlString);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // Start new request
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"%@", responseObject);
+    
+    
+    
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [client setParameterEncoding:AFFormURLParameterEncoding];
+    [client postPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        NSLog(@"review response: %@", rO);
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
@@ -121,14 +125,36 @@
         [alerView show];
         
         [self btnCancelTouched:nil];
-    }];
-    
-    [request setFailedBlock:^{
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    [request startAsynchronous];
+    
+    
+    
+   /* NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        NSLog(@"review response: %@", rO);
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You reviewed sucessfully!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alerView show];
+        
+        [self btnCancelTouched:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+    
+    [operation start];
+    */
+    
+   
 }
 
 - (IBAction)btnEditTouched:(id)sender

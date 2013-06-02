@@ -38,6 +38,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:kRCFirstTimeLogin];
+        [[NSUserDefaults standardUserDefaults]  synchronize];
+    }
+
+    
+    
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastDate"];
 
 
@@ -86,9 +94,9 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"%@", responseObject);
         
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        //NSLog(@"%@", rO);
 
         [self.listLocation removeAllObjects];
         for (NSDictionary *locationDic in rO)

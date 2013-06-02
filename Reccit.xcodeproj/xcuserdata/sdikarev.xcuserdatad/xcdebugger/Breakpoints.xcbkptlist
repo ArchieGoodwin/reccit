@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/Main Tab/Account/Details/RCLinkedAccountsViewController.m"
-         timestampString = "390460166.36698"
+         timestampString = "391694702.711761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "124"
-         endingLineNumber = "124"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
          landmarkName = "-btnTwitterLogin:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Reccit/RCLoginViewController.m"
-         timestampString = "391607544.776916"
+         timestampString = "391857004.507507"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "423"
-         endingLineNumber = "423">
+         startingLineNumber = "427"
+         endingLineNumber = "427">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -135,13 +135,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Reccit/Main Tab/Home/Location Detail/RCReviewInDetailsViewController.m"
-         timestampString = "390981382.039524"
+         filePath = "Reccit/RCLoginViewController.m"
+         timestampString = "391857004.507507"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
-         landmarkName = "-btnSubmitTouched:"
+         startingLineNumber = "200"
+         endingLineNumber = "200"
+         landmarkName = "-registerFailed:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

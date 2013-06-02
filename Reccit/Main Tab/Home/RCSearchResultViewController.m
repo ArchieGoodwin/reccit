@@ -84,6 +84,7 @@
             _btn1.hidden = YES;
             _btn2.hidden = YES;
             _btn3.hidden = YES;
+        _btnSearchInside.hidden = YES;
     }
     else
     {
@@ -97,6 +98,7 @@
             _btn2.hidden = YES;
             _btn3.hidden = YES;
         }
+                _btnSearchInside.hidden = NO;
         
     }
 }
@@ -181,7 +183,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"favs: %@", rO);
+       // NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
         NSArray *listLocation = [rO objectForKey:@"Reccits"];
@@ -570,6 +572,7 @@
     [self setBtn1:nil];
     [self setBtn2:nil];
     [self setBtn3:nil];
+    [self setBtnSearchInside:nil];
     [super viewDidUnload];
 }
 @end

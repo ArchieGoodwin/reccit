@@ -26,7 +26,7 @@
 @synthesize zipCode;
 @synthesize rating;
 @synthesize ID;
-@synthesize recommendation;
+@synthesize recommendation = _recommendation;
 @synthesize isMark;
 @synthesize index;
 @synthesize comment;
