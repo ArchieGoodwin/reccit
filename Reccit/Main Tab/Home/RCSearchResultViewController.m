@@ -183,14 +183,14 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-       // NSLog(@"favs: %@", rO);
+        //NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
         NSArray *listLocation = [rO objectForKey:@"Reccits"];
         if (listLocation != [NSNull null]){
             for (NSDictionary *locationDic in listLocation)
             {
-                
+                NSLog(@"%@", locationDic);
                 RCLocation *l = [RCCommonUtils getLocationFromDictionary:locationDic];
                 if(l)
                 {

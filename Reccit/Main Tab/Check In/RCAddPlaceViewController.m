@@ -743,6 +743,8 @@
                     [self makeStringWithKeyAndValue:@"city" value:self.location.city],
                     [self makeStringWithKeyAndValue:@"state" value:self.location.state],
                     [self makeStringWithKeyAndValue:@"country" value:self.location.country],
+                    [self makeStringWithKeyAndValue:@"type" value:self.location.category],
+                    [self makeStringWithKeyAndValue:@"genre" value:self.location.genre],
                     [self makeStringWithKeyAndValue:@"lat" value:[NSString stringWithFormat:@"%f",self.location.latitude]],
                     [self makeStringWithKeyAndValue:@"long" value:[NSString stringWithFormat:@"%f",self.location.longitude]],
                     nil];
@@ -753,7 +755,7 @@
     
     
     
-    NSLog(@"%@", [clock stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+    //NSLog(@"%@", [clock stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     NSLog(@"%@", clock );
     
     return clock;

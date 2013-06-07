@@ -111,7 +111,7 @@
     }
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
     NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArround, currentLocation.latitude, currentLocation.longitude];
-    NSLog(@"REQUEST URL: %@", urlString);
+    NSLog(@"REQUEST URL callAPIGetListLocation: %@", urlString);
     
     // Start new request
     NSURL *url = [NSURL URLWithString:urlString];
@@ -130,7 +130,7 @@
         {
             for (NSDictionary *locationDic in [rO objectForKey:[category description]])
             {
-                NSLog(@"%@", locationDic);
+                //NSLog(@"%@", locationDic);
                 RCLocation *location = [[RCLocation alloc] init];
                 
                 location.name = [locationDic objectForKey:@"name"];
@@ -140,7 +140,7 @@
                 location.address = [locationDic objectForKey:@"address"];
                 if ([locationDic objectForKey:@"country"] != nil && [locationDic objectForKey:@"country"] != [NSNull null]) {
                     location.country  = [locationDic objectForKey:@"country"];
-                    NSLog(@"%@", location.country);
+                    //NSLog(@"%@", location.country);
                 }
                 if ([locationDic objectForKey:@"locality"] != nil && [locationDic objectForKey:@"locality"] != [NSNull null]) {
                     location.locality  = [locationDic objectForKey:@"locality"];

@@ -28,10 +28,10 @@
 + (void)authenticateFacebookWithToken:(NSString *)token userId:(NSString *)userId
 {
     
-    NSString *urlString = [NSString stringWithFormat:kRCAPIFacebookAuthenticate, token];
+    NSString *urlString = [NSString stringWithFormat:kRCAPIFacebookAuthenticate, token, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]];
     if (userId != nil)
     {
-        urlString = [NSString stringWithFormat:@"%@&userid=%@", [NSString stringWithFormat:kRCAPIFacebookAuthenticate, token], userId];
+        urlString = [NSString stringWithFormat:@"%@&userid=%@", [NSString stringWithFormat:kRCAPIFacebookAuthenticate, token, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]], userId];
     }
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"get user first url : %@", urlString);
@@ -154,12 +154,13 @@
                          NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                          //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                         iterations++;
                          completion([NSNumber numberWithBool:YES]);
                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                          NSLog(@"error frCheckinRequest %@", [error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
                          [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
-
+                        iterations++;
                          completion([NSNumber numberWithBool:YES]);
                      }];
                      
@@ -217,13 +218,15 @@
                      [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                          NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                          //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
+                         
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                         iterations++;
                          completion([NSNumber numberWithBool:YES]);
                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                          NSLog(@"error frCheckinRequest %@", [error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
                          [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
-
+                        iterations++;
                          completion([NSNumber numberWithBool:YES]);
                      }];
                      
@@ -279,13 +282,14 @@
                      [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                          NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                          //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
+                         iterations++;
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                          completion([NSNumber numberWithBool:YES]);
                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                          NSLog(@"error frCheckinRequest %@", [error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
                          [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
-
+                        iterations++;
                          completion([NSNumber numberWithBool:YES]);
                      }];
                      
@@ -340,13 +344,14 @@
                      [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                          NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                          //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
+                         iterations++;
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                          completion([NSNumber numberWithBool:YES]);
                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                          NSLog(@"error frCheckinRequest %@", [error description]);
                          [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
                          [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
-
+                        iterations++;
                          completion([NSNumber numberWithBool:YES]);
                      }];
                      

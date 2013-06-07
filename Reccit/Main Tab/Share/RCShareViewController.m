@@ -212,19 +212,23 @@
         NSArray *genreSplit = [loc.genre componentsSeparatedByString:@","];
         for(NSString *split in genreSplit)
         {
-            BOOL identicalStringFound = NO;
-            for(NSString *genre in genres)
+            if(![split isEqualToString:@"Bar"] && ![split isEqualToString:@"Hotel"] && ![split isEqualToString:@"Restaurant"] && ![split isEqualToString:@""] && ![split isEqualToString:@"Nightclub"] && ![split isEqualToString:@"Sports Bar"])
             {
-                if([genre isEqualToString:split])
+                BOOL identicalStringFound = NO;
+                for(NSString *genre in genres)
                 {
-                    identicalStringFound = YES;
-                    break;
+                    if([genre isEqualToString:split])
+                    {
+                        identicalStringFound = YES;
+                        break;
+                    }
+                }
+                if(!identicalStringFound)
+                {
+                    [genres addObject:split];
                 }
             }
-            if(!identicalStringFound)
-            {
-                [genres addObject:split];
-            }
+            
         }
     }
     [RCDataHolder setListCountry:genres];

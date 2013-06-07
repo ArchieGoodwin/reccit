@@ -127,7 +127,7 @@
         [self loadCurrentCity];
     }
     
-    if ([RCDataHolder getListCountry] == nil)
+    if ([self.categoryName isEqualToString:@"restaurant"])
     {
         [self loadGerne];
     }
@@ -375,7 +375,7 @@
         }*/
         if ([self.tfGenre.text length] > 0)
         {
-            query = [NSString stringWithFormat:@"%@&cuisine=%@", query, self.tfGenre.text];
+            query = [NSString stringWithFormat:@"%@&genre=%@", query, self.tfGenre.text];
         }
         
         if ([self.tfPrice.text length] > 0)
@@ -404,7 +404,7 @@
         }
         if ([self.tfGenre.text length] > 0)
         {
-            query = [NSString stringWithFormat:@"%@&cuisine=%@", query, self.tfGenre.text];
+            query = [NSString stringWithFormat:@"%@&genre=%@", query, self.tfGenre.text];
         }
         
         if ([self.tfPrice.text length] > 0)

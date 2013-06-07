@@ -25,7 +25,7 @@
     RCMapAnnotation *itAnnotation = (RCMapAnnotation*)self.annotation;
     
     NSString *imageName = nil;
-    NSLog(@"%@", itAnnotation.myLocation.category);
+    //NSLog(@"%@", itAnnotation.myLocation.category);
     if ([itAnnotation.myLocation.type isEqualToString:@"bar"])
     {
         imageName = @"icon-map-drink.png";

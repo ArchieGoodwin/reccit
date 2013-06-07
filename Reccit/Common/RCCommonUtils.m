@@ -231,10 +231,14 @@
             
             for (NSDictionary *friend in [locationDic objectForKey:@"friends"])
             {
-                //NSLog(@"Friend Image: %@", [friend objectForKey:@"image"]);
-                [listFriend addObject:[friend objectForKey:@"image"]];
-                [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"firstName"], [friend objectForKey:@"lastName"]]];
-                
+                if([friend objectForKey:@"firstName"])
+                {
+                    NSLog(@"Friend Image: %@", [friend objectForKey:@"image"]);
+                    [listFriend addObject:[friend objectForKey:@"image"]];
+                    [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"firstName"], [friend objectForKey:@"lastName"]]];
+                    
+                }
+
             }
             
             location.listFriends = listFriend;

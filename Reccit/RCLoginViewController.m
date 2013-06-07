@@ -285,7 +285,7 @@
                  [[NSUserDefaults standardUserDefaults] setObject:img forKey:kRCUserImageUrl];
                  [[NSUserDefaults standardUserDefaults] setObject:user.username forKey:kRCUserName];
                  [[NSUserDefaults standardUserDefaults] setObject:user.id forKey:kRCUserFacebookId];
-                 NSString *name = [NSString stringWithFormat:@"%@ %@", user.first_name, user.last_name];
+                 NSString *name = [NSString stringWithFormat:@"%@ %@, %@", user.first_name, user.last_name, user.id];
                  
                  [[NSUserDefaults standardUserDefaults] setObject:name forKey:kRCUserFacebookName];
              } else {

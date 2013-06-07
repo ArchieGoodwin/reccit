@@ -127,15 +127,19 @@
         self.listComment = [[NSMutableArray alloc] init];
         for (NSDictionary *dic in [rO objectForKey:@"comments"])
         {
-            RCReview *review = [[RCReview alloc] init];
-            review.content = [dic objectForKey:@"comment"];
-            review.image = [dic objectForKey:@"photo"];
-            if (review.image == nil || [dic objectForKey:@"photo"] == [NSNull null])
+            if([dic objectForKey:@"id"] != [NSNull null])
             {
-                review.image = nil;
+                RCReview *review = [[RCReview alloc] init];
+                review.content = [dic objectForKey:@"comment"];
+                review.image = [dic objectForKey:@"photo"];
+                if (review.image == nil || [dic objectForKey:@"photo"] == [NSNull null])
+                {
+                    review.image = nil;
+                }
+                
+                [self.listComment addObject:review];
             }
-            
-            [self.listComment addObject:review];
+           
         }
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];

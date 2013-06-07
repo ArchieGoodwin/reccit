@@ -20,6 +20,7 @@
 @interface RCListFriendViewController ()
 {
     UIGestureRecognizer *cancelGesture;
+    NSString *keyword;
 }
 
 @end
@@ -38,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    keyword = nil;
 	// Do any additional setup after loading the view.
     
     self.listFriends = [[NSMutableArray alloc] init];
@@ -180,7 +182,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0)
+    if (keyword == nil)
     return [self.listFriends count];
     
     return [self.listFriendsFilter count];
@@ -190,8 +192,9 @@
 {
     RCFriendCell *cell = (RCFriendCell *)[tableView dequeueReusableCellWithIdentifier:@"RCFriendCell"];
     
-    RCPerson *person = nil;    
-    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0) {
+    RCPerson *person = nil;
+    
+    if (keyword == nil  ) {
         person = [self.listFriends objectAtIndex:indexPath.row];
     } else {
         person = [self.listFriendsFilter objectAtIndex:indexPath.row];
@@ -262,6 +265,40 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    return YES;
+}
+
+// Take string from Search Textfield and compare it with autocomplete array
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+    
+    // Put anything that starts with this substring into the autoCompleteArray
+    // The items in this array is what will show up in the table view
+    
+    [self.listFriendsFilter removeAllObjects];
+    for (RCPerson *friend in self.listFriends)
+    {
+        if ([friend.name rangeOfString:substring options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+            [self.listFriendsFilter addObject:friend];
+        }
+    }
+    if([substring isEqualToString:@""])
+    {
+        self.tfSearch.text = @"";
+        keyword = nil;
+    }
+    
+    [self.tbFriends reloadData];
+    
+}
+
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *substring = [NSString stringWithString:textField.text];
+    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    keyword = substring;
+    [self searchAutocompleteEntriesWithSubstring:substring];
     return YES;
 }
 

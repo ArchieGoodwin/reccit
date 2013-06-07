@@ -265,13 +265,13 @@
     
     RCLocation *location = [self.listLocation objectAtIndex:indexPath.row];
     cell.lbName.text = location.name;
-    NSLog(@"%@", location.address);
+    NSLog(@"%@, %@", location.city, location.address);
     
     if(location.address)
     {
         if(![location.address isEqualToString:@"(null)"])
         {
-            cell.lbAddress.text = location.address;
+            cell.lbAddress.text = [NSString stringWithFormat:@"%@, %@", location.city, location.address];
 
         }
     }

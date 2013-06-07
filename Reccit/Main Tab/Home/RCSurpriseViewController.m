@@ -93,15 +93,15 @@
     // Start new request
     NSString *urlString = [NSString stringWithFormat:kAPISearchSurprise, self.querySearch];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSLog(@"happy hours url: %@", urlString);
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSString *str = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
-        
+        NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"happy hours: %@", str);
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
         /*if([str hasPrefix:@"hi"])

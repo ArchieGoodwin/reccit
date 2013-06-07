@@ -46,6 +46,7 @@
 {
     self.lbName.text = self.location.name;
     self.rateView.rate = self.location.rating;
+    NSLog(@"%d, %f", self.location.recommendation, self.location.rating);
     NSLog(@"%@", self.location.comment);
     self.txtComment.text = self.location.comment;
     
@@ -85,7 +86,7 @@
     }
     
     
-    self.btnReccit.alpha = 1;
+    self.btnReccit.alpha = 1.0;
     self.btnNotReccit.alpha = 0.3;
 }
 
@@ -98,12 +99,12 @@
         return;
     }
     self.btnReccit.alpha = 0.3;
-    self.btnNotReccit.alpha = 1;
+    self.btnNotReccit.alpha = 1.0;
 }
 
 - (IBAction)btnShareTouched:(id)sender
 {
-    NSString *urlString = [NSString stringWithFormat:kRCAPIUpdateComment, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.location.ID, self.btnReccit.alpha == 1.0 ? @"true" : @"false", self.rateView.rate, self.txtComment.text];
+    NSString *urlString = [NSString stringWithFormat:kRCAPIUpdateComment, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.location.ID, self.btnReccit.alpha == 1.0 ? @"yes" : @"no", self.rateView.rate, self.txtComment.text];
     NSLog(@"REQUEST URL: %@", urlString);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

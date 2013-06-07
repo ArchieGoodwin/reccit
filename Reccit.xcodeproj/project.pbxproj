@@ -344,6 +344,9 @@
 		D54CAE6A802074E03BB6445F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54CA4AA3E3A17CC04AC57BC /* AddressBookUI.framework */; };
 		D54CAECBB49164D066CD4D69 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D54CAF5A7E00654535D4CC31 /* AFXMLRequestOperation.m */; };
 		D54CAEE1C55E38AA7AF9E61B /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D54CA3DABB11B7B0A0E0CDCB /* AFImageRequestOperation.m */; };
+		DC1102231760E76800F3CCFF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC11021F1760E76800F3CCFF /* libTestFlight.a */; };
+		DC1102241760E76800F3CCFF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DC1102201760E76800F3CCFF /* README.md */; };
+		DC1102251760E76800F3CCFF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = DC1102211760E76800F3CCFF /* release_notes.md */; };
 		DC564A4A1749DB1A0023A09F /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC564A491749DB1A0023A09F /* libGoogleAnalytics.a */; };
 		DC564A4C1749DB3C0023A09F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC564A4B1749DB3C0023A09F /* CoreData.framework */; };
 		DC564A7A174DD1340023A09F /* Sequencer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC564A79174DD1340023A09F /* Sequencer.m */; };
@@ -363,9 +366,6 @@
 		DC5AE44A1736600F00773A13 /* yajl_lex.c in Sources */ = {isa = PBXBuildFile; fileRef = DC5AE4401736600F00773A13 /* yajl_lex.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DC5AE44B1736600F00773A13 /* yajl_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = DC5AE4421736600F00773A13 /* yajl_parser.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DC5AE44C1736600F00773A13 /* yajl_version.c in Sources */ = {isa = PBXBuildFile; fileRef = DC5AE4441736600F00773A13 /* yajl_version.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DC5AE492173CBB9E00773A13 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5AE48E173CBB9E00773A13 /* libTestFlight.a */; };
-		DC5AE493173CBB9E00773A13 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DC5AE48F173CBB9E00773A13 /* README.md */; };
-		DC5AE494173CBB9E00773A13 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = DC5AE490173CBB9E00773A13 /* release_notes.md */; };
 		DC5EA53B17080FB200579FED /* surprase.png in Resources */ = {isa = PBXBuildFile; fileRef = DC5EA53A17080FB200579FED /* surprase.png */; };
 		DC5EA556170BEC6E00579FED /* RCWhereAmIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5EA553170BEC6D00579FED /* RCWhereAmIViewController.xib */; };
 		DC5EA557170BEC6E00579FED /* RCWhereAmIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5EA554170BEC6D00579FED /* RCWhereAmIViewController.m */; };
@@ -920,6 +920,10 @@
 		D54CAE3EBEE092C44154EB7E /* facebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = facebookHelper.m; sourceTree = "<group>"; };
 		D54CAEDE0AD09799A7A7F2A1 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
 		D54CAF5A7E00654535D4CC31 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		DC11021F1760E76800F3CCFF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		DC1102201760E76800F3CCFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		DC1102211760E76800F3CCFF /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		DC1102221760E76800F3CCFF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		DC564A441749DB1A0023A09F /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		DC564A451749DB1A0023A09F /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		DC564A461749DB1A0023A09F /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
@@ -967,10 +971,6 @@
 		DC5AE4421736600F00773A13 /* yajl_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yajl_parser.c; sourceTree = "<group>"; };
 		DC5AE4431736600F00773A13 /* yajl_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = yajl_parser.h; sourceTree = "<group>"; };
 		DC5AE4441736600F00773A13 /* yajl_version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yajl_version.c; sourceTree = "<group>"; };
-		DC5AE48E173CBB9E00773A13 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		DC5AE48F173CBB9E00773A13 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		DC5AE490173CBB9E00773A13 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		DC5AE491173CBB9E00773A13 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		DC5EA53A17080FB200579FED /* surprase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = surprase.png; sourceTree = "<group>"; };
 		DC5EA553170BEC6D00579FED /* RCWhereAmIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCWhereAmIViewController.xib; sourceTree = "<group>"; };
 		DC5EA554170BEC6D00579FED /* RCWhereAmIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCWhereAmIViewController.m; sourceTree = "<group>"; };
@@ -1076,9 +1076,9 @@
 				A04035BB16B57BC9009F6CFB /* libOAuth.a in Frameworks */,
 				D54CAE6A802074E03BB6445F /* AddressBookUI.framework in Frameworks */,
 				D54CA2236183B6639106A96B /* AddressBook.framework in Frameworks */,
-				DC5AE492173CBB9E00773A13 /* libTestFlight.a in Frameworks */,
 				DC564A4A1749DB1A0023A09F /* libGoogleAnalytics.a in Frameworks */,
 				DC73EBE9174F638700DBAB1C /* FacebookSDK.framework in Frameworks */,
+				DC1102231760E76800F3CCFF /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2017,10 +2017,10 @@
 		DC5AE48D173CBB9300773A13 /* testflight */ = {
 			isa = PBXGroup;
 			children = (
-				DC5AE48E173CBB9E00773A13 /* libTestFlight.a */,
-				DC5AE48F173CBB9E00773A13 /* README.md */,
-				DC5AE490173CBB9E00773A13 /* release_notes.md */,
-				DC5AE491173CBB9E00773A13 /* TestFlight.h */,
+				DC11021F1760E76800F3CCFF /* libTestFlight.a */,
+				DC1102201760E76800F3CCFF /* README.md */,
+				DC1102211760E76800F3CCFF /* release_notes.md */,
+				DC1102221760E76800F3CCFF /* TestFlight.h */,
 			);
 			name = testflight;
 			sourceTree = "<group>";
@@ -2366,8 +2366,6 @@
 				DCBDE37C1706A77E00E5C80A /* img-twitterwithsign.png in Resources */,
 				DC5EA53B17080FB200579FED /* surprase.png in Resources */,
 				DC5EA556170BEC6E00579FED /* RCWhereAmIViewController.xib in Resources */,
-				DC5AE493173CBB9E00773A13 /* README.md in Resources */,
-				DC5AE494173CBB9E00773A13 /* release_notes.md in Resources */,
 				DC8934EE17435351008922EC /* f_login.png in Resources */,
 				DC8934F017435351008922EC /* login_with_sign.png in Resources */,
 				DC8934F117435351008922EC /* t_login.png in Resources */,
@@ -2421,6 +2419,8 @@
 				DC73EBED174F63F300DBAB1C /* FacebookSDKResources.bundle in Resources */,
 				DC87DADA1758CA6900C9CBD9 /* back_for_logout.png in Resources */,
 				DC87DADC1758CDCB00C9CBD9 /* logout.png in Resources */,
+				DC1102241760E76800F3CCFF /* README.md in Resources */,
+				DC1102251760E76800F3CCFF /* release_notes.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2645,7 +2645,7 @@
 				GCC_PREFIX_HEADER = "Reccit/Reccit-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "Reccit/Reccit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Reccit/Externals/Twitter+OAuth/Libraries & Headers\"",
@@ -2654,8 +2654,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
+				PROVISIONING_PROFILE = "66951FE6-1D7C-4DAC-9630-83FEF9853E9E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "66951FE6-1D7C-4DAC-9630-83FEF9853E9E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2673,7 +2673,7 @@
 				GCC_PREFIX_HEADER = "Reccit/Reccit-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "Reccit/Reccit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Reccit/Externals/Twitter+OAuth/Libraries & Headers\"",
@@ -2682,8 +2682,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC8A09DC-CF3D-4539-A0DB-9FEC3CA00091";
+				PROVISIONING_PROFILE = "66951FE6-1D7C-4DAC-9630-83FEF9853E9E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "66951FE6-1D7C-4DAC-9630-83FEF9853E9E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

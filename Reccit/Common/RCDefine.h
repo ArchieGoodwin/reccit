@@ -33,15 +33,15 @@
 #define kRCFoursquareUserId             @"FoursquareUserId"
 
 
-#define kSendUserChekins @"http://bizannouncements.com/bhavesh/getUser.php?auth=fbook&user=%@&type=usercheckin&token=%@"
-#define kSendFriendsChekins @"http://bizannouncements.com/bhavesh/getUser.php?auth=fbook&user=%@&type=friendcheckin&token=%@"
+#define kSendUserChekins @"http://bizannouncements.com/bhavesh/getUser.php?auth=fbook&user=%@&type=usercheckin&token=%@&device=ios"
+#define kSendFriendsChekins @"http://bizannouncements.com/bhavesh/getUser.php?auth=fbook&user=%@&type=friendcheckin&token=%@&device=ios"
 
 
 // API
 
 
 
-#define kRCAPIFacebookAuthenticate      @"http://bizannouncements.com/Vega/services/app/register.php?type=facebook&from=web&access_token=%@"
+#define kRCAPIFacebookAuthenticate      @"http://bizannouncements.com/Vega/services/app/register.php?type=facebook&from=web&access_token=%@&facebookid=%@"
 //#define kRCAPIFacebookAuthenticate @"http://bizannouncements.com/Vega/services/facebook/authenticate.php?access_token=%@"
 
 #define kRCAPITwitterAuthenticate @"http://bizannouncements.com/Vega/services/twitter/authentication.php?oauth_token=%@&oauth_secret=%@"
