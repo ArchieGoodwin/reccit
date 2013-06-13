@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="j8D-tm-rXL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="j8D-tm-rXL">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1296" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -9,7 +10,7 @@
             <objects>
                 <viewController id="2" customClass="RCLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="EpE-we-d9K">
@@ -65,6 +66,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="GDU-Jq-U8b"/>
                     <connections>
                         <segue destination="aV5-mI-Iia" kind="push" identifier="PushTwitter" id="XYc-gD-GVw"/>
@@ -82,7 +84,7 @@
             <objects>
                 <viewController id="bVh-1i-8kE" customClass="RCLoginFoursquareViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7h4-6j-bTD">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="48F-DR-jby">
@@ -130,6 +132,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="pjY-Vy-jUQ"/>
                     <connections>
                         <segue destination="yn1-9I-OtI" kind="push" identifier="PushRate" id="ceO-xc-Gio"/>
@@ -143,6 +146,7 @@
         <scene sceneID="o5G-Fc-Cfn">
             <objects>
                 <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="j8D-tm-rXL" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="DHe-xv-vOb"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2h0-l6-X53">
@@ -161,7 +165,7 @@
             <objects>
                 <viewController id="aV5-mI-Iia" customClass="RCLoginTwitterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Mr-Sg-inb">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="4jz-Fp-Wzj">
@@ -209,6 +213,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="YEP-3a-5PW"/>
                     <connections>
                         <segue destination="yn1-9I-OtI" kind="push" identifier="PushRate" id="ROz-7B-tUO"/>
@@ -224,7 +229,7 @@
             <objects>
                 <viewController id="yn1-9I-OtI" customClass="RCRateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xzX-At-0fa">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="Jrq-di-xWM">
@@ -325,6 +330,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Kf4-Bx-FjO"/>
                     <connections>
                         <outlet property="tbLocation" destination="Hwc-Ae-djH" id="oz9-H1-1l8"/>
@@ -339,6 +345,7 @@
         <scene sceneID="cu3-FC-aKJ">
             <objects>
                 <navigationController definesPresentationContext="YES" id="2zf-Aj-WYl" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="" image="ic_checkin.png" id="MMv-bv-Jfe"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Fl-oz-Poj">
                         <autoresizingMask key="autoresizingMask"/>
@@ -356,7 +363,7 @@
             <objects>
                 <viewController id="WTP-dm-KIh" customClass="RCCheckInViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IAw-zA-1Jy">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="WVQ-gQ-9J9">
@@ -406,6 +413,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Check In" image="ic_checkin.png" id="d4Y-9j-qO5"/>
                     <navigationItem key="navigationItem" id="cn5-GS-Tdb"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -424,7 +432,8 @@
         <scene sceneID="Tno-HV-IOT">
             <objects>
                 <navigationController definesPresentationContext="YES" id="7mi-KE-9BD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Ugd-yF-wbu"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="gear.png" id="Ugd-yF-wbu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fji-0H-7d0">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -441,11 +450,11 @@
             <objects>
                 <viewController id="qb7-AQ-GNv" customClass="RCAccountViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4jg-Yf-1Up">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-about.png" id="AA9-eU-TVB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="AA9-eU-TVB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="yWg-Nf-7W1">
@@ -522,7 +531,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="ic_me.png" id="bVs-or-lgA"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <tabBarItem key="tabBarItem" title="" image="gear.png" id="bVs-or-lgA"/>
                     <navigationItem key="navigationItem" id="UUb-3b-Rbq"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
@@ -540,7 +550,7 @@
             <objects>
                 <viewController id="Ovz-vb-rJW" customClass="RCLinkedAccountsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YtF-DB-nfz">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="Rwn-5i-uII">
@@ -644,6 +654,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="sNp-vt-JFJ"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
@@ -665,7 +676,7 @@
             <objects>
                 <viewController id="Rfr-VA-scv" customClass="RCTermsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vb2-f7-fqx">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-about.png" id="zfV-qh-e2q">
@@ -713,6 +724,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Fp2-Qh-jWI"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
@@ -730,7 +742,7 @@
             <objects>
                 <viewController id="aHj-Aj-sIh" customClass="RCShareViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rmD-Xr-kkh">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="2HA-xL-E4B">
@@ -885,6 +897,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="" image="ic_share.png" id="Z2y-gg-pr0"/>
                     <navigationItem key="navigationItem" id="9uE-9f-5K2"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -929,6 +942,7 @@
         <scene sceneID="chP-rm-wjU">
             <objects>
                 <navigationController definesPresentationContext="YES" id="hbX-vm-1CZ" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Item" id="DA8-ve-rLO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gF6-ac-9DN">
                         <autoresizingMask key="autoresizingMask"/>
@@ -946,7 +960,7 @@
             <objects>
                 <viewController id="Ta1-8O-wm7" customClass="RCMyReviewViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bO1-ml-nyg">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="Jya-cy-W0f">
@@ -1080,6 +1094,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Ji7-6c-PQn"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
@@ -1116,7 +1131,7 @@
             <objects>
                 <viewController id="pym-pZ-4SM" customClass="RCListFriendViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HV8-Sc-jTK">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wuh-ge-FDi">
@@ -1245,6 +1260,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="xLL-6v-H0a"/>
                     <connections>
                         <outlet property="tbFriends" destination="yG8-6p-G4T" id="fJq-ZG-rjT"/>
@@ -1260,7 +1276,7 @@
             <objects>
                 <viewController id="U8i-Vf-cQO" customClass="RCAddPlaceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xXd-Lf-iw0">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-checkin-friend.png" id="3AW-b9-z45">
@@ -1283,14 +1299,14 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="pNC-Wz-IEl">
-                                <rect key="frame" x="76" y="417" width="79" height="27"/>
+                                <rect key="frame" x="90" y="413" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="swFacebookChange:" destination="U8i-Vf-cQO" eventType="valueChanged" id="IWq-sD-VJI"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qDo-t2-UfM">
-                                <rect key="frame" x="208" y="417" width="79" height="27"/>
+                                <rect key="frame" x="222" y="413" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="swTwitterChange:" destination="U8i-Vf-cQO" eventType="valueChanged" id="jxW-G1-Bck"/>
@@ -1385,7 +1401,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_notfound.jpg" id="uL1-nN-eYZ">
-                                <rect key="frame" x="7" y="181" width="100" height="100"/>
+                                <rect key="frame" x="7" y="181" width="116" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="7pr-0B-orX">
@@ -1418,6 +1434,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Vj9-PZ-UUZ"/>
                     <connections>
                         <outlet property="imgAvatar" destination="ERr-5z-Lj1" id="Zvr-Dh-uXJ"/>
@@ -1441,6 +1458,7 @@
         <scene sceneID="8k2-4m-pp5">
             <objects>
                 <navigationController definesPresentationContext="YES" id="eF2-nl-Sqc" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="" image="ic_house.png" id="XTq-73-jvQ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G1x-jR-fwl">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1458,7 +1476,7 @@
             <objects>
                 <viewController id="xOR-RT-o6C" customClass="RCHomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a9x-rY-gKE">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="EvE-Hk-kbl">
@@ -1536,6 +1554,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Home" image="ic_house.png" id="iGa-ex-ka5"/>
                     <navigationItem key="navigationItem" id="DDJ-EU-ivh"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -1554,7 +1573,7 @@
             <objects>
                 <viewController id="bbC-ke-gQQ" customClass="RCSearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FQ5-ni-8KI">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="hLE-9y-3BQ">
@@ -1715,6 +1734,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="fsQ-Gn-eRH"/>
                     <connections>
                         <outlet property="bgGenre" destination="gIU-lN-Ld6" id="kxI-2i-soJ"/>
@@ -1764,7 +1784,7 @@
             <objects>
                 <viewController id="oXc-7U-239" customClass="RCSurpriseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7OR-ig-PBH">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="OLO-ds-ntE">
@@ -1892,6 +1912,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="b1X-Ke-nTx"/>
                     <connections>
                         <outlet property="imgAvatar" destination="OLO-ds-ntE" id="7uI-zb-e0d"/>
@@ -1909,7 +1930,7 @@
             <objects>
                 <viewController id="Kqy-Mf-YWE" customClass="RCSearchResultViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aAx-12-7aC">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-search-box.png" id="jV4-El-fj6">
@@ -2121,6 +2142,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="b1w-AV-1Ah"/>
                     <connections>
                         <outlet property="btn1" destination="6A0-i1-MJf" id="URZ-FS-4ko"/>
@@ -2139,12 +2161,43 @@
             </objects>
             <point key="canvasLocation" x="4212" y="-990"/>
         </scene>
+        <!--Users Around Place View Controller-->
+        <scene sceneID="hz9-jP-5CU">
+            <objects>
+                <tableViewController id="WBK-Xp-aMU" customClass="RCUsersAroundPlaceViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8KE-xf-ZSV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="dDv-u8-h1U">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WBK-Xp-aMU" id="f8T-Bp-3PE"/>
+                            <outlet property="delegate" destination="WBK-Xp-aMU" id="F6h-Su-wog"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="Fde-WP-9PA"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x3d-nl-FWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5031" y="-2037"/>
+        </scene>
         <!--Direct View Controller-->
         <scene sceneID="aPa-aF-060">
             <objects>
                 <viewController id="ohU-LT-bDR" customClass="RCDirectViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EGH-0p-sNu">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="8si-fZ-kVH">
@@ -2288,6 +2341,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="b0U-GQ-iLw"/>
                     <connections>
                         <outlet property="imgAvatar" destination="8si-fZ-kVH" id="Ufa-R1-IZT"/>
@@ -2306,7 +2360,7 @@
             <objects>
                 <viewController id="N9f-D5-Jdw" customClass="RCWebViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1kf-R4-lfO">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="RpG-Vc-ENj">
@@ -2341,6 +2395,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="ngp-SS-bSz"/>
                     <connections>
                         <outlet property="imgAvatar" destination="RpG-Vc-ENj" id="ufU-G3-erj"/>
@@ -2356,7 +2411,7 @@
             <objects>
                 <viewController id="lHT-qM-SNn" customClass="RCLocationDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vqy-w2-lSD">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="O7S-8g-uC6">
@@ -2383,7 +2438,7 @@
                                     <action selector="btnBackTouched:" destination="lHT-qM-SNn" eventType="touchUpInside" id="DCe-Bj-vMb"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-detail@2x.png" id="6dj-j7-pTf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-detail.png" id="6dj-j7-pTf">
                                 <rect key="frame" x="0.0" y="398" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
@@ -2428,7 +2483,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cjs-t9-UWv">
-                                <rect key="frame" x="215" y="150" width="99" height="39"/>
+                                <rect key="frame" x="215" y="147" width="99" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="review_button_place_details.png">
@@ -2443,7 +2498,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="c0w-Fv-kCt">
-                                <rect key="frame" x="215" y="186" width="99" height="39"/>
+                                <rect key="frame" x="215" y="183" width="99" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="reserve_button_place_details.png">
@@ -2458,7 +2513,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yUf-zS-VNl">
-                                <rect key="frame" x="215" y="223" width="99" height="39"/>
+                                <rect key="frame" x="215" y="220" width="99" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="directions_button_place_details.png">
@@ -2514,17 +2569,34 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Currently none of your friends have reviewed this place. Be the first one to review it." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qBz-Sq-oc7">
-                                <rect key="frame" x="7" y="276" width="307" height="52"/>
+                                <rect key="frame" x="7" y="278" width="307" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V0L-8W-gmB">
+                                <rect key="frame" x="215" y="260" width="98" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="vibe">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="WBK-Xp-aMU" kind="push" id="MVD-eL-HlB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="WEu-0t-bJT"/>
                     <connections>
+                        <outlet property="btnVibe" destination="V0L-8W-gmB" id="4hz-zF-D4h"/>
                         <outlet property="imgAvatar" destination="OMH-v5-yuN" id="02d-RU-MPQ"/>
                         <outlet property="lbAddress" destination="28F-Wa-gRi" id="UlY-qo-R2F"/>
                         <outlet property="lbCity" destination="E9U-R9-Vvp" id="ts3-4V-KAO"/>
@@ -2549,7 +2621,7 @@
             <objects>
                 <viewController id="u6J-cv-L5M" customClass="RCLoginFacebookViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ElW-oy-joD">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="IphoneRetinaBknd.jpg" id="yU8-G8-UxI">
@@ -2597,6 +2669,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="6j7-yx-hBu"/>
                     <connections>
                         <segue destination="yn1-9I-OtI" kind="push" identifier="PushRate" id="eIz-Ns-dGO"/>
@@ -2611,6 +2684,7 @@
         <scene sceneID="41z-nS-J5s">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="krw-1f-dp5" customClass="RCMainTabbarController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="yXs-Kl-3Hi"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -2633,19 +2707,19 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyj-Ky-xDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="MdJ-wH-kRg">
-                    <rect key="frame" x="0.0" y="410" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="404" width="320" height="56"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="29d-Wn-po5">
-                            <rect key="frame" x="0.0" y="2" width="78" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" backgroundImage="tabbar-home.png">
+                            <state key="normal" backgroundImage="home_inactive.png">
                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" backgroundImage="tabbar-home-active.png"/>
-                            <state key="highlighted" backgroundImage="tabbar-home.png">
+                            <state key="selected" backgroundImage="home.png"/>
+                            <state key="highlighted" backgroundImage="home.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -2653,15 +2727,15 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="eIE-Tf-dyi">
-                            <rect key="frame" x="80" y="2" width="80" height="50"/>
+                            <rect key="frame" x="80" y="0.0" width="80" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" backgroundImage="tabbar-check-in.png">
+                            <state key="normal" backgroundImage="check_inactive.png">
                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" backgroundImage="tabbar-check-in-active.png"/>
-                            <state key="highlighted" backgroundImage="tabbar-check-in.png">
+                            <state key="selected" backgroundImage="check.png"/>
+                            <state key="highlighted" backgroundImage="check.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -2669,15 +2743,15 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="eAO-M9-QWd">
-                            <rect key="frame" x="162" y="2" width="78" height="50"/>
+                            <rect key="frame" x="160" y="0.0" width="80" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" backgroundImage="tabbar-share.png">
+                            <state key="normal" backgroundImage="share_inactive.png">
                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" backgroundImage="tabbar-share-active.png"/>
-                            <state key="highlighted" backgroundImage="tabbar-share.png">
+                            <state key="selected" backgroundImage="share.png"/>
+                            <state key="highlighted" backgroundImage="share.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -2685,15 +2759,17 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="vJF-oE-ZVH">
-                            <rect key="frame" x="242" y="2" width="78" height="50"/>
+                            <rect key="frame" x="240" y="0.0" width="80" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" backgroundImage="tabbar-user.png">
+                            <state key="normal" backgroundImage="gearinactive.png">
                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" backgroundImage="tabbar-user-active.png"/>
-                            <state key="highlighted" backgroundImage="tabbar-user.png">
+                            <state key="selected" backgroundImage="gear.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="gear.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -2701,7 +2777,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="2093" y="249"/>
@@ -2719,7 +2795,7 @@
         <image name="bg-checkbox.png" width="22" height="21"/>
         <image name="bg-checkin-friend.png" width="320" height="60"/>
         <image name="bg-combobox.png" width="135" height="32"/>
-        <image name="bg-detail@2x.png" width="640" height="307"/>
+        <image name="bg-detail.png" width="320" height="153.5"/>
         <image name="bg-direction.png" width="320" height="361"/>
         <image name="bg-hours.png" width="98" height="25"/>
         <image name="bg-my-review.png" width="303" height="314"/>
@@ -2745,6 +2821,8 @@
         <image name="btn-transit.png" width="115" height="32"/>
         <image name="btn-walk.png" width="115" height="32"/>
         <image name="btn_back.png" width="21" height="30"/>
+        <image name="check.png" width="82" height="56"/>
+        <image name="check_inactive.png" width="82" height="56"/>
         <image name="checkin_new_button.png" width="297" height="78"/>
         <image name="collapse_button.png" width="80" height="65"/>
         <image name="directions_button_place_details.png" width="198" height="78"/>
@@ -2754,9 +2832,13 @@
         <image name="expand_button.png" width="80" height="65"/>
         <image name="f_login.png" width="262" height="94"/>
         <image name="facebook_sign_login.png" width="378" height="294"/>
+        <image name="gear.png" width="82" height="56"/>
+        <image name="gearinactive.png" width="82" height="56"/>
         <image name="go_button.png" width="140" height="84"/>
         <image name="go_green_button.png" width="139" height="78"/>
         <image name="happy_hour_button.png" width="263" height="174"/>
+        <image name="home.png" width="69" height="56"/>
+        <image name="home_inactive.png" width="69" height="56"/>
         <image name="ic_checkin.png" width="30" height="30"/>
         <image name="ic_facebook.png" width="128" height="128"/>
         <image name="ic_foursquare.png" width="72" height="72"/>
@@ -2777,19 +2859,13 @@
         <image name="review_thumbs_down_.png" width="73" height="73"/>
         <image name="review_thumbs_up.png" width="73" height="73"/>
         <image name="reviews_sign.png" width="170" height="50"/>
+        <image name="share.png" width="83" height="56"/>
+        <image name="share_inactive.png" width="83" height="56"/>
         <image name="skip_button.png" width="126" height="94"/>
         <image name="skip_button_review.png" width="172" height="68"/>
         <image name="stay_button.png" width="263" height="180"/>
         <image name="surprase.png" width="245" height="61"/>
         <image name="t_login.png" width="262" height="94"/>
-        <image name="tabbar-check-in-active.png" width="83" height="56"/>
-        <image name="tabbar-check-in.png" width="83" height="56"/>
-        <image name="tabbar-home-active.png" width="69" height="56"/>
-        <image name="tabbar-home.png" width="69" height="56"/>
-        <image name="tabbar-share-active.png" width="83" height="56"/>
-        <image name="tabbar-share.png" width="83" height="56"/>
-        <image name="tabbar-user-active.png" width="82" height="56"/>
-        <image name="tabbar-user.png" width="82" height="56"/>
         <image name="text-dirrect.png" width="104" height="12"/>
         <image name="twitter_sign_login.png" width="416" height="245"/>
         <image name="txt-connected.png" width="87" height="13"/>
@@ -2799,261 +2875,6 @@
         <image name="what_areyoudoing_button.png" width="297" height="78"/>
         <image name="write_review_button.png" width="297" height="78"/>
     </resources>
-    <classes>
-        <class className="DYRateView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DYRateView.h"/>
-        </class>
-        <class className="GAITrackedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GAITrackedViewController.h"/>
-        </class>
-        <class className="MapView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapView.h"/>
-        </class>
-        <class className="RCAccountViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCAccountViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnAboutTouched:"/>
-                <relationship kind="action" name="btnTermsTouched:"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RCAddPlaceViewController" superclassName="RCBaseViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCAddPlaceViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnUnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgLocation" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbCity" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbPhone" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-                <relationship kind="outlet" name="swFacebook" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="swTwitter" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="viewInfo" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RCBaseViewController" superclassName="GAITrackedViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCBaseViewController.h"/>
-        </class>
-        <class className="RCCheckInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCCheckInViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCDirectViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCDirectViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbEnd" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbStart" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MapView"/>
-                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCFriendCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCFriendCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="checkBox" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAva" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgSource" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RCHomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCHomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tfSearch" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RCLinkedAccountsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLinkedAccountsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnFacebookUpdate" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnFoursquareUpdate" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTwitterUpdate" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgFacebookConnect" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgFoursquareConnect" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgTwitterConnect" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="RCListFriendViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCListFriendViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tbFriends" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tfSearch" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RCLocationDetailViewController" superclassName="RCBaseViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLocationDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnCall" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbCity" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbNoReview" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbPrice" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbReviews" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-                <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCLoginFacebookViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFacebookViewController.h"/>
-        </class>
-        <class className="RCLoginFoursquareViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFoursquareViewController.h"/>
-        </class>
-        <class className="RCLoginTwitterViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginTwitterViewController.h"/>
-        </class>
-        <class className="RCLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginViewController.h"/>
-        </class>
-        <class className="RCMainTabbarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCMainTabbarController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnTab1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTab2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTab3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnTab4" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="viewButton" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RCMyReviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCMyReviewViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnEdit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnNotReccit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnReccit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnShare" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="txtComment" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="RCRateCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCRateCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnReview" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnUnLike" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
-            </relationships>
-        </class>
-        <class className="RCRateViewController" superclassName="RCBaseViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCRateViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCSearchResultViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchResultViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btn1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btn2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btn3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSearchInside" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="c1" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="c2" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="c3" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgSurprise" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblNumberOfFriends" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblNumberOfReccits" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tbResult" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tfLocation" candidateClass="NSString"/>
-            </relationships>
-        </class>
-        <class className="RCSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bgGenre" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="bgSearchGenre" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="btnGo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnIncrease" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnReduce" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSearch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSuprise" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="progressDistance" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="sliderDistance" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="tfGenre" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfLocation" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="viewContent" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RCShareCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="checkBox" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RCShareViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="handleTap:" candidateClass="UITapGestureRecognizer"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="picker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tfBackGenre" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tfCity" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfGenre" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfType" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="toolbarDone" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="RCSurpriseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSurpriseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgHappyHour" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tbResult" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RCTermsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCTermsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnBackTouched:"/>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbTitle" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RCWebViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCWebViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

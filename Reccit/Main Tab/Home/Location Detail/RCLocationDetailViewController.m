@@ -48,11 +48,21 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    _btnVibe.hidden = YES;
     self.lbName.text = self.location.name;
-    self.lbAddress.text = self.location.street;
+    if(self.location.city != [NSNull null] && self.location.city != nil)
+    {
+        self.lbAddress.text = [NSString stringWithFormat:@"%@ %@", self.location.city, self.location.street];
+
+    }
+    else
+    {
+        self.lbAddress.text = self.location.street;
+
+    }
     
     self.rateView.rate = self.location.rating;
-    self.lbCity.text = self.location.city;
+    self.lbCity.text = self.location.genre;
     
     /*if (self.location.phoneNumber == nil)
     {
@@ -321,4 +331,8 @@
 }
 
 
+- (void)viewDidUnload {
+    [self setBtnVibe:nil];
+    [super viewDidUnload];
+}
 @end

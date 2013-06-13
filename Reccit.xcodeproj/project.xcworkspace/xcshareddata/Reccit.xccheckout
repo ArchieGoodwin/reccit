@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AF6ADBAC-2EB1-4044-B4A4-E7DFDA21CD3F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Reccit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E5559924-3831-4C11-9A0B-2B308C3AAC6A</key>
+		<string>ssh://github.com/ArchieGoodwin/reccit.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Reccit.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E5559924-3831-4C11-9A0B-2B308C3AAC6A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/ArchieGoodwin/reccit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E5559924-3831-4C11-9A0B-2B308C3AAC6A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E5559924-3831-4C11-9A0B-2B308C3AAC6A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Reccit</string>
+		</dict>
+	</array>
+</dict>
+</plist>

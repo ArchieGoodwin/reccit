@@ -131,7 +131,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        //NSLog(@"%@", responseObject);
+        NSLog(@"%@", rO);
         self.listLocationReccit = [[NSMutableArray alloc] init];
         
         

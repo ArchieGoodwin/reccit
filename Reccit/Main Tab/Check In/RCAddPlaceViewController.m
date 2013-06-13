@@ -94,13 +94,13 @@
             
             if ([self.location.category isEqualToString:@"hotel"])
             {
-                [self.imgLocation setImage:[UIImage imageNamed:@"img-stay.png"]];
+                [self.imgLocation setImage:[UIImage imageNamed:@"sleep_type.png"]];
             } else if ([self.location.category isEqualToString:@"bar"])
             {
-                [self.imgLocation setImage:[UIImage imageNamed:@"img-drink.png"]];
+                [self.imgLocation setImage:[UIImage imageNamed:@"drink_type.png"]];
             } else if ([self.location.category isEqualToString:@"restaurant"])
             {
-                [self.imgLocation setImage:[UIImage imageNamed:@"img-eat.png"]];
+                [self.imgLocation setImage:[UIImage imageNamed:@"eat_type.png"]];
             }
             
             self.lbName.text = self.location.name;
