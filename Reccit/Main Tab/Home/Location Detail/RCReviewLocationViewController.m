@@ -277,6 +277,10 @@
                     [self makeStringWithKeyAndValue:@"genre" value:self.location.genre],
                     [self makeStringWithKeyAndValue:@"lat" value:[NSString stringWithFormat:@"%f",self.location.latitude]],
                     [self makeStringWithKeyAndValue:@"long" value:[NSString stringWithFormat:@"%f",self.location.longitude]],
+                    [self makeStringWithKeyAndValue:@"genre" value:self.location.genre],
+                    [self makeStringWithKeyAndValue:@"type" value:self.location.category],
+                    [self makeStringWithKeyAndValue:@"street" value:self.location.street],
+                    [self makeStringWithKeyAndValue:@"phone" value:self.location.phoneNumber],
                     nil];
     
     

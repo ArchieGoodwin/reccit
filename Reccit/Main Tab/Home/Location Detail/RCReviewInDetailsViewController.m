@@ -83,7 +83,9 @@
     {
         if(self.location.ID > 0)
         {
-            NSString *urlString = [NSString stringWithFormat:@"%@?reviews=%@", kRCAPIUpdateComment, [self makeString]];
+            //NSString *urlString = [NSString stringWithFormat:@"%@?reviews=%@", kRCAPIUpdateComment, [self makeString]];
+            NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, [self makeString2]];
+
             NSLog(@"REQUEST URL: %@", urlString);
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -285,6 +287,11 @@
                     [self makeStringWithKeyAndValue:@"country" value:self.location.country],
                     [self makeStringWithKeyAndValue:@"lat" value:[NSString stringWithFormat:@"%f",self.location.latitude]],
                     [self makeStringWithKeyAndValue:@"long" value:[NSString stringWithFormat:@"%f",self.location.longitude]],
+                    [self makeStringWithKeyAndValue:@"genre" value:self.location.genre],
+                    [self makeStringWithKeyAndValue:@"type" value:self.location.category],
+                    [self makeStringWithKeyAndValue:@"street" value:self.location.street],
+                    [self makeStringWithKeyAndValue:@"phone" value:self.location.phoneNumber],
+
                     nil];
     
     
@@ -293,7 +300,7 @@
     
     
     
-    NSLog(@"%@", [clock stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+    //NSLog(@"%@", [clock stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     NSLog(@"%@", clock );
     
     return clock;

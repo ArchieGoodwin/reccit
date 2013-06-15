@@ -16,7 +16,7 @@
 #import "RCReviewInDetailsViewController.h"
 #import "RCDirectViewController.h"
 #import "AFNetworking.h"
-
+#import "VibeViewController.h"
 #define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d&user_id=%@"
 
 @interface RCLocationDetailViewController ()
@@ -46,9 +46,17 @@
     [self performSelector:@selector(callAPIGetListReview) withObject:nil afterDelay:0.2];
 }
 
+- (IBAction)btnVibeTap:(id)sender {
+    VibeViewController *controller = [[VibeViewController alloc] initWithNibName:@"VibeViewController" bundle:nil];
+    controller.location = self.location;
+    [self presentViewController:controller animated:YES completion:^{
+       
+    }];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
-    _btnVibe.hidden = YES;
+    _btnVibe.hidden = NO;
     self.lbName.text = self.location.name;
     if(self.location.city != [NSNull null] && self.location.city != nil)
     {

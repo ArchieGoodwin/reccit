@@ -131,7 +131,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"%@", rO);
+        //NSLog(@"callAPIGetListReccit %@", rO);
         self.listLocationReccit = [[NSMutableArray alloc] init];
         
         
@@ -190,7 +190,7 @@
         if (listLocation != [NSNull null]){
             for (NSDictionary *locationDic in listLocation)
             {
-                NSLog(@"%@", locationDic);
+                //NSLog(@"%@", locationDic);
                 RCLocation *l = [RCCommonUtils getLocationFromDictionary:locationDic];
                 if(l)
                 {

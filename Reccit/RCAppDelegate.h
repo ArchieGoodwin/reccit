@@ -20,6 +20,9 @@ extern NSString *const SCSessionStateChangedNotification;
     CLLocationCoordinate2D currentLocation;
     
 }
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong) UIStoryboard *initalStoryboard;
 @property (strong, nonatomic) UIWindow *window;
 
