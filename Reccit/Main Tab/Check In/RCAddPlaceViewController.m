@@ -22,7 +22,7 @@
 #import "OAToken.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import "MGTwitterEngine.h"
-
+#import "RCVibeHelper.h"
 
 #define kGSAPIAddNewPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php?user=%@&rating=%d&friends=%@&recommend=%@&comment=%@&auth=%@&name=%@&address=%@&city=%@&state=%@&zipcode=%@&country=%@&lat=%lf&long=%lf"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
@@ -688,6 +688,9 @@
             
             [self.navigationController popViewControllerAnimated:YES];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
+           
+            
         }];
         
         [request setFailedBlock:^{

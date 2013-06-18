@@ -15,6 +15,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "RCAddPlaceViewController.h"
 #import "RCRateViewController.h"
+#import "RCVibeHelper.h"
 #define kRCAPIUpdateComment @"http://bizannouncements.com/bhavesh/reviewsupdate.php"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
 @interface RCReviewInDetailsViewController ()
@@ -78,7 +79,17 @@
 
 - (IBAction)btnSubmitTouched:(id)sender
 {
-    
+    [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
+        if(result)
+        {
+            NSLog(@"Success!");
+            
+        }
+        else
+        {
+            NSLog(@"error in addUserToPlaceTalk %@", error.description);
+        }
+    }];
     if(self.shouldSendImmediately)
     {
         if(self.location.ID > 0)

@@ -418,8 +418,10 @@
 		DC601699176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC601698176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.m */; };
 		DC60169C176C913700C0B5E4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC60169A176C913700C0B5E4 /* Model.xcdatamodeld */; };
 		DC60169F176C92CF00C0B5E4 /* RCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DC60169E176C92CF00C0B5E4 /* RCMessage.m */; };
-		DC6016A2176C92D000C0B5E4 /* RCConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016A1176C92D000C0B5E4 /* RCConversation.m */; };
 		DC6016A5176C92D000C0B5E4 /* RCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016A4176C92D000C0B5E4 /* RCUser.m */; };
+		DC6016A9176D83D600C0B5E4 /* RCConversationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016A7176D83D500C0B5E4 /* RCConversationsViewController.m */; };
+		DC6016AA176D83D600C0B5E4 /* RCConversationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC6016A8176D83D600C0B5E4 /* RCConversationsViewController.xib */; };
+		DC6016AE176D846800C0B5E4 /* RCConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016AD176D846800C0B5E4 /* RCConversation.m */; };
 		DC73EBE9174F638700DBAB1C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC73EBE8174F638700DBAB1C /* FacebookSDK.framework */; };
 		DC73EBED174F63F300DBAB1C /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DC73EBEC174F63F300DBAB1C /* FacebookSDKResources.bundle */; };
 		DC73EBEF174F668D00DBAB1C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC73EBEE174F668D00DBAB1C /* Security.framework */; };
@@ -1082,10 +1084,14 @@
 		DC60169B176C913700C0B5E4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		DC60169D176C92CF00C0B5E4 /* RCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessage.h; sourceTree = "<group>"; };
 		DC60169E176C92CF00C0B5E4 /* RCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMessage.m; sourceTree = "<group>"; };
-		DC6016A0176C92D000C0B5E4 /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
-		DC6016A1176C92D000C0B5E4 /* RCConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConversation.m; sourceTree = "<group>"; };
 		DC6016A3176C92D000C0B5E4 /* RCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUser.h; sourceTree = "<group>"; };
 		DC6016A4176C92D000C0B5E4 /* RCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCUser.m; sourceTree = "<group>"; };
+		DC6016A6176D83D500C0B5E4 /* RCConversationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversationsViewController.h; sourceTree = "<group>"; };
+		DC6016A7176D83D500C0B5E4 /* RCConversationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConversationsViewController.m; sourceTree = "<group>"; };
+		DC6016A8176D83D600C0B5E4 /* RCConversationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCConversationsViewController.xib; sourceTree = "<group>"; };
+		DC6016AB176D844000C0B5E4 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		DC6016AC176D846800C0B5E4 /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
+		DC6016AD176D846800C0B5E4 /* RCConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConversation.m; sourceTree = "<group>"; };
 		DC73EBE8174F638700DBAB1C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		DC73EBEC174F63F300DBAB1C /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		DC73EBEE174F668D00DBAB1C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1578,10 +1584,10 @@
 				A095E36E16B326FF007108F6 /* Default@2x.png */,
 				A095E37016B326FF007108F6 /* Default-568h@2x.png */,
 				DC60169A176C913700C0B5E4 /* Model.xcdatamodeld */,
+				DC6016AC176D846800C0B5E4 /* RCConversation.h */,
+				DC6016AD176D846800C0B5E4 /* RCConversation.m */,
 				DC6016A3176C92D000C0B5E4 /* RCUser.h */,
 				DC6016A4176C92D000C0B5E4 /* RCUser.m */,
-				DC6016A0176C92D000C0B5E4 /* RCConversation.h */,
-				DC6016A1176C92D000C0B5E4 /* RCConversation.m */,
 				DC60169D176C92CF00C0B5E4 /* RCMessage.h */,
 				DC60169E176C92CF00C0B5E4 /* RCMessage.m */,
 			);
@@ -2175,6 +2181,9 @@
 		DC601660176C6CE600C0B5E4 /* Bubbles */ = {
 			isa = PBXGroup;
 			children = (
+				DC6016A6176D83D500C0B5E4 /* RCConversationsViewController.h */,
+				DC6016A7176D83D500C0B5E4 /* RCConversationsViewController.m */,
+				DC6016A8176D83D600C0B5E4 /* RCConversationsViewController.xib */,
 				DC601686176C6D6D00C0B5E4 /* VibeViewController.h */,
 				DC601687176C6D6D00C0B5E4 /* VibeViewController.m */,
 				DC601688176C6D6D00C0B5E4 /* VibeViewController.xib */,
@@ -2642,6 +2651,7 @@
 				DC601684176C6D0E00C0B5E4 /* typingSomeone.png in Resources */,
 				DC601685176C6D0E00C0B5E4 /* typingSomeone@2x.png in Resources */,
 				DC60168A176C6D6D00C0B5E4 /* VibeViewController.xib in Resources */,
+				DC6016AA176D83D600C0B5E4 /* RCConversationsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2789,8 +2799,9 @@
 				DC601699176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.m in Sources */,
 				DC60169C176C913700C0B5E4 /* Model.xcdatamodeld in Sources */,
 				DC60169F176C92CF00C0B5E4 /* RCMessage.m in Sources */,
-				DC6016A2176C92D000C0B5E4 /* RCConversation.m in Sources */,
 				DC6016A5176C92D000C0B5E4 /* RCUser.m in Sources */,
+				DC6016A9176D83D600C0B5E4 /* RCConversationsViewController.m in Sources */,
+				DC6016AE176D846800C0B5E4 /* RCConversation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2869,8 +2880,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2889,8 +2900,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C485176F-4F7F-4CBF-B376-C66A552F3D1D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C485176F-4F7F-4CBF-B376-C66A552F3D1D";
+				PROVISIONING_PROFILE = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2898,8 +2909,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergey Dikarev (A2KE4XLMNK)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2918,8 +2929,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C485176F-4F7F-4CBF-B376-C66A552F3D1D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C485176F-4F7F-4CBF-B376-C66A552F3D1D";
+				PROVISIONING_PROFILE = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2951,9 +2962,10 @@
 		DC60169A176C913700C0B5E4 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DC6016AB176D844000C0B5E4 /* Model 2.xcdatamodel */,
 				DC60169B176C913700C0B5E4 /* Model.xcdatamodel */,
 			);
-			currentVersion = DC60169B176C913700C0B5E4 /* Model.xcdatamodel */;
+			currentVersion = DC6016AB176D844000C0B5E4 /* Model 2.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

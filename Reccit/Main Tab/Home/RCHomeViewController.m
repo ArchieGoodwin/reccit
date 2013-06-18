@@ -16,7 +16,8 @@
 #import "RCCommonUtils.h"
 #import "RCDataHolder.h"
 #import "RCSurpriseViewController.h"
-
+#import "RCVibeHelper.h"
+#import "RCConversationsViewController.h"
 @interface RCHomeViewController ()
 
 @end
@@ -49,17 +50,61 @@
     [super viewWillAppear: animated];
     
     if ([RCDataHolder getCurrentCity] == nil) {
-        [self loadCurrentCity];
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self loadCurrentCity];
+
+        });
     }
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+    {
+        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(BOOL result, NSError *error) {
+            //check if there are new messages in conversations
+            //store conversations in coredata
+            if(result)
+            {
+                
+                
+                
+                
+                
+                dispatch_async(dispatch_get_main_queue(),^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New messages!" message:@"You have unread messages in Vibe. Show?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"YES", nil];
+                    [alert show];
+                    
+                });
+            }
+        }];
+    }
+    
     
     [self.navigationController setNavigationBarHidden:YES];
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        
+    }
+    else
+    {
+        RCConversationsViewController *contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
+     
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contr];
+        
+        [self presentViewController:nav animated:YES completion:^{
+           
+        }];
+    }
+}
+
 
 - (void)loadCurrentCity
 {
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
@@ -74,7 +119,7 @@
             
 
         }
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     }];
     

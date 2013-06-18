@@ -52,6 +52,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     _initalStoryboard = self.window.rootViewController.storyboard;
 
     
+
     return YES;
 }
 
@@ -355,7 +356,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"socialism" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -368,7 +369,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"socialism.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Model.sqlite"];
     
     NSError *error = nil;
     

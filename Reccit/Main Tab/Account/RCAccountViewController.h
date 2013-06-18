@@ -15,5 +15,6 @@
 
 - (IBAction)btnAboutTouched:(id)sender;
 - (IBAction)btnTermsTouched:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnVibe;
 
 @end

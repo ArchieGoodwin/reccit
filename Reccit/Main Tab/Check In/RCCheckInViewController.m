@@ -131,8 +131,22 @@
             for (NSDictionary *locationDic in [rO objectForKey:[category description]])
             {
                 //NSLog(@"%@", locationDic);
-                RCLocation *location = [[RCLocation alloc] init];
                 
+                RCLocation *location = [RCCommonUtils getLocationFromDictionary:locationDic];
+
+                
+                
+                
+                
+                /*RCLocation *location = [[RCLocation alloc] init];
+                if ([locationDic objectForKey:@"place_id"] != nil && [locationDic objectForKey:@"place_id"] != [NSNull null]) {
+                    location.ID = [[locationDic objectForKey:@"place_id"] integerValue];
+                    
+                }
+                else
+                {
+                    location.ID = 0;
+                }
                 location.name = [locationDic objectForKey:@"name"];
                 location.city = [locationDic objectForKey:@"city"];
                 location.state = [locationDic objectForKey:@"state"];
@@ -156,7 +170,7 @@
                     location.rating = [[locationDic objectForKey:@"rating"] doubleValue];
                 } else {
                     location.rating = 0;
-                }
+                }*/
                 
                 [self.listLocation addObject:location];
                 

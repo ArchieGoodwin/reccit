@@ -9,7 +9,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "RCMessage.h"
 typedef enum _NSBubbleType
 {
     BubbleTypeMine = 0,
@@ -24,6 +24,7 @@ typedef enum _NSBubbleType
 @property (readonly, nonatomic) UIEdgeInsets insets;
 @property (nonatomic, strong) UIImage *avatar;
 @property (nonatomic, strong) NSString *avatarUrl;
+@property (nonatomic, strong) RCMessage *message;
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
 - (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;

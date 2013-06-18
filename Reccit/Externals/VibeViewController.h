@@ -11,6 +11,8 @@
 #import <UIKit/UIKit.h>
 #import "UIBubbleTableViewDataSource.h"
 #import "RCLocation.h"
+
+@class RCConversation;
 @interface VibeViewController : UIViewController <UIBubbleTableViewDataSource>
 {
     IBOutlet UIBubbleTableView *bubbleTable;
@@ -19,8 +21,11 @@
     
     NSMutableArray *bubbleData;
 }
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *placeTitle;
+@property (weak, nonatomic) IBOutlet UIToolbar *bar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnBack;
 
 @property (nonatomic, strong) RCLocation *location;
-
+@property (nonatomic, strong) RCConversation *convsersation;
 @property (nonatomic, weak) IBOutlet UINavigationItem *lblPlaceName;
 @end

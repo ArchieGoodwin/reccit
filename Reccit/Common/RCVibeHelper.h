@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RCDefine.h"
 @class RCConversation;
 @interface RCVibeHelper : NSObject
 
@@ -18,5 +19,10 @@
 
 
 -(NSMutableArray *)getBubblesFromConversation:(RCConversation *)conversation  myUserId:(NSInteger)myUserId;
-
+-(void)getConversationsFormServer:(NSInteger)userId completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(void)addUserToPlaceTalk:(NSInteger)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(void)getConversationFromServer:(NSInteger)placeId completionBlock:(RCCompleteBlockWithConvResult)completionBlock;
+-(void)sendMessageFromUserId:(NSInteger)userId messageText:(NSString *)messageText placeId:(NSInteger)placeId subj:(NSString *)subj completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(RCConversation *)getConverationById:(NSInteger *)convId;
+-(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithResult)completionBlock;
 @end

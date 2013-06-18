@@ -17,6 +17,8 @@
 #import "RCDirectViewController.h"
 #import "AFNetworking.h"
 #import "VibeViewController.h"
+#import "RCVibeHelper.h"
+#import "NSManagedObject+NWCoreDataHelper.h"
 #define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d&user_id=%@"
 
 @interface RCLocationDetailViewController ()
@@ -39,6 +41,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    
+    
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
     [self.view setBackgroundColor:kRCBackgroundView];
@@ -49,6 +53,14 @@
 - (IBAction)btnVibeTap:(id)sender {
     VibeViewController *controller = [[VibeViewController alloc] initWithNibName:@"VibeViewController" bundle:nil];
     controller.location = self.location;
+    RCConversation *conv = [[RCVibeHelper sharedInstance] getConverationById:self.location.ID];;
+    if(conv.placeName == nil)
+    {
+        conv.placeName = self.location.name;
+        [RCConversation saveDefaultContext];
+    }
+    controller.convsersation = conv;
+    
     [self presentViewController:controller animated:YES completion:^{
        
     }];
@@ -56,7 +68,18 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    _btnVibe.hidden = NO;
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+    {
+        if(self.location.ID > 0)
+        {
+            _btnVibe.hidden = NO;
+
+        }
+    }
+    else
+    {
+        _btnVibe.hidden = YES;
+    }
     self.lbName.text = self.location.name;
     if(self.location.city != [NSNull null] && self.location.city != nil)
     {

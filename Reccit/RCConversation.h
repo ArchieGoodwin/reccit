@@ -2,7 +2,7 @@
 //  RCConversation.h
 //  Reccit
 //
-//  Created by Nero Wolfe on 6/15/13.
+//  Created by Nero Wolfe on 6/16/13.
 //  Copyright (c) 2013 Incoding. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * conversationId;
 @property (nonatomic, retain) NSNumber * placeId;
+@property (nonatomic, retain) NSString * placeName;
 @property (nonatomic, retain) NSSet *messages;
 @end
 

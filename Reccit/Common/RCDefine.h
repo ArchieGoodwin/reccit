@@ -5,7 +5,7 @@
 //  Created by Lee Way on 1/26/13.
 //  Copyright (c) 2013 leeway. All rights reserved.
 //
-
+#import "RCConversation.h"
 #ifndef Reccit_RCDefine_h
 #define Reccit_RCDefine_h
 
@@ -62,6 +62,9 @@
 
 
 typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
+typedef void (^RCCompleteBlockWithConvResult)  (RCConversation *result, NSError *error);
+
+typedef void (^RCCompleteBlockWithArrayResult)  (NSMutableArray *result, NSError *error);
 
 
 #endif

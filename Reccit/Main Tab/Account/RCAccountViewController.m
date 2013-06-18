@@ -26,9 +26,56 @@
     return self;
 }
 
+- (void) sizeButtonToText:(UIButton *)button availableSize:(CGSize)availableSize padding:(UIEdgeInsets)padding {
+    CGRect boundsForText = button.frame;
+    
+    // Measures string
+    CGSize stringSize = [button.titleLabel.text sizeWithFont:button.titleLabel.font];
+    stringSize.width = MIN(stringSize.width + padding.left + padding.right, availableSize.width);
+    
+    // Center's location of button
+    boundsForText.origin.x += (boundsForText.size.width - stringSize.width) / 2;
+    boundsForText.size.width = stringSize.width;
+    [button setFrame:boundsForText];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] == nil)
+    {
+        [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"vibe"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //[_btnVibe sizeToFit];
+        //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+        
+
+    }
+    else
+    {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+        {
+            [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
+            //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+
+            
+        }
+        else
+        {
+            [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
+            
+            //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+
+            
+        }
+    }
+    
+    
+    
 	// Do any additional setup after loading the view.
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
@@ -73,6 +120,37 @@
     
   
 }
+- (IBAction)btnVibeSwitch:(id)sender {
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] == nil)
+    {
+        [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+    }
+    else
+    {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+        {
+            [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"vibe"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+        }
+        else
+        {
+            [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+            
+        }
+        
+    }
+    
+    
+}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -111,4 +189,8 @@
     [self performSegueWithIdentifier:@"PushAbout" sender:@"terms"];
 }
 
+- (void)viewDidUnload {
+    [self setBtnVibe:nil];
+    [super viewDidUnload];
+}
 @end

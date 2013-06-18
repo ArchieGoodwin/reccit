@@ -66,6 +66,13 @@
     }
 
     self.querySearch = query;
+    self.isSurprase = NO;
+    self.showTabs = NO;
+    _btn1.hidden = YES;
+    _btn2.hidden = YES;
+    _btn3.hidden = YES;
+    
+    
     [self performSelector:@selector(callAPIGetListReccit) withObject:nil afterDelay:0.1];
     [self.searchBar resignFirstResponder];
 
@@ -131,7 +138,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        //NSLog(@"callAPIGetListReccit %@", rO);
+        NSLog(@"callAPIGetListReccit %@", rO);
         self.listLocationReccit = [[NSMutableArray alloc] init];
         
         
@@ -183,7 +190,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        //NSLog(@"favs: %@", rO);
+        NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
         NSArray *listLocation = [rO objectForKey:@"Reccits"];

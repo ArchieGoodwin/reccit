@@ -200,22 +200,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "392123804.471322"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
-            landmarkName = "-Publish:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
             timestampString = "392187540.407131"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -302,6 +286,98 @@
             startingLineNumber = "564"
             endingLineNumber = "564"
             landmarkName = "-touchMe:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
+            timestampString = "393068628.714768"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
+            landmarkName = "-btnCheckInTouched:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__46-[RCAddPlaceViewController btnCheckInTouched:]_block_invoke448"
+                  moduleName = "Reccit"
+                  urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/Main%20Tab/Check%20In/RCAddPlaceViewController.m"
+                  timestampString = "393157262.127507"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "694"
+                  endingLineNumber = "694"
+                  offsetFromSymbolStart = "807">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_449"
+                  moduleName = "Reccit"
+                  urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/Main%20Tab/Check%20In/RCAddPlaceViewController.m"
+                  timestampString = "393157262.128003"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "694"
+                  endingLineNumber = "694"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_450"
+                  moduleName = "Reccit"
+                  urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/Main%20Tab/Check%20In/RCAddPlaceViewController.m"
+                  timestampString = "393157262.128364"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "694"
+                  endingLineNumber = "694"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reccit/Common/RCVibeHelper.m"
+            timestampString = "393157169.217994"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "-getPlaceFromServer:conv:completionBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reccit/Common/RCVibeHelper.m"
+            timestampString = "393157242.29086"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "-createConversationFromDict:placeId:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

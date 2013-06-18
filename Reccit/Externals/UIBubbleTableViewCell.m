@@ -87,7 +87,7 @@
 #else
         //self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
         
-        [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
+        [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.message.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
 
 #endif
         self.avatarImage.layer.cornerRadius = 9.0;

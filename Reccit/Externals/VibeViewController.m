@@ -16,10 +16,28 @@
     [super viewDidLoad];
     
     
-    self.lblPlaceName.title = self.location.name;
+    _placeTitle.title = self.location.name;
    
+
+    if(self.navigationController)
+    {
+        [self.navigationController setNavigationBarHidden:YES animated:NO]; // hides
+    }
+    else
+    {
+        //hide:  barbuttonItem.width = 0.01;
+        //show:  barbuttonItem.width = 0; //(0 defaults to text width)
+
+        NSMutableArray *items = [_bar.items mutableCopy];
+        [items removeObject:_btnBack];
+        _bar.items = items;
+        
+       // _btnBack.width = 0.01;
+    }
     
-    bubbleData = [[RCVibeHelper sharedInstance] getConversationFromArray:@[@{@"UserId":@577},@{@"UserId":@577}] myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    //bubbleData = [[RCVibeHelper sharedInstance] getConversationFromArray:@[@{@"UserId":@577},@{@"UserId":@577}] myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue]];
+
     bubbleTable.bubbleDataSource = self;
     
     // The line below sets the snap interval in seconds. This defines how the bubbles will be grouped in time.
@@ -40,13 +58,40 @@
     //    - NSBubbleTypingTypeNone - no "now typing" bubble
     
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-    
     [bubbleTable reloadData];
+
+    
+    [self refreshConversaton];
     
     // Keyboard events
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)refreshConversaton
+{
+    [[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
+        if(result != nil)
+        {
+            self.convsersation = result;
+            bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue]];
+            [bubbleTable reloadData];
+            
+            if (bubbleTable.contentSize.height > bubbleTable.frame.size.height)
+            {
+                CGPoint offset = CGPointMake(0, bubbleTable.contentSize.height - bubbleTable.frame.size.height);
+                [bubbleTable setContentOffset:offset animated:YES];
+            }
+        }
+       
+
+        
+    }];
+}
+
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)btnClose:(id)sender
@@ -116,6 +161,19 @@
 {
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
+    
+    [[RCVibeHelper sharedInstance] sendMessageFromUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] messageText:textField.text placeId:self.location.ID subj:@"" completionBlock:^(BOOL result, NSError *error) {
+        //
+        
+        if(result)
+        {
+            [self refreshConversaton];
+
+        }
+        
+    }];
+    
+    
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
     [bubbleTable reloadData];
@@ -129,6 +187,15 @@
         CGPoint offset = CGPointMake(0, bubbleTable.contentSize.height - bubbleTable.frame.size.height);
         [bubbleTable setContentOffset:offset animated:YES];
     }
+    
+    
+    
 }
 
+- (void)viewDidUnload {
+    [self setBtnBack:nil];
+    [self setBar:nil];
+    [self setPlaceTitle:nil];
+    [super viewDidUnload];
+}
 @end

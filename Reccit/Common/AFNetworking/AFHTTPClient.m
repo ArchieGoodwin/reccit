@@ -134,7 +134,7 @@ NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSS
     for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
         [mutablePairs addObject:[pair URLEncodedStringValueWithEncoding:stringEncoding]];
     }
-
+    //NSLog(@"AFQueryStringFromParametersWithEncoding: %@", [mutablePairs componentsJoinedByString:@"&"]);
     return [mutablePairs componentsJoinedByString:@"&"];
 }
 
