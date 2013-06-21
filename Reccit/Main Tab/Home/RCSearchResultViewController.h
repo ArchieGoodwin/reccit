@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RCSearchResultViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RCSearchResultViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *c1;
 @property (weak, nonatomic) IBOutlet UIImageView *c2;
 @property (weak, nonatomic) IBOutlet UITextField *c3;

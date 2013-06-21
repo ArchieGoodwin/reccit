@@ -26,7 +26,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [TestFlight takeOff:@"a4640385-1ded-4fae-b4fb-f2b2060da251"];
+    [TestFlight takeOff:@"30310d41-d318-4141-b303-c32bcc6b81e3"];
     
     // Optional: automatically send uncaught exceptions to Google Analytics.
     [GAI sharedInstance].trackUncaughtExceptions = YES;

@@ -18,6 +18,8 @@
 #import "RCVibeHelper.h"
 #define kRCAPIUpdateComment @"http://bizannouncements.com/bhavesh/reviewsupdate.php"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
+#define kRCAPIUpdateCommentInRate @"http://bizannouncements.com/bhavesh/updatereview.php?userid=%@&placeid=%d&recommend=%@&rating=%lf&review=%@"
+
 @interface RCReviewInDetailsViewController ()
 
 @end
@@ -36,7 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //_isDelta = NO;
     
     UIColor *bg = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     self.view.backgroundColor = bg;
@@ -94,15 +96,26 @@
     {
         if(self.location.ID > 0)
         {
-            //NSString *urlString = [NSString stringWithFormat:@"%@?reviews=%@", kRCAPIUpdateComment, [self makeString]];
             NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, [self makeString2]];
-
+            
             NSLog(@"REQUEST URL: %@", urlString);
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
             
             NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            if(self.isDelta == YES)
+            {
+                urlString = [NSString stringWithFormat:kRCAPIUpdateCommentInRate, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.location.ID, self.recommendation == YES ? @"yes" : @"no", self.rateView.rate, self.tvReview.text];
+                NSLog(@"REQUEST URL: %@", urlString);
+                
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                // Start new request
+                url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            }
+            //NSString *urlString = [NSString stringWithFormat:@"%@?reviews=%@", kRCAPIUpdateComment, [self makeString]];
+            
             
             
             AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -302,6 +315,8 @@
                     [self makeStringWithKeyAndValue:@"type" value:self.location.category],
                     [self makeStringWithKeyAndValue:@"street" value:self.location.street],
                     [self makeStringWithKeyAndValue:@"phone" value:self.location.phoneNumber],
+                    [self makeStringWithKeyAndValue2:@"place_id" value:[NSString stringWithFormat:@"%i", self.location.ID > 0 ? self.location.ID : 0]],
+
 
                     nil];
     

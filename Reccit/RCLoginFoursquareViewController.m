@@ -91,7 +91,7 @@
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelFont = [UIFont boldSystemFontOfSize:12];
-    HUD.labelText = @"Login Successfully!";
+    HUD.labelText = @"Login Successful!";
     
     
     

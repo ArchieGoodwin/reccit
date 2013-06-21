@@ -46,6 +46,8 @@
     [self.tbResult setSeparatorColor:[UIColor clearColor]];
     
     self.searchBar.text = self.searchString;
+    self.searchBar.returnKeyType = UIReturnKeySearch;
+    self.searchBar.delegate = self;
     [self.searchBar setEnabled:YES];
 }
 
@@ -77,6 +79,33 @@
     [self.searchBar resignFirstResponder];
 
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    _isSearch = YES;
+    
+    NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
+    
+    if ([self.searchBar.text length] > 0)
+    {
+        query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+    }
+    
+    self.querySearch = query;
+    self.isSurprase = NO;
+    self.showTabs = NO;
+    _btn1.hidden = YES;
+    _btn2.hidden = YES;
+    _btn3.hidden = YES;
+    
+    
+    [self performSelector:@selector(callAPIGetListReccit) withObject:nil afterDelay:0.1];
+    [self.searchBar resignFirstResponder];
+    
+    return YES;
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -138,7 +167,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"callAPIGetListReccit %@", rO);
+        //NSLog(@"callAPIGetListReccit %@", rO);
         self.listLocationReccit = [[NSMutableArray alloc] init];
         
         
@@ -190,7 +219,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"favs: %@", rO);
+        //NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
         NSArray *listLocation = [rO objectForKey:@"Reccits"];
@@ -205,6 +234,9 @@
                     
                 }
             }
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"friendsCount" ascending:NO];
+            NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+            _listLocationFriend = [[_listLocationFriend sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationFriend count] == 0)
@@ -350,11 +382,11 @@
             }
             else
             {
-                if(firstTime)
+                if(!_isSearch && !firstTime)
                 {
-                    return 0;
+                    return 1;
                 }
-                return 1;
+                return 0;
             }
         case 2:
             return [self.listLocationFriend count];
@@ -379,9 +411,13 @@
             }
             else
             {
-                UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
-                [(UILabel *)[cell viewWithTag:300] setText:@"Unfortunately at this time none of your friends have recommended any places that match your search parameters. Please select the friendsfav tab to see the places your friends have visited"];
-                return cell;
+                if(!_isSearch)
+                {
+                    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
+                    [(UILabel *)[cell viewWithTag:300] setText:@"We don't have any Reccits for you right now, but check back as you and your friends rate more places"];
+                    return cell;
+                }
+                
             }
             
             break;

@@ -57,7 +57,7 @@
     
     [self.view setBackgroundColor:kRCBackgroundView];
     
-    [self callAPIGetListLocationRate];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,7 +65,7 @@
     [super viewWillAppear:animated];
     
     //[[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"view" withAction:@"viewWillAppear" withLabel:@"RCRateViewController" withValue:nil];
-    
+    [self callAPIGetListLocationRate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -202,7 +202,7 @@
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = location;
     self.reviewVc.shouldSendImmediately = YES;
-
+    self.reviewVc.isDelta = YES;
     //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
     
     [self presentSemiModalViewController:self.reviewVc];
@@ -310,6 +310,7 @@
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = location;
     self.reviewVc.shouldSendImmediately = YES;
+    self.reviewVc.isDelta = YES;
     //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
     
     [self presentSemiModalViewController:self.reviewVc];

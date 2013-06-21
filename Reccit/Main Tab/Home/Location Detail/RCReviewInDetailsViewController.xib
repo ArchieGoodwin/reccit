@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -47,7 +47,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{289, 217}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="548187360"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -63,7 +62,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{200, 27}, {36, 36}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="831836713"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">1005</int>
@@ -103,7 +101,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{237, 27}, {36, 36}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="785808658"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">1006</int>
@@ -130,7 +127,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{257, -1}, {31, 29}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="489337099"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -151,7 +147,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{62, 177}, {85, 34}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1006267466"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -176,7 +171,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{150, 177}, {85, 34}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -200,7 +194,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{31, 71}, {227, 98}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="431550840"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -233,7 +226,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{14, 31}, {184, 28}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="958374914"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -249,7 +241,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{42, 27}, {120, 28}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="450773746"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="93970993">
 									<int key="NSColorSpace">3</int>
@@ -262,7 +253,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 6}, {50, 9}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="47663449"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -277,7 +267,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{66, 0}, {197, 21}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="718681960"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -310,7 +299,6 @@
 						</array>
 						<string key="NSFrame">{{16, 25}, {289, 235}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="313754281"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="93970993"/>
@@ -319,7 +307,6 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="497831840"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -595,68 +582,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">49</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">DYRateView</string>
-					<string key="superclassName">UIView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/DYRateView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">RCBaseViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/RCBaseViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">RCReviewInDetailsViewController</string>
-					<string key="superclassName">RCBaseViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="btnLike">UIButton</string>
-						<string key="btnUnLike">UIButton</string>
-						<string key="lblPlaceName">UILabel</string>
-						<string key="rateView">DYRateView</string>
-						<string key="tvReview">UITextView</string>
-						<string key="viewRound">UIView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="btnLike">
-							<string key="name">btnLike</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="btnUnLike">
-							<string key="name">btnUnLike</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lblPlaceName">
-							<string key="name">lblPlaceName</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="rateView">
-							<string key="name">rateView</string>
-							<string key="candidateClassName">DYRateView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tvReview">
-							<string key="name">tvReview</string>
-							<string key="candidateClassName">UITextView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="viewRound">
-							<string key="name">viewRound</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/RCReviewInDetailsViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

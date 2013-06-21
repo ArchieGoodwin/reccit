@@ -151,7 +151,7 @@
                        @"{"
                        @"'query2':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND timestamp > %li AND timestamp < %li',"
                        @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
-                       "phone, pic, price_range, website "
+                       "phone, pic, price_range, website, pic_big "
                        "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, name, "
                        "type FROM place WHERE page_id IN (SELECT target_id FROM #query2)) ',"
                        @"}", down_t, upper_t];
@@ -527,7 +527,7 @@
                                                                 [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
                                                                 [self makeStringWithKeyAndValue:@"phone" value:[[placeDict objectForKey:@"phone"] stringByReplacingOccurrencesOfString:@"&" withString:@"" ]],
                                 [self makeStringWithKeyAndValue:@"type" value:categoriesString],
-                                       [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic"]]],
+                                       [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic_big"]]],
 
                                 [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
                                 //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
@@ -690,7 +690,7 @@
                             [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
                             [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
                             [self makeStringWithKeyAndValue:@"type" value:categoriesString],
-                            [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic"]]],
+                            [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic_big"]]],
                             [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
                             //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
                             //hoursString,
@@ -781,7 +781,7 @@
                            @"{"
                            @"'query1':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid = me() limit 0, 100',"
                            @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
-                           "phone, pic, price_range, website "
+                           "phone, pic, price_range, website, pic_big "
                            "from page where type in (\"RESTAURANT/CAFE\", "
                            "\"BAR\", "
                            "\"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
@@ -798,7 +798,7 @@
         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if(!error)
             {
-                NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
+                //NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
                 [self buildArraysForUser:[result objectForKey:@"data"]];
                 [self buildResultForUser];
                 if(completeBlockWithResult)

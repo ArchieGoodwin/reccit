@@ -344,6 +344,12 @@
 		D54CAE6A802074E03BB6445F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54CA4AA3E3A17CC04AC57BC /* AddressBookUI.framework */; };
 		D54CAECBB49164D066CD4D69 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D54CAF5A7E00654535D4CC31 /* AFXMLRequestOperation.m */; };
 		D54CAEE1C55E38AA7AF9E61B /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D54CA3DABB11B7B0A0E0CDCB /* AFImageRequestOperation.m */; };
+		DC0AAC921773125A00058735 /* SPGooglePlacesAutocompleteUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0AAC8B1773125A00058735 /* SPGooglePlacesAutocompleteUtilities.m */; };
+		DC0AAC931773125A00058735 /* SPGooglePlacesAutocompleteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0AAC8D1773125A00058735 /* SPGooglePlacesAutocompleteQuery.m */; };
+		DC0AAC941773125A00058735 /* SPGooglePlacesPlaceDetailQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0AAC8F1773125A00058735 /* SPGooglePlacesPlaceDetailQuery.m */; };
+		DC0AAC951773125A00058735 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0AAC911773125A00058735 /* SPGooglePlacesAutocompletePlace.m */; };
+		DC0AAC9817733E1D00058735 /* favs_tabs.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0AAC9617733E1D00058735 /* favs_tabs.png */; };
+		DC0AAC9917733E1D00058735 /* reccits_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0AAC9717733E1D00058735 /* reccits_tab.png */; };
 		DC3AD3051769DF5F00C65E87 /* button_checkin_active.png in Resources */ = {isa = PBXBuildFile; fileRef = DC3AD2F51769DF5F00C65E87 /* button_checkin_active.png */; };
 		DC3AD3061769DF5F00C65E87 /* button_checkin_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC3AD2F61769DF5F00C65E87 /* button_checkin_active@2x.png */; };
 		DC3AD3071769DF5F00C65E87 /* button_checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = DC3AD2F71769DF5F00C65E87 /* button_checkin.png */; };
@@ -970,6 +976,16 @@
 		D54CAE3EBEE092C44154EB7E /* facebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = facebookHelper.m; sourceTree = "<group>"; };
 		D54CAEDE0AD09799A7A7F2A1 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
 		D54CAF5A7E00654535D4CC31 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		DC0AAC8A1773125A00058735 /* SPGooglePlacesAutocompleteUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteUtilities.h; sourceTree = "<group>"; };
+		DC0AAC8B1773125A00058735 /* SPGooglePlacesAutocompleteUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteUtilities.m; sourceTree = "<group>"; };
+		DC0AAC8C1773125A00058735 /* SPGooglePlacesAutocompleteQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteQuery.h; sourceTree = "<group>"; };
+		DC0AAC8D1773125A00058735 /* SPGooglePlacesAutocompleteQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteQuery.m; sourceTree = "<group>"; };
+		DC0AAC8E1773125A00058735 /* SPGooglePlacesPlaceDetailQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesPlaceDetailQuery.h; sourceTree = "<group>"; };
+		DC0AAC8F1773125A00058735 /* SPGooglePlacesPlaceDetailQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesPlaceDetailQuery.m; sourceTree = "<group>"; };
+		DC0AAC901773125A00058735 /* SPGooglePlacesAutocompletePlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompletePlace.h; sourceTree = "<group>"; };
+		DC0AAC911773125A00058735 /* SPGooglePlacesAutocompletePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompletePlace.m; sourceTree = "<group>"; };
+		DC0AAC9617733E1D00058735 /* favs_tabs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favs_tabs.png; sourceTree = "<group>"; };
+		DC0AAC9717733E1D00058735 /* reccits_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reccits_tab.png; sourceTree = "<group>"; };
 		DC3AD2F51769DF5F00C65E87 /* button_checkin_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_checkin_active.png; sourceTree = "<group>"; };
 		DC3AD2F61769DF5F00C65E87 /* button_checkin_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_checkin_active@2x.png"; sourceTree = "<group>"; };
 		DC3AD2F71769DF5F00C65E87 /* button_checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_checkin.png; sourceTree = "<group>"; };
@@ -1598,6 +1614,8 @@
 			isa = PBXGroup;
 			children = (
 				DC514FA61769981800978873 /* star_empty.png */,
+				DC0AAC9617733E1D00058735 /* favs_tabs.png */,
+				DC0AAC9717733E1D00058735 /* reccits_tab.png */,
 				DC514FA71769981800978873 /* star_empty@2x.png */,
 				DC3AD2F51769DF5F00C65E87 /* button_checkin_active.png */,
 				DC3AD2F61769DF5F00C65E87 /* button_checkin_active@2x.png */,
@@ -1842,6 +1860,7 @@
 		A095E40816B32AD1007108F6 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				DC0AAC891773124C00058735 /* Autocomplete */,
 				DC601660176C6CE600C0B5E4 /* Bubbles */,
 				A0E3ED3D16B5B24D002722E8 /* SDWebImage */,
 				A04036E516B59F4E009F6CFB /* DYRateView */,
@@ -2107,6 +2126,21 @@
 				D54CA30F4A599C6D3FE39DE0 /* AFNetworkActivityIndicatorManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		DC0AAC891773124C00058735 /* Autocomplete */ = {
+			isa = PBXGroup;
+			children = (
+				DC0AAC8A1773125A00058735 /* SPGooglePlacesAutocompleteUtilities.h */,
+				DC0AAC8B1773125A00058735 /* SPGooglePlacesAutocompleteUtilities.m */,
+				DC0AAC8C1773125A00058735 /* SPGooglePlacesAutocompleteQuery.h */,
+				DC0AAC8D1773125A00058735 /* SPGooglePlacesAutocompleteQuery.m */,
+				DC0AAC8E1773125A00058735 /* SPGooglePlacesPlaceDetailQuery.h */,
+				DC0AAC8F1773125A00058735 /* SPGooglePlacesPlaceDetailQuery.m */,
+				DC0AAC901773125A00058735 /* SPGooglePlacesAutocompletePlace.h */,
+				DC0AAC911773125A00058735 /* SPGooglePlacesAutocompletePlace.m */,
+			);
+			name = Autocomplete;
 			sourceTree = "<group>";
 		};
 		DC564A431749DB100023A09F /* GA */ = {
@@ -2652,6 +2686,8 @@
 				DC601685176C6D0E00C0B5E4 /* typingSomeone@2x.png in Resources */,
 				DC60168A176C6D6D00C0B5E4 /* VibeViewController.xib in Resources */,
 				DC6016AA176D83D600C0B5E4 /* RCConversationsViewController.xib in Resources */,
+				DC0AAC9817733E1D00058735 /* favs_tabs.png in Resources */,
+				DC0AAC9917733E1D00058735 /* reccits_tab.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2802,6 +2838,10 @@
 				DC6016A5176C92D000C0B5E4 /* RCUser.m in Sources */,
 				DC6016A9176D83D600C0B5E4 /* RCConversationsViewController.m in Sources */,
 				DC6016AE176D846800C0B5E4 /* RCConversation.m in Sources */,
+				DC0AAC921773125A00058735 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
+				DC0AAC931773125A00058735 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
+				DC0AAC941773125A00058735 /* SPGooglePlacesPlaceDetailQuery.m in Sources */,
+				DC0AAC951773125A00058735 /* SPGooglePlacesAutocompletePlace.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2880,8 +2920,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2900,8 +2940,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2909,8 +2949,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2929,8 +2969,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B1C78FEE-2D32-4115-8196-DED8E5683A70";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -28,5 +28,6 @@
 
 @property (nonatomic, assign) BOOL shouldSendImmediately;
 @property (assign) BOOL recommendation;
+@property (nonatomic, assign) BOOL isDelta;
 
 @end

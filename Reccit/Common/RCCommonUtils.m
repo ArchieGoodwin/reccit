@@ -243,7 +243,7 @@
             
             location.listFriends = listFriend;
             location.listFriendsName = listFriendName;
-            
+            location.friendsCount = location.listFriends.count;
         }
         
         return location;

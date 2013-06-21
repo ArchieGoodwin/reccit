@@ -274,7 +274,7 @@
             HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
             RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
-            [appDelegate openSessionWithAllowLoginUI:YES];
+            [appDelegate openSessionWithAllowLoginUI:NO];
         }
     }
 }
@@ -316,7 +316,7 @@
     
     
     
-    CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
+    CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate] getCurrentLocation];
     
     FBRequest *postLocRequest = [FBRequest requestForPlacesSearchAtCoordinate:currentLocation radiusInMeters:1000 resultsLimit:1 searchText:self.location.name];
     postLocRequest.session = FBSession.activeSession;
@@ -350,7 +350,9 @@
                     [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                             
-                            NSLog(@"%@", [error description]);
+                            NSLog(@"%@", result);
+                            
+                            [self checkinMe];
                             
                         }];
                     }];
@@ -359,8 +361,9 @@
                 {
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         
-                        NSLog(@"%@", [error description]);
-                        
+                        NSLog(@"%@", result);
+                        [self checkinMe];
+
                     }];
                 }
 
@@ -376,8 +379,9 @@
                     [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                             
-                            NSLog(@"%@", [error description]);
-                            
+                            NSLog(@"%@", result);
+                            [self checkinMe];
+
                         }];
                     }];
                 }
@@ -386,7 +390,8 @@
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         
                         NSLog(@"%@", [error description]);
-                        
+                        [self checkinMe];
+
                     }];
                 }
 
@@ -409,7 +414,8 @@
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         
                         NSLog(@"%@", [error description]);
-                        
+                        [self checkinMe];
+
                     }];
                 }];
             }
@@ -418,7 +424,8 @@
                 [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                     
                     NSLog(@"%@", [error description]);
-                    
+                    [self checkinMe];
+
                 }];
             }
 
@@ -468,6 +475,8 @@
         }];
     else {
         [_engine sendUpdate: value];
+        
+        [self checkinMe];
     }
     
     /*if(_engine.isAuthorized)
@@ -640,6 +649,7 @@
         {
             self.reviewString = [self makeString2];
         }
+        
         if(self.swTwitter.isOn)
         {
             if(self.messageString)
@@ -665,45 +675,50 @@
         
         
         
-        NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, self.reviewString];
-        NSLog(@"REQUEST URL kRCAPIAddPlace: %@", urlString);
-        
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        
-        NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-        [request setRequestMethod:@"POST"];
-
-        [request setCompletionBlock:^{
-            
-            NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
-            NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-            NSLog(@"responseObject %@", responseObject);
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Checkin successful!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            alert.tag = 101;
-            [alert show];
-
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            
-           
-            
-        }];
-        
-        [request setFailedBlock:^{
-            [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        }];
-        
-        [request startAsynchronous];
         
     }
     
     
     
+}
+
+-(void)checkinMe
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, self.reviewString];
+    NSLog(@"REQUEST URL kRCAPIAddPlace: %@", urlString);
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    
+    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setRequestMethod:@"POST"];
+    
+    [request setCompletionBlock:^{
+        
+        NSLog(@"%@", [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+        NSLog(@"responseObject %@", responseObject);
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Checkin successful!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        alert.tag = 101;
+        [alert show];
+        
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        
+        
+    }];
+    
+    [request setFailedBlock:^{
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+    
+    [request startAsynchronous];
 }
 
 

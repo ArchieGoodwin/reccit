@@ -35,7 +35,7 @@
 @synthesize type;
 @synthesize genre;
 @synthesize happyhours;
-
+@synthesize friendsCount;
 @synthesize listFriends;
 @synthesize listFriendsName;
 

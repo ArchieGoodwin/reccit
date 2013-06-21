@@ -281,6 +281,8 @@
                     [self makeStringWithKeyAndValue:@"type" value:self.location.category],
                     [self makeStringWithKeyAndValue:@"street" value:self.location.street],
                     [self makeStringWithKeyAndValue:@"phone" value:self.location.phoneNumber],
+                    [self makeStringWithKeyAndValue2:@"place_id" value:[NSString stringWithFormat:@"%i", self.location.ID > 0 ? self.location.ID : 0]],
+
                     nil];
     
     

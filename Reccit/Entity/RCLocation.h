@@ -35,6 +35,7 @@
 @property (nonatomic, assign) BOOL isMark;
 @property (nonatomic, copy) NSMutableArray *happyhours;
 @property (nonatomic, copy) NSMutableArray *listFriends;
+@property (nonatomic, assign) NSInteger friendsCount;
 
 @property (nonatomic, copy) NSMutableArray *listFriendsName;
 

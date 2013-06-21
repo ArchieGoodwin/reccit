@@ -271,7 +271,7 @@
         HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
         HUD.mode = MBProgressHUDModeCustomView;
         HUD.labelFont = [UIFont boldSystemFontOfSize:12];
-        HUD.labelText = @"Login Successfully!";
+        HUD.labelText = @"Login Successful!";
         
         // Call webservice authenticate
         //NSLog(@"%@", [[FBSession activeSession] accessTokenData]);
@@ -349,7 +349,7 @@
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelFont = [UIFont boldSystemFontOfSize:12];
-    HUD.labelText = @"Login Successfully!";
+    HUD.labelText = @"Login Successful!";
     NSLog(@"%@ %@", [_engine getAccessToken].key, [_engine getAccessToken].secret);
     [[NSUserDefaults standardUserDefaults] setObject:[_engine getAccessToken].key forKey:@"tKey"];
     [[NSUserDefaults standardUserDefaults] setObject:[_engine getAccessToken].secret forKey:@"tSecret"];

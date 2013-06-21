@@ -323,6 +323,20 @@
                                     <action selector="btnDoneTouched:" destination="yn1-9I-OtI" eventType="touchUpInside" id="8B6-pt-lsL"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="uwQ-zp-rpt">
+                                <rect key="frame" x="20" y="40" width="280" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Here's your Checkins. Rate and Review!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nSj-cc-cIT">
+                                        <rect key="frame" x="3" y="6" width="275" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" red="0.094117656349999995" green="0.070588238540000001" blue="0.33333334329999997" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -520,7 +534,7 @@
                                     <action selector="btnLogOut:" destination="qb7-AQ-GNv" eventType="touchUpInside" id="GNC-xZ-sll"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uEe-V5-Kup">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uEe-V5-Kup">
                                 <rect key="frame" x="11" y="299" width="301" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -532,7 +546,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tfn-5y-2HV">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tfn-5y-2HV">
                                 <rect key="frame" x="20" y="307" width="280" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.094117656350135803" green="0.070588238537311554" blue="0.3333333432674408" alpha="1" colorSpace="deviceRGB"/>
@@ -1606,7 +1620,7 @@
                                             <action selector="btnGoTouched:" destination="bbC-ke-gQQ" eventType="touchUpInside" id="req-tJ-IaN"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="ir0-OR-EtF">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="ir0-OR-EtF">
                                         <rect key="frame" x="48" y="22" width="225" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -1618,7 +1632,7 @@
                                         <rect key="frame" x="48" y="107" width="225" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="city, country" minimumFontSize="17" id="ZS7-Y4-NIz">
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="city, country" minimumFontSize="17" id="ZS7-Y4-NIz">
                                         <rect key="frame" x="84" y="25" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -1636,7 +1650,21 @@
                                             <outlet property="delegate" destination="bbC-ke-gQQ" id="9Nr-IV-KLY"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter genre" minimumFontSize="17" id="3mx-u2-CvF">
+                                    <searchBar contentMode="redraw" placeholder="City, Country" id="s6S-85-nhY">
+                                        <rect key="frame" x="48" y="20" width="225" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
+                                        <connections>
+                                            <outlet property="delegate" destination="bbC-ke-gQQ" id="obr-Lt-Bo2"/>
+                                        </connections>
+                                    </searchBar>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter cuisine" minimumFontSize="17" id="3mx-u2-CvF">
                                         <rect key="frame" x="84" y="111" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -1645,7 +1673,7 @@
                                             <outlet property="delegate" destination="bbC-ke-gQQ" id="EhG-si-uRb"/>
                                         </connections>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="hJ7-nK-mI2">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="hJ7-nK-mI2">
                                         <rect key="frame" x="58" y="29" width="18" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -1757,6 +1785,7 @@
                         <outlet property="mapView" destination="qnm-8N-zvh" id="cI4-wY-WWj"/>
                         <outlet property="pickerView" destination="vrh-7P-hcy" id="oAN-la-tvu"/>
                         <outlet property="searchBar" destination="VBa-nw-52w" id="X0k-XL-FpV"/>
+                        <outlet property="searchDispController" destination="evO-Hu-9YK" id="lOJ-Db-G7k"/>
                         <outlet property="tfGenre" destination="3mx-u2-CvF" id="phZ-pZ-vty"/>
                         <outlet property="tfLocation" destination="ZS7-Y4-NIz" id="UFh-SW-Ntz"/>
                         <outlet property="tfPrice" destination="oDk-ZU-31p" id="8id-2z-DtD"/>
@@ -1765,6 +1794,15 @@
                         <segue destination="Kqy-Mf-YWE" kind="push" identifier="PushResultSearch" id="E0T-IN-y5q"/>
                     </connections>
                 </viewController>
+                <searchDisplayController id="evO-Hu-9YK">
+                    <connections>
+                        <outlet property="delegate" destination="bbC-ke-gQQ" id="Cq1-Lq-8rL"/>
+                        <outlet property="searchBar" destination="s6S-85-nhY" id="4Ja-nI-af9"/>
+                        <outlet property="searchContentsController" destination="bbC-ke-gQQ" id="8gp-Vr-a0u"/>
+                        <outlet property="searchResultsDataSource" destination="bbC-ke-gQQ" id="8Ro-j7-lF9"/>
+                        <outlet property="searchResultsDelegate" destination="bbC-ke-gQQ" id="7yC-ZO-5iq"/>
+                    </connections>
+                </searchDisplayController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCn-Kb-0cZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pickerView contentMode="scaleToFill" id="vrh-7P-hcy">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
@@ -2001,10 +2039,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6A0-i1-MJf">
-                                <rect key="frame" x="-4" y="54" width="101" height="44"/>
+                                <rect key="frame" x="1" y="59" width="158" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="btn-reccit.png">
+                                <state key="normal" image="reccits_tab.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -2016,10 +2054,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2fI-dC-7u8">
-                                <rect key="frame" x="88" y="54" width="125" height="44"/>
+                                <rect key="frame" x="160" y="59" width="158" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="btn-friend-fav.png">
+                                <state key="normal" image="favs_tabs.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -2028,21 +2066,6 @@
                                 </state>
                                 <connections>
                                     <action selector="btnMenuTouched:" destination="Kqy-Mf-YWE" eventType="touchUpInside" id="T2g-0p-zEo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IHK-ce-HX9">
-                                <rect key="frame" x="199" y="54" width="130" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="btn-popular.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnMenuTouched:" destination="Kqy-Mf-YWE" eventType="touchUpInside" id="CNM-vZ-RGZ"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="gl7-ec-oSQ">
@@ -2155,7 +2178,6 @@
                     <connections>
                         <outlet property="btn1" destination="6A0-i1-MJf" id="URZ-FS-4ko"/>
                         <outlet property="btn2" destination="2fI-dC-7u8" id="qZd-3f-hMk"/>
-                        <outlet property="btn3" destination="IHK-ce-HX9" id="6eB-SH-7uN"/>
                         <outlet property="btnSearchInside" destination="oyS-lr-Cph" id="bpq-Mm-ZG8"/>
                         <outlet property="c1" destination="jV4-El-fj6" id="hBt-SO-zFT"/>
                         <outlet property="imgAvatar" destination="YiM-qu-CUg" id="dC0-Qq-l1e"/>
@@ -2781,11 +2803,8 @@
         <image name="btn-cancel.png" width="63" height="30"/>
         <image name="btn-drive.png" width="115" height="32"/>
         <image name="btn-edit.png" width="62" height="31"/>
-        <image name="btn-friend-fav.png" width="114" height="31"/>
         <image name="btn-like-press.png" width="26" height="27"/>
         <image name="btn-linked.png" width="301" height="51"/>
-        <image name="btn-popular.png" width="114" height="31"/>
-        <image name="btn-reccit.png" width="94" height="31"/>
         <image name="btn-search.png" width="41" height="40"/>
         <image name="btn-share.png" width="88" height="30"/>
         <image name="btn-submit.png" width="90" height="28"/>
@@ -2810,6 +2829,7 @@
         <image name="expand_button.png" width="80" height="65"/>
         <image name="f_login.png" width="262" height="94"/>
         <image name="facebook_sign_login.png" width="378" height="294"/>
+        <image name="favs_tabs.png" width="322" height="63"/>
         <image name="gear.png" width="82" height="56"/>
         <image name="go_button.png" width="140" height="84"/>
         <image name="go_green_button.png" width="139" height="78"/>
@@ -2828,6 +2848,7 @@
         <image name="login_with_sign.png" width="131" height="23"/>
         <image name="logout.png" width="606" height="102"/>
         <image name="rate_screen_upper_sign.png" width="586" height="153"/>
+        <image name="reccits_tab.png" width="322" height="63"/>
         <image name="reserve_button_place_details.png" width="198" height="78"/>
         <image name="review_button.png" width="171" height="68"/>
         <image name="review_button_place_details.png" width="198" height="78"/>

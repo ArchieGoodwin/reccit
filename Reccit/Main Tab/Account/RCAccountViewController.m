@@ -100,7 +100,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCUserId];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFoursquareLoggedIn];
 
-    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"fcheckin"];
+
     
     [[NSUserDefaults standardUserDefaults]  synchronize];
     

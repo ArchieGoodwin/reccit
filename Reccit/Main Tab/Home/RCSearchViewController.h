@@ -8,13 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-
-@interface RCSearchViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MKMapViewDelegate>
-
+#import "SPGooglePlacesAutocompleteQuery.h"
+@interface RCSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MKMapViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+{
+    NSArray *searchResultPlaces;
+    SPGooglePlacesAutocompleteQuery *searchQuery;
+    MKPointAnnotation *selectedPlaceAnnotation;
+    
+    BOOL shouldBeginEditing;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *btnIncrease;
 @property (weak, nonatomic) IBOutlet UIButton *btnReduce;
+@property (strong, nonatomic) IBOutlet UISearchDisplayController *searchDispController;
 
 @property (weak, nonatomic) IBOutlet UITextField *tfLocation;
 @property (weak, nonatomic) IBOutlet UITextField *tfPrice;
@@ -37,6 +44,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSearch;
 @property (strong, nonatomic) NSMutableArray *listLocation;
 @property (strong, nonatomic) NSMutableArray *listAnnotation;
+
+
 
 @property (strong, nonatomic) NSString *categoryName;
 
