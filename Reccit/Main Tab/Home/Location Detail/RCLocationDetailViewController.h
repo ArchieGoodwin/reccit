@@ -12,9 +12,9 @@
 #import "RCLocation.h"
 #import "ASIHTTPRequest.h"
 #import "RCBaseViewController.h"
-
+#import <MapKit/MapKit.h>
 @class RCReviewInDetailsViewController;
-@interface RCLocationDetailViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface RCLocationDetailViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *btnVibe;

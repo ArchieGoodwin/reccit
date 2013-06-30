@@ -16,7 +16,7 @@
 #import "MGTwitterEngine.h"
 #import "RCWhereAmIViewController.h"
 @class RCLocation;
-@interface RCAddPlaceViewController : RCBaseViewController <UITextViewDelegate,SA_OAuthTwitterControllerDelegate , MGTwitterEngineDelegate>
+@interface RCAddPlaceViewController : RCBaseViewController <UITextViewDelegate,SA_OAuthTwitterControllerDelegate , MGTwitterEngineDelegate, MKMapViewDelegate>
 {
     SA_OAuthTwitterEngine *_engine;
 }

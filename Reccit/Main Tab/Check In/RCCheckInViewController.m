@@ -134,6 +134,7 @@
                 
                 RCLocation *location = [RCCommonUtils getLocationFromDictionary:locationDic];
 
+                NSLog(@"loc id: %i", location.ID);
                 
                 
                 

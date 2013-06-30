@@ -17,6 +17,8 @@
 #import "RCMainTabbarController.h"
 #import "RCAccountViewController.h"
 #import "GAI.h"
+#import "RCVibeHelper.h"
+#import "RCConversationsViewController.h"
 NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStateChangedNotification";
 
 @implementation RCAppDelegate
@@ -26,6 +28,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     [TestFlight takeOff:@"30310d41-d318-4141-b303-c32bcc6b81e3"];
     
     // Optional: automatically send uncaught exceptions to Google Analytics.
@@ -51,9 +54,134 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
     _initalStoryboard = self.window.rootViewController.storyboard;
 
+    NSDictionary *localNotif =
+    [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSLog(@"launchOptions: %@", launchOptions);
+    NSLog(@"localNotif: %@", localNotif);
     
+    if (localNotif) {
+        NSDictionary *itemName = [localNotif objectForKey:@"aps"];
+        NSLog(@"dict: %@, aps: %@", localNotif, itemName);
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+        {
+            [self getVibes];
+            
+        }
+    }
+    application.applicationIconBadgeNumber = 0;
+    
+    
+    NSLog(@"Registering for push notifications...");
+    [[UIApplication sharedApplication]
+     registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeAlert |
+      UIRemoteNotificationTypeBadge |
+      UIRemoteNotificationTypeSound)];
+    
+    
+#if TARGET_IPHONE_SIMULATOR
+    
+    NSString *_device_token = @"03a7e865 e2476e32 e42f28f0 c0efaf70 a778b272 7443b905 b573dc4b 9907d7a9";
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_device_token forKey:@"device_token"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //[mHandler saveToUserDefaults:_device_token key:@"device_token"];
+#else // TARGET_IPHONE_SIMULATOR
+    
+    // Device specific code
+    
+#endif // TARGET_IPHONE_SIMULATOR
+
+    [self clearNotifications];
 
     return YES;
+}
+-(void)clearNotifications
+{
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+
+    NSString *s = [[NSString stringWithFormat:@"%@", deviceToken] substringToIndex:[[NSString stringWithFormat:@"%@", deviceToken] length] - 1]; //remove last ,
+    NSString * device_token = [s substringFromIndex:1];
+    NSLog(@"device token: %@", device_token);
+    
+    [[NSUserDefaults standardUserDefaults] setObject:device_token forKey:@"device_token"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    
+    NSString *str = [NSString stringWithFormat: @"Error: %@", err];
+    NSLog(@"%@", str);
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    NSLog(@"didReceiveRemoteNotification: %@", userInfo);
+    for (id key in userInfo) {
+        NSLog(@"key: %@, value: %@", key, [userInfo objectForKey:key]);
+        
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+        {
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:nil userInfo:nil];
+
+            [self getVibes];
+        }
+    }
+    
+    [self clearNotifications];
+}
+
+
+-(void)getVibes
+{
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+    {
+        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(BOOL result, NSError *error) {
+            //check if there are new messages in conversations
+            //store conversations in coredata
+            //if(result)
+            //{
+            
+            dispatch_async(dispatch_get_main_queue(),^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New messages!" message:@"You have unread messages in Vibe. Show?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"YES", nil];
+                [alert show];
+                
+            });
+            //}
+        }];
+    }
+    
+}
+
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        
+    }
+    else
+    {
+        RCConversationsViewController *contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
+        
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contr];
+        
+        [self.window.rootViewController presentViewController:nav animated:YES completion:^{
+            
+        }];
+    }
 }
 
 

@@ -25,22 +25,28 @@
     RCMapAnnotation *itAnnotation = (RCMapAnnotation*)self.annotation;
     
     NSString *imageName = nil;
-    //NSLog(@"%@", itAnnotation.myLocation.category);
-    if ([itAnnotation.myLocation.type isEqualToString:@"bar"])
+    if([itAnnotation respondsToSelector:@selector(myLocation)])
     {
-        imageName = @"icon-map-drink.png";
+        NSLog(@"%@", itAnnotation.myLocation.category);
+        
+        
+        if ([[itAnnotation.myLocation.type lowercaseString] rangeOfString:@"bar"].location != NSNotFound)
+        {
+            imageName = @"icon-map-drink.png";
+        }
+        if ([[itAnnotation.myLocation.type lowercaseString] rangeOfString:@"hotel"].location != NSNotFound)
+        {
+            imageName = @"icon-map-sleep.png";
+        }
+        if ([[itAnnotation.myLocation.type lowercaseString] rangeOfString:@"restaurant"].location != NSNotFound)
+        {
+            imageName = @"icon-map-eat.png";
+        }
+        self.image = [UIImage imageNamed:imageName];
+        
+        self.frame = CGRectMake(0, 0, 23, 29);
     }
-    if ([itAnnotation.myLocation.type isEqualToString:@"hotel"])
-    {
-        imageName = @"icon-map-sleep.png";
-    }
-    if ([itAnnotation.myLocation.type isEqualToString:@"restaurant"])
-    {
-        imageName = @"icon-map-eat.png";
-    }
-    self.image = [UIImage imageNamed:imageName];
-    
-    self.frame = CGRectMake(0, 0, 23, 29);
+   
 }
 
 - (id)initWithFrame:(CGRect)frame

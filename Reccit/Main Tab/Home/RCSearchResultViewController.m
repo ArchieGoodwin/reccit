@@ -589,20 +589,39 @@
 {
     RCLocation *location = nil;
     switch (self.currentTab) {
-        case 1:
-            location = [self.listLocationReccit objectAtIndex:indexPath.row];
-            break;
+        case 1:{
+            if(self.listLocationReccit.count > 0)
+            {
+                location = [self.listLocationReccit objectAtIndex:indexPath.row];
+
+            }
+            break;}
         case 2:
-            location = [self.listLocationFriend objectAtIndex:indexPath.row];
+        {
+            if(self.listLocationFriend.count > 0)
+            {
+                location = [self.listLocationFriend objectAtIndex:indexPath.row];
+
+            }
+            break;}
+        case 3:{
+            if(self.listLocationPopular.count > 0)
+            {
+                location = [self.listLocationPopular objectAtIndex:indexPath.row];
+
+            }
+            
             break;
-        case 3:
-            location = [self.listLocationPopular objectAtIndex:indexPath.row];
-            break;
+        }
+    }
+    if(location != nil)
+    {
+        location.type = self.category;
+        NSLog(@"%@ %@ %@", location.name, location.type, location.category);
+        [self performSegueWithIdentifier:@"PushDetail" sender:location];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     
-    NSLog(@"%@", location.name);
-    [self performSegueWithIdentifier:@"PushDetail" sender:location];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)viewDidUnload {

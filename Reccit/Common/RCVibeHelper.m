@@ -40,6 +40,40 @@
     return mess;
 }
 
+-(NSArray *)getMessagesSorted:(RCConversation *)conversation
+{
+     NSArray *array = [conversation.messages allObjects];
+    
+    
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"" ascending:NO comparator:^NSComparisonResult(RCMessage *obj1, RCMessage * obj2) {
+        
+        return [obj1.messageDate compare:obj2.messageDate];
+    }];
+    
+    NSArray *result = [array sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    
+    return result;
+}
+
+
+-(NSArray *)getAllConversationsSortedByDate
+{
+    
+    NSMutableArray *array = [RCConversation getAllRecords];
+
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"" ascending:NO comparator:^NSComparisonResult(RCConversation *obj1, RCConversation * obj2) {
+
+        RCMessage *last1 = [self getMessagesSorted:obj1][0];
+        RCMessage *last2 = [self getMessagesSorted:obj2][0];
+
+        return [last1.messageDate compare:last2.messageDate];
+    }];
+    
+    NSArray *result = [array sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+
+    return result;
+}
 
 -(RCUser *)getUserById:(NSInteger)userId
 {
@@ -190,6 +224,62 @@
     [operation start];
 }
 
+-(void)getUserFromServer:(NSInteger)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock
+{
+    //Message/FetchByPlace?PlaceId=value
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/User/Get/%i", userId];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSLog(@"get getUserFromServer url : %@", urlString);
+    
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        NSLog(@"getUserFromServer %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        
+        if([rO objectForKey:@"data"] != [NSNull null])
+        {
+            RCUser *user = [self getUserById:userId];
+            
+            if(user == nil)
+            {
+                user = [RCUser createEntityInContext];
+                user.userId = [NSNumber numberWithInt:userId];
+                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[[rO objectForKey:@"data"] objectForKey:@"FacebookID"]];
+                user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
+            }
+            else
+            {
+                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[[rO objectForKey:@"data"] objectForKey:@"FacebookID"]];
+                user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
+
+            }
+            mess.user = user;
+            [RCUser saveDefaultContext];
+
+            if(completionBlock)
+            {
+                completionBlock(mess, nil);
+            }
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(completionBlock)
+        {
+            completionBlock(NO, error);
+        }
+    }];
+    
+    [operation start];
+}
+
+
+
 -(void)getConversationFromServer:(NSInteger)placeId completionBlock:(RCCompleteBlockWithConvResult)completionBlock
 {
     
@@ -284,12 +374,15 @@
         if([message.user.userId integerValue] != myUserId)
         {
             NSBubbleData *someoneBubble = [NSBubbleData dataWithText:message.messageText date:message.messageDate == nil ? [NSDate date] : message.messageDate  type:BubbleTypeSomeoneElse];
+            someoneBubble.message = message;
             someoneBubble.avatarUrl = message.user.avatarUrl;
             [temp addObject:someoneBubble];
         }
         else
         {
             NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.messageText date:message.messageDate == nil ? [NSDate date] : message.messageDate  type:BubbleTypeMine];
+            sayBubble.message = message;
+
             sayBubble.avatarUrl = message.user.avatarUrl;
             [temp addObject:sayBubble];
         }
@@ -345,6 +438,30 @@
         NSLog(@"addUserToPlaceTalk %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error addUserToPlaceTalk %@", [error description]);
+        
+        completionBlock(NO, error);
+    }];
+    
+}
+
+-(void)registerUser:(NSInteger)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock
+{
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/User/RegisterDevice"];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSLog(@"get registerUser url : %@", urlString);
+    
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [client setParameterEncoding:AFFormURLParameterEncoding];
+    
+    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"NotificationId":deviceToken};
+    [client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
+    [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"registerUser %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error registerUser %@", [error description]);
         
         completionBlock(NO, error);
     }];

@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "SPGooglePlacesAutocompleteQuery.h"
-@interface RCSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MKMapViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+#import "TRAutocompleteView.h"
+#import "TRGoogleMapsAutocompleteItemsSource.h"
+#import "TRTextFieldExtensions.h"
+#import "TRGoogleMapsAutocompletionCellFactory.h"
+@interface RCSearchViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *searchResultPlaces;
     SPGooglePlacesAutocompleteQuery *searchQuery;
     MKPointAnnotation *selectedPlaceAnnotation;
-    
+    TRAutocompleteView *_autocompleteView;
+    IBOutlet UITextField *autoTextField;
+
     BOOL shouldBeginEditing;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
@@ -33,7 +39,7 @@
 
 @property (weak, nonatomic) IBOutlet UIProgressView *progressDistance;
 
-@property (weak, nonatomic) IBOutlet UITextField *searchBar;
+@property (weak, nonatomic) IBOutlet UITextField *searchBarTxt;
 @property (weak, nonatomic) IBOutlet UISlider *sliderDistance;
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -49,4 +55,7 @@
 
 @property (strong, nonatomic) NSString *categoryName;
 
+
+-(void)shiftView;
+-(void)shiftViewBack;
 @end

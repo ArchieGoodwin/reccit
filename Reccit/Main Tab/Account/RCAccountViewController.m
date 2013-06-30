@@ -12,7 +12,9 @@
 #import "RCTermsViewController.h"
 #import "RCAppDelegate.h"
 @interface RCAccountViewController ()
-
+{
+    UITapGestureRecognizer *vibeGesture;
+}
 @end
 
 @implementation RCAccountViewController
@@ -39,40 +41,37 @@
     [button setFrame:boundsForText];
 }
 
-- (void)viewDidLoad
+-(void)showHideVibe
 {
-    [super viewDidLoad];
-    
-    
-    
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] == nil)
+    if(_btnVibe.hidden)
     {
-        [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
-        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"vibe"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        //[_btnVibe sizeToFit];
-        //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
-        
+        _btnVibe.hidden = NO;
+        _btnVibe1.hidden = NO;
+        [self changeStateOFVibeButton];
 
     }
     else
     {
-        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
-        {
-            [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
-            //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+        [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"vibe"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        _btnVibe.hidden = YES;
+        _btnVibe1.hidden = YES;
 
-            
-        }
-        else
-        {
-            [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
-            
-            //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
-
-            
-        }
     }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    vibeGesture = [UITapGestureRecognizer new];
+    vibeGesture.numberOfTapsRequired = 3;
+    [vibeGesture addTarget:self action:@selector(showHideVibe)];
+    [self.view addGestureRecognizer:vibeGesture];
+    
+    
     
     
     
@@ -83,8 +82,52 @@
     [self.lbName setText:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName]];
 }
 
+-(void)changeStateOFVibeButton
+{
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] == nil)
+    {
+        [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"vibe"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //[_btnVibe sizeToFit];
+        //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+        
+        
+    }
+    else
+    {
+        _btnVibe.hidden = NO;
+        _btnVibe1.hidden = NO;
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+        {
+            [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
+            //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+            
+            
+        }
+        else
+        {
+            [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
+            
+            //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+            
+            
+        }
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+    {
+        _btnVibe.hidden = NO;
+        if(!_btnVibe.hidden)
+        {
+            [self changeStateOFVibeButton];
+        }
+    }
+   
+    
     [self.navigationController setNavigationBarHidden:YES];
 }
 
@@ -192,6 +235,9 @@
 
 - (void)viewDidUnload {
     [self setBtnVibe:nil];
+    [self setBackImage:nil];
+    [self setBtnVibe1:nil];
+    [self setContainer:nil];
     [super viewDidUnload];
 }
 @end

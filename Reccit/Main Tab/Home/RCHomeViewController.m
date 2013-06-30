@@ -18,6 +18,7 @@
 #import "RCSurpriseViewController.h"
 #import "RCVibeHelper.h"
 #import "RCConversationsViewController.h"
+#import "RCVibeHelper.h"
 @interface RCHomeViewController ()
 
 @end
@@ -38,9 +39,26 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+
+    
+    
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
     [self.tfSearch setPlaceholder:[NSString stringWithFormat:@"Search for keyword/place ^ %@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCCurrentCity]]];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"] != nil)
+    {
+        [[RCVibeHelper sharedInstance] registerUser:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] deviceToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"] completionBlock:^(BOOL result, NSError *error) {
+            
+            NSLog(@"success registerUser");
+            
+            
+            
+        }];
+    }
+   
+
+
     
     [self.view setBackgroundColor:kRCBackgroundView];
 }
@@ -48,6 +66,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
+ 
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     if ([RCDataHolder getCurrentCity] == nil) {
         dispatch_async(dispatch_get_main_queue(),^{
@@ -56,48 +78,15 @@
         });
     }
     
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
-    {
-        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(BOOL result, NSError *error) {
-            //check if there are new messages in conversations
-            //store conversations in coredata
-            if(result)
-            {
-                
-                
-                
-                
-                
-                dispatch_async(dispatch_get_main_queue(),^{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New messages!" message:@"You have unread messages in Vibe. Show?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"YES", nil];
-                    [alert show];
-                    
-                });
-            }
-        }];
-    }
-    
+   
+    //[self getVibes];
     
     [self.navigationController setNavigationBarHidden:YES];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 0)
-    {
-        
-    }
-    else
-    {
-        RCConversationsViewController *contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
-     
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contr];
-        
-        [self presentViewController:nav animated:YES completion:^{
-           
-        }];
-    }
-}
+
+
+
 
 
 - (void)loadCurrentCity

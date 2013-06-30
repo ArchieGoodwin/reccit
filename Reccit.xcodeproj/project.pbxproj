@@ -350,6 +350,12 @@
 		DC0AAC951773125A00058735 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0AAC911773125A00058735 /* SPGooglePlacesAutocompletePlace.m */; };
 		DC0AAC9817733E1D00058735 /* favs_tabs.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0AAC9617733E1D00058735 /* favs_tabs.png */; };
 		DC0AAC9917733E1D00058735 /* reccits_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0AAC9717733E1D00058735 /* reccits_tab.png */; };
+		DC27DFFC1776B4F7005B9CBD /* TRAutocompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27DFF01776B4F7005B9CBD /* TRAutocompleteView.m */; };
+		DC27DFFD1776B4F7005B9CBD /* TRGoogleMapsAutocompleteItemsSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27DFF31776B4F7005B9CBD /* TRGoogleMapsAutocompleteItemsSource.m */; };
+		DC27DFFE1776B4F7005B9CBD /* TRGoogleMapsAutocompletionCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27DFF51776B4F7005B9CBD /* TRGoogleMapsAutocompletionCellFactory.m */; };
+		DC27DFFF1776B4F7005B9CBD /* TRGoogleMapsSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27DFF71776B4F7005B9CBD /* TRGoogleMapsSuggestion.m */; };
+		DC27E0001776B4F7005B9CBD /* TRStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27DFF91776B4F7005B9CBD /* TRStringExtensions.m */; };
+		DC27E0011776B4F7005B9CBD /* TRTextFieldExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27DFFB1776B4F7005B9CBD /* TRTextFieldExtensions.m */; };
 		DC3AD3051769DF5F00C65E87 /* button_checkin_active.png in Resources */ = {isa = PBXBuildFile; fileRef = DC3AD2F51769DF5F00C65E87 /* button_checkin_active.png */; };
 		DC3AD3061769DF5F00C65E87 /* button_checkin_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC3AD2F61769DF5F00C65E87 /* button_checkin_active@2x.png */; };
 		DC3AD3071769DF5F00C65E87 /* button_checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = DC3AD2F71769DF5F00C65E87 /* button_checkin.png */; };
@@ -986,6 +992,20 @@
 		DC0AAC911773125A00058735 /* SPGooglePlacesAutocompletePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompletePlace.m; sourceTree = "<group>"; };
 		DC0AAC9617733E1D00058735 /* favs_tabs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favs_tabs.png; sourceTree = "<group>"; };
 		DC0AAC9717733E1D00058735 /* reccits_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reccits_tab.png; sourceTree = "<group>"; };
+		DC27DFEE1776B4F7005B9CBD /* TRAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteItemsSource.h; sourceTree = "<group>"; };
+		DC27DFEF1776B4F7005B9CBD /* TRAutocompleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteView.h; sourceTree = "<group>"; };
+		DC27DFF01776B4F7005B9CBD /* TRAutocompleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAutocompleteView.m; sourceTree = "<group>"; };
+		DC27DFF11776B4F7005B9CBD /* TRAutocompletionCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompletionCellFactory.h; sourceTree = "<group>"; };
+		DC27DFF21776B4F7005B9CBD /* TRGoogleMapsAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsAutocompleteItemsSource.h; sourceTree = "<group>"; };
+		DC27DFF31776B4F7005B9CBD /* TRGoogleMapsAutocompleteItemsSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsAutocompleteItemsSource.m; sourceTree = "<group>"; };
+		DC27DFF41776B4F7005B9CBD /* TRGoogleMapsAutocompletionCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsAutocompletionCellFactory.h; sourceTree = "<group>"; };
+		DC27DFF51776B4F7005B9CBD /* TRGoogleMapsAutocompletionCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsAutocompletionCellFactory.m; sourceTree = "<group>"; };
+		DC27DFF61776B4F7005B9CBD /* TRGoogleMapsSuggestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsSuggestion.h; sourceTree = "<group>"; };
+		DC27DFF71776B4F7005B9CBD /* TRGoogleMapsSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsSuggestion.m; sourceTree = "<group>"; };
+		DC27DFF81776B4F7005B9CBD /* TRStringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRStringExtensions.h; sourceTree = "<group>"; };
+		DC27DFF91776B4F7005B9CBD /* TRStringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRStringExtensions.m; sourceTree = "<group>"; };
+		DC27DFFA1776B4F7005B9CBD /* TRTextFieldExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTextFieldExtensions.h; sourceTree = "<group>"; };
+		DC27DFFB1776B4F7005B9CBD /* TRTextFieldExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTextFieldExtensions.m; sourceTree = "<group>"; };
 		DC3AD2F51769DF5F00C65E87 /* button_checkin_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_checkin_active.png; sourceTree = "<group>"; };
 		DC3AD2F61769DF5F00C65E87 /* button_checkin_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_checkin_active@2x.png"; sourceTree = "<group>"; };
 		DC3AD2F71769DF5F00C65E87 /* button_checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_checkin.png; sourceTree = "<group>"; };
@@ -1860,6 +1880,7 @@
 		A095E40816B32AD1007108F6 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				DC27DFED1776B4E8005B9CBD /* Autocomplete 2 */,
 				DC0AAC891773124C00058735 /* Autocomplete */,
 				DC601660176C6CE600C0B5E4 /* Bubbles */,
 				A0E3ED3D16B5B24D002722E8 /* SDWebImage */,
@@ -2141,6 +2162,27 @@
 				DC0AAC911773125A00058735 /* SPGooglePlacesAutocompletePlace.m */,
 			);
 			name = Autocomplete;
+			sourceTree = "<group>";
+		};
+		DC27DFED1776B4E8005B9CBD /* Autocomplete 2 */ = {
+			isa = PBXGroup;
+			children = (
+				DC27DFEE1776B4F7005B9CBD /* TRAutocompleteItemsSource.h */,
+				DC27DFEF1776B4F7005B9CBD /* TRAutocompleteView.h */,
+				DC27DFF01776B4F7005B9CBD /* TRAutocompleteView.m */,
+				DC27DFF11776B4F7005B9CBD /* TRAutocompletionCellFactory.h */,
+				DC27DFF21776B4F7005B9CBD /* TRGoogleMapsAutocompleteItemsSource.h */,
+				DC27DFF31776B4F7005B9CBD /* TRGoogleMapsAutocompleteItemsSource.m */,
+				DC27DFF41776B4F7005B9CBD /* TRGoogleMapsAutocompletionCellFactory.h */,
+				DC27DFF51776B4F7005B9CBD /* TRGoogleMapsAutocompletionCellFactory.m */,
+				DC27DFF61776B4F7005B9CBD /* TRGoogleMapsSuggestion.h */,
+				DC27DFF71776B4F7005B9CBD /* TRGoogleMapsSuggestion.m */,
+				DC27DFF81776B4F7005B9CBD /* TRStringExtensions.h */,
+				DC27DFF91776B4F7005B9CBD /* TRStringExtensions.m */,
+				DC27DFFA1776B4F7005B9CBD /* TRTextFieldExtensions.h */,
+				DC27DFFB1776B4F7005B9CBD /* TRTextFieldExtensions.m */,
+			);
+			name = "Autocomplete 2";
 			sourceTree = "<group>";
 		};
 		DC564A431749DB100023A09F /* GA */ = {
@@ -2842,6 +2884,12 @@
 				DC0AAC931773125A00058735 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
 				DC0AAC941773125A00058735 /* SPGooglePlacesPlaceDetailQuery.m in Sources */,
 				DC0AAC951773125A00058735 /* SPGooglePlacesAutocompletePlace.m in Sources */,
+				DC27DFFC1776B4F7005B9CBD /* TRAutocompleteView.m in Sources */,
+				DC27DFFD1776B4F7005B9CBD /* TRGoogleMapsAutocompleteItemsSource.m in Sources */,
+				DC27DFFE1776B4F7005B9CBD /* TRGoogleMapsAutocompletionCellFactory.m in Sources */,
+				DC27DFFF1776B4F7005B9CBD /* TRGoogleMapsSuggestion.m in Sources */,
+				DC27E0001776B4F7005B9CBD /* TRStringExtensions.m in Sources */,
+				DC27E0011776B4F7005B9CBD /* TRTextFieldExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2920,8 +2968,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2940,8 +2988,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2949,8 +2997,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2969,8 +3017,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

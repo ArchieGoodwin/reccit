@@ -11,5 +11,5 @@
 @interface RCConversationsViewController : UITableViewController
 
 
-@property (nonatomic, strong) NSMutableArray *conversations;
+@property (nonatomic, strong) NSArray *conversations;
 @end

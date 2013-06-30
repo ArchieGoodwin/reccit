@@ -13,7 +13,9 @@
 #import "NSBubbleData.h"
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
-
+#import "RCUser.h"
+#import "RCMessage.h"
+#import "RCVibeHelper.h"
 @interface UIBubbleTableViewCell ()
 
 @property (nonatomic, retain) UIView *customView;
@@ -81,16 +83,28 @@
     // Adjusting the x coordinate for avatar
     if (self.showAvatar)
     {
-        [self.avatarImage removeFromSuperview];
-#if !__has_feature(objc_arc)
-        self.avatarImage = [[[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])] autorelease];
-#else
-        //self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
-        
-        [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.message.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
+        //[self.avatarImage removeFromSuperview];
+        self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
+        NSLog(@"%@", self.data.message.user.userId);
+        if(self.data.message.user.avatarUrl == nil)
+        {
+            [[RCVibeHelper sharedInstance] getUserFromServer:[self.data.message.user.userId integerValue] mess:self.data.message completionBlock:^(RCMessage *result, NSError *error) {
+                
+                NSLog(@"%@", result.user.avatarUrl);
+                self.data.message = result;
+                [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.message.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
+                
+            }];
+        }
+        else
+        {
+            NSLog(@"%@", self.data.message.user.avatarUrl);
 
-#endif
-        self.avatarImage.layer.cornerRadius = 9.0;
+             [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.message.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
+        }
+       
+
+        self.avatarImage.layer.cornerRadius = 3.0;
         self.avatarImage.layer.masksToBounds = YES;
         self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
         self.avatarImage.layer.borderWidth = 1.0;

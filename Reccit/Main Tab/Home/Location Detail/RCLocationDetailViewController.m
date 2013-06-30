@@ -19,6 +19,8 @@
 #import "VibeViewController.h"
 #import "RCVibeHelper.h"
 #import "NSManagedObject+NWCoreDataHelper.h"
+#import "RCMapAnnotationView.h"
+#import "RCMapAnnotation.h"
 #define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d&user_id=%@"
 
 @interface RCLocationDetailViewController ()
@@ -41,7 +43,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
+    self.mapView.delegate = self;
+
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
@@ -68,6 +71,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
         if(self.location.ID > 0)
@@ -93,7 +97,11 @@
     }
     
     self.rateView.rate = self.location.rating;
-    self.lbCity.text = self.location.genre;
+    if(self.location.genre != [NSNull null] && self.location.genre != nil)
+    {
+        self.lbCity.text = self.location.genre;
+
+    }
     
     /*if (self.location.phoneNumber == nil)
     {
@@ -104,20 +112,98 @@
     MKCoordinateRegion region = {{0,0},{.001,.001}};
     region.center = currentLocation;
     
-    MKPointAnnotation *userLocation = [[MKPointAnnotation alloc] init];
-    userLocation.coordinate = currentLocation;
-    [self.mapView addAnnotation:userLocation];
+    NSLog(@"%@  %@  %f, %f", self.location.type, self.location.category, self.location.latitude, self.location.longitude);
+    
+    RCMapAnnotation *annotation = [[RCMapAnnotation alloc] init];
+    
+    annotation.myLocation = self.location;
+    annotation.title = self.location.name;
+    annotation.coordinate = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
+    [self.mapView addAnnotation:annotation];
+    
+    
+   // MKPointAnnotation *userLocation = [[MKPointAnnotation alloc] init];
+    //userLocation.coordinate = currentLocation;
+    //[self.mapView addAnnotation:userLocation];
     
     [self.mapView setRegion:region animated:NO];
     self.mapView.showsUserLocation = YES;
-    
     self.lbPrice.text = @"";
     for (int i = 0; i < self.location.price; ++i)
     {
         self.lbPrice.text = [NSString stringWithFormat:@"%@$", self.lbPrice.text];
     }
     
+    //[self centerMap2];
+    
     [super viewWillAppear:animated];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id<MKAnnotation>)a
+{
+    
+    if(![a isKindOfClass:[MKUserLocation class]])
+    {
+        MKAnnotationView* annotationView = nil;
+        
+        NSString* identifier = @"Image";
+        
+        //RCMapAnnotationView * imageAnnotationView = (RCMapAnnotationView*)[mv dequeueReusableAnnotationViewWithIdentifier:identifier];
+        //if(nil == imageAnnotationView)
+        //{
+        RCMapAnnotationView* imageAnnotationView = [[RCMapAnnotationView alloc] initWithAnnotation:a reuseIdentifier:identifier];
+        
+        //}
+        
+        annotationView = imageAnnotationView;
+        
+        annotationView.canShowCallout = YES;
+        //UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        //MapAnnotation* csAnnotation = (MapAnnotation*)a;
+        
+        //detailButton.tag = csAnnotation.tag;
+        //[detailButton addTarget:self action:@selector(goToPlace:) forControlEvents:UIControlEventTouchUpInside];
+        //annotationView.rightCalloutAccessoryView = detailButton;
+        //annotationView.calloutOffset = CGPointMake(0, 4);
+        //annotationView.centerOffset =  CGPointMake(0, 0);
+        return annotationView;
+    }
+    return nil;
+    
+    
+}
+
+- (void)centerMap2{
+    
+    if([_mapView.annotations count] == 0)
+        return;
+    
+    CLLocationCoordinate2D topLeftCoord;
+    topLeftCoord.latitude = -90;
+    topLeftCoord.longitude = 180;
+    
+    CLLocationCoordinate2D bottomRightCoord;
+    bottomRightCoord.latitude = 90;
+    bottomRightCoord.longitude = -180;
+    
+    for(id <MKAnnotation> annotation in _mapView.annotations)
+    {
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude);
+        
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, annotation.coordinate.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, annotation.coordinate.latitude);
+    }
+    
+    MKCoordinateRegion region;
+    region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
+    region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
+    region.span.latitudeDelta = 0.003; // Add a little extra space on the sides
+    region.span.longitudeDelta = 0.003; // Add a little extra space on the sides
+    
+    region = [_mapView regionThatFits:region];
+    [_mapView setRegion:region animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning

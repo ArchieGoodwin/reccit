@@ -23,7 +23,10 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "MGTwitterEngine.h"
 #import "RCVibeHelper.h"
-
+#import "RCMapAnnotation.h"
+#import "RCMapAnnotationView.h"
+#import <MapKit/MapKit.h>
+#import "RCAppDelegate.h"
 #define kGSAPIAddNewPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php?user=%@&rating=%d&friends=%@&recommend=%@&comment=%@&auth=%@&name=%@&address=%@&city=%@&state=%@&zipcode=%@&country=%@&lat=%lf&long=%lf"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
 
@@ -71,6 +74,39 @@
     [self.view setBackgroundColor:kRCBackgroundView];
 }
 
+- (void)centerMap2{
+    
+    if([_mapView.annotations count] == 0)
+        return;
+    
+    CLLocationCoordinate2D topLeftCoord;
+    topLeftCoord.latitude = -90;
+    topLeftCoord.longitude = 180;
+    
+    CLLocationCoordinate2D bottomRightCoord;
+    bottomRightCoord.latitude = 90;
+    bottomRightCoord.longitude = -180;
+    
+    for(id <MKAnnotation> annotation in _mapView.annotations)
+    {
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude);
+        
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, annotation.coordinate.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, annotation.coordinate.latitude);
+    }
+    
+    MKCoordinateRegion region;
+    region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
+    region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
+    region.span.latitudeDelta = 0.003; // Add a little extra space on the sides
+    region.span.longitudeDelta = 0.003; // Add a little extra space on the sides
+    
+    region = [_mapView regionThatFits:region];
+    [_mapView setRegion:region animated:YES];
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     /*if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCTwitterLoggedIn] != nil)
@@ -92,6 +128,7 @@
             self.viewInfo.hidden = NO;
             NSLog(@"%@", self.location.category);
             
+            self.location.type = self.location.category;
             if ([self.location.category isEqualToString:@"hotel"])
             {
                 [self.imgLocation setImage:[UIImage imageNamed:@"sleep_type.png"]];
@@ -136,13 +173,32 @@
             MKCoordinateRegion region = {{0,0},{.001,.001}};
             region.center = currentLocation;
             
-            MKPointAnnotation *userLocation = [[MKPointAnnotation alloc] init];
-            userLocation.coordinate = currentLocation;
-            [self.mapView addAnnotation:userLocation];
+            self.mapView.delegate = self;
+            
+            // add annotation to map
+            RCMapAnnotation *annotation = [[RCMapAnnotation alloc] init];
+            annotation.myLocation = self.location;
+            annotation.title = self.location.name;
+            annotation.coordinate = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
+            [self.mapView addAnnotation:annotation];
+            
+            
+            /*CLLocationCoordinate2D curLoc = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate] getCurrentLocation];
+
+            RCMapAnnotation *annotation2 = [[RCMapAnnotation alloc] init];
+            annotation2.title = @"Current location";
+            annotation2.coordinate = CLLocationCoordinate2DMake(curLoc.latitude, curLoc.longitude);
+            [self.mapView addAnnotation:annotation2];*/
+            
+            //MKPointAnnotation *userLocation = [[MKPointAnnotation alloc] init];
+            //userLocation.coordinate = currentLocation;
+            //[self.mapView addAnnotation:userLocation];
             
             [self.mapView setRegion:region animated:NO];
             self.mapView.showsUserLocation = YES;
             
+            
+            [self centerMap2];
             
         } else {
             
@@ -193,6 +249,39 @@
    
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id<MKAnnotation>)a
+{
+    
+    if(![a isKindOfClass:[MKUserLocation class]])
+    {
+        MKAnnotationView* annotationView = nil;
+        
+        NSString* identifier = @"Image";
+        
+        //RCMapAnnotationView * imageAnnotationView = (RCMapAnnotationView*)[mv dequeueReusableAnnotationViewWithIdentifier:identifier];
+        //if(nil == imageAnnotationView)
+        //{
+        RCMapAnnotationView* imageAnnotationView = [[RCMapAnnotationView alloc] initWithAnnotation:a reuseIdentifier:identifier];
+        
+        //}
+        
+        annotationView = imageAnnotationView;
+        
+        annotationView.canShowCallout = YES;
+        //UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        //MapAnnotation* csAnnotation = (MapAnnotation*)a;
+        
+        //detailButton.tag = csAnnotation.tag;
+        //[detailButton addTarget:self action:@selector(goToPlace:) forControlEvents:UIControlEventTouchUpInside];
+        //annotationView.rightCalloutAccessoryView = detailButton;
+        //annotationView.calloutOffset = CGPointMake(0, 4);
+        //annotationView.centerOffset =  CGPointMake(0, 0);
+        return annotationView;
+    }
+    return nil;
+    
+    
+}
 
 
 
@@ -265,15 +354,16 @@
 {
     RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-    [appDelegate openSessionWithAllowLoginUI:NO];
+    //[appDelegate openSessionWithAllowLoginUI:NO];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFacebookLoggedIn] == nil && self.swFacebook.isOn)
+    if (self.swFacebook.isOn)
     {
+
         if (FBSession.activeSession.isOpen) {
         } else {
-            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
-            RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
+            //RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
             [appDelegate openSessionWithAllowLoginUI:NO];
         }
     }
@@ -311,10 +401,7 @@
 
         [fArray addObject:person.ID];
     }
-    
-    
-    
-    
+
     
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate] getCurrentLocation];
     
@@ -345,11 +432,12 @@
                 FBRequest *postRequest = [FBRequest requestWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"];
                 postRequest.session = [FBSession activeSession];
                 
-                if(![postRequest.session.permissions containsObject:@"publish_checkins"])
+                if(![postRequest.session.permissions containsObject:@"publish_actions"])
                 {
-                    [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                    [postRequest.session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                            
+                            NSLog(@"error %@", error.description);
+
                             NSLog(@"%@", result);
                             
                             [self checkinMe];
@@ -360,7 +448,8 @@
                 else
                 {
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                        
+                        NSLog(@"error %@", error.description);
+
                         NSLog(@"%@", result);
                         [self checkinMe];
 
@@ -374,9 +463,9 @@
                 postRequest.session = [FBSession activeSession];
                 
                 
-                if(![postRequest.session.permissions containsObject:@"publish_checkins"])
+                if(![postRequest.session.permissions containsObject:@"publish_actions"])
                 {
-                    [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                    [postRequest.session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                             
                             NSLog(@"%@", result);
@@ -408,9 +497,9 @@
             postRequest.session = [FBSession activeSession];
             
             
-            if(![postRequest.session.permissions containsObject:@"publish_checkins"])
+            if(![postRequest.session.permissions containsObject:@"publish_actions"])
             {
-                [postRequest.session requestNewPublishPermissions:[NSArray arrayWithObjects:@"publish_actions", @"publish_checkins", nil] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                [postRequest.session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         
                         NSLog(@"%@", [error description]);
@@ -672,6 +761,11 @@
                 [self Publish:[NSString stringWithFormat:@"at %@", self.location.name]];
             }
         }
+        else
+        {
+            [self checkinMe];
+
+        }
         
         
         
@@ -765,6 +859,9 @@
                     [self makeStringWithKeyAndValue:@"genre" value:self.location.genre],
                     [self makeStringWithKeyAndValue:@"lat" value:[NSString stringWithFormat:@"%f",self.location.latitude]],
                     [self makeStringWithKeyAndValue:@"long" value:[NSString stringWithFormat:@"%f",self.location.longitude]],
+                    [self makeStringWithKeyAndValue:@"street" value:self.location.street],
+                    [self makeStringWithKeyAndValue:@"phone" value:self.location.phoneNumber],
+                    [self makeStringWithKeyAndValue2:@"place_id" value:[NSString stringWithFormat:@"%i", self.location.ID > 0 ? self.location.ID : 0]],
                     nil];
     
     
@@ -802,7 +899,7 @@
     } else {
         [self.swFacebook setOn:NO];
         [HUD hide:YES];
-        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Login failed with Facebook"];
+        //[RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Login failed with Facebook"];
     }
 }
 
@@ -811,12 +908,12 @@
     [HUD hide:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFoursquareLoggedIn] == nil)
+    /*if ([[NSUserDefaults standardUserDefaults] objectForKey:kRCFoursquareLoggedIn] == nil)
     {
         [self performSegueWithIdentifier:@"PushFoursquare" sender:nil];
     } else {
         [self performSegueWithIdentifier:@"PushRate" sender:nil];
-    }
+    }*/
 }
 
 #pragma mark -

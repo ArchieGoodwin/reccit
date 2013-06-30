@@ -21,6 +21,10 @@
 #import "AFNetworking.h"
 #import "SPGooglePlacesAutocompleteQuery.h"
 #import "SPGooglePlacesAutocompletePlace.h"
+#import "TRAutocompleteView.h"
+#import "TRGoogleMapsAutocompleteItemsSource.h"
+#import "TRTextFieldExtensions.h"
+#import "TRGoogleMapsAutocompletionCellFactory.h"
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
 
 
@@ -56,14 +60,21 @@
 {
     [super viewDidLoad];
     
-    searchQuery = [[SPGooglePlacesAutocompleteQuery alloc] init];
     
-    shouldBeginEditing = YES;
+    _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:autoTextField
+                                                         usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyDReGYWBPSVAmKXki80akGombUHBDwWp48"]
+                                                         cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
+                                                        presentingIn:self];
     
-    for (UIView * v in self.searchDispController.searchBar.subviews) {
+    
+    
+    
+    
+    /*for (UIView * v in self.searchDispController.searchBar.subviews) {
         if ([v isKindOfClass:NSClassFromString(@"UISearchBarTextField")]) {
             v.superview.alpha = 0;
-            UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(47, 185, 300, 40)];
+            UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(47, 185, 250, 40)];
+            containerView.tag = 9009;
             [containerView addSubview:v];
             [self.view addSubview:containerView];
         }
@@ -71,8 +82,9 @@
 
     self.searchDispController.searchBar.showsCancelButton = YES;
     self.searchDispController.searchBar.showsScopeBar = YES;
-    //[self.searchDispController.searchBar sizeToFit];
-    [self.searchDispController.searchBar setShowsCancelButton:YES animated:YES];
+    [self.searchDispController.searchBar sizeToFit];
+    self.searchDispController.searchBar.frame = CGRectMake(47, 15, 250, 40);*/
+
     
 	// Do any additional setup after loading the view.
     
@@ -83,9 +95,10 @@
     self.tfPrice.inputAccessoryView = self.toolbar;
     self.tfGenre.inputAccessoryView = self.toolbar;
     self.tfLocation.inputAccessoryView = self.toolbar;
-    self.searchBar.returnKeyType = UIReturnKeySearch;
+    self.searchBarTxt.returnKeyType = UIReturnKeySearch;
     _btnReduce.hidden = YES;
     [self.view setBackgroundColor:kRCBackgroundView];
+    
     
 }
 
@@ -97,12 +110,17 @@
         self.mapView.frame = CGRectMake(0, 0, 320, [self isIphone5]  ? 508 : 420);
         _btnIncrease.hidden = YES;
         _btnReduce.hidden = NO;
+        
+        autoTextField.hidden = YES;
+        
+
     }
     else
     {
         self.mapView.frame = mapRect;
         _btnIncrease.hidden = NO;
         _btnReduce.hidden = YES;
+        autoTextField.hidden = NO;
     }
 }
 
@@ -147,14 +165,12 @@
     mapRect = self.mapView.frame;
 
     if ([RCDataHolder getCurrentCity] != nil) {
-        self.searchBar.placeholder = [NSString stringWithFormat:@"keyword/place ^ %@", [RCDataHolder getCurrentCity]];
-        self.searchDispController.searchBar.text = [RCDataHolder getCurrentCity];
-        self.tfLocation.text = [RCDataHolder getCurrentCity];
-        [self dismissSearchControllerWhileStayingActive];
+        self.searchBarTxt.placeholder = [NSString stringWithFormat:@"keyword/place ^ %@", [RCDataHolder getCurrentCity]];
+        //self.searchDispController.searchBar.text = [RCDataHolder getCurrentCity];
+        autoTextField.text = [RCDataHolder getCurrentCity];
 
     } else {
         [self loadCurrentCity];
-        [self dismissSearchControllerWhileStayingActive];
 
     }
     
@@ -176,6 +192,9 @@
     }
    // self.searchDispController.searchBar.frame = CGRectMake(self.searchDispController.searchBar.frame.origin.x, self.searchDispController.searchBar.frame.origin.y, 200, 40);
     [self callAPIGetListLocation];
+    
+    [autoTextField resignFirstResponder];
+    [self.searchBarTxt resignFirstResponder];
 }
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
@@ -205,13 +224,13 @@
 }
 
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+/*-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *substring = [NSString stringWithString:textField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
     [self searchAutocompleteEntriesWithSubstring:substring];
     return YES;
-}
+}*/
 
 - (void)callAPIGetListLocation
 {
@@ -415,9 +434,9 @@
 //            [RCDataHolder setCurrentCity:[NSString stringWithFormat:@"%@,%@", [[placemarks objectAtIndex:0] locality], [[placemarks objectAtIndex:0] country]]];
             
             [RCDataHolder setCurrentCity:[[placemarks objectAtIndex:0] locality]];
-            self.searchBar.placeholder = [NSString stringWithFormat:@"keyword/place ^ %@", [RCDataHolder getCurrentCity]];
-            self.tfLocation.text = [RCDataHolder getCurrentCity];
-            self.searchDispController.searchBar.text = [RCDataHolder getCurrentCity];
+            self.searchBarTxt.placeholder = [NSString stringWithFormat:@"keyword/place ^ %@", [RCDataHolder getCurrentCity]];
+            autoTextField.text = [RCDataHolder getCurrentCity];
+            //self.searchDispController.searchBar.text = [RCDataHolder getCurrentCity];
         } else {
             [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         }
@@ -436,8 +455,8 @@
     if (sender == self.btnGo)
     {
         RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
-        
-        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.searchDispController.searchBar.text, self.categoryName];
+        result.category = self.categoryName;
+        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", autoTextField.text, self.categoryName];
         
         result.isSurprase = NO;
         result.showTabs = YES;
@@ -455,7 +474,7 @@
             query = [NSString stringWithFormat:@"%@&price=%d", query, [self.tfPrice.text length]];
         }
         result.isSearch = NO;
-        result.tfLocation = self.tfLocation.text;
+        result.tfLocation = autoTextField.text;
         result.categoryName = self.categoryName;
         result.querySearch = query;
     }
@@ -463,16 +482,17 @@
     if (sender == self.btnSuprise)
     {
         RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
-        
+        result.category = self.categoryName;
+
         NSString *query = [NSString stringWithFormat:@"filter=surpriseme&city=%@&type=%@", self.searchDispController.searchBar.text , self.categoryName];
         
         result.isSurprase = YES;
         result.showTabs = NO;
-        result.tfLocation = self.tfLocation.text;
+        result.tfLocation = autoTextField.text;
         result.categoryName = self.categoryName;
-        if ([self.searchBar.text length] > 0)
+        if ([self.searchBarTxt.text length] > 0)
         {
-            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBarTxt.text];
         }
         if ([self.tfGenre.text length] > 0)
         {
@@ -491,19 +511,20 @@
     if (sender == self.btnSearch)
     {
         RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
-        
-        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.searchDispController.searchBar.text, self.categoryName];
+        result.category = self.categoryName;
+
+        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", autoTextField.text, self.categoryName];
         result.isSurprase = NO;
         result.showTabs = NO;
-        result.tfLocation = self.tfLocation.text;
+        result.tfLocation = autoTextField.text;
         result.categoryName = self.categoryName;
-        if ([self.searchBar.text length] > 0)
+        if ([self.searchBarTxt.text length] > 0)
         {
-            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBarTxt.text];
         }
         result.isSearch = YES;
         result.querySearch = query;
-        result.searchString = self.searchBar.text;
+        result.searchString = self.searchBarTxt.text;
     }
 }
 
@@ -573,12 +594,41 @@
     
     if (textField.tag == 1000) return;
     
+    /*if (textField.tag == 9010)
+    {
+        
+        textField.frame = CGRectMake(textField.frame.origin.x, 70, textField.frame.size.width, textField.frame.size.height);
+        
+        return;
+    }*/
+
+    
     [self.pickerView reloadAllComponents];
     
     [UIView animateWithDuration:0.4 animations:^{
         [UIView setAnimationBeginsFromCurrentState:YES];
         CGRect frame = self.view.frame;
         frame.origin.y = -150;
+        self.view.frame = frame;
+    }];
+}
+
+
+-(void)shiftView
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        CGRect frame = self.view.frame;
+        frame.origin.y = -150;
+        self.view.frame = frame;
+    }];
+}
+
+-(void)shiftViewBack
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        CGRect frame = self.view.frame;
+        frame.origin.y = 0;
         self.view.frame = frame;
     }];
 }
@@ -692,148 +742,13 @@
 - (void)viewDidUnload {
     [self setBtnIncrease:nil];
     [self setBtnReduce:nil];
-    [self setSearchDispController:nil];
     [super viewDidUnload];
 }
 
 
-#pragma mark -
-#pragma mark UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [searchResultPlaces count];
-}
-
-- (SPGooglePlacesAutocompletePlace *)placeAtIndexPath:(NSIndexPath *)indexPath {
-    return [searchResultPlaces objectAtIndex:indexPath.row];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"SPGooglePlacesAutocompleteCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    
-    cell.textLabel.font = [UIFont fontWithName:@"GillSans" size:16.0];
-    cell.textLabel.text = [self placeAtIndexPath:indexPath].name;
-    return cell;
-}
-
-#pragma mark -
-#pragma mark UITableViewDelegate
 
 
 
-
-- (void)dismissSearchControllerWhileStayingActive {
-    // Animate out the table view.
-    NSTimeInterval animationDuration = 0.3;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:animationDuration];
-    self.searchDispController.searchResultsTableView.alpha = 0.0;
-    [UIView commitAnimations];
-    //[self.searchDispController.searchBar setShowsCancelButton:NO animated:YES];
-    [self.searchDispController.searchBar resignFirstResponder];
-    //[self.searchDispController setActive:NO];
-    
-    self.searchDispController.searchBar.showsCancelButton = YES;
-    self.searchDispController.searchBar.showsScopeBar = YES;
-    //[self.searchDispController.searchBar sizeToFit];
-    [self.searchDispController.searchBar setShowsCancelButton:YES animated:YES];
-    self.searchDispController.searchBar.frame = CGRectMake(47, 15, 300, 40);
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SPGooglePlacesAutocompletePlace *place = [self placeAtIndexPath:indexPath];
-    
-    [place resolveToPlacemark:^(CLPlacemark *placemark, NSString *addressString, NSError *error) {
-        if (error) {
-            SPPresentAlertViewWithErrorAndTitle(error, @"Could not map selected Place");
-        } else if (placemark) {
-            //[self addPlacemarkAnnotationToMap:placemark addressString:addressString];
-            [self dismissSearchControllerWhileStayingActive];
-            //NSLog(placemark.locality);
-            //_citySearchBar.text = placemark.locality;
-            self.searchDispController.searchBar.text = placemark.locality;
-            [self.searchDispController.searchBar resignFirstResponder];
-            self.view.frame = viewRect;
-            [self.searchDispController.searchBar setShowsCancelButton:NO animated:YES];
-            self.searchDispController.searchBar.frame = CGRectMake(47, 15, 200, 40);
-
-            //shouldBeginEditing = NO;
-            //self.searchDispController.searchResultsTableView.alpha = 0.0;
-            //self.searchDispController.searchBar.frame = CGRectMake(47, 185, 200, 40);
-            //[self.searchDispController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
-           
-            //[self.searchDispController setActive:NO animated:YES];
-        }
-    }];
-}
-
-#pragma mark -
-#pragma mark UISearchDisplayDelegate
-
-- (void)handleSearchForSearchString:(NSString *)searchString {
-    //searchQuery.location = self.mapView.userLocation.coordinate;
-    searchQuery.input = searchString;
-    [searchQuery fetchPlaces:^(NSArray *places, NSError *error) {
-        if (error) {
-            SPPresentAlertViewWithErrorAndTitle(error, @"Could not fetch Places");
-        } else {
-           
-            searchResultPlaces = places;
-            [self.searchDispController.searchResultsTableView reloadData];
-        }
-    }];
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    [self handleSearchForSearchString:searchString];
-    
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
-}
-
-#pragma mark -
-#pragma mark UISearchBar Delegate
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if (![searchBar isFirstResponder]) {
-        // User tapped the 'clear' button.
-        shouldBeginEditing = NO;
-        [self.searchDispController setActive:NO];
-        self.searchDispController.searchBar.showsCancelButton = YES;
-        self.searchDispController.searchBar.showsScopeBar = YES;
-        //[self.searchDispController.searchBar sizeToFit];
-        [self.searchDispController.searchBar setShowsCancelButton:YES animated:YES];
-        self.searchDispController.searchBar.frame = CGRectMake(47, 15, 250, 40);
-
-         //[self.searchDispController.searchBar setShowsCancelButton:NO animated:YES];
-    }
-}
-
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    if (shouldBeginEditing) {
-        // Animate in the table view.
-        NSTimeInterval animationDuration = 0.3;
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:animationDuration];
-        viewRect = self.view.frame;
-        self.view.frame = CGRectMake(self.view.frame.origin.x, -150, 320, self.view.frame.size.height);
-        self.searchDispController.searchResultsTableView.alpha = 1.0;
-        //self.searchDispController.searchBar.frame = CGRectMake(47, 0, 200, 40);
-        [UIView commitAnimations];
-        [self.searchDispController setActive:YES animated:YES];
-        self.searchDispController.searchBar.frame = CGRectMake(47, 15, 250, 40);
-
-        //[_citySearchBar setShowsCancelButton:NO animated:NO];
-        //[self.searchDispController.searchBar setShowsCancelButton:NO animated:NO];
-    }
-    BOOL boolToReturn = shouldBeginEditing;
-    shouldBeginEditing = YES;
-    return boolToReturn;
-}
 
 
 @end

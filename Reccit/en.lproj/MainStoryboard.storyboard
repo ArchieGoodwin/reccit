@@ -569,7 +569,10 @@
                     <navigationItem key="navigationItem" id="UUb-3b-Rbq"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="backImage" destination="AA9-eU-TVB" id="lwj-t6-Pis"/>
                         <outlet property="btnVibe" destination="Tfn-5y-2HV" id="5ge-ra-tl3"/>
+                        <outlet property="btnVibe1" destination="uEe-V5-Kup" id="5nq-Kz-qIQ"/>
+                        <outlet property="container" destination="4jg-Yf-1Up" id="okn-Hg-9aK"/>
                         <outlet property="imgAvatar" destination="yWg-Nf-7W1" id="rk6-mP-Kt8"/>
                         <outlet property="lbName" destination="bkw-7i-3pX" id="ctX-Kv-xVF"/>
                         <segue destination="Rfr-VA-scv" kind="push" identifier="PushAbout" id="bw6-C4-Hig"/>
@@ -1599,11 +1602,11 @@
                 <viewController id="bbC-ke-gQQ" customClass="RCSearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FQ5-ni-8KI">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="hLE-9y-3BQ">
                                 <rect key="frame" x="0.0" y="170" width="320" height="378"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZEq-a3-9Er">
                                         <rect key="frame" x="125" y="289" width="70" height="42"/>
@@ -1620,7 +1623,7 @@
                                             <action selector="btnGoTouched:" destination="bbC-ke-gQQ" eventType="touchUpInside" id="req-tJ-IaN"/>
                                         </connections>
                                     </button>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="ir0-OR-EtF">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="ir0-OR-EtF">
                                         <rect key="frame" x="48" y="22" width="225" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -1633,7 +1636,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="city, country" minimumFontSize="17" id="ZS7-Y4-NIz">
-                                        <rect key="frame" x="84" y="25" width="180" height="30"/>
+                                        <rect key="frame" x="105" y="168" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1642,7 +1645,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Price range" minimumFontSize="17" id="oDk-ZU-31p">
-                                        <rect key="frame" x="84" y="67" width="180" height="30"/>
+                                        <rect key="frame" x="84" y="69" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1650,20 +1653,6 @@
                                             <outlet property="delegate" destination="bbC-ke-gQQ" id="9Nr-IV-KLY"/>
                                         </connections>
                                     </textField>
-                                    <searchBar contentMode="redraw" placeholder="City, Country" id="s6S-85-nhY">
-                                        <rect key="frame" x="48" y="20" width="225" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                        <scopeButtonTitles>
-                                            <string>Title</string>
-                                            <string>Title</string>
-                                        </scopeButtonTitles>
-                                        <connections>
-                                            <outlet property="delegate" destination="bbC-ke-gQQ" id="obr-Lt-Bo2"/>
-                                        </connections>
-                                    </searchBar>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter cuisine" minimumFontSize="17" id="3mx-u2-CvF">
                                         <rect key="frame" x="84" y="111" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1673,12 +1662,12 @@
                                             <outlet property="delegate" destination="bbC-ke-gQQ" id="EhG-si-uRb"/>
                                         </connections>
                                     </textField>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="hJ7-nK-mI2">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="hJ7-nK-mI2">
                                         <rect key="frame" x="58" y="29" width="18" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="SKx-uh-yxc">
-                                        <rect key="frame" x="58" y="70" width="18" height="23"/>
+                                        <rect key="frame" x="58" y="73" width="18" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="wda-fx-QiD">
@@ -1692,19 +1681,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-search-box.png" id="Lca-hd-0C8">
-                                <rect key="frame" x="78" y="9" width="164" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="keyword search" minimumFontSize="17" id="VBa-nw-52w">
-                                <rect key="frame" x="88" y="8" width="130" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="bbC-ke-gQQ" id="m99-Jm-78W"/>
-                                </connections>
-                            </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="GTG-LH-PTw">
                                 <rect key="frame" x="283" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1725,6 +1701,19 @@
                                     <action selector="btnCloseTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="6R5-Vp-mGo"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-search-box.png" id="Lca-hd-0C8">
+                                <rect key="frame" x="78" y="9" width="164" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="keyword search" minimumFontSize="17" id="VBa-nw-52w">
+                                <rect key="frame" x="88" y="8" width="130" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bbC-ke-gQQ" id="m99-Jm-78W"/>
+                                </connections>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ndt-aH-idX">
                                 <rect key="frame" x="205" y="3" width="41" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1740,6 +1729,13 @@
                                     <action selector="btnSeachTouched:" destination="bbC-ke-gQQ" eventType="touchUpInside" id="kPp-po-srw"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" tag="9010" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="Le4-vn-FjY">
+                                <rect key="frame" x="79" y="196" width="183" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cPP-4f-RvK">
                                 <rect key="frame" x="140" y="157" width="40" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1775,6 +1771,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fsQ-Gn-eRH"/>
                     <connections>
+                        <outlet property="autoTextField" destination="Le4-vn-FjY" id="nx3-9f-fa8"/>
                         <outlet property="bgGenre" destination="gIU-lN-Ld6" id="kxI-2i-soJ"/>
                         <outlet property="bgSearchGenre" destination="wda-fx-QiD" id="8sd-jf-aNW"/>
                         <outlet property="btnGo" destination="ZEq-a3-9Er" id="V0z-Kb-F2N"/>
@@ -1784,8 +1781,7 @@
                         <outlet property="imgAvatar" destination="GTG-LH-PTw" id="yVx-YF-Wmy"/>
                         <outlet property="mapView" destination="qnm-8N-zvh" id="cI4-wY-WWj"/>
                         <outlet property="pickerView" destination="vrh-7P-hcy" id="oAN-la-tvu"/>
-                        <outlet property="searchBar" destination="VBa-nw-52w" id="X0k-XL-FpV"/>
-                        <outlet property="searchDispController" destination="evO-Hu-9YK" id="lOJ-Db-G7k"/>
+                        <outlet property="searchBarTxt" destination="VBa-nw-52w" id="alk-iD-eDy"/>
                         <outlet property="tfGenre" destination="3mx-u2-CvF" id="phZ-pZ-vty"/>
                         <outlet property="tfLocation" destination="ZS7-Y4-NIz" id="UFh-SW-Ntz"/>
                         <outlet property="tfPrice" destination="oDk-ZU-31p" id="8id-2z-DtD"/>
@@ -1794,15 +1790,6 @@
                         <segue destination="Kqy-Mf-YWE" kind="push" identifier="PushResultSearch" id="E0T-IN-y5q"/>
                     </connections>
                 </viewController>
-                <searchDisplayController id="evO-Hu-9YK">
-                    <connections>
-                        <outlet property="delegate" destination="bbC-ke-gQQ" id="Cq1-Lq-8rL"/>
-                        <outlet property="searchBar" destination="s6S-85-nhY" id="4Ja-nI-af9"/>
-                        <outlet property="searchContentsController" destination="bbC-ke-gQQ" id="8gp-Vr-a0u"/>
-                        <outlet property="searchResultsDataSource" destination="bbC-ke-gQQ" id="8Ro-j7-lF9"/>
-                        <outlet property="searchResultsDelegate" destination="bbC-ke-gQQ" id="7yC-ZO-5iq"/>
-                    </connections>
-                </searchDisplayController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCn-Kb-0cZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pickerView contentMode="scaleToFill" id="vrh-7P-hcy">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
@@ -2869,6 +2856,268 @@
         <image name="what_areyoudoing_button.png" width="297" height="78"/>
         <image name="write_review_button.png" width="297" height="78"/>
     </resources>
+    <classes>
+        <class className="DYRateView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DYRateView.h"/>
+        </class>
+        <class className="GAITrackedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GAITrackedViewController.h"/>
+        </class>
+        <class className="MapView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapView.h"/>
+        </class>
+        <class className="RCAccountViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCAccountViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnAboutTouched:"/>
+                <relationship kind="action" name="btnTermsTouched:"/>
+                <relationship kind="outlet" name="backImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="btnVibe" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnVibe1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="container" candidateClass="UIView"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RCAddPlaceViewController" superclassName="RCBaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCAddPlaceViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnLike" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnUnLike" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgLocation" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbCity" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbPhone" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
+                <relationship kind="outlet" name="swFacebook" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="swTwitter" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="viewInfo" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="RCBaseViewController" superclassName="GAITrackedViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCBaseViewController.h"/>
+        </class>
+        <class className="RCCheckInViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCCheckInViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RCDirectViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCDirectViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbEnd" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbStart" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MapView"/>
+                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RCFriendCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCFriendCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imgAva" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgSource" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RCHomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCHomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="tfSearch" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="RCLinkedAccountsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLinkedAccountsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnFacebookUpdate" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnFoursquareUpdate" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnTwitterUpdate" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgFacebookConnect" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgFoursquareConnect" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgTwitterConnect" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="RCListFriendViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCListFriendViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="tbFriends" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tfSearch" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="RCLocationDetailViewController" superclassName="RCBaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLocationDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnCall" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnVibe" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbCity" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbNoReview" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbPrice" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbReviews" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
+                <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RCLoginFacebookViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFacebookViewController.h"/>
+        </class>
+        <class className="RCLoginFoursquareViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFoursquareViewController.h"/>
+        </class>
+        <class className="RCLoginTwitterViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginTwitterViewController.h"/>
+        </class>
+        <class className="RCLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginViewController.h"/>
+        </class>
+        <class className="RCMainTabbarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCMainTabbarController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnTab1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnTab2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnTab3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnTab4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="viewButton" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="RCMyReviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCMyReviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnEdit" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnNotReccit" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnReccit" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnShare" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="txtComment" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="RCRateCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCRateCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnLike" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnReview" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnUnLike" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lbAddress" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rateView" candidateClass="DYRateView"/>
+            </relationships>
+        </class>
+        <class className="RCRateViewController" superclassName="RCBaseViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCRateViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RCSearchResultViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchResultViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btn1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btn2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btn3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnSearchInside" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="c1" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="c2" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="c3" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgSurprise" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblNumberOfFriends" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblNumberOfReccits" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tbResult" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tfLocation" candidateClass="NSString"/>
+            </relationships>
+        </class>
+        <class className="RCSearchViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="autoTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="bgGenre" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="bgSearchGenre" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="btnGo" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnIncrease" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnReduce" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnSearch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnSuprise" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="progressDistance" candidateClass="UIProgressView"/>
+                <relationship kind="outlet" name="searchBarTxt" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="searchDispController" candidateClass="UISearchDisplayController"/>
+                <relationship kind="outlet" name="sliderDistance" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="tfGenre" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfLocation" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="viewContent" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="RCShareCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RCShareViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="handleTap:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="picker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tfBackGenre" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="tfCity" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfGenre" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfType" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="toolbarDone" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="RCSurpriseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSurpriseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgHappyHour" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="tbResult" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RCTermsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCTermsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnBackTouched:"/>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbTitle" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="RCWebViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RCWebViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

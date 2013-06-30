@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RCDefine.h"
 @class RCConversation;
+@class RCMessage;
 @interface RCVibeHelper : NSObject
 
 
@@ -25,4 +26,7 @@
 -(void)sendMessageFromUserId:(NSInteger)userId messageText:(NSString *)messageText placeId:(NSInteger)placeId subj:(NSString *)subj completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(RCConversation *)getConverationById:(NSInteger *)convId;
 -(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(void)getUserFromServer:(NSInteger)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock;
+-(void)registerUser:(NSInteger)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(NSArray *)getAllConversationsSortedByDate;
 @end
