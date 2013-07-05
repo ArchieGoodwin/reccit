@@ -60,6 +60,16 @@
 {
     [super viewDidLoad];
     
+    if([RCCommonUtils isIphone5])
+    {
+        CGRect frame = _viewPrice.frame;
+        frame.origin.y = 90;
+        _viewPrice.frame = frame;
+        
+        frame = _viewGenre.frame;
+        frame.origin.y = 158;
+        _viewGenre.frame = frame;
+    }
     
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:autoTextField
                                                          usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyDReGYWBPSVAmKXki80akGombUHBDwWp48"]
@@ -510,21 +520,23 @@
     
     if (sender == self.btnSearch)
     {
-        RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
-        result.category = self.categoryName;
+        
 
-        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", autoTextField.text, self.categoryName];
-        result.isSurprase = NO;
-        result.showTabs = NO;
-        result.tfLocation = autoTextField.text;
-        result.categoryName = self.categoryName;
-        if ([self.searchBarTxt.text length] > 0)
-        {
+            RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
+            result.category = self.categoryName;
+            
+            NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", autoTextField.text, self.categoryName];
+            result.isSurprase = NO;
+            result.showTabs = NO;
+            result.tfLocation = autoTextField.text;
+            result.categoryName = self.categoryName;
+            
             query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBarTxt.text];
-        }
-        result.isSearch = YES;
-        result.querySearch = query;
-        result.searchString = self.searchBarTxt.text;
+            result.isSearch = YES;
+            result.querySearch = query;
+            result.searchString = self.searchBarTxt.text;
+        
+       
     }
 }
 
@@ -553,6 +565,8 @@
 
 - (IBAction)btnGoTouched:(id)sender
 {
+    
+    
     [self performSegueWithIdentifier:@"PushResultSearch" sender:sender];
 }
 
@@ -565,13 +579,31 @@
 
 - (IBAction)btnSeachTouched:(id)sender
 {
-    [self performSegueWithIdentifier:@"PushResultSearch" sender:sender];
+    if(self.searchBarTxt.text.length > 0)
+    {
+        [self performSegueWithIdentifier:@"PushResultSearch" sender:sender];
+
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Enter keyword in search field please" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
  
-    [self performSegueWithIdentifier:@"PushResultSearch" sender:textField];
+    if(self.searchBarTxt.text.length > 0)
+    {
+        [self performSegueWithIdentifier:@"PushResultSearch" sender:self.btnSearch];
+        
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Enter keyword in search field please" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 
     return YES;
 }
@@ -742,6 +774,9 @@
 - (void)viewDidUnload {
     [self setBtnIncrease:nil];
     [self setBtnReduce:nil];
+    [self setViewCity:nil];
+    [self setViewPrice:nil];
+    [self setViewGenre:nil];
     [super viewDidUnload];
 }
 

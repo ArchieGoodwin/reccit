@@ -58,50 +58,71 @@
 }
 
 - (IBAction)searchByButton:(id)sender {
-    _isSearch = YES;
     
-    NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
-    
-    if ([self.searchBar.text length] > 0)
+    if(self.searchBar.text.length > 0)
     {
-        query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+        _isSearch = YES;
+        
+        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
+        
+        if ([self.searchBar.text length] > 0)
+        {
+            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+        }
+        
+        self.querySearch = query;
+        self.isSurprase = NO;
+        self.showTabs = NO;
+        _btn1.hidden = YES;
+        _btn2.hidden = YES;
+        _btn3.hidden = YES;
+        
+        
+        [self performSelector:@selector(callAPIGetListReccit) withObject:nil afterDelay:0.1];
+        [self.searchBar resignFirstResponder];
+        
     }
-
-    self.querySearch = query;
-    self.isSurprase = NO;
-    self.showTabs = NO;
-    _btn1.hidden = YES;
-    _btn2.hidden = YES;
-    _btn3.hidden = YES;
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Enter keyword in search field please" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
     
-    
-    [self performSelector:@selector(callAPIGetListReccit) withObject:nil afterDelay:0.1];
-    [self.searchBar resignFirstResponder];
+   
 
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     
-    _isSearch = YES;
-    
-    NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
-    
-    if ([self.searchBar.text length] > 0)
+    if(self.searchBar.text.length > 0)
     {
-        query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+        _isSearch = YES;
+        
+        NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
+        
+        if ([self.searchBar.text length] > 0)
+        {
+            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+        }
+        
+        self.querySearch = query;
+        self.isSurprase = NO;
+        self.showTabs = NO;
+        _btn1.hidden = YES;
+        _btn2.hidden = YES;
+        _btn3.hidden = YES;
+        
+        
+        [self performSelector:@selector(callAPIGetListReccit) withObject:nil afterDelay:0.1];
+        [self.searchBar resignFirstResponder];
+        
     }
-    
-    self.querySearch = query;
-    self.isSurprase = NO;
-    self.showTabs = NO;
-    _btn1.hidden = YES;
-    _btn2.hidden = YES;
-    _btn3.hidden = YES;
-    
-    
-    [self performSelector:@selector(callAPIGetListReccit) withObject:nil afterDelay:0.1];
-    [self.searchBar resignFirstResponder];
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Enter keyword in search field please" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
     
     return YES;
 }

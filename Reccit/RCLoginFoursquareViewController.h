@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BZFoursquare.h"
+#import "GAITrackedViewController.h"
 
-@interface RCLoginFoursquareViewController : UIViewController <BZFoursquareRequestDelegate, BZFoursquareSessionDelegate>
+@interface RCLoginFoursquareViewController : GAITrackedViewController <BZFoursquareRequestDelegate, BZFoursquareSessionDelegate>
 
 @property(nonatomic, strong) BZFoursquare *foursquare;
 

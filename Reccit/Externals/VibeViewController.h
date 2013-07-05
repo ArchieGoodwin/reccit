@@ -11,9 +11,10 @@
 #import <UIKit/UIKit.h>
 #import "UIBubbleTableViewDataSource.h"
 #import "RCLocation.h"
+#import "GAITrackedViewController.h"
 
 @class RCConversation;
-@interface VibeViewController : UIViewController <UIBubbleTableViewDataSource>
+@interface VibeViewController : GAITrackedViewController <UIBubbleTableViewDataSource>
 {
     IBOutlet UIBubbleTableView *bubbleTable;
     IBOutlet UIView *textInputView;

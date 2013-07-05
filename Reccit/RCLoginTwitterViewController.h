@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "SA_OAuthTwitterController.h"
+#import "GAITrackedViewController.h"
 
-@interface RCLoginTwitterViewController : UIViewController <SA_OAuthTwitterControllerDelegate>
+@interface RCLoginTwitterViewController : GAITrackedViewController <SA_OAuthTwitterControllerDelegate>
 {
     SA_OAuthTwitterEngine *_engine;
 }

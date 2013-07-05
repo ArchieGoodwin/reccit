@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ASIHTTPRequest.h"
+#import "GAITrackedViewController.h"
 
 @class RCAddPlaceViewController;
-@interface RCListFriendViewController : UIViewController <UITextFieldDelegate>
+@interface RCListFriendViewController : GAITrackedViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tbFriends;
 @property (weak, nonatomic) IBOutlet UITextField *tfSearch;

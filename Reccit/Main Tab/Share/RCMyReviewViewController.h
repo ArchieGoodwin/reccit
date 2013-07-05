@@ -10,8 +10,9 @@
 #import "RCLocation.h"
 #import "DYRateView.h"
 #import "ASIHTTPRequest.h"
+#import "GAITrackedViewController.h"
 
-@interface RCMyReviewViewController : UIViewController <UITextViewDelegate>
+@interface RCMyReviewViewController : GAITrackedViewController <UITextViewDelegate>
 
 @property (nonatomic, strong) RCLocation *location;
 

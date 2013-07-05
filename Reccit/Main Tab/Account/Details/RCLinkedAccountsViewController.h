@@ -11,8 +11,9 @@
 #import "SA_OAuthTwitterController.h"
 #import "SA_OAuthTwitterEngine.h"
 #import "BZFoursquare.h"
+#import "GAITrackedViewController.h"
 
-@interface RCLinkedAccountsViewController : UIViewController <SA_OAuthTwitterControllerDelegate, BZFoursquareRequestDelegate, BZFoursquareSessionDelegate>
+@interface RCLinkedAccountsViewController : GAITrackedViewController <SA_OAuthTwitterControllerDelegate, BZFoursquareRequestDelegate, BZFoursquareSessionDelegate>
 {
     SA_OAuthTwitterEngine *_engine;
 }

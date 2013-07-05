@@ -13,7 +13,9 @@
 #import "TRGoogleMapsAutocompleteItemsSource.h"
 #import "TRTextFieldExtensions.h"
 #import "TRGoogleMapsAutocompletionCellFactory.h"
-@interface RCSearchViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
+#import "GAITrackedViewController.h"
+
+@interface RCSearchViewController : GAITrackedViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *searchResultPlaces;
     SPGooglePlacesAutocompleteQuery *searchQuery;
@@ -23,6 +25,9 @@
 
     BOOL shouldBeginEditing;
 }
+@property (weak, nonatomic) IBOutlet UIView *viewGenre;
+@property (weak, nonatomic) IBOutlet UIView *viewPrice;
+@property (weak, nonatomic) IBOutlet UIView *viewCity;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *btnIncrease;

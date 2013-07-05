@@ -23,7 +23,7 @@
 + (RCLocation *)getLocationFromDictionary:(NSDictionary *)locationDic;
 
 + (void)drawListLocationToPDF:(NSArray *)listLocation;
--(BOOL)isIphone5;
++(BOOL)isIphone5;
 BOOL IS_IPHONE5_RETINA(void);
 
 @end

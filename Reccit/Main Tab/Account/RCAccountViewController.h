@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface RCAccountViewController : UIViewController <UIAlertViewDelegate>
+@interface RCAccountViewController : GAITrackedViewController <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *lbName;

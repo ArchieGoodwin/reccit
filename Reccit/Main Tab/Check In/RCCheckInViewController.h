@@ -10,8 +10,8 @@
 #import <MapKit/MapKit.h>
 #import "ASIHTTPRequest.h"
 #import <FacebookSDK/FacebookSDK.h>
-
-@interface RCCheckInViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, UIAlertViewDelegate>
+#import "GAITrackedViewController.h"
+@interface RCCheckInViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;

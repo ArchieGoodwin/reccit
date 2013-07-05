@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface RCSurpriseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RCSurpriseViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tbResult;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;

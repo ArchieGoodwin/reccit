@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface RCTermsViewController : UIViewController
+@interface RCTermsViewController : GAITrackedViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 

@@ -351,7 +351,7 @@ BOOL IS_IPHONE5_RETINA(void) {
 }
 
 
--(BOOL)isIphone5
++(BOOL)isIphone5
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         if ([[UIScreen mainScreen] respondsToSelector: @selector(scale)]) {

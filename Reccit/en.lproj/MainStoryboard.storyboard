@@ -415,7 +415,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_notfound.jpg" id="joo-aG-Jtm">
-                                <rect key="frame" x="274" y="5" width="40" height="40"/>
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -463,12 +463,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="yWg-Nf-7W1">
-                                <rect key="frame" x="9" y="7" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="yWg-Nf-7W1">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bkw-7i-3pX">
-                                <rect key="frame" x="53" y="11" width="247" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Username" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bkw-7i-3pX">
+                                <rect key="frame" x="39" y="9" width="238" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -594,8 +594,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="BG4-Xp-iVp">
-                                <rect key="frame" x="283" y="7" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="BG4-Xp-iVp">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background_for_linked_accounts.png" id="zAQ-I2-C2t">
@@ -719,8 +719,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="zsM-jD-eJY">
-                                <rect key="frame" x="283" y="7" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="zsM-jD-eJY">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CdJ-ja-bDu">
@@ -784,17 +784,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="9zF-sb-ufJ">
-                                <rect key="frame" x="280" y="9" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="9zF-sb-ufJ">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-share.png" id="IKF-9d-JdG">
                                 <rect key="frame" x="11" y="47" width="298" height="363"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e2l-yG-3Q0">
                                 <rect key="frame" x="118" y="364" width="88" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="btn-share.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -824,7 +824,7 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" id="XK4-DS-hnf">
                                 <rect key="frame" x="25" y="168" width="266" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -936,6 +936,8 @@
                     <navigationItem key="navigationItem" id="9uE-9f-5K2"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="bkgImage" destination="IKF-9d-JdG" id="DUo-E3-Mak"/>
+                        <outlet property="btnShare" destination="e2l-yG-3Q0" id="wvG-mg-LlJ"/>
                         <outlet property="imgAvatar" destination="9zF-sb-ufJ" id="Fdp-T1-Zem"/>
                         <outlet property="picker" destination="RNj-1c-RSL" id="87d-Tl-HGU"/>
                         <outlet property="tbReview" destination="XK4-DS-hnf" id="rtR-ZV-V3K"/>
@@ -1000,8 +1002,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="gv7-nF-evN">
-                                <rect key="frame" x="283" y="8" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="gv7-nF-evN">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-my-review.png" id="MHW-w9-V5U">
@@ -1458,8 +1460,8 @@
                                     <action selector="btnCloseTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="hW0-JR-NLM"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="ERr-5z-Lj1">
-                                <rect key="frame" x="283" y="7" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="ERr-5z-Lj1">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -1572,7 +1574,7 @@
                                     <action selector="btnMenuTouched:" destination="xOR-RT-o6C" eventType="touchUpInside" id="pqr-eb-bc0"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="Eyb-us-9CG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="Eyb-us-9CG">
                                 <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1608,8 +1610,78 @@
                                 <rect key="frame" x="0.0" y="170" width="320" height="378"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" id="aDR-ZS-wfl">
+                                        <rect key="frame" x="48" y="22" width="225" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="ir0-OR-EtF">
+                                                <rect key="frame" x="0.0" y="-2" width="225" height="39"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="hJ7-nK-mI2">
+                                                <rect key="frame" x="6" y="6" width="18" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="9010" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="Le4-vn-FjY">
+                                                <rect key="frame" x="30" y="2" width="183" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="VNK-mg-urq">
+                                        <rect key="frame" x="48" y="70" width="225" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="Xq8-QL-hxN">
+                                                <rect key="frame" x="0.0" y="-2" width="225" height="39"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Price range" minimumFontSize="17" id="oDk-ZU-31p">
+                                                <rect key="frame" x="30" y="3" width="180" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="bbC-ke-gQQ" id="9Nr-IV-KLY"/>
+                                                </connections>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="SKx-uh-yxc">
+                                                <rect key="frame" x="6" y="6" width="18" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="Hya-QT-jQG">
+                                        <rect key="frame" x="48" y="119" width="225" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="gIU-lN-Ld6">
+                                                <rect key="frame" x="0.0" y="0.0" width="225" height="39"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter cuisine" minimumFontSize="17" id="3mx-u2-CvF">
+                                                <rect key="frame" x="32" y="5" width="180" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="bbC-ke-gQQ" id="EhG-si-uRb"/>
+                                                </connections>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="wda-fx-QiD">
+                                                <rect key="frame" x="6" y="8" width="18" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZEq-a3-9Er">
-                                        <rect key="frame" x="125" y="289" width="70" height="42"/>
+                                        <rect key="frame" x="125" y="306" width="70" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="go_button.png">
@@ -1623,57 +1695,6 @@
                                             <action selector="btnGoTouched:" destination="bbC-ke-gQQ" eventType="touchUpInside" id="req-tJ-IaN"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="ir0-OR-EtF">
-                                        <rect key="frame" x="48" y="22" width="225" height="39"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="Xq8-QL-hxN">
-                                        <rect key="frame" x="48" y="64" width="225" height="39"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-textfield-search.png" id="gIU-lN-Ld6">
-                                        <rect key="frame" x="48" y="107" width="225" height="39"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="city, country" minimumFontSize="17" id="ZS7-Y4-NIz">
-                                        <rect key="frame" x="105" y="168" width="180" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="bbC-ke-gQQ" id="jMT-D3-IV5"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Price range" minimumFontSize="17" id="oDk-ZU-31p">
-                                        <rect key="frame" x="84" y="69" width="180" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="bbC-ke-gQQ" id="9Nr-IV-KLY"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter cuisine" minimumFontSize="17" id="3mx-u2-CvF">
-                                        <rect key="frame" x="84" y="111" width="180" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="bbC-ke-gQQ" id="EhG-si-uRb"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="hJ7-nK-mI2">
-                                        <rect key="frame" x="58" y="29" width="18" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="SKx-uh-yxc">
-                                        <rect key="frame" x="58" y="73" width="18" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon-search.png" id="wda-fx-QiD">
-                                        <rect key="frame" x="58" y="115" width="18" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -1681,8 +1702,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="GTG-LH-PTw">
-                                <rect key="frame" x="283" y="7" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="GTG-LH-PTw">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o9v-vm-wd9">
@@ -1729,13 +1750,6 @@
                                     <action selector="btnSeachTouched:" destination="bbC-ke-gQQ" eventType="touchUpInside" id="kPp-po-srw"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" tag="9010" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="Le4-vn-FjY">
-                                <rect key="frame" x="79" y="196" width="183" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cPP-4f-RvK">
                                 <rect key="frame" x="140" y="157" width="40" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1783,10 +1797,12 @@
                         <outlet property="pickerView" destination="vrh-7P-hcy" id="oAN-la-tvu"/>
                         <outlet property="searchBarTxt" destination="VBa-nw-52w" id="alk-iD-eDy"/>
                         <outlet property="tfGenre" destination="3mx-u2-CvF" id="phZ-pZ-vty"/>
-                        <outlet property="tfLocation" destination="ZS7-Y4-NIz" id="UFh-SW-Ntz"/>
                         <outlet property="tfPrice" destination="oDk-ZU-31p" id="8id-2z-DtD"/>
                         <outlet property="toolbar" destination="SvY-8j-XUe" id="IYj-ab-01B"/>
+                        <outlet property="viewCity" destination="aDR-ZS-wfl" id="0W6-na-eEi"/>
                         <outlet property="viewContent" destination="hLE-9y-3BQ" id="LAX-Bw-gq1"/>
+                        <outlet property="viewGenre" destination="Hya-QT-jQG" id="1Vf-dR-1Wf"/>
+                        <outlet property="viewPrice" destination="VNK-mg-urq" id="Wss-CM-TlX"/>
                         <segue destination="Kqy-Mf-YWE" kind="push" identifier="PushResultSearch" id="E0T-IN-y5q"/>
                     </connections>
                 </viewController>
@@ -1822,8 +1838,8 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="OLO-ds-ntE">
-                                <rect key="frame" x="283" y="8" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="OLO-ds-ntE">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="alG-k1-Czv">
@@ -2000,8 +2016,8 @@
                                     <action selector="searchByButton:" destination="Kqy-Mf-YWE" eventType="touchUpInside" id="hhc-KH-9bV"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="YiM-qu-CUg">
-                                <rect key="frame" x="283" y="8" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="YiM-qu-CUg">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="w66-03-un8">
@@ -2186,8 +2202,8 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="8si-fZ-kVH">
-                                <rect key="frame" x="283" y="8" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="8si-fZ-kVH">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EA0-Ot-NQj">
@@ -2348,8 +2364,8 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="RpG-Vc-ENj">
-                                <rect key="frame" x="284" y="8" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="RpG-Vc-ENj">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8O1-XM-Nd2">
@@ -2402,8 +2418,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_me2.png" id="OMH-v5-yuN">
-                                <rect key="frame" x="283" y="8" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_me2.png" id="OMH-v5-yuN">
+                                <rect key="frame" x="285" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JoQ-ag-DeL">
@@ -2866,7 +2882,7 @@
         <class className="MapView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MapView.h"/>
         </class>
-        <class className="RCAccountViewController" superclassName="UIViewController">
+        <class className="RCAccountViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCAccountViewController.h"/>
             <relationships>
                 <relationship kind="action" name="btnAboutTouched:"/>
@@ -2900,7 +2916,7 @@
         <class className="RCBaseViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCBaseViewController.h"/>
         </class>
-        <class className="RCCheckInViewController" superclassName="UIViewController">
+        <class className="RCCheckInViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCCheckInViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
@@ -2908,7 +2924,7 @@
                 <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="RCDirectViewController" superclassName="UIViewController">
+        <class className="RCDirectViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCDirectViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
@@ -2928,14 +2944,14 @@
                 <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="RCHomeViewController" superclassName="UIViewController">
+        <class className="RCHomeViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCHomeViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="tfSearch" candidateClass="UITextField"/>
             </relationships>
         </class>
-        <class className="RCLinkedAccountsViewController" superclassName="UIViewController">
+        <class className="RCLinkedAccountsViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLinkedAccountsViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="btnFacebookUpdate" candidateClass="UIButton"/>
@@ -2947,7 +2963,7 @@
                 <relationship kind="outlet" name="imgTwitterConnect" candidateClass="UIImageView"/>
             </relationships>
         </class>
-        <class className="RCListFriendViewController" superclassName="UIViewController">
+        <class className="RCListFriendViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCListFriendViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
@@ -2973,16 +2989,16 @@
                 <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="RCLoginFacebookViewController" superclassName="UIViewController">
+        <class className="RCLoginFacebookViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFacebookViewController.h"/>
         </class>
-        <class className="RCLoginFoursquareViewController" superclassName="UIViewController">
+        <class className="RCLoginFoursquareViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginFoursquareViewController.h"/>
         </class>
-        <class className="RCLoginTwitterViewController" superclassName="UIViewController">
+        <class className="RCLoginTwitterViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginTwitterViewController.h"/>
         </class>
-        <class className="RCLoginViewController" superclassName="UIViewController">
+        <class className="RCLoginViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLoginViewController.h"/>
         </class>
         <class className="RCMainTabbarController" superclassName="UITabBarController">
@@ -2995,7 +3011,7 @@
                 <relationship kind="outlet" name="viewButton" candidateClass="UIView"/>
             </relationships>
         </class>
-        <class className="RCMyReviewViewController" superclassName="UIViewController">
+        <class className="RCMyReviewViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCMyReviewViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
@@ -3027,7 +3043,7 @@
                 <relationship kind="outlet" name="tbLocation" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="RCSearchResultViewController" superclassName="UIViewController">
+        <class className="RCSearchResultViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchResultViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="btn1" candidateClass="UIButton"/>
@@ -3046,9 +3062,15 @@
                 <relationship kind="outlet" name="tfLocation" candidateClass="NSString"/>
             </relationships>
         </class>
-        <class className="RCSearchViewController" superclassName="UIViewController">
+        <class className="RCSearchViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchViewController.h"/>
             <relationships>
+                <relationship kind="action" name="btnBackTouched:"/>
+                <relationship kind="action" name="btnDoneTouched:"/>
+                <relationship kind="action" name="btnGoTouched:"/>
+                <relationship kind="action" name="btnSeachTouched:"/>
+                <relationship kind="action" name="btnSupriseMeTouched:"/>
+                <relationship kind="action" name="increaseReduceMap:"/>
                 <relationship kind="outlet" name="autoTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="bgGenre" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="bgSearchGenre" candidateClass="UIImageView"/>
@@ -3068,7 +3090,10 @@
                 <relationship kind="outlet" name="tfLocation" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="viewCity" candidateClass="UIView"/>
                 <relationship kind="outlet" name="viewContent" candidateClass="UIView"/>
+                <relationship kind="outlet" name="viewGenre" candidateClass="UIView"/>
+                <relationship kind="outlet" name="viewPrice" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="RCShareCell" superclassName="UITableViewCell">
@@ -3078,10 +3103,12 @@
                 <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="RCShareViewController" superclassName="UIViewController">
+        <class className="RCShareViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareViewController.h"/>
             <relationships>
                 <relationship kind="action" name="handleTap:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="outlet" name="bkgImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="btnShare" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="picker" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="tbReview" candidateClass="UITableView"/>
@@ -3093,7 +3120,7 @@
                 <relationship kind="outlet" name="toolbarDone" candidateClass="UIToolbar"/>
             </relationships>
         </class>
-        <class className="RCSurpriseViewController" superclassName="UIViewController">
+        <class className="RCSurpriseViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSurpriseViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
@@ -3101,7 +3128,7 @@
                 <relationship kind="outlet" name="tbResult" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="RCTermsViewController" superclassName="UIViewController">
+        <class className="RCTermsViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCTermsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="btnBackTouched:"/>
@@ -3110,7 +3137,7 @@
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
-        <class className="RCWebViewController" superclassName="UIViewController">
+        <class className="RCWebViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCWebViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
@@ -3126,6 +3153,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="Mq5-R3-QU1"/>
         <segue reference="SuD-zf-nKL"/>
-        <segue reference="Xcg-p9-p62"/>
+        <segue reference="iQq-30-Fua"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface RCSearchResultViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface RCSearchResultViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *c1;
 @property (weak, nonatomic) IBOutlet UIImageView *c2;
 @property (weak, nonatomic) IBOutlet UITextField *c3;

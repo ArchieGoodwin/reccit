@@ -11,6 +11,7 @@
 #import "DYRateView.h"
 #import "RCBaseViewController.h"
 #import "ASIHTTPRequest.h"
+#import "GAITrackedViewController.h"
 
 @interface RCWhereAmIViewController : RCBaseViewController <UITextViewDelegate, UIAlertViewDelegate>
 

@@ -516,16 +516,19 @@
                 }
                 hoursString = [NSString stringWithFormat:@"\"hours\":{%@}", [hours componentsJoinedByString:@","]];
 
+                NSString *phone = [placeDict objectForKey:@"phone"] == [NSNull null] ? @"" : [[placeDict objectForKey:@"phone"] stringByReplacingOccurrencesOfString:@"&" withString:@"" ];
+                NSString *street = [[placeDict objectForKey:@"location"] objectForKey:@"street"] == [NSNull null] ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"street"];
+
                 NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"target_id"]],
                                                                 [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
                                                                 [self makeStringWithKeyAndValue:@"name" value:placeName],
                                                                 [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
                                                                 [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
                                                                 [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
-                                       [self makeStringWithKeyAndValue:@"street" value:[self stringWithPercentEscape:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByReplacingOccurrencesOfString:@"\"" withString:@""]]],
+                                       [self makeStringWithKeyAndValue:@"street" value:[self stringWithPercentEscape:[street stringByReplacingOccurrencesOfString:@"\"" withString:@""]]],
 
                                                                 [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
-                                                                [self makeStringWithKeyAndValue:@"phone" value:[[placeDict objectForKey:@"phone"] stringByReplacingOccurrencesOfString:@"&" withString:@"" ]],
+                                                                [self makeStringWithKeyAndValue:@"phone" value:phone],
                                 [self makeStringWithKeyAndValue:@"type" value:categoriesString],
                                        [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic_big"]]],
 

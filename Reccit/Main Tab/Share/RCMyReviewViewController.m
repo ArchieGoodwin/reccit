@@ -188,7 +188,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [UIView animateWithDuration:0.4 animations:^{
-        self.view.frame = CGRectMake(0, -150, self.view.frame.size.width, self.view.frame.size.height);
+        self.view.frame = CGRectMake(0, -110, self.view.frame.size.width, self.view.frame.size.height);
     }];
 }
 

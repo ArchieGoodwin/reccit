@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ASIHTTPRequest.h"
 #import <MessageUI/MessageUI.h>
+#import "GAITrackedViewController.h"
 
-@interface RCShareViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface RCShareViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     UITextField *currentTextField;
 }
@@ -31,6 +32,8 @@
 @property (strong, nonatomic) NSMutableArray *listReviewResult;
 
 @property (strong, nonatomic) NSMutableArray *listCity;
+@property (weak, nonatomic) IBOutlet UIButton *btnShare;
 
+@property (weak, nonatomic) IBOutlet UIImageView *bkgImage;
 - (IBAction)handleTap:(UITapGestureRecognizer *)sender;
 @end

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "GAITrackedViewController.h"
 
-@interface RCHomeViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface RCHomeViewController : GAITrackedViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet UITextField *tfSearch;

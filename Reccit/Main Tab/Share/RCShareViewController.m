@@ -54,6 +54,21 @@
     self.tfCity.inputAccessoryView = self.toolbarDone;
     self.tfCity.delegate = self;
     
+    if([RCCommonUtils isIphone5])
+    {
+        CGRect frame = _bkgImage.frame;
+        frame.size.height = 490;
+        _bkgImage.frame = frame;
+        
+        frame = _btnShare.frame;
+        frame.origin.y = 478;
+        _btnShare.frame = frame;
+        
+        frame = self.tbReview.frame;
+        frame.size.height = 290;
+        self.tbReview.frame = frame;
+    }
+    
     
 }
 
@@ -758,6 +773,8 @@
 - (void)viewDidUnload {
     [self setTfBackGenre:nil];
     [self setTfBackGenre:nil];
+    [self setBkgImage:nil];
+    [self setBtnShare:nil];
     [super viewDidUnload];
 }
 @end

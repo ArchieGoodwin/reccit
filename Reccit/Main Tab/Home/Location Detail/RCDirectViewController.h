@@ -11,8 +11,9 @@
 #import <MapKit/MapKit.h>
 #import "ASIHTTPRequest.h"
 #import "MapView.h"
+#import "GAITrackedViewController.h"
 
-@interface RCDirectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RCDirectViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) RCLocation *location;
 @property (weak, nonatomic) IBOutlet UITableView *table;

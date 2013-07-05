@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface RCLoginFacebookViewController : UIViewController
+@interface RCLoginFacebookViewController : GAITrackedViewController
 
 @end

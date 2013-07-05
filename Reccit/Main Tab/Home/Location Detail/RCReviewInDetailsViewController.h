@@ -11,6 +11,7 @@
 #import "DYRateView.h"
 #import "RCBaseViewController.h"
 #import "ASIHTTPRequest.h"
+#import "GAITrackedViewController.h"
 
 @interface RCReviewInDetailsViewController : RCBaseViewController <UITextViewDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lblPlaceName;

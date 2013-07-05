@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface RCWebViewController : UIViewController <UIWebViewDelegate>
+@interface RCWebViewController : GAITrackedViewController <UIWebViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *imgAvatar;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
