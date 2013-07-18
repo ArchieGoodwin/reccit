@@ -49,18 +49,18 @@
 
     
     // facebook session
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(facebookSessionStateChanged:) name:SCSessionStateChangedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFacebookSuccess) name:@"fLogin" object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginTwitterSuccess) name:@"tLogin" object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:@"fRegisterError" object:nil];
+   
 
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin] == nil)
     {
-
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(facebookSessionStateChanged:) name:SCSessionStateChangedNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFacebookSuccess) name:@"fLogin" object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginTwitterSuccess) name:@"tLogin" object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:@"fRegisterError" object:nil];
 
     }
     else
@@ -285,7 +285,7 @@
                  [[NSUserDefaults standardUserDefaults] setObject:img forKey:kRCUserImageUrl];
                  [[NSUserDefaults standardUserDefaults] setObject:user.username forKey:kRCUserName];
                  [[NSUserDefaults standardUserDefaults] setObject:user.id forKey:kRCUserFacebookId];
-                 NSString *name = [NSString stringWithFormat:@"%@ %@, %@", user.first_name, user.last_name, user.id];
+                 NSString *name = [NSString stringWithFormat:@"%@ %@", user.first_name, user.last_name];
                  
                  [[NSUserDefaults standardUserDefaults] setObject:name forKey:kRCUserFacebookName];
              } else {
@@ -312,7 +312,7 @@
         //[self performSelector:@selector(loginFacebookSuccess) withObject:nil afterDelay:1.5];
     } else {
         [HUD hide:YES];
-        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Login failed with Facebook"];
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Login failed with Facebook."];
     }
 }
 

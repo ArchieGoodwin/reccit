@@ -57,7 +57,7 @@
     PDFItem * pdfItem2 = [[PDFItem alloc] init];
     pdfItem2.text = [NSString stringWithFormat:@"%.0lf", self.rating];
     pdfItem2.font = fontHeader;
-    pdfItem2.widthPercentage = 10;
+    pdfItem2.widthPercentage = 8;
     
     PDFItem * pdfItem3 = [[PDFItem alloc] init];
     pdfItem3.text = self.comment;
@@ -67,15 +67,16 @@
     PDFItem * pdfItem4 = [[PDFItem alloc] init];
     pdfItem4.text = self.recommendation ? @"Yes" : @"No";
     pdfItem4.font = fontHeader;
-    pdfItem4.widthPercentage = 10;
+    pdfItem4.widthPercentage = 17;
     
     PDFItem * pdfItem5 = [[PDFItem alloc] init];
     pdfItem5.text = self.priceRange;
     pdfItem5.font = fontHeader;
-    pdfItem5.widthPercentage = 15;
+    pdfItem5.widthPercentage = 10;
     
     NSArray * arrPDFItem = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem2, pdfItem3, pdfItem4, pdfItem5, nil];
     [[PDFService defaultService] writeObjects:arrPDFItem drawBorder:YES];
 }
+
 
 @end

@@ -274,6 +274,7 @@
                         break;
                     case ACErrorPermissionDenied:
                         NSLog(@"Permission Denied");
+                        completionBlock(YES,error);
                         break;
                     case ACErrorUnknown:
                     default: // fall through for any unknown errors...
@@ -284,6 +285,9 @@
                 // handle other error domains and their associated response codes...
                 NSLog(@"%@", [error localizedDescription]);
             }
+            
+            
+
         }
     }];
 }

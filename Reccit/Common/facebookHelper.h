@@ -36,4 +36,6 @@
 -(void)getFacebookUserCheckins:(RCCompleteBlockWithResult)completionBlock;
 -(void)getFacebookQueryWithTimePaging:(RCCompleteBlockWithResult)completionBlock;
 -(void)facebookQueryWithTimePaging:(long)offset completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(void)facebookQueryWithTimePagingRecent:(long)offset completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(void)getFacebookUserCheckinsRecent2:(long)offset  completionBlock:(RCCompleteBlockWithResult)completionBlock;
 @end

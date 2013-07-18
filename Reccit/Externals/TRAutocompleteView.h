@@ -33,7 +33,7 @@
 @protocol TRAutocompletionCellFactory;
 @protocol TRSuggestionItem;
 
-@interface TRAutocompleteView : UIView
+@interface TRAutocompleteView : UIView <UITextFieldDelegate>
 
 @property(readonly) id <TRSuggestionItem> selectedSuggestion;
 @property(readonly) NSArray *suggestions;
@@ -50,4 +50,5 @@
                                      cellFactory:(id <TRAutocompletionCellFactory>)factory
                                     presentingIn:(UIViewController *)controller;
 
+-(void)hideAll;
 @end

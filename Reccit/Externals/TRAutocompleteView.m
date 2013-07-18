@@ -160,7 +160,7 @@
         
         self.frame = CGRectMake(_queryTextField.frame.origin.x,
                                 calculatedY,
-                                _queryTextField.frame.size.width,
+                                260,//_queryTextField.frame.size.width,
                                 calculatedHeight);
         _table.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     }
@@ -169,6 +169,28 @@
     
   
     
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self hideAll];
+    return YES;
+}
+
+
+-(void)hideAll
+{
+    if([_queryTextField isFirstResponder])
+    {
+        [self removeFromSuperview];
+        
+        [_contextController shiftViewBack];
+        _visible = NO;
+        /*CGRect frame = _queryTextField.frame;
+         frame.origin.y = txtY;
+         _queryTextField.frame = frame;*/
+        [_queryTextField resignFirstResponder];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification

@@ -19,6 +19,11 @@
 #import "RCVibeHelper.h"
 #import "RCConversationsViewController.h"
 #import "RCVibeHelper.h"
+#import "RCWebService.h"
+#import "Sequencer.h"
+#import "facebookHelper.h"
+#import "AFNetworking.h"
+#import "TestFlight.h"
 @interface RCHomeViewController ()
 
 @end
@@ -34,12 +39,43 @@
     return self;
 }
 
+/*-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
+
+- (UIViewController *)childViewControllerForStatusBarHidden
+{
+    return self;
+}
+
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}*/
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        //self.edgesForExtendedLayout = UIExtendedEdgeNone;
+        //self.extendedLayoutIncludesOpaqueBars = YES;
+        
+        CGRect frame = self.view.frame;
+        frame.size.height = frame.size.height - 20;
+        frame.origin.y = 20;
 
+        self.view.frame = frame;
+        //[UIView animateWithDuration:0.4 animations:^{
+            [self.navigationController setNeedsStatusBarAppearanceUpdate];
+        //}];
+
+    }
+   
     
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
@@ -65,8 +101,26 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+ 
+    
+    
     [super viewWillAppear: animated];
  
+    
+    NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastDate"];
+    if(date == nil)
+    {
+        date = [NSDate date];
+        [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"lastDate"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(),^{
+        [self  getLastCheckinsFromDate:date];
+        
+    });
+    
+    
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
@@ -78,10 +132,81 @@
         });
     }
     
+    
    
     //[self getVibes];
     
     [self.navigationController setNavigationBarHidden:YES];
+}
+
+
+-(void)getLastCheckinsFromDate:(NSDate *)date
+{
+    //Sequencer *sequencer = [[Sequencer alloc] init];
+    __block int iterations = 1;
+    
+    int period = [[NSDate date] timeIntervalSinceDate:date];
+    //period = 320000;
+    
+    //period = 864000;
+    int numberOfDays = period / 86400;
+    NSLog(@"%i %i", period, numberOfDays);
+    if(numberOfDays < 1) return;
+    
+    NSLog(@"start query return last checkins %@", [NSDate date]);
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastDate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+        [[facebookHelper sharedInstance] getFacebookUserCheckinsRecent2:iterations *period completionBlock:^(BOOL result, NSError *error) {
+            if([[facebookHelper sharedInstance] stringUserCheckins])
+            {
+                NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                NSLog(@"get userCheckinRequest last: %@", [NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
+
+                AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:userCheckinUrl];
+                [client setParameterEncoding:AFFormURLParameterEncoding];
+                //[client setDefaultHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
+                [client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringUserCheckins].length]];
+                [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringUserCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"[userCheckinRequest responseData] last: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+
+                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                    //completion([NSNumber numberWithBool:YES]);
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"error userCheckinRequest last%@", [error description]);
+                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest last %@  %@", [NSDate date], [error description]]];
+
+                }];
+                
+                
+            }
+            
+            [[facebookHelper sharedInstance] facebookQueryWithTimePagingRecent:iterations *period completionBlock:^(BOOL result, NSError *error) {
+                if([[facebookHelper sharedInstance] stringFriendsCheckins])
+                {
+                    
+                    NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekins,
+                                                                [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                    NSLog(@"get frCheckinRequest last: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
+                    
+                    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:frCheckinUrl];
+                    [client setParameterEncoding:AFFormURLParameterEncoding];
+                    [client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
+                    [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"[frCheckinRequest last responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+                        [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"error frCheckinRequest last %@", [error description]);
+                        [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest last %@  %@", [NSDate date], [error description]]];
+                    }];
+                    
+                }
+                
+            }];
+            
+        }];
+
 }
 
 

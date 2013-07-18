@@ -7,7 +7,7 @@
 //
 
 #import <MapKit/MapKit.h>
-
+@class RCLocation;
 @interface RCMapAnnotationView : MKAnnotationView
 
 - (id)initWithAnnotation:(id <MKAnnotation>) annotation reuseIdentifier:(NSString*)indentify;

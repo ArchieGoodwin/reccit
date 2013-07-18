@@ -43,7 +43,7 @@
             imageName = @"icon-map-eat.png";
         }
         self.image = [UIImage imageNamed:imageName];
-        
+        self.tag = itAnnotation.myLocation.ID;
         self.frame = CGRectMake(0, 0, 23, 29);
     }
    

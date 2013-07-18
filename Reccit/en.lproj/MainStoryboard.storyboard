@@ -1804,6 +1804,7 @@
                         <outlet property="viewGenre" destination="Hya-QT-jQG" id="1Vf-dR-1Wf"/>
                         <outlet property="viewPrice" destination="VNK-mg-urq" id="Wss-CM-TlX"/>
                         <segue destination="Kqy-Mf-YWE" kind="push" identifier="PushResultSearch" id="E0T-IN-y5q"/>
+                        <segue destination="lHT-qM-SNn" kind="push" identifier="showLocDetails" id="spU-Zx-VDm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCn-Kb-0cZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2084,17 +2085,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1001" contentMode="left" text="place name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9f-j8-J81">
-                                                    <rect key="frame" x="12" y="2" width="305" height="21"/>
+                                                    <rect key="frame" x="12" y="2" width="247" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="997" contentMode="left" text="# of reccs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uaE-xJ-zMN">
-                                                    <rect key="frame" x="212" y="49" width="66" height="21"/>
+                                                    <rect key="frame" x="214" y="39" width="66" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="505" contentMode="left" text="miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gpF-l9-c9k">
+                                                    <rect key="frame" x="249" y="2" width="69" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="996" contentMode="left" text="# of friends who have visited" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6b5-bW-gxr">
@@ -2192,7 +2200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Io4-2p-BuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4212" y="-990"/>
+            <point key="canvasLocation" x="4388" y="-872"/>
         </scene>
         <!--Direct View Controller-->
         <scene sceneID="aPa-aF-060">
@@ -3065,12 +3073,6 @@
         <class className="RCSearchViewController" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCSearchViewController.h"/>
             <relationships>
-                <relationship kind="action" name="btnBackTouched:"/>
-                <relationship kind="action" name="btnDoneTouched:"/>
-                <relationship kind="action" name="btnGoTouched:"/>
-                <relationship kind="action" name="btnSeachTouched:"/>
-                <relationship kind="action" name="btnSupriseMeTouched:"/>
-                <relationship kind="action" name="increaseReduceMap:"/>
                 <relationship kind="outlet" name="autoTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="bgGenre" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="bgSearchGenre" candidateClass="UIImageView"/>
@@ -3153,6 +3155,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="Mq5-R3-QU1"/>
         <segue reference="SuD-zf-nKL"/>
-        <segue reference="iQq-30-Fua"/>
+        <segue reference="Xcg-p9-p62"/>
     </inferredMetricsTieBreakers>
 </document>

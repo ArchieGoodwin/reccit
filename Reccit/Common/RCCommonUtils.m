@@ -290,7 +290,7 @@
     PDFItem * pdfItem2 = [[PDFItem alloc] init];
     pdfItem2.text = @"Ratings";
     pdfItem2.font = fontHeader;
-    pdfItem2.widthPercentage = 10;
+    pdfItem2.widthPercentage = 8;
     
     PDFItem * pdfItem3 = [[PDFItem alloc] init];
     pdfItem3.text = @"Reviews";
@@ -300,12 +300,12 @@
     PDFItem * pdfItem4 = [[PDFItem alloc] init];
     pdfItem4.text = @"Recommend it?";
     pdfItem4.font = fontHeader;
-    pdfItem4.widthPercentage = 10;
+    pdfItem4.widthPercentage = 17;
     
     PDFItem * pdfItem5 = [[PDFItem alloc] init];
     pdfItem5.text = @"Price Range";
     pdfItem5.font = fontHeader;
-    pdfItem5.widthPercentage = 15;
+    pdfItem5.widthPercentage = 10;
     
     NSArray * arrHeader = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem2, pdfItem3, pdfItem4, pdfItem5, nil];
     

@@ -46,7 +46,7 @@
 
     
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastDate"];
+    //[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastDate"];
 
 
     self.listLocation = [[NSMutableArray alloc] init];

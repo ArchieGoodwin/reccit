@@ -46,7 +46,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>k03</string>
+	<string>l02</string>
 	<key>FacebookAppID</key>
 	<string>343928219036680</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -64,5 +64,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

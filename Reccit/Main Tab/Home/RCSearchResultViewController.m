@@ -15,7 +15,8 @@
 #import "DYRateView.h"
 #import "RCLocationDetailViewController.h"
 #import "AFNetworking.h"
-
+#import "RCAppDelegate.h"
+#import <MapKit/MapKit.h>
 #define kAPIReccit @"http://bizannouncements.com/Vega/services/app/friendReccit.php?user=%@&%@"
 #define kAPISearchReccit  @"http://bizannouncements.com/Vega/services/app/getReccit.php?user=%@&%@"
 #define kAPISearchFriendFac @"http://bizannouncements.com/Vega/services/app/friendFavorites.php?user=%@&%@"
@@ -32,6 +33,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        self.edgesForExtendedLayout = UIExtendedEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = YES;
+        
+        CGRect frame = self.view.frame;
+        frame.size.height = frame.size.height - 20;
+        self.view.frame = frame;
+    }
     firstTime = YES;
     self.listLocationReccit = nil;
     self.listLocationFriend = nil;
@@ -178,6 +188,8 @@
     // Start new request
     
     NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccit : kAPIReccit, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    //NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccit : kAPIReccit, @"958", [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -417,6 +429,51 @@
     return 0;
 }
 
+
+-(NSString *)distanceStringFromPoint:(double)lat lng:(double)lng
+{
+    CLLocationDegrees longitude = lng;
+    CLLocationDegrees latitude = lat;
+    CLLocation *placeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    CLLocationCoordinate2D usrLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate] getCurrentLocation];
+    CLLocation * userLocation = [[CLLocation alloc] initWithLatitude:usrLocation.latitude longitude:usrLocation.longitude];
+    
+    CFLocaleRef userLocaleRef = CFLocaleCopyCurrent();
+    //CFShow(CFLocaleGetIdentifier(userLocaleRef));
+    NSString *loc = (NSString *)CFLocaleGetIdentifier(userLocaleRef);
+    CFRelease(userLocaleRef);
+    
+    //NSLog(@"%f  %f   %f   %f", placeLocation.coordinate.latitude, placeLocation.coordinate.longitude, userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+    double kilometers = [userLocation distanceFromLocation:placeLocation];
+    //kilometers = 1.4;
+    double res = 0.0;
+    if([loc isEqualToString:@"en_US"] || [loc isEqualToString:@"en_GB"])
+    {
+        loc = @"en_US";
+    }
+    if([loc isEqualToString:@"en_US"])
+    {
+        res = kilometers / 1609.344;
+    }
+    else
+    {
+        res = kilometers / 1000;
+    }
+
+    NSString *str  = @"";
+    if(res > 1)
+    {
+        str = [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%.1f %@", res, [loc isEqualToString:@"en_US"] ? @"miles" : @"km"]];
+    }
+    else
+    {
+        str = [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%.1f %@", (res * ([loc isEqualToString:@"en_US"] ? 5280 : 1000)), [loc isEqualToString:@"en_US"] ? @"feets" : @"m"]];
+    }
+    return str;
+}
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ResultCell"];
@@ -515,7 +572,7 @@
         ((UILabel *)[cell viewWithTag:997]).hidden = YES;
     }
 
-    
+    [(UILabel *)[cell viewWithTag:505] setText:[self distanceStringFromPoint:location.latitude lng:location.longitude]];
     
     
     [(UILabel *)[cell viewWithTag:1001] setText:location.name];

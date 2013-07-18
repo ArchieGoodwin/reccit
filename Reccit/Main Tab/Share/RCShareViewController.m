@@ -16,6 +16,7 @@
 #import "RCLocation.h"
 #import "RCMyReviewViewController.h"
 #import "AFNetworking.h"
+#import "RCAppDelegate.h"
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
 #define kAPIListReview @"http://bizannouncements.com/Vega/services/app/profile.php?user=%@&city=%@&rating=%@&type=%@&genre=%@"
 
@@ -41,6 +42,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        self.edgesForExtendedLayout = UIExtendedEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = YES;
+        
+        CGRect frame = self.view.frame;
+        frame.size.height = frame.size.height - 20;
+        frame.origin.y = 20;
+        self.view.frame = frame;
+    }
+
+    
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
@@ -295,7 +308,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
-        NSLog(@"%@", [rO description]);
+        NSLog(@"share response: %@", rO);
         self.listReview  = [[NSMutableArray alloc] init];
         self.listCity = [[NSMutableArray alloc] init];
         for (NSDictionary *locationDic in [rO objectForKey:@"Profile"])

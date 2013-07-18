@@ -495,7 +495,6 @@
 		DCB5E7421744E92E002F7F59 /* go_green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7401744E92E002F7F59 /* go_green_button.png */; };
 		DCB5E7441744E982002F7F59 /* checkin_new_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7431744E982002F7F59 /* checkin_new_button.png */; };
 		DCB5E7461745FA1A002F7F59 /* review_indetails_labels.png in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7451745FA1A002F7F59 /* review_indetails_labels.png */; };
-		DCB8729C17684CF100A04EE4 /* RCUsersAroundPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB8729B17684CF100A04EE4 /* RCUsersAroundPlaceViewController.m */; };
 		DCBDE37A1706A77E00E5C80A /* img-facebwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3771706A77E00E5C80A /* img-facebwithsign.png */; };
 		DCBDE37B1706A77E00E5C80A /* img-fourwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3781706A77E00E5C80A /* img-fourwithsign.png */; };
 		DCBDE37C1706A77E00E5C80A /* img-twitterwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3791706A77E00E5C80A /* img-twitterwithsign.png */; };
@@ -1189,8 +1188,6 @@
 		DCB5E7401744E92E002F7F59 /* go_green_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = go_green_button.png; sourceTree = "<group>"; };
 		DCB5E7431744E982002F7F59 /* checkin_new_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkin_new_button.png; sourceTree = "<group>"; };
 		DCB5E7451745FA1A002F7F59 /* review_indetails_labels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = review_indetails_labels.png; sourceTree = "<group>"; };
-		DCB8729A17684CF100A04EE4 /* RCUsersAroundPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUsersAroundPlaceViewController.h; sourceTree = "<group>"; };
-		DCB8729B17684CF100A04EE4 /* RCUsersAroundPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCUsersAroundPlaceViewController.m; sourceTree = "<group>"; };
 		DCBDE3771706A77E00E5C80A /* img-facebwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-facebwithsign.png"; sourceTree = "<group>"; };
 		DCBDE3781706A77E00E5C80A /* img-fourwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-fourwithsign.png"; sourceTree = "<group>"; };
 		DCBDE3791706A77E00E5C80A /* img-twitterwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-twitterwithsign.png"; sourceTree = "<group>"; };
@@ -2034,8 +2031,6 @@
 				DCB5E7291744E0EF002F7F59 /* RCReviewInDetailsViewController.h */,
 				DCB5E72B1744E109002F7F59 /* RCReviewInDetailsViewController.m */,
 				DCB5E72D1744E118002F7F59 /* RCReviewInDetailsViewController.xib */,
-				DCB8729A17684CF100A04EE4 /* RCUsersAroundPlaceViewController.h */,
-				DCB8729B17684CF100A04EE4 /* RCUsersAroundPlaceViewController.m */,
 			);
 			path = "Location Detail";
 			sourceTree = "<group>";
@@ -2866,7 +2861,6 @@
 				DC5AE44C1736600F00773A13 /* yajl_version.c in Sources */,
 				DCB5E72C1744E109002F7F59 /* RCReviewInDetailsViewController.m in Sources */,
 				DC564A7A174DD1340023A09F /* Sequencer.m in Sources */,
-				DCB8729C17684CF100A04EE4 /* RCUsersAroundPlaceViewController.m in Sources */,
 				DC60166C176C6D0400C0B5E4 /* NSBubbleData.m in Sources */,
 				DC60166D176C6D0400C0B5E4 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				DC60166E176C6D0400C0B5E4 /* UIBubbleTableView.m in Sources */,
@@ -2968,8 +2962,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2997,8 +2991,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reccit LLC (3EC8YRSYDC)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

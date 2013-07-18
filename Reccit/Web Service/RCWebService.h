@@ -17,4 +17,5 @@
 + (void)authenticateFacebookWithToken:(NSString *)token userId:(NSString *)userId;
 + (void)authenticateTwitterWithToken:(NSString *)token userId:(NSString *)userId;
 + (void)authenticateFoursquareWithToken:(NSString *)token userId:(NSString *)userId;
+-(void)getLastCheckinsFromDate:(NSDate *)date;
 @end

@@ -191,6 +191,65 @@
     }];
 }
 
+-(void)facebookQueryWithTimePagingRecent:(long)offset completionBlock:(RCCompleteBlockWithResult)completionBlock
+{
+    NSLog(@"step recursiveQuery %i", iterations);
+    
+    [_checkins removeAllObjects];
+    [_places removeAllObjects];
+    _stringFriendsCheckins = @"";
+    
+    long millis = [[NSDate date] timeIntervalSince1970];
+    long down_t = millis - offset;
+    long upper_t = millis;
+    NSLog(@"period: %li   %li   , current time %li", down_t, upper_t, upper_t - down_t);
+    NSString *query = [NSString stringWithFormat:
+                       @"{"
+                       @"'query2':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND timestamp > %li AND timestamp < %li',"
+                       @"'query3':'select page_id, name, type, food_styles, hours, location, categories, "
+                       "phone, pic, price_range, website, pic_big "
+                       "from page where type in (\"RESTAURANT/CAFE\", \"BAR\", \"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, name, "
+                       "type FROM place WHERE page_id IN (SELECT target_id FROM #query2)) ',"
+                       @"}", down_t, upper_t];
+    
+    
+    
+    // Set up the query parameter
+    NSDictionary *queryParam =
+    [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+    
+    FBRequest *postRequest = [FBRequest requestWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET"];
+    postRequest.session = FBSession.activeSession;
+    
+    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if(!error)
+        {
+            iterations++;
+            [self buildArrays:[result objectForKey:@"data"]];
+            
+            [self buildResult];
+            NSLog(@"end query %@", [NSDate date]);
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+            
+            if(completionBlock)
+            {
+                completionBlock(YES, nil);
+            }
+        }
+        else
+        {
+            NSLog(@"error: %@", [error description]);
+            if(completionBlock)
+            {
+                completionBlock(NO, error);
+            }
+        }
+    }];
+}
+
+
+
+
 -(void)getFacebookQueryWithTimePaging:(RCCompleteBlockWithResult)completionBlock
 {
     RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
@@ -774,6 +833,67 @@
     }
 }
 
+-(void)getFacebookUserCheckinsRecent2:(long)offset  completionBlock:(RCCompleteBlockWithResult)completionBlock
+{
+    
+    RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
+    
+    long millis = [[NSDate date] timeIntervalSince1970];
+    long down_t = millis - offset;
+    long upper_t = millis;
+    
+    int numberOfDays = offset / 86400;
+    if(numberOfDays < 10)
+    {
+        down_t = millis - (86400 * 10);
+    }
+    NSLog(@"getFacebookUserCheckinsRecent2 period: %li   %li   , current time %li", down_t, upper_t, upper_t - down_t);
+
+    
+    NSString *query = [NSString stringWithFormat:
+                       @"{"
+                       @"'query1':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li AND timestamp < %li',"
+                       @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
+                       "phone, pic, price_range, website, pic_big "
+                       "from page where type in (\"RESTAURANT/CAFE\", "
+                       "\"BAR\", "
+                       "\"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
+                       "name, type "
+                       " FROM place WHERE page_id IN (SELECT target_id FROM #query1))',"
+                       @"}", down_t, upper_t];
+    
+    // Set up the query parameter
+    NSDictionary *queryParam =
+    [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+    // Make the API request that uses FQL
+    FBRequest *postRequest = [FBRequest requestWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET"];
+    postRequest.session = FBSession.activeSession;
+    [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if(!error)
+        {
+           // NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
+            [self buildArraysForUser:[result objectForKey:@"data"]];
+            [self buildResultForUser];
+            if(completeBlockWithResult)
+            {
+                completeBlockWithResult(YES, nil);
+            }
+            
+        }
+        else
+        {
+            
+            NSLog(@"error: %@", [error description]);
+            if(completeBlockWithResult)
+            {
+                completeBlockWithResult(NO, error);
+            }
+        }
+    }];
+    
+
+}
+
 
 -(void)getFacebookUserCheckins:(RCCompleteBlockWithResult)completionBlock
 {
@@ -801,7 +921,7 @@
         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if(!error)
             {
-                //NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
+                NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
                 [self buildArraysForUser:[result objectForKey:@"data"]];
                 [self buildResultForUser];
                 if(completeBlockWithResult)

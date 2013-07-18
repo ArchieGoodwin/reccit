@@ -10,7 +10,6 @@
 #import "DYRateView.h"
 #import <MapKit/MapKit.h>
 #import "SA_OAuthTwitterController.h"
-#import "ASIHTTPRequest.h"
 #import "RCReviewInDetailsViewController.h"
 #import "RCBaseViewController.h"
 #import "MGTwitterEngine.h"

@@ -25,6 +25,7 @@
 #import "TRGoogleMapsAutocompleteItemsSource.h"
 #import "TRTextFieldExtensions.h"
 #import "TRGoogleMapsAutocompletionCellFactory.h"
+#import "RCLocationDetailViewController.h"
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
 
 
@@ -59,7 +60,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    mapRect = self.mapView.frame;
+
+    self.listLocation = [NSMutableArray new];
+    self.listAnnotation = [NSMutableArray new];
     if([RCCommonUtils isIphone5])
     {
         CGRect frame = _viewPrice.frame;
@@ -69,15 +73,28 @@
         frame = _viewGenre.frame;
         frame.origin.y = 158;
         _viewGenre.frame = frame;
+        
     }
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        self.edgesForExtendedLayout = UIExtendedEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = YES;
+
+        CGRect frame = self.view.frame;
+        frame.size.height = frame.size.height - 20;
+        frame.origin.y = 20;
+        self.view.frame = frame;
+    }
+    
+
     
     _autocompleteView = [TRAutocompleteView autocompleteViewBindedTo:autoTextField
                                                          usingSource:[[TRGoogleMapsAutocompleteItemsSource alloc] initWithMinimumCharactersToTrigger:2 apiKey:@"AIzaSyDReGYWBPSVAmKXki80akGombUHBDwWp48"]
                                                          cellFactory:[[TRGoogleMapsAutocompletionCellFactory alloc] initWithCellForegroundColor:[UIColor lightGrayColor] fontSize:14]
                                                         presentingIn:self];
     
-    
-    
+    autoTextField.delegate = _autocompleteView;
+    //autoTextField.delegate = self;
     
     
     /*for (UIView * v in self.searchDispController.searchBar.subviews) {
@@ -172,7 +189,6 @@
     [self.mapView setRegion:region animated:NO];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
-    mapRect = self.mapView.frame;
 
     if ([RCDataHolder getCurrentCity] != nil) {
         self.searchBarTxt.placeholder = [NSString stringWithFormat:@"keyword/place ^ %@", [RCDataHolder getCurrentCity]];
@@ -273,9 +289,29 @@
         
         for (NSDictionary *category in rO)
         {
+            int i = 0;
             for (NSDictionary *locationDic in [rO objectForKey:[category description]])
             {
-                NSLog(@"locationDic - %@",locationDic);
+                NSLog(@"%@",locationDic);
+                RCLocation *location = [RCCommonUtils getLocationFromDictionary:locationDic];
+                location.ID = i;
+                i++;
+                if(location)
+                {
+                    [self.listLocation addObject:location];
+                    
+                    // add annotation to map
+                    RCMapAnnotation *annotation = [[RCMapAnnotation alloc] init];
+                    annotation.myLocation = location;
+                    annotation.title = location.name;
+                    annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+                    [self.mapView addAnnotation:annotation];
+                    [self.listAnnotation addObject:annotation];
+                    
+                }
+                
+                
+                /*NSLog(@"locationDic - %@",locationDic);
                 RCLocation *location = [[RCLocation alloc] init];
                 location.name = [locationDic objectForKey:@"name"];
                 location.type = [locationDic objectForKey:@"type"];
@@ -298,17 +334,9 @@
                     location.rating = [[locationDic objectForKey:@"rating"] doubleValue];
                 } else {
                     location.rating = 0;
-                }
+                }*/
                 
-                [self.listLocation addObject:location];
                 
-                // add annotation to map
-                RCMapAnnotation *annotation = [[RCMapAnnotation alloc] init];
-                annotation.myLocation = location;
-                annotation.title = location.name;
-                annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
-                [self.mapView addAnnotation:annotation];
-                [self.listAnnotation addObject:annotation];
                 
                 
                 
@@ -329,6 +357,20 @@
 
     
 }
+
+-(RCLocation *)getLocationById:(NSInteger)locId
+{
+    /*for(RCLocation *loc in self.listLocation)
+    {
+        if(loc.ID == locId)
+        {
+            return loc;
+        }
+    }
+    return nil;*/
+    return [self.listLocation objectAtIndex:locId];
+}
+
 
 - (void)centerMap2{
     
@@ -383,19 +425,30 @@
         annotationView = imageAnnotationView;
         
         annotationView.canShowCallout = YES;
-        //UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        //MapAnnotation* csAnnotation = (MapAnnotation*)a;
+        UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         
-        //detailButton.tag = csAnnotation.tag;
-        //[detailButton addTarget:self action:@selector(goToPlace:) forControlEvents:UIControlEventTouchUpInside];
-        //annotationView.rightCalloutAccessoryView = detailButton;
-        //annotationView.calloutOffset = CGPointMake(0, 4);
-        //annotationView.centerOffset =  CGPointMake(0, 0);
+        detailButton.tag = annotationView.tag;
+        [detailButton addTarget:self action:@selector(goToPlace:) forControlEvents:UIControlEventTouchUpInside];
+        annotationView.rightCalloutAccessoryView = detailButton;
+        annotationView.calloutOffset = CGPointMake(0, 4);
+        annotationView.centerOffset =  CGPointMake(0, 0);
         return annotationView;
     }
     return nil;
     
    
+}
+
+-(IBAction)goToPlace:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+
+    int locId = btn.tag;
+    RCLocation *loc = [self getLocationById:locId];
+    
+    
+    [self performSegueWithIdentifier:@"showLocDetails" sender:loc];
+
 }
 
 
@@ -538,6 +591,21 @@
         
        
     }
+    
+    if(sender != self.btnSearch && sender != self.btnSuprise && sender != self.btnGo)
+    {
+        
+        if([segue.identifier isEqualToString:@"showLocDetails"])
+        {
+            
+           
+            
+            RCLocationDetailViewController *detail = (RCLocationDetailViewController *)segue.destinationViewController;
+            
+            detail.location = sender;
+        }
+    
+    }
 }
 
 #pragma mark -
@@ -594,16 +662,20 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
  
-    if(self.searchBarTxt.text.length > 0)
-    {
-        [self performSegueWithIdentifier:@"PushResultSearch" sender:self.btnSearch];
-        
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Enter keyword in search field please" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
+
+        if(self.searchBarTxt.text.length > 0)
+        {
+            [self performSegueWithIdentifier:@"PushResultSearch" sender:self.btnSearch];
+            
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Enter keyword in search field please" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+    
+    
+    
 
     return YES;
 }
