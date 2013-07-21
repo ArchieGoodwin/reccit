@@ -311,7 +311,7 @@
                   symbolName = "-[RCAddPlaceViewController Publish:]"
                   moduleName = "Reccit"
                   urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/Main%20Tab/Check%20In/RCAddPlaceViewController.m"
-                  timestampString = "395658263.04323"
+                  timestampString = "396017281.259582"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "416"
@@ -325,7 +325,7 @@
                   symbolName = "__36-[RCAddPlaceViewController Publish:]_block_invoke"
                   moduleName = "Reccit"
                   urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/Main%20Tab/Check%20In/RCAddPlaceViewController.m"
-                  timestampString = "395658263.043473"
+                  timestampString = "396017281.259767"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "416"
@@ -333,6 +333,22 @@
                   offsetFromSymbolStart = "135">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reccit/Main Tab/Home/RCHomeViewController.m"
+            timestampString = "396017169.01298"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

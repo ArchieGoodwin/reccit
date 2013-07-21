@@ -460,6 +460,7 @@
     [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"registerUser %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        completionBlock(YES, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error registerUser %@", [error description]);
         
