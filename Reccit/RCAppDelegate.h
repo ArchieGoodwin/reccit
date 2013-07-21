@@ -40,4 +40,5 @@ extern NSString *const SCSessionStateChangedNotification;
 // FBSession, a login screen is displayed.
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
 - (void)resetWindowToInitialView;
+-(void)getVibes;
 @end

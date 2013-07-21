@@ -517,6 +517,8 @@
 {
     if (sender == self.btnGo)
     {
+        
+        //city={city}&type={type}&genre={genre}&state={state}&country={country}&latitude={latitude}&longitude={longitude}&price={price}
         RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
         result.category = self.categoryName;
         NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", autoTextField.text, self.categoryName];
@@ -536,6 +538,10 @@
         {
             query = [NSString stringWithFormat:@"%@&price=%d", query, [self.tfPrice.text length]];
         }
+        
+        CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
+        query = [NSString stringWithFormat:@"%@&latitude=%f&longitude=%f", query, currentLocation.latitude, currentLocation.longitude];
+        
         result.isSearch = NO;
         result.tfLocation = autoTextField.text;
         result.categoryName = self.categoryName;
@@ -574,7 +580,6 @@
     if (sender == self.btnSearch)
     {
         
-
             RCSearchResultViewController *result = (RCSearchResultViewController *)segue.destinationViewController;
             result.category = self.categoryName;
             
@@ -584,7 +589,7 @@
             result.tfLocation = autoTextField.text;
             result.categoryName = self.categoryName;
             
-            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBarTxt.text];
+            query = [NSString stringWithFormat:@"%@&searchstring=%@", query, self.searchBarTxt.text];
             result.isSearch = YES;
             result.querySearch = query;
             result.searchString = self.searchBarTxt.text;

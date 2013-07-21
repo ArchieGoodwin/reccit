@@ -17,6 +17,8 @@
 #import "RCDefine.h"
 #import "AFNetworking.h"
 #define kRCAPICheckInGetLocationRate @"http://bizannouncements.com/bhavesh/deltaservice.php?userid=%@"
+#define kRCAPICheckInGetLocationRateDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/delta?userfbid=%@"
+
 
 @interface RCRateViewController ()
 
@@ -96,7 +98,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        //NSLog(@"%@", rO);
+        NSLog(@"%@", rO);
 
         [self.listLocation removeAllObjects];
         for (NSDictionary *locationDic in rO)

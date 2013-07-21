@@ -76,7 +76,10 @@
 
     }
    
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNewMessages:) name:@"vibes" object:nil];
+
+   // RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    //[appDelegate getVibes];
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
@@ -97,6 +100,54 @@
 
     
     [self.view setBackgroundColor:kRCBackgroundView];
+}
+
+
+-(void)showNewMessages:(NSNotification *)notification
+{
+    if(notification != nil)
+    {
+        int messages = [((NSNumber *) [notification object]) integerValue];
+        
+        if(messages > 0)
+        {
+            CGRect rect = CGRectMake(self.imgAvatar.frame.origin.x + self.imgAvatar.frame.size.width / 2 + 4, self.imgAvatar.frame.origin.y - 4, 15, 15);
+            UIView *cont = [[UIView alloc] initWithFrame:rect];
+            cont.backgroundColor = [UIColor redColor];
+            UILabel *lblMess = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
+            lblMess.backgroundColor = [UIColor clearColor];
+            lblMess.textColor = [UIColor whiteColor];
+            lblMess.textAlignment = NSTextAlignmentCenter;
+            lblMess.font = [UIFont systemFontOfSize:11];
+            lblMess.text = [NSString stringWithFormat:@"%i", messages];
+            
+            [cont addSubview:lblMess];
+            
+            cont.tag = 7077;
+            [self.view addSubview:cont];
+        }
+        else
+        {
+            [[self.view viewWithTag:7077] removeFromSuperview];
+            
+        }
+    }
+    else
+    {
+        [[self.view viewWithTag:7077] removeFromSuperview];
+
+    }
+    
+
+
+    
+    //[self performSelector:@selector(closeVibes) withObject:nil afterDelay:3];
+}
+
+
+-(void)closeVibes
+{
+     [[self.view viewWithTag:7077] removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated

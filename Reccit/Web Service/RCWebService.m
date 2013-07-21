@@ -57,6 +57,11 @@
             
             
         }
+        else
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];
+
+        }
         
         if([[NSUserDefaults standardUserDefaults] objectForKey:@"fcheckin"] == nil)
         {
@@ -153,14 +158,15 @@
                      if([[facebookHelper sharedInstance] stringFriendsCheckins])
                      {
                          
-                         NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekins,
-                                                                     [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
-                         NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
+                         NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekinsDOTNET,
+                                                                     [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId], token]];
+                         NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekinsDOTNET,
+                                                             [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId], token]);
                          
                          AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:frCheckinUrl];
-                         [client setParameterEncoding:AFFormURLParameterEncoding];
-                         [client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                         [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         [client setParameterEncoding:AFJSONParameterEncoding];
+                         //[client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
+                         [client postPath:@"" parameters:@{@"\"data\"":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                              //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                              
@@ -192,14 +198,14 @@
                      if([[facebookHelper sharedInstance] stringFriendsCheckins])
                      {
                          
-                         NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekins,
-                                                                     [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
-                         NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
-                         
+                         NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekinsDOTNET,
+                                                                     [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId], token]];
+                         NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekinsDOTNET,
+                                                             [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId], token]);
                          AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:frCheckinUrl];
-                         [client setParameterEncoding:AFFormURLParameterEncoding];
-                         [client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                         [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         [client setParameterEncoding:AFJSONParameterEncoding];
+                         //[client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
+                         [client postPath:@"" parameters:@{@"\"data\"":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                              //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                              iterations++;
@@ -229,14 +235,14 @@
                      if([[facebookHelper sharedInstance] stringFriendsCheckins])
                      {
                          
-                         NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekins,
-                                                                     [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
-                         NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
-                         
+                         NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekinsDOTNET,
+                                                                     [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId], token]];
+                         NSLog(@"get frCheckinRequest: %@", [NSString stringWithFormat:kSendFriendsChekinsDOTNET,
+                                                             [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId], token]);
                          AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:frCheckinUrl];
-                         [client setParameterEncoding:AFFormURLParameterEncoding];
+                         [client setParameterEncoding:AFJSONParameterEncoding];
                          [client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringFriendsCheckins].length]];
-                         [client postPath:@"" parameters:@{@"fb_usercheckin":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         [client postPath:@"" parameters:@{@"\"data\"":[[facebookHelper sharedInstance] stringFriendsCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                              //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                              iterations++;

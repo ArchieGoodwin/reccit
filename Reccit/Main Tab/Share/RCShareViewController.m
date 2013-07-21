@@ -298,7 +298,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     
-    NSString *urlString = [NSString stringWithFormat:@"http://bizannouncements.com/Vega/services/app/profile.php?user=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    NSString *urlString = [NSString stringWithFormat:@"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/GetProfile?userfbid=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     NSLog(@"shre link: %@", urlString);
@@ -311,7 +311,7 @@
         NSLog(@"share response: %@", rO);
         self.listReview  = [[NSMutableArray alloc] init];
         self.listCity = [[NSMutableArray alloc] init];
-        for (NSDictionary *locationDic in [rO objectForKey:@"Profile"])
+        for (NSDictionary *locationDic in [rO objectForKey:@"GetProfileResult"])
         {
             RCLocation *location =  [RCCommonUtils getLocationFromDictionary:locationDic];
             

@@ -459,6 +459,7 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
                     break;
                 case AFJSONParameterEncoding:;
                     [request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+                    //NSLog(@"%@", parameters);
                     [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error]];
                     break;
                 case AFPropertyListParameterEncoding:;

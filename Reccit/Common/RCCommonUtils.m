@@ -136,9 +136,9 @@
         location.priceRange = [locationDic objectForKey:@"price_range"];
         //location.recommendation = [[locationDic objectForKey:@"recommended"] intValue] == 1;
         
-        if ([locationDic objectForKey:@"reccit"] != nil && [locationDic objectForKey:@"reccit"] != [NSNull null]) {
+        if ([locationDic objectForKey:@"isReccit"] != nil && [locationDic objectForKey:@"isReccit"] != [NSNull null]) {
             //NSLog(@"reccit : %i",[[locationDic objectForKey:@"reccit"] integerValue]);
-            if( [[locationDic objectForKey:@"reccit"] integerValue] == 1)
+            if( [[locationDic objectForKey:@"isReccit"] integerValue] == 1)
             {
                 location.recommendation = YES;
             }
@@ -231,11 +231,12 @@
             
             for (NSDictionary *friend in [locationDic objectForKey:@"friends"])
             {
-                if([friend objectForKey:@"firstName"])
+                if([friend objectForKey:@"FirstName"])
                 {
-                    NSLog(@"Friend Image: %@", [friend objectForKey:@"image"]);
-                    [listFriend addObject:[friend objectForKey:@"image"]];
-                    [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"firstName"], [friend objectForKey:@"lastName"]]];
+                    
+                  // NSLog(@"Friend Image: %@", [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[friend objectForKey:@"FBUserId"]]);
+                    [listFriend addObject:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[friend objectForKey:@"FBUserId"]]];
+                    [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"FirstName"], [friend objectForKey:@"LastName"]]];
                     
                 }
 

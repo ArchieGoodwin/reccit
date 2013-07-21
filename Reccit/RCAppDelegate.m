@@ -95,6 +95,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 
     [self clearNotifications];
 
+    
     return YES;
 }
 -(void)clearNotifications
@@ -147,20 +148,27 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 {
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
-        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(BOOL result, NSError *error) {
+        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
             //check if there are new messages in conversations
             //store conversations in coredata
             //if(result)
             //{
             
-            dispatch_async(dispatch_get_main_queue(),^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
+            
+            /*dispatch_async(dispatch_get_main_queue(),^{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New messages!" message:@"You have unread messages in Vibe. Show?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"YES", nil];
                 [alert show];
                 
-            });
+            });*/
             //}
         }];
     }
+    
+    
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:99] userInfo:nil];
+
     
 }
 

@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getVibes) name:@"vibes" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getVibes) name:@"vibes" object:nil];
     
     self.trackedViewName = NSStringFromClass([self class]);
 	// Do any additional setup after loading the view.

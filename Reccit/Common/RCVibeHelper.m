@@ -85,14 +85,14 @@
     return mess;
 }
 
--(BOOL)createMessageFromDict:(NSDictionary *)dict conv:(RCConversation *)conv
+-(int)createMessageFromDict:(NSDictionary *)dict conv:(RCConversation *)conv
 {
-    BOOL hasNew = NO;
+   int hasNew = 0;
 
     RCMessage *mess = [self getMessageById:[dict objectForKey:@"Id"]];
     if(mess == nil)
     {
-        hasNew = YES;
+        hasNew = 1;
         //create message
         
         RCMessage *message = [RCMessage createEntityInContext];
@@ -130,9 +130,9 @@
     return hasNew;
 }
 
--(BOOL)createConversationFromDict:(NSArray *)dict placeId:(NSInteger)placeId
+-(int)createConversationFromDict:(NSArray *)dict placeId:(NSInteger)placeId
 {
-    BOOL hasNew = NO;
+    int hasNew = 0;
 
     if(dict.count > 0)
     {
@@ -142,26 +142,32 @@
         if(conv != nil)
         {
             //check messages
+            int newMessages = 0;
             for(NSDictionary *messDict in dict)
             {
-                BOOL isNewMessage = [self createMessageFromDict:messDict conv:conv];
-                if(isNewMessage)
-                {
-                    hasNew = YES;
-                }
+                int isNewMessage = [self createMessageFromDict:messDict conv:conv];
+                newMessages = newMessages + isNewMessage;
+                
             }
+            
+            hasNew = newMessages;
         }
         else
         {
             //create conv
-            hasNew = YES;
             
             RCConversation *conv = [RCConversation createEntityInContext];
             conv.placeId = [NSNumber numberWithInt:placeId];
+            int newMessages = 0;
+
             for(NSDictionary *messDict in dict)
             {
-                [self createMessageFromDict:messDict conv:conv];
+                int isNewMessage = [self createMessageFromDict:messDict conv:conv];
+                newMessages = newMessages + isNewMessage;
+
             }
+            hasNew = newMessages;
+
         }
 
         
@@ -323,7 +329,7 @@
     [operation start];
 }
 
--(void)getConversationsFormServer:(NSInteger)userId completionBlock:(RCCompleteBlockWithResult)completionBlock
+-(void)getConversationsFormServer:(NSInteger)userId completionBlock:(RCCompleteBlockWithIntResult)completionBlock
 {
     NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Message/FetchByUser?UserId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     
@@ -339,14 +345,13 @@
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         NSLog(@"getConversationsFormServer %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 
-        BOOL hasNew = NO;
+        int hasNew = 0;
         for(NSDictionary *convDict in [rO objectForKey:@"data"])
         {
-            BOOL isNewConv = [self createConversationFromDict:[convDict objectForKey:@"Messages"] placeId:[[convDict objectForKey:@"PlaceId"] integerValue]];
-            if(isNewConv)
-            {
-                hasNew = YES;
-            }
+            int isNewConv = [self createConversationFromDict:[convDict objectForKey:@"Messages"] placeId:[[convDict objectForKey:@"PlaceId"] integerValue]];
+            
+            hasNew = hasNew + isNewConv;
+            
         }
         
         
@@ -357,7 +362,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(completionBlock)
         {
-            completionBlock(NO, error);
+            completionBlock(0, error);
         }
     }];
     

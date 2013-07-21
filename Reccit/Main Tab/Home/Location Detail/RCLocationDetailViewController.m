@@ -22,7 +22,7 @@
 #import "RCMapAnnotationView.h"
 #import "RCMapAnnotation.h"
 #define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d&user_id=%@"
-
+#define kAPIGetCommentDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/GetComments?userfbid=%@&placeid=%d"
 @interface RCLocationDetailViewController ()
 
 @end
@@ -234,9 +234,9 @@
 - (void)callAPIGetListReview
 {
     // Start new request
-    NSString *urlString = [NSString stringWithFormat:kAPIGetComment, self.location.ID, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    NSString *urlString = [NSString stringWithFormat:kAPIGetCommentDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.location.ID];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   // [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     NSLog(@"callAPIGetListReview  url %@", urlString);
@@ -252,14 +252,15 @@
         NSLog(@"%@", rO);
         
         self.listComment = [[NSMutableArray alloc] init];
-        for (NSDictionary *dic in [rO objectForKey:@"comments"])
+        for (NSDictionary *dic in [rO objectForKey:@"GetCommentResult"])
         {
             if([dic objectForKey:@"id"] != [NSNull null])
             {
                 RCReview *review = [[RCReview alloc] init];
                 review.content = [dic objectForKey:@"comment"];
-                review.image = [dic objectForKey:@"photo"];
-                if (review.image == nil || [dic objectForKey:@"photo"] == [NSNull null])
+
+                review.image = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[dic objectForKey:@"user_id"]];
+                if (review.image == nil || [dic objectForKey:@"user_id"] == [NSNull null])
                 {
                     review.image = nil;
                 }
@@ -269,7 +270,7 @@
            
         }
         
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //[MBProgressHUD hideHUDForView:self.view animated:YES];
         
         if ([self.listComment count] == 0)
         {
@@ -285,7 +286,7 @@
         [self.tbReview reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
     [operation start];

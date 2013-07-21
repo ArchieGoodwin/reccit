@@ -18,8 +18,17 @@
 #import "RCAppDelegate.h"
 #import <MapKit/MapKit.h>
 #define kAPIReccit @"http://bizannouncements.com/Vega/services/app/friendReccit.php?user=%@&%@"
+
+#define kAPIReccitDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/Reccit?userfbid=%@&%@"
+
 #define kAPISearchReccit  @"http://bizannouncements.com/Vega/services/app/getReccit.php?user=%@&%@"
+
+#define kAPISearchReccitDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/KeywordSearch?userfbid=%@&%@"
 #define kAPISearchFriendFac @"http://bizannouncements.com/Vega/services/app/friendFavorites.php?user=%@&%@"
+#define kAPISearchFriendFavDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/Popular?userfbid=%@&%@"
+
+
+//
 #define kAPISearchPopular @"http://bizannouncements.com/Vega/services/app/otherPlaces.php?user=%@&%@"
 
 @interface RCSearchResultViewController ()
@@ -187,7 +196,7 @@
 {
     // Start new request
     
-    NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccit : kAPIReccit, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccitDOTNET : kAPIReccitDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     //NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccit : kAPIReccit, @"958", [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     
@@ -204,7 +213,7 @@
         self.listLocationReccit = [[NSMutableArray alloc] init];
         
         
-        NSArray *listLocation = [rO objectForKey:@"Reccits"];
+        NSArray *listLocation = _isSearch ? [rO objectForKey:@"KeywordSearchResult"] : [rO objectForKey:@"ReccitResult"];
         if (listLocation != [NSNull null])
         {
             for (NSDictionary *locationDic in listLocation)
@@ -240,7 +249,7 @@
 - (void)callAPIGetListFriendFav
 {
     // Start new request
-    NSString *urlString = [NSString stringWithFormat:kAPISearchFriendFac, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.querySearch];
+    NSString *urlString = [NSString stringWithFormat:kAPISearchFriendFavDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.querySearch];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -252,10 +261,10 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        //NSLog(@"favs: %@", rO);
+       // NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
-        NSArray *listLocation = [rO objectForKey:@"Reccits"];
+        NSArray *listLocation = [rO objectForKey:@"PopularResult"];
         if (listLocation != [NSNull null]){
             for (NSDictionary *locationDic in listLocation)
             {
