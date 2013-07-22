@@ -458,9 +458,10 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
                     [request setHTTPBody:[AFQueryStringFromParametersWithEncoding(parameters, self.stringEncoding) dataUsingEncoding:self.stringEncoding]];
                     break;
                 case AFJSONParameterEncoding:;
-                    [request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+                    //[request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+                    [request setValue:[NSString stringWithFormat:@"application/json;"] forHTTPHeaderField:@"Content-Type"];
                     //NSLog(@"%@", parameters);
-                    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error]];
+                    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:&error]];
                     break;
                 case AFPropertyListParameterEncoding:;
                     [request setValue:[NSString stringWithFormat:@"application/x-plist; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
@@ -476,6 +477,8 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 
 	return request;
 }
+
+
 
 - (NSMutableURLRequest *)multipartFormRequestWithMethod:(NSString *)method
                                                    path:(NSString *)path
@@ -646,6 +649,8 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
 }
+
+
 
 - (void)putPath:(NSString *)path
      parameters:(NSDictionary *)parameters

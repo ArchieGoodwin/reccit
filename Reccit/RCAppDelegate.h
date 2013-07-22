@@ -41,4 +41,8 @@ extern NSString *const SCSessionStateChangedNotification;
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
 - (void)resetWindowToInitialView;
 -(void)getVibes;
+-(void)checkRoot;
+-(void)showNewMessages:(NSNotification *)notification;
+-(void)showButtonForMessages;
+-(void)hideConversationButton;
 @end

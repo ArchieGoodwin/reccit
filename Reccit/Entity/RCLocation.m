@@ -38,6 +38,7 @@
 @synthesize friendsCount;
 @synthesize listFriends;
 @synthesize listFriendsName;
+@synthesize factual_id;
 
 
 - (void) drawContentToPDF;

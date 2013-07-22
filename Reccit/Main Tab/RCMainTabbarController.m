@@ -7,7 +7,7 @@
 //
 
 #import "RCMainTabbarController.h"
-
+#import "RCAppDelegate.h"
 @interface RCMainTabbarController ()
 
 @end
@@ -26,6 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showButtonForMessages];
 	// Do any additional setup after loading the view.
     self.btnTab1.selected = YES;
     

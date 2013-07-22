@@ -78,12 +78,10 @@
                         NSLog(@"get userCheckinRequest: %@", [NSString stringWithFormat:kSendUserChekinsDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId], token]);
                         
                         
-                        
                         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:userCheckinUrl];
                         [client setParameterEncoding:AFJSONParameterEncoding];
                         //[client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
 
-                        //[client setDefaultHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
                         //[client setDefaultHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[facebookHelper sharedInstance] stringUserCheckins].length]];
                         [client postPath:@"" parameters:@{@"\"data\"":[[facebookHelper sharedInstance] stringUserCheckins]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             NSLog(@"[userCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);

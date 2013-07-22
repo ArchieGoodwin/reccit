@@ -20,6 +20,8 @@
     SA_OAuthTwitterEngine *_engine;
 }
 
+@property (weak, nonatomic) IBOutlet UIImageView *imgLike;
+@property (weak, nonatomic) IBOutlet UILabel *lblReccits;
 
 @property (strong, nonatomic) NSString *locationName;
 @property (strong, nonatomic) RCLocation *location;

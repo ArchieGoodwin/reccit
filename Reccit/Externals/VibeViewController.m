@@ -9,6 +9,7 @@
 #import "NSBubbleData.h"
 #import "RCVibeHelper.h"
 #import "RCDefine.h"
+#import "RCAppDelegate.h"
 @implementation VibeViewController
 
 - (void)viewDidLoad
@@ -97,7 +98,8 @@
 -(IBAction)btnClose:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:^{
-       
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate showButtonForMessages];
     }];
     
 }

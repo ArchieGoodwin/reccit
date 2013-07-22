@@ -69,10 +69,11 @@
     vibeGesture = [UITapGestureRecognizer new];
     vibeGesture.numberOfTapsRequired = 3;
     [vibeGesture addTarget:self action:@selector(showHideVibe)];
-    [self.view addGestureRecognizer:vibeGesture];
+    //[self.view addGestureRecognizer:vibeGesture];
     
     
-    
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     
 	// Do any additional setup after loading the view.

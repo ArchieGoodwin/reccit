@@ -790,7 +790,7 @@
     }
 
     //NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
-    NSString *data = [NSString stringWithFormat:@"\"[%@]",[temp componentsJoinedByString:@","]];
+    NSString *data = [NSString stringWithFormat:@"[%@]",[temp componentsJoinedByString:@","]];
 
 
     NSLog(@"result for user checkins %i, data:  %@", temp.count, data);

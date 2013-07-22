@@ -67,7 +67,7 @@
     self.tfCity.inputAccessoryView = self.toolbarDone;
     self.tfCity.delegate = self;
     
-    if([RCCommonUtils isIphone5])
+   /* if([RCCommonUtils isIphone5])
     {
         CGRect frame = _bkgImage.frame;
         frame.size.height = 490;
@@ -82,7 +82,7 @@
         self.tbReview.frame = frame;
     }
     
-    
+    */
 }
 
 
@@ -542,6 +542,17 @@
     } else {
         [cell.contentView setBackgroundColor:kRCBackgroundView];
     }
+    
+    if(review.recommendation)
+    {
+        ((UIImageView *)[cell viewWithTag:30]).image = [UIImage imageNamed:@"Icon-Like.png"];
+    }
+    else
+    {
+        ((UIImageView *)[cell viewWithTag:30]).image = [UIImage imageNamed:@"Icon-Dislike.png"];
+
+    }
+    
     
     return cell;
 }

@@ -144,6 +144,69 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 }
 
 
+-(void)showButtonForMessages
+{
+    [[self.window viewWithTag:5055] removeFromSuperview];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame =  CGRectMake(280, 20, 35, 35);
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(showConversations) forControlEvents:UIControlEventTouchUpInside];
+    btn.tag = 5055;
+    
+    [self.window addSubview:btn];
+}
+
+-(void)showNewMessages:(NSNotification *)notification
+{
+    
+    if(notification != nil)
+    {
+        int messages = [((NSNumber *) [notification object]) integerValue];
+        
+        if(messages > 0)
+        {
+            CGRect rect = CGRectMake(301, 20, 18, 18);
+            UIView *cont = [[UIView alloc] initWithFrame:rect];
+            cont.backgroundColor = [UIColor clearColor];
+            
+            //[cont addSubview:[self showButtonForMessages]];
+            
+            UIImageView *alert = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Alert.png"]];
+            alert.frame = CGRectMake(0, 0, 18, 18);
+            [cont addSubview:alert];
+            UILabel *lblMess = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
+            lblMess.backgroundColor = [UIColor clearColor];
+            lblMess.textColor = [UIColor whiteColor];
+            lblMess.textAlignment = NSTextAlignmentCenter;
+            lblMess.font = [UIFont systemFontOfSize:11];
+            lblMess.text = [NSString stringWithFormat:@"%i", messages];
+            
+            [cont addSubview:lblMess];
+            
+            cont.tag = 7077;
+            [self.window addSubview:cont];
+        }
+        else
+        {
+            [[self.window viewWithTag:7077] removeFromSuperview];
+            
+       
+        }
+    }
+    else
+    {
+        [[self.window viewWithTag:7077] removeFromSuperview];
+        
+       
+    }
+    
+    
+    
+    
+    //[self performSelector:@selector(closeVibes) withObject:nil afterDelay:3];
+}
+
+
 -(void)getVibes
 {
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
@@ -173,6 +236,23 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 }
 
 
+-(void)hideConversationButton
+{
+     [[self.window viewWithTag:5055] removeFromSuperview];
+}
+
+-(void)showConversations
+{
+    [[self.window viewWithTag:5055] removeFromSuperview];
+    
+    RCConversationsViewController *contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contr];
+    
+    [self.window.rootViewController presentViewController:nav animated:YES completion:^{
+        
+    }];
+}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -182,16 +262,15 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     }
     else
     {
-        RCConversationsViewController *contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
-        
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contr];
-        
-        [self.window.rootViewController presentViewController:nav animated:YES completion:^{
-            
-        }];
+        [self showConversations];
     }
 }
 
+
+-(void)checkRoot
+{
+    NSLog(@"%@", [self.window.rootViewController class]);
+}
 
 - (void)resetWindowToInitialView
 {

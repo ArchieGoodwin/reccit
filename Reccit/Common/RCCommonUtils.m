@@ -10,7 +10,8 @@
 #import "RCLocation.h"
 #import "PDFService.h"
 #import "PDFItem.h"
-
+#import "RCAppDelegate.h"
+#import "RCDefine.h"
 @implementation RCCommonUtils
 
 + (double)distanceBeetween:(CLLocationCoordinate2D)locationA andLocation:(CLLocationCoordinate2D)locationB {
@@ -85,6 +86,14 @@
         else
         {
             location.ID = 0;
+        }
+        if ([locationDic objectForKey:@"factual_id"] != nil && [locationDic objectForKey:@"factual_id"] != [NSNull null]) {
+            location.factual_id = [locationDic objectForKey:@"factual_id"];
+            
+        }
+        else
+        {
+            location.factual_id = @"";
         }
         location.genre = [locationDic objectForKey:@"genre"];
         if ([locationDic objectForKey:@"rating"] != nil && [locationDic objectForKey:@"rating"] != [NSNull null]) {
@@ -259,6 +268,83 @@
     
     
 }
++(NSString *)makeStringWithKeyAndValue:(NSString *)key value:(NSString *)value
+{
+    
+    return [NSString stringWithFormat:@"\"%@\":\"%@\"", key, value];
+    
+    
+    
+}
+
++(NSString *)makeStringWithKeyAndValue2:(NSString *)key value:(NSString *)value
+{
+    
+    return [NSString stringWithFormat:@"\"%@\":%@", key, value];
+    
+    
+    
+}
+
++(NSString *)buildReviewString:(RCLocation *)location
+{
+        CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
+
+        NSArray *locUserArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[NSString stringWithFormat:@"%f", currentLocation.latitude]],
+                         [self makeStringWithKeyAndValue:@"longitude" value:[NSString stringWithFormat:@"%f", currentLocation.longitude]],
+                         nil];
+    
+    
+        NSArray *locPlaceArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[NSString stringWithFormat:@"%f", location.latitude]],
+                             [self makeStringWithKeyAndValue:@"longitude" value:[NSString stringWithFormat:@"%f", location.longitude]],
+                             nil];
+    
+    //[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]
+            NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[NSString stringWithFormat:@"%i",location.ID]],
+                                  [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locPlaceArray componentsJoinedByString:@","]]],
+                                   [self makeStringWithKeyAndValue:@"city" value:location.city],
+                                   [self makeStringWithKeyAndValue:@"country" value:location.country],
+                                   [self makeStringWithKeyAndValue:@"state" value:location.state],
+                                   [self makeStringWithKeyAndValue:@"street" value:location.street],
+                                   [self makeStringWithKeyAndValue:@"zip" value:location.zipCode],
+                                   [self makeStringWithKeyAndValue:@"phone" value:location.phoneNumber],
+                                   [self makeStringWithKeyAndValue:@"type" value:location.category],
+                                   [self makeStringWithKeyAndValue:@"pic" value:@""],
+                                   [self makeStringWithKeyAndValue:@"name" value:location.name],
+
+                                   [self makeStringWithKeyAndValue:@"price_range" value:location.priceRange],
+                                   [self makeStringWithKeyAndValue:@"food_styles" value:location.genre],
+
+
+                                  nil];
+            
+            
+         
+    
+            NSArray *userArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"user" value:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]],
+                           [self makeStringWithKeyAndValue:@"name" value:location.name],
+                           [self makeStringWithKeyAndValue:@"address" value:location.address],
+                           [self makeStringWithKeyAndValue:@"factual_id" value:location.factual_id],
+                           [self makeStringWithKeyAndValue:@"comment" value:location.comment],
+                           [self makeStringWithKeyAndValue:@"recommend" value:location.recommendation ? @"true" : @"false"],
+                           [self makeStringWithKeyAndValue2:@"coords" value:[NSString stringWithFormat:@"{%@}",[locUserArray componentsJoinedByString:@","]]],
+                           [self makeStringWithKeyAndValue2:@"place" value:[NSString stringWithFormat:@"{%@}",[placeArray componentsJoinedByString:@","]]],
+
+                           nil];
+    
+    
+            NSString *place = [NSString stringWithFormat:@"{%@}", [userArray componentsJoinedByString:@","]];
+            
+            
+
+    
+    //NSLog(@"result for review place:  %@", place);
+    
+    return place;
+
+}
+
+
 
 + (void)drawListLocationToPDF:(NSArray *)listLocation
 {

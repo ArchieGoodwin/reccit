@@ -71,8 +71,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+    _btnVibe.hidden = NO;
+    /*if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
         if(self.location.ID > 0)
         {
@@ -83,7 +83,7 @@
     else
     {
         _btnVibe.hidden = YES;
-    }
+    }*/
     self.lbName.text = self.location.name;
     if(self.location.city != [NSNull null] && self.location.city != nil)
     {

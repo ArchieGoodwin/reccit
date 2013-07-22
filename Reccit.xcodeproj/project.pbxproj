@@ -495,6 +495,71 @@
 		DCB5E7421744E92E002F7F59 /* go_green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7401744E92E002F7F59 /* go_green_button.png */; };
 		DCB5E7441744E982002F7F59 /* checkin_new_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7431744E982002F7F59 /* checkin_new_button.png */; };
 		DCB5E7461745FA1A002F7F59 /* review_indetails_labels.png in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7451745FA1A002F7F59 /* review_indetails_labels.png */; };
+		DCBBFBEF179CF99A00A9D49C /* Alert.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBAE179CF99A00A9D49C /* Alert.png */; };
+		DCBBFBF0179CF99A00A9D49C /* Bottombar-Button-CheckIn-Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBAF179CF99A00A9D49C /* Bottombar-Button-CheckIn-Grey.png */; };
+		DCBBFBF1179CF99A00A9D49C /* Bottombar-Button-CheckIn.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB0179CF99A00A9D49C /* Bottombar-Button-CheckIn.png */; };
+		DCBBFBF2179CF99A00A9D49C /* Bottombar-Button-Discover-Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB1179CF99A00A9D49C /* Bottombar-Button-Discover-Grey.png */; };
+		DCBBFBF3179CF99A00A9D49C /* Bottombar-Button-Discover.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB2179CF99A00A9D49C /* Bottombar-Button-Discover.png */; };
+		DCBBFBF4179CF99A00A9D49C /* Bottombar-Button-MyPlaces-Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB3179CF99A00A9D49C /* Bottombar-Button-MyPlaces-Grey.png */; };
+		DCBBFBF5179CF99A00A9D49C /* Bottombar-Button-MyPlaces.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB4179CF99A00A9D49C /* Bottombar-Button-MyPlaces.png */; };
+		DCBBFBF6179CF99A00A9D49C /* Bottombar-Button-Settings-Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB5179CF99A00A9D49C /* Bottombar-Button-Settings-Grey.png */; };
+		DCBBFBF7179CF99A00A9D49C /* Bottombar-Button-Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB6179CF99A00A9D49C /* Bottombar-Button-Settings.png */; };
+		DCBBFBF8179CF99A00A9D49C /* Button-AddAFriend.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB7179CF99A00A9D49C /* Button-AddAFriend.png */; };
+		DCBBFBF9179CF99A00A9D49C /* Button-AllGenres.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB8179CF99A00A9D49C /* Button-AllGenres.png */; };
+		DCBBFBFA179CF99A00A9D49C /* Button-AllPrices.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBB9179CF99A00A9D49C /* Button-AllPrices.png */; };
+		DCBBFBFB179CF99A00A9D49C /* Button-Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBBA179CF99A00A9D49C /* Button-Back.png */; };
+		DCBBFBFC179CF99A00A9D49C /* Button-Call.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBBB179CF99A00A9D49C /* Button-Call.png */; };
+		DCBBFBFD179CF99A00A9D49C /* Button-Call2.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBBC179CF99A00A9D49C /* Button-Call2.png */; };
+		DCBBFBFE179CF99A00A9D49C /* Button-CheckIn.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBBD179CF99A00A9D49C /* Button-CheckIn.png */; };
+		DCBBFBFF179CF99A00A9D49C /* Button-Directions.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBBE179CF99A00A9D49C /* Button-Directions.png */; };
+		DCBBFC00179CF99A00A9D49C /* Button-Done.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBBF179CF99A00A9D49C /* Button-Done.png */; };
+		DCBBFC01179CF99A00A9D49C /* Button-Down.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC0179CF99A00A9D49C /* Button-Down.png */; };
+		DCBBFC02179CF99A00A9D49C /* Button-EnterLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC1179CF99A00A9D49C /* Button-EnterLocation.png */; };
+		DCBBFC03179CF99A00A9D49C /* Button-Filter.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC2179CF99A00A9D49C /* Button-Filter.png */; };
+		DCBBFC04179CF99A00A9D49C /* Button-Go.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC3179CF99A00A9D49C /* Button-Go.png */; };
+		DCBBFC05179CF99A00A9D49C /* Button-Left.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC4179CF99A00A9D49C /* Button-Left.png */; };
+		DCBBFC06179CF99A00A9D49C /* Button-Review.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC5179CF99A00A9D49C /* Button-Review.png */; };
+		DCBBFC07179CF99A00A9D49C /* Button-Review2.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC6179CF99A00A9D49C /* Button-Review2.png */; };
+		DCBBFC08179CF99A00A9D49C /* Button-Search.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC7179CF99A00A9D49C /* Button-Search.png */; };
+		DCBBFC09179CF99A00A9D49C /* Button-Send.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC8179CF99A00A9D49C /* Button-Send.png */; };
+		DCBBFC0A179CF99A00A9D49C /* Button-Vibe.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBC9179CF99A00A9D49C /* Button-Vibe.png */; };
+		DCBBFC0B179CF99A00A9D49C /* Button-WhatRUDoing.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBCA179CF99A00A9D49C /* Button-WhatRUDoing.png */; };
+		DCBBFC0C179CF99A00A9D49C /* Categories-Drinks.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBCB179CF99A00A9D49C /* Categories-Drinks.png */; };
+		DCBBFC0D179CF99A00A9D49C /* Categories-Eat.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBCC179CF99A00A9D49C /* Categories-Eat.png */; };
+		DCBBFC0E179CF99A00A9D49C /* Categories-HappyHour.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBCD179CF99A00A9D49C /* Categories-HappyHour.png */; };
+		DCBBFC0F179CF99A00A9D49C /* Categories-Stay.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBCE179CF99A00A9D49C /* Categories-Stay.png */; };
+		DCBBFC10179CF99A00A9D49C /* Chatroom-Talkbuble1-Bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBCF179CF99A00A9D49C /* Chatroom-Talkbuble1-Bottom.png */; };
+		DCBBFC11179CF99A00A9D49C /* Chatroom-Talkbuble1-Middle.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD0179CF99A00A9D49C /* Chatroom-Talkbuble1-Middle.png */; };
+		DCBBFC12179CF99A00A9D49C /* Chatroom-Talkbuble1-Top.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD1179CF99A00A9D49C /* Chatroom-Talkbuble1-Top.png */; };
+		DCBBFC13179CF99A00A9D49C /* Chatroom-Talkbuble2-Bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD2179CF99A00A9D49C /* Chatroom-Talkbuble2-Bottom.png */; };
+		DCBBFC14179CF99A00A9D49C /* Chatroom-Talkbuble2-Middle.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD3179CF99A00A9D49C /* Chatroom-Talkbuble2-Middle.png */; };
+		DCBBFC15179CF99A00A9D49C /* Chatroom-Talkbuble2-Top.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD4179CF99A00A9D49C /* Chatroom-Talkbuble2-Top.png */; };
+		DCBBFC16179CF99A00A9D49C /* Checkbox-Checked.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD5179CF99A00A9D49C /* Checkbox-Checked.png */; };
+		DCBBFC17179CF99A00A9D49C /* Checkbox-Empty.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD6179CF99A00A9D49C /* Checkbox-Empty.png */; };
+		DCBBFC18179CF99A00A9D49C /* CheckIn-ContentBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD7179CF99A00A9D49C /* CheckIn-ContentBackground.png */; };
+		DCBBFC19179CF99A00A9D49C /* FilterOptions-ButtonUpDown.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD8179CF99A00A9D49C /* FilterOptions-ButtonUpDown.png */; };
+		DCBBFC1A179CF99A00A9D49C /* FilterOptions-TextField.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBD9179CF99A00A9D49C /* FilterOptions-TextField.png */; };
+		DCBBFC1B179CF99A00A9D49C /* Icon-Dislike-Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBDA179CF99A00A9D49C /* Icon-Dislike-Grey.png */; };
+		DCBBFC1C179CF99A00A9D49C /* Icon-Dislike-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBDB179CF99A00A9D49C /* Icon-Dislike-Small.png */; };
+		DCBBFC1D179CF99A00A9D49C /* Icon-Dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBDC179CF99A00A9D49C /* Icon-Dislike.png */; };
+		DCBBFC1E179CF99A00A9D49C /* Icon-Facebook-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBDD179CF99A00A9D49C /* Icon-Facebook-Small.png */; };
+		DCBBFC1F179CF99A00A9D49C /* Icon-Like-Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBDE179CF99A00A9D49C /* Icon-Like-Grey.png */; };
+		DCBBFC20179CF99A00A9D49C /* Icon-Like-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBDF179CF99A00A9D49C /* Icon-Like-Small.png */; };
+		DCBBFC21179CF99A00A9D49C /* Icon-Like.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE0179CF99A00A9D49C /* Icon-Like.png */; };
+		DCBBFC22179CF99A00A9D49C /* Icon-Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE1179CF99A00A9D49C /* Icon-Plus.png */; };
+		DCBBFC23179CF99A00A9D49C /* Icon-Star-Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE2179CF99A00A9D49C /* Icon-Star-Grey.png */; };
+		DCBBFC24179CF99A00A9D49C /* Icon-Star.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE3179CF99A00A9D49C /* Icon-Star.png */; };
+		DCBBFC25179CF99A00A9D49C /* Icon-Twitter-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE4179CF99A00A9D49C /* Icon-Twitter-Small.png */; };
+		DCBBFC26179CF99A00A9D49C /* Icon-X.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE5179CF99A00A9D49C /* Icon-X.png */; };
+		DCBBFC27179CF99A00A9D49C /* MessageCenter-AlertButton.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE6179CF99A00A9D49C /* MessageCenter-AlertButton.png */; };
+		DCBBFC28179CF99A00A9D49C /* Popup-Drink.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE7179CF99A00A9D49C /* Popup-Drink.png */; };
+		DCBBFC29179CF99A00A9D49C /* Popup-Eat.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE8179CF99A00A9D49C /* Popup-Eat.png */; };
+		DCBBFC2A179CF99A00A9D49C /* Popup-Icon-X.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBE9179CF99A00A9D49C /* Popup-Icon-X.png */; };
+		DCBBFC2B179CF99A00A9D49C /* Popup-Stay.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBEA179CF99A00A9D49C /* Popup-Stay.png */; };
+		DCBBFC2C179CF99A00A9D49C /* Popup-TextField.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBEB179CF99A00A9D49C /* Popup-TextField.png */; };
+		DCBBFC2D179CF99A00A9D49C /* Tab-Popular.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBEC179CF99A00A9D49C /* Tab-Popular.png */; };
+		DCBBFC2E179CF99A00A9D49C /* Tab-Reccits.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBED179CF99A00A9D49C /* Tab-Reccits.png */; };
+		DCBBFC2F179CF99A00A9D49C /* TextField-Search.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBEE179CF99A00A9D49C /* TextField-Search.png */; };
 		DCBDE37A1706A77E00E5C80A /* img-facebwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3771706A77E00E5C80A /* img-facebwithsign.png */; };
 		DCBDE37B1706A77E00E5C80A /* img-fourwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3781706A77E00E5C80A /* img-fourwithsign.png */; };
 		DCBDE37C1706A77E00E5C80A /* img-twitterwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3791706A77E00E5C80A /* img-twitterwithsign.png */; };
@@ -1188,6 +1253,71 @@
 		DCB5E7401744E92E002F7F59 /* go_green_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = go_green_button.png; sourceTree = "<group>"; };
 		DCB5E7431744E982002F7F59 /* checkin_new_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkin_new_button.png; sourceTree = "<group>"; };
 		DCB5E7451745FA1A002F7F59 /* review_indetails_labels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = review_indetails_labels.png; sourceTree = "<group>"; };
+		DCBBFBAE179CF99A00A9D49C /* Alert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alert.png; sourceTree = "<group>"; };
+		DCBBFBAF179CF99A00A9D49C /* Bottombar-Button-CheckIn-Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-CheckIn-Grey.png"; sourceTree = "<group>"; };
+		DCBBFBB0179CF99A00A9D49C /* Bottombar-Button-CheckIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-CheckIn.png"; sourceTree = "<group>"; };
+		DCBBFBB1179CF99A00A9D49C /* Bottombar-Button-Discover-Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-Discover-Grey.png"; sourceTree = "<group>"; };
+		DCBBFBB2179CF99A00A9D49C /* Bottombar-Button-Discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-Discover.png"; sourceTree = "<group>"; };
+		DCBBFBB3179CF99A00A9D49C /* Bottombar-Button-MyPlaces-Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-MyPlaces-Grey.png"; sourceTree = "<group>"; };
+		DCBBFBB4179CF99A00A9D49C /* Bottombar-Button-MyPlaces.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-MyPlaces.png"; sourceTree = "<group>"; };
+		DCBBFBB5179CF99A00A9D49C /* Bottombar-Button-Settings-Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-Settings-Grey.png"; sourceTree = "<group>"; };
+		DCBBFBB6179CF99A00A9D49C /* Bottombar-Button-Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottombar-Button-Settings.png"; sourceTree = "<group>"; };
+		DCBBFBB7179CF99A00A9D49C /* Button-AddAFriend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-AddAFriend.png"; sourceTree = "<group>"; };
+		DCBBFBB8179CF99A00A9D49C /* Button-AllGenres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-AllGenres.png"; sourceTree = "<group>"; };
+		DCBBFBB9179CF99A00A9D49C /* Button-AllPrices.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-AllPrices.png"; sourceTree = "<group>"; };
+		DCBBFBBA179CF99A00A9D49C /* Button-Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Back.png"; sourceTree = "<group>"; };
+		DCBBFBBB179CF99A00A9D49C /* Button-Call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Call.png"; sourceTree = "<group>"; };
+		DCBBFBBC179CF99A00A9D49C /* Button-Call2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Call2.png"; sourceTree = "<group>"; };
+		DCBBFBBD179CF99A00A9D49C /* Button-CheckIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-CheckIn.png"; sourceTree = "<group>"; };
+		DCBBFBBE179CF99A00A9D49C /* Button-Directions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Directions.png"; sourceTree = "<group>"; };
+		DCBBFBBF179CF99A00A9D49C /* Button-Done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Done.png"; sourceTree = "<group>"; };
+		DCBBFBC0179CF99A00A9D49C /* Button-Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Down.png"; sourceTree = "<group>"; };
+		DCBBFBC1179CF99A00A9D49C /* Button-EnterLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-EnterLocation.png"; sourceTree = "<group>"; };
+		DCBBFBC2179CF99A00A9D49C /* Button-Filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Filter.png"; sourceTree = "<group>"; };
+		DCBBFBC3179CF99A00A9D49C /* Button-Go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Go.png"; sourceTree = "<group>"; };
+		DCBBFBC4179CF99A00A9D49C /* Button-Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Left.png"; sourceTree = "<group>"; };
+		DCBBFBC5179CF99A00A9D49C /* Button-Review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Review.png"; sourceTree = "<group>"; };
+		DCBBFBC6179CF99A00A9D49C /* Button-Review2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Review2.png"; sourceTree = "<group>"; };
+		DCBBFBC7179CF99A00A9D49C /* Button-Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Search.png"; sourceTree = "<group>"; };
+		DCBBFBC8179CF99A00A9D49C /* Button-Send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Send.png"; sourceTree = "<group>"; };
+		DCBBFBC9179CF99A00A9D49C /* Button-Vibe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Vibe.png"; sourceTree = "<group>"; };
+		DCBBFBCA179CF99A00A9D49C /* Button-WhatRUDoing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-WhatRUDoing.png"; sourceTree = "<group>"; };
+		DCBBFBCB179CF99A00A9D49C /* Categories-Drinks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Categories-Drinks.png"; sourceTree = "<group>"; };
+		DCBBFBCC179CF99A00A9D49C /* Categories-Eat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Categories-Eat.png"; sourceTree = "<group>"; };
+		DCBBFBCD179CF99A00A9D49C /* Categories-HappyHour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Categories-HappyHour.png"; sourceTree = "<group>"; };
+		DCBBFBCE179CF99A00A9D49C /* Categories-Stay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Categories-Stay.png"; sourceTree = "<group>"; };
+		DCBBFBCF179CF99A00A9D49C /* Chatroom-Talkbuble1-Bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatroom-Talkbuble1-Bottom.png"; sourceTree = "<group>"; };
+		DCBBFBD0179CF99A00A9D49C /* Chatroom-Talkbuble1-Middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatroom-Talkbuble1-Middle.png"; sourceTree = "<group>"; };
+		DCBBFBD1179CF99A00A9D49C /* Chatroom-Talkbuble1-Top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatroom-Talkbuble1-Top.png"; sourceTree = "<group>"; };
+		DCBBFBD2179CF99A00A9D49C /* Chatroom-Talkbuble2-Bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatroom-Talkbuble2-Bottom.png"; sourceTree = "<group>"; };
+		DCBBFBD3179CF99A00A9D49C /* Chatroom-Talkbuble2-Middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatroom-Talkbuble2-Middle.png"; sourceTree = "<group>"; };
+		DCBBFBD4179CF99A00A9D49C /* Chatroom-Talkbuble2-Top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatroom-Talkbuble2-Top.png"; sourceTree = "<group>"; };
+		DCBBFBD5179CF99A00A9D49C /* Checkbox-Checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Checkbox-Checked.png"; sourceTree = "<group>"; };
+		DCBBFBD6179CF99A00A9D49C /* Checkbox-Empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Checkbox-Empty.png"; sourceTree = "<group>"; };
+		DCBBFBD7179CF99A00A9D49C /* CheckIn-ContentBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckIn-ContentBackground.png"; sourceTree = "<group>"; };
+		DCBBFBD8179CF99A00A9D49C /* FilterOptions-ButtonUpDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FilterOptions-ButtonUpDown.png"; sourceTree = "<group>"; };
+		DCBBFBD9179CF99A00A9D49C /* FilterOptions-TextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FilterOptions-TextField.png"; sourceTree = "<group>"; };
+		DCBBFBDA179CF99A00A9D49C /* Icon-Dislike-Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Dislike-Grey.png"; sourceTree = "<group>"; };
+		DCBBFBDB179CF99A00A9D49C /* Icon-Dislike-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Dislike-Small.png"; sourceTree = "<group>"; };
+		DCBBFBDC179CF99A00A9D49C /* Icon-Dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Dislike.png"; sourceTree = "<group>"; };
+		DCBBFBDD179CF99A00A9D49C /* Icon-Facebook-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Facebook-Small.png"; sourceTree = "<group>"; };
+		DCBBFBDE179CF99A00A9D49C /* Icon-Like-Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Like-Grey.png"; sourceTree = "<group>"; };
+		DCBBFBDF179CF99A00A9D49C /* Icon-Like-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Like-Small.png"; sourceTree = "<group>"; };
+		DCBBFBE0179CF99A00A9D49C /* Icon-Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Like.png"; sourceTree = "<group>"; };
+		DCBBFBE1179CF99A00A9D49C /* Icon-Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Plus.png"; sourceTree = "<group>"; };
+		DCBBFBE2179CF99A00A9D49C /* Icon-Star-Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Star-Grey.png"; sourceTree = "<group>"; };
+		DCBBFBE3179CF99A00A9D49C /* Icon-Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Star.png"; sourceTree = "<group>"; };
+		DCBBFBE4179CF99A00A9D49C /* Icon-Twitter-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Twitter-Small.png"; sourceTree = "<group>"; };
+		DCBBFBE5179CF99A00A9D49C /* Icon-X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-X.png"; sourceTree = "<group>"; };
+		DCBBFBE6179CF99A00A9D49C /* MessageCenter-AlertButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MessageCenter-AlertButton.png"; sourceTree = "<group>"; };
+		DCBBFBE7179CF99A00A9D49C /* Popup-Drink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Popup-Drink.png"; sourceTree = "<group>"; };
+		DCBBFBE8179CF99A00A9D49C /* Popup-Eat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Popup-Eat.png"; sourceTree = "<group>"; };
+		DCBBFBE9179CF99A00A9D49C /* Popup-Icon-X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Popup-Icon-X.png"; sourceTree = "<group>"; };
+		DCBBFBEA179CF99A00A9D49C /* Popup-Stay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Popup-Stay.png"; sourceTree = "<group>"; };
+		DCBBFBEB179CF99A00A9D49C /* Popup-TextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Popup-TextField.png"; sourceTree = "<group>"; };
+		DCBBFBEC179CF99A00A9D49C /* Tab-Popular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tab-Popular.png"; sourceTree = "<group>"; };
+		DCBBFBED179CF99A00A9D49C /* Tab-Reccits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tab-Reccits.png"; sourceTree = "<group>"; };
+		DCBBFBEE179CF99A00A9D49C /* TextField-Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TextField-Search.png"; sourceTree = "<group>"; };
 		DCBDE3771706A77E00E5C80A /* img-facebwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-facebwithsign.png"; sourceTree = "<group>"; };
 		DCBDE3781706A77E00E5C80A /* img-fourwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-fourwithsign.png"; sourceTree = "<group>"; };
 		DCBDE3791706A77E00E5C80A /* img-twitterwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-twitterwithsign.png"; sourceTree = "<group>"; };
@@ -1630,6 +1760,7 @@
 		A095E3AC16B328ED007108F6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DCBBFBAD179CF97200A9D49C /* newdesign2 */,
 				DC514FA61769981800978873 /* star_empty.png */,
 				DC0AAC9617733E1D00058735 /* favs_tabs.png */,
 				DC0AAC9717733E1D00058735 /* reccits_tab.png */,
@@ -2352,6 +2483,78 @@
 			name = facebook_login;
 			sourceTree = "<group>";
 		};
+		DCBBFBAD179CF97200A9D49C /* newdesign2 */ = {
+			isa = PBXGroup;
+			children = (
+				DCBBFBAE179CF99A00A9D49C /* Alert.png */,
+				DCBBFBAF179CF99A00A9D49C /* Bottombar-Button-CheckIn-Grey.png */,
+				DCBBFBB0179CF99A00A9D49C /* Bottombar-Button-CheckIn.png */,
+				DCBBFBB1179CF99A00A9D49C /* Bottombar-Button-Discover-Grey.png */,
+				DCBBFBB2179CF99A00A9D49C /* Bottombar-Button-Discover.png */,
+				DCBBFBB3179CF99A00A9D49C /* Bottombar-Button-MyPlaces-Grey.png */,
+				DCBBFBB4179CF99A00A9D49C /* Bottombar-Button-MyPlaces.png */,
+				DCBBFBB5179CF99A00A9D49C /* Bottombar-Button-Settings-Grey.png */,
+				DCBBFBB6179CF99A00A9D49C /* Bottombar-Button-Settings.png */,
+				DCBBFBB7179CF99A00A9D49C /* Button-AddAFriend.png */,
+				DCBBFBB8179CF99A00A9D49C /* Button-AllGenres.png */,
+				DCBBFBB9179CF99A00A9D49C /* Button-AllPrices.png */,
+				DCBBFBBA179CF99A00A9D49C /* Button-Back.png */,
+				DCBBFBBB179CF99A00A9D49C /* Button-Call.png */,
+				DCBBFBBC179CF99A00A9D49C /* Button-Call2.png */,
+				DCBBFBBD179CF99A00A9D49C /* Button-CheckIn.png */,
+				DCBBFBBE179CF99A00A9D49C /* Button-Directions.png */,
+				DCBBFBBF179CF99A00A9D49C /* Button-Done.png */,
+				DCBBFBC0179CF99A00A9D49C /* Button-Down.png */,
+				DCBBFBC1179CF99A00A9D49C /* Button-EnterLocation.png */,
+				DCBBFBC2179CF99A00A9D49C /* Button-Filter.png */,
+				DCBBFBC3179CF99A00A9D49C /* Button-Go.png */,
+				DCBBFBC4179CF99A00A9D49C /* Button-Left.png */,
+				DCBBFBC5179CF99A00A9D49C /* Button-Review.png */,
+				DCBBFBC6179CF99A00A9D49C /* Button-Review2.png */,
+				DCBBFBC7179CF99A00A9D49C /* Button-Search.png */,
+				DCBBFBC8179CF99A00A9D49C /* Button-Send.png */,
+				DCBBFBC9179CF99A00A9D49C /* Button-Vibe.png */,
+				DCBBFBCA179CF99A00A9D49C /* Button-WhatRUDoing.png */,
+				DCBBFBCB179CF99A00A9D49C /* Categories-Drinks.png */,
+				DCBBFBCC179CF99A00A9D49C /* Categories-Eat.png */,
+				DCBBFBCD179CF99A00A9D49C /* Categories-HappyHour.png */,
+				DCBBFBCE179CF99A00A9D49C /* Categories-Stay.png */,
+				DCBBFBCF179CF99A00A9D49C /* Chatroom-Talkbuble1-Bottom.png */,
+				DCBBFBD0179CF99A00A9D49C /* Chatroom-Talkbuble1-Middle.png */,
+				DCBBFBD1179CF99A00A9D49C /* Chatroom-Talkbuble1-Top.png */,
+				DCBBFBD2179CF99A00A9D49C /* Chatroom-Talkbuble2-Bottom.png */,
+				DCBBFBD3179CF99A00A9D49C /* Chatroom-Talkbuble2-Middle.png */,
+				DCBBFBD4179CF99A00A9D49C /* Chatroom-Talkbuble2-Top.png */,
+				DCBBFBD5179CF99A00A9D49C /* Checkbox-Checked.png */,
+				DCBBFBD6179CF99A00A9D49C /* Checkbox-Empty.png */,
+				DCBBFBD7179CF99A00A9D49C /* CheckIn-ContentBackground.png */,
+				DCBBFBD8179CF99A00A9D49C /* FilterOptions-ButtonUpDown.png */,
+				DCBBFBD9179CF99A00A9D49C /* FilterOptions-TextField.png */,
+				DCBBFBDA179CF99A00A9D49C /* Icon-Dislike-Grey.png */,
+				DCBBFBDB179CF99A00A9D49C /* Icon-Dislike-Small.png */,
+				DCBBFBDC179CF99A00A9D49C /* Icon-Dislike.png */,
+				DCBBFBDD179CF99A00A9D49C /* Icon-Facebook-Small.png */,
+				DCBBFBDE179CF99A00A9D49C /* Icon-Like-Grey.png */,
+				DCBBFBDF179CF99A00A9D49C /* Icon-Like-Small.png */,
+				DCBBFBE0179CF99A00A9D49C /* Icon-Like.png */,
+				DCBBFBE1179CF99A00A9D49C /* Icon-Plus.png */,
+				DCBBFBE2179CF99A00A9D49C /* Icon-Star-Grey.png */,
+				DCBBFBE3179CF99A00A9D49C /* Icon-Star.png */,
+				DCBBFBE4179CF99A00A9D49C /* Icon-Twitter-Small.png */,
+				DCBBFBE5179CF99A00A9D49C /* Icon-X.png */,
+				DCBBFBE6179CF99A00A9D49C /* MessageCenter-AlertButton.png */,
+				DCBBFBE7179CF99A00A9D49C /* Popup-Drink.png */,
+				DCBBFBE8179CF99A00A9D49C /* Popup-Eat.png */,
+				DCBBFBE9179CF99A00A9D49C /* Popup-Icon-X.png */,
+				DCBBFBEA179CF99A00A9D49C /* Popup-Stay.png */,
+				DCBBFBEB179CF99A00A9D49C /* Popup-TextField.png */,
+				DCBBFBEC179CF99A00A9D49C /* Tab-Popular.png */,
+				DCBBFBED179CF99A00A9D49C /* Tab-Reccits.png */,
+				DCBBFBEE179CF99A00A9D49C /* TextField-Search.png */,
+			);
+			name = newdesign2;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2405,6 +2608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC514FA21769956500978873 /* happy_type.png in Resources */,
+				DCBBFBF9179CF99A00A9D49C /* Button-AllGenres.png in Resources */,
 				A095E36516B326FF007108F6 /* InfoPlist.strings in Resources */,
 				A095E36D16B326FF007108F6 /* Default.png in Resources */,
 				A095E36F16B326FF007108F6 /* Default@2x.png in Resources */,
@@ -2414,12 +2618,15 @@
 				A095E3C116B328ED007108F6 /* ic_checkin.png in Resources */,
 				A095E3C216B328ED007108F6 /* ic_close.png in Resources */,
 				DC514F9B176990F400978873 /* gearinactive@2x.png in Resources */,
+				DCBBFC14179CF99A00A9D49C /* Chatroom-Talkbuble2-Middle.png in Resources */,
 				A095E3C316B328ED007108F6 /* ic_dislike.png in Resources */,
 				A095E3C416B328ED007108F6 /* ic_dislike_selected.png in Resources */,
 				A095E3C516B328ED007108F6 /* ic_facebook.png in Resources */,
 				A095E3C616B328ED007108F6 /* ic_foursquare.png in Resources */,
+				DCBBFBFF179CF99A00A9D49C /* Button-Directions.png in Resources */,
 				A095E3C716B328ED007108F6 /* ic_like.png in Resources */,
 				A095E3C816B328ED007108F6 /* ic_like_selected.png in Resources */,
+				DCBBFC0D179CF99A00A9D49C /* Categories-Eat.png in Resources */,
 				A095E3C916B328ED007108F6 /* ic_me.png in Resources */,
 				A095E3CA16B328ED007108F6 /* ic_me2.png in Resources */,
 				A095E3CB16B328ED007108F6 /* ic_myprofile.png in Resources */,
@@ -2438,7 +2645,9 @@
 				A095E45016B32AD1007108F6 /* README.txt in Resources */,
 				A037C4C316B339B900CC4124 /* icon.png in Resources */,
 				A037C4C516B339BC00CC4124 /* icon@2x.png in Resources */,
+				DCBBFC0A179CF99A00A9D49C /* Button-Vibe.png in Resources */,
 				A040353516B5704F009F6CFB /* Social_face.png in Resources */,
+				DCBBFBF6179CF99A00A9D49C /* Bottombar-Button-Settings-Grey.png in Resources */,
 				A040353616B5704F009F6CFB /* Social_twitter.png in Resources */,
 				A040353816B570DB009F6CFB /* logo.png in Resources */,
 				A040354416B574A4009F6CFB /* 37x-Checkmark.png in Resources */,
@@ -2447,23 +2656,30 @@
 				A04035BA16B57BC9009F6CFB /* jQueryInjectLandscape.txt in Resources */,
 				A04035CC16B57BC9009F6CFB /* twitter_load.png in Resources */,
 				A040376416B5AF35009F6CFB /* img_notfound.jpg in Resources */,
+				DCBBFC20179CF99A00A9D49C /* Icon-Like-Small.png in Resources */,
 				A08E4EEA16B6AB3D00F16DD0 /* bg_header.png in Resources */,
 				A08E4EEB16B6AB3D00F16DD0 /* bg_header@2x.png in Resources */,
 				A08E4EEF16B6AD8200F16DD0 /* btn_back.png in Resources */,
 				A08E4EF016B6AD8200F16DD0 /* btn_back@2x.png in Resources */,
 				A0E0B05316B82F4900152CBE /* arrow-show.png in Resources */,
+				DCBBFC18179CF99A00A9D49C /* CheckIn-ContentBackground.png in Resources */,
 				A0E0B05416B82F4900152CBE /* arrow-show@2x.png in Resources */,
 				A0468BE916B83E7A0016D0F7 /* arrow-hide.png in Resources */,
 				A0468BEA16B83E7A0016D0F7 /* arrow-hide@2x.png in Resources */,
 				A0FCE17E16B92C1F00BD4057 /* bg-search-box.png in Resources */,
 				A0FCE17F16B92C1F00BD4057 /* bg-search-box@2x.png in Resources */,
+				DCBBFC00179CF99A00A9D49C /* Button-Done.png in Resources */,
 				A0FCE18016B92C1F00BD4057 /* btn-done.png in Resources */,
 				A0FCE18116B92C1F00BD4057 /* btn-done@2x.png in Resources */,
 				DC514FA51769956500978873 /* eat_type.png in Resources */,
 				A0FCE18216B92C1F00BD4057 /* btn-go.png in Resources */,
 				A0FCE18316B92C1F00BD4057 /* btn-go@2x.png in Resources */,
 				A045361C16BA0E3E00F540EC /* bg-add-friend.png in Resources */,
+				DCBBFC22179CF99A00A9D49C /* Icon-Plus.png in Resources */,
 				A045361D16BA0E3E00F540EC /* bg-add-friend@2x.png in Resources */,
+				DCBBFC12179CF99A00A9D49C /* Chatroom-Talkbuble1-Top.png in Resources */,
+				DCBBFBF7179CF99A00A9D49C /* Bottombar-Button-Settings.png in Resources */,
+				DCBBFC1F179CF99A00A9D49C /* Icon-Like-Grey.png in Resources */,
 				A045361E16BA0E3E00F540EC /* bg-checkin-friend.png in Resources */,
 				A045361F16BA0E3E00F540EC /* bg-checkin-friend@2x.png in Resources */,
 				A045362016BA0E3E00F540EC /* btn-add-friend.png in Resources */,
@@ -2471,32 +2687,43 @@
 				A045362216BA0E3E00F540EC /* btn-checkin.png in Resources */,
 				A045362316BA0E3E00F540EC /* btn-checkin@2x.png in Resources */,
 				A045362416BA0E3E00F540EC /* btn-dislike.png in Resources */,
+				DCBBFC11179CF99A00A9D49C /* Chatroom-Talkbuble1-Middle.png in Resources */,
+				DCBBFC28179CF99A00A9D49C /* Popup-Drink.png in Resources */,
 				A045362516BA0E3E00F540EC /* btn-dislike@2x.png in Resources */,
+				DCBBFC03179CF99A00A9D49C /* Button-Filter.png in Resources */,
 				A045362616BA0E3E00F540EC /* btn-doing.png in Resources */,
 				A045362716BA0E3E00F540EC /* btn-doing@2x.png in Resources */,
+				DCBBFC26179CF99A00A9D49C /* Icon-X.png in Resources */,
 				A045362816BA0E3E00F540EC /* btn-like.png in Resources */,
 				A045362916BA0E3E00F540EC /* btn-like@2x.png in Resources */,
 				DC3AD3091769DF5F00C65E87 /* button_home_active.png in Resources */,
+				DCBBFC06179CF99A00A9D49C /* Button-Review.png in Resources */,
 				A045362A16BA0E3E00F540EC /* btn-review.png in Resources */,
 				A045362B16BA0E3E00F540EC /* btn-review@2x.png in Resources */,
 				A045363716BA10D600F540EC /* txt-rate-place.png in Resources */,
+				DCBBFC13179CF99A00A9D49C /* Chatroom-Talkbuble2-Bottom.png in Resources */,
+				DCBBFBFA179CF99A00A9D49C /* Button-AllPrices.png in Resources */,
 				A045363816BA10D600F540EC /* txt-rate-place@2x.png in Resources */,
 				A0A4E72416BA310F00CB0BBF /* btn-dislike-press.png in Resources */,
+				DCBBFC25179CF99A00A9D49C /* Icon-Twitter-Small.png in Resources */,
 				A0A4E72516BA310F00CB0BBF /* btn-dislike-press@2x.png in Resources */,
 				A0A4E72616BA310F00CB0BBF /* btn-like-press.png in Resources */,
 				A0A4E72716BA310F00CB0BBF /* btn-like-press@2x.png in Resources */,
 				A0348F8716BA998D009622EC /* btn-search.png in Resources */,
 				A0348F8816BA998D009622EC /* btn-search@2x.png in Resources */,
+				DCBBFC1C179CF99A00A9D49C /* Icon-Dislike-Small.png in Resources */,
 				A0348F8D16BA9A45009622EC /* btn-go-search.png in Resources */,
 				A0348F8E16BA9A45009622EC /* btn-go-search@2x.png in Resources */,
 				A0348F8F16BA9A45009622EC /* btn-suprise.png in Resources */,
 				A0348F9016BA9A45009622EC /* btn-suprise@2x.png in Resources */,
 				A0348F9516BA9B17009622EC /* bg-textfield-search.png in Resources */,
 				A0348F9616BA9B17009622EC /* bg-textfield-search@2x.png in Resources */,
+				DCBBFC08179CF99A00A9D49C /* Button-Search.png in Resources */,
 				A0348F9716BA9B17009622EC /* icon-search.png in Resources */,
 				A0348F9816BA9B17009622EC /* icon-search@2x.png in Resources */,
 				A0B08C6116BAB1B8005B1644 /* btn-friend-fav.png in Resources */,
 				A0B08C6216BAB1B8005B1644 /* btn-friend-fav@2x.png in Resources */,
+				DCBBFBF0179CF99A00A9D49C /* Bottombar-Button-CheckIn-Grey.png in Resources */,
 				A0B08C6316BAB1B8005B1644 /* btn-popular.png in Resources */,
 				A0B08C6416BAB1B8005B1644 /* btn-popular@2x.png in Resources */,
 				A0B08C6516BAB1B8005B1644 /* btn-reccit.png in Resources */,
@@ -2507,6 +2734,7 @@
 				A0B08C7116BAB7C9005B1644 /* btn-eat.png in Resources */,
 				A0B08C7216BAB7C9005B1644 /* btn-eat@2x.png in Resources */,
 				DC514FAB1769981800978873 /* star_empty@2x.png in Resources */,
+				DCBBFC2E179CF99A00A9D49C /* Tab-Reccits.png in Resources */,
 				A0B08C7316BAB7C9005B1644 /* btn-happy.png in Resources */,
 				A0B08C7416BAB7C9005B1644 /* btn-happy@2x.png in Resources */,
 				DC3AD30C1769DF5F00C65E87 /* button_home@2x.png in Resources */,
@@ -2523,19 +2751,25 @@
 				A0BD93C616BAD7F800CB4381 /* btn-reserve.png in Resources */,
 				A0BD93C716BAD7F800CB4381 /* btn-reserve@2x.png in Resources */,
 				A0BD93C816BAD7F800CB4381 /* btn-review-detail.png in Resources */,
+				DCBBFC29179CF99A00A9D49C /* Popup-Eat.png in Resources */,
 				DC3AD3101769DF5F00C65E87 /* button_settings@2x.png in Resources */,
 				A0BD93C916BAD7F800CB4381 /* btn-review-detail@2x.png in Resources */,
 				DC3AD30B1769DF5F00C65E87 /* button_home.png in Resources */,
 				A0BD93D016BAE21800CB4381 /* txt-review.png in Resources */,
 				A0BD93D116BAE21800CB4381 /* txt-review@2x.png in Resources */,
 				A0BD93EB16BAFA2D00CB4381 /* bg-review.png in Resources */,
+				DCBBFBF8179CF99A00A9D49C /* Button-AddAFriend.png in Resources */,
+				DCBBFBF5179CF99A00A9D49C /* Bottombar-Button-MyPlaces.png in Resources */,
 				A0BD93EC16BAFA2D00CB4381 /* bg-review@2x.png in Resources */,
 				A0BD93ED16BAFA2D00CB4381 /* btn-cancel.png in Resources */,
 				A0BD93EE16BAFA2D00CB4381 /* btn-cancel@2x.png in Resources */,
 				A0BD93EF16BAFA2D00CB4381 /* btn-submit.png in Resources */,
+				DCBBFBF2179CF99A00A9D49C /* Bottombar-Button-Discover-Grey.png in Resources */,
 				A0BD93F016BAFA2D00CB4381 /* btn-submit@2x.png in Resources */,
 				A0BD93F116BAFA2D00CB4381 /* tabbar-home@2x.png in Resources */,
 				A02C1D0016BBDF1400D89819 /* RCReviewLocationViewController.xib in Resources */,
+				DCBBFC10179CF99A00A9D49C /* Chatroom-Talkbuble1-Bottom.png in Resources */,
+				DCBBFC07179CF99A00A9D49C /* Button-Review2.png in Resources */,
 				A02C1D1F16BBF1F700D89819 /* tabbar-check-in-active.png in Resources */,
 				A02C1D2016BBF1F700D89819 /* tabbar-check-in-active@2x.png in Resources */,
 				A02C1D2116BBF1F700D89819 /* tabbar-check-in.png in Resources */,
@@ -2563,17 +2797,22 @@
 				DC3AD30F1769DF5F00C65E87 /* button_settings.png in Resources */,
 				A005E1A316BBFCE50015E0B7 /* text-dirrect@2x.png in Resources */,
 				A04A893316BCE620004A1992 /* bg-about.png in Resources */,
+				DCBBFBF1179CF99A00A9D49C /* Bottombar-Button-CheckIn.png in Resources */,
 				DC514F9D176990F400978873 /* gear@2x.png in Resources */,
 				A04A893416BCE620004A1992 /* bg-about@2x.png in Resources */,
 				A04A893516BCE620004A1992 /* bg-linked-account.png in Resources */,
 				A04A893616BCE620004A1992 /* bg-linked-account@2x.png in Resources */,
 				A04A893716BCE620004A1992 /* btn-about.png in Resources */,
+				DCBBFC01179CF99A00A9D49C /* Button-Down.png in Resources */,
 				A04A893816BCE620004A1992 /* btn-about@2x.png in Resources */,
 				A04A893916BCE620004A1992 /* btn-linked-updated.png in Resources */,
 				A04A893A16BCE620004A1992 /* btn-linked-updated@2x.png in Resources */,
+				DCBBFC0B179CF99A00A9D49C /* Button-WhatRUDoing.png in Resources */,
 				DC3AD30D1769DF5F00C65E87 /* button_settings_active.png in Resources */,
+				DCBBFC19179CF99A00A9D49C /* FilterOptions-ButtonUpDown.png in Resources */,
 				A04A893B16BCE620004A1992 /* btn-linked.png in Resources */,
 				A04A893C16BCE620004A1992 /* btn-linked@2x.png in Resources */,
+				DCBBFC2C179CF99A00A9D49C /* Popup-TextField.png in Resources */,
 				A04A893D16BCE620004A1992 /* btn-term.png in Resources */,
 				A04A893E16BCE620004A1992 /* btn-term@2x.png in Resources */,
 				A04A893F16BCE620004A1992 /* txt-connected.png in Resources */,
@@ -2581,12 +2820,14 @@
 				A04A894316BCE6D0004A1992 /* btn-back-white.png in Resources */,
 				A04A894416BCE6D0004A1992 /* btn-back-white@2x.png in Resources */,
 				A04A894716BCE8B8004A1992 /* bg-share.png in Resources */,
+				DCBBFC09179CF99A00A9D49C /* Button-Send.png in Resources */,
 				A04A894816BCE8B8004A1992 /* bg-share@2x.png in Resources */,
 				A04A894D16BCE8CA004A1992 /* bg-my-review.png in Resources */,
 				A04A894E16BCE8CA004A1992 /* bg-my-review@2x.png in Resources */,
 				A04A894F16BCE8CA004A1992 /* btn-share.png in Resources */,
 				A04A895016BCE8CA004A1992 /* btn-share@2x.png in Resources */,
 				A04A895316BCE8D1004A1992 /* txt-term.png in Resources */,
+				DCBBFC15179CF99A00A9D49C /* Chatroom-Talkbuble2-Top.png in Resources */,
 				DC514FAC1769981800978873 /* star_filled.png in Resources */,
 				A04A895416BCE8D1004A1992 /* txt-term@2x.png in Resources */,
 				A04A895F16BCF927004A1992 /* bg-checkbox-selected.png in Resources */,
@@ -2595,7 +2836,9 @@
 				DC3AD3051769DF5F00C65E87 /* button_checkin_active.png in Resources */,
 				A04A896216BCF927004A1992 /* bg-checkbox@2x.png in Resources */,
 				A04A896316BCF927004A1992 /* bg-dropbox.png in Resources */,
+				DCBBFC2F179CF99A00A9D49C /* TextField-Search.png in Resources */,
 				A04A896416BCF927004A1992 /* bg-dropbox@2x.png in Resources */,
+				DCBBFC24179CF99A00A9D49C /* Icon-Star.png in Resources */,
 				A01CCF9016BEB549001FEDE8 /* btn-write-review.png in Resources */,
 				A01CCF9116BEB549001FEDE8 /* btn-write-review@2x.png in Resources */,
 				A0637E2116BEDC5500A5A4D5 /* tabbar-home-active.png in Resources */,
@@ -2604,19 +2847,23 @@
 				A09993EB16C169A300D993C5 /* bg-rate-recommend.png in Resources */,
 				A09993EC16C169A300D993C5 /* bg-rate-recommend@2x.png in Resources */,
 				DC3AD3081769DF5F00C65E87 /* button_checkin@2x.png in Resources */,
+				DCBBFC21179CF99A00A9D49C /* Icon-Like.png in Resources */,
 				DC3AD3141769DF5F00C65E87 /* button_share@2x.png in Resources */,
 				A09993ED16C169A300D993C5 /* bg-reccit.png in Resources */,
 				A09993EE16C169A300D993C5 /* bg-reccit@2x.png in Resources */,
 				A09993EF16C169A300D993C5 /* bg-twitter.png in Resources */,
 				A09993F016C169A300D993C5 /* bg-twitter@2x.png in Resources */,
+				DCBBFC2B179CF99A00A9D49C /* Popup-Stay.png in Resources */,
 				DC3AD3121769DF5F00C65E87 /* button_share_active@2x.png in Resources */,
 				A053B49C16C375260068215C /* txt-happy-hour.png in Resources */,
 				A053B49D16C375260068215C /* txt-happy-hour@2x.png in Resources */,
 				A0D7681716C4133100C8E93E /* img-drink.png in Resources */,
+				DCBBFC1D179CF99A00A9D49C /* Icon-Dislike.png in Resources */,
 				A0D7681816C4133100C8E93E /* img-drink@2x.png in Resources */,
 				A0D7681916C4133100C8E93E /* img-eat.png in Resources */,
 				A0D7681A16C4133100C8E93E /* img-eat@2x.png in Resources */,
 				A0D7681B16C4133100C8E93E /* img-stay.png in Resources */,
+				DCBBFBFB179CF99A00A9D49C /* Button-Back.png in Resources */,
 				A0D7681C16C4133100C8E93E /* img-stay@2x.png in Resources */,
 				A0D7682116C4161500C8E93E /* bg-combobox.png in Resources */,
 				A0D7682216C4161500C8E93E /* bg-combobox@2x.png in Resources */,
@@ -2624,32 +2871,42 @@
 				A0D7682416C4161500C8E93E /* btn-checkin-go@2x.png in Resources */,
 				A085F08E16C5516100C40786 /* about.html in Resources */,
 				A085F08F16C5516100C40786 /* privacy.html in Resources */,
+				DCBBFBEF179CF99A00A9D49C /* Alert.png in Resources */,
 				DC514F9C176990F400978873 /* gearinactive.png in Resources */,
 				A085F09016C5516100C40786 /* tos.html in Resources */,
 				A085F09316C552EE00C40786 /* txt-about.png in Resources */,
+				DCBBFBFD179CF99A00A9D49C /* Button-Call2.png in Resources */,
 				A085F09416C552EE00C40786 /* txt-about@2x.png in Resources */,
+				DCBBFC16179CF99A00A9D49C /* Checkbox-Checked.png in Resources */,
 				A0F0D0C616CE24A2003267A9 /* btn-edit.png in Resources */,
 				DC3AD30E1769DF5F00C65E87 /* button_settings_active@2x.png in Resources */,
 				A0F0D0C716CE24A2003267A9 /* btn-edit@2x.png in Resources */,
 				A0F0D0E516CE6ED0003267A9 /* bg-hours.png in Resources */,
 				A0F0D0E616CE6ED0003267A9 /* bg-hours@2x.png in Resources */,
+				DCBBFC0E179CF99A00A9D49C /* Categories-HappyHour.png in Resources */,
 				A0C5D96916D4FAD30090B697 /* icon-map-drink.png in Resources */,
+				DCBBFC1A179CF99A00A9D49C /* FilterOptions-TextField.png in Resources */,
 				A0C5D96A16D4FAD30090B697 /* icon-map-drink@2x.png in Resources */,
+				DCBBFBF3179CF99A00A9D49C /* Bottombar-Button-Discover.png in Resources */,
 				A0C5D96B16D4FAD30090B697 /* icon-map-eat.png in Resources */,
 				A0C5D96C16D4FAD30090B697 /* icon-map-eat@2x.png in Resources */,
 				A0C5D96D16D4FAD30090B697 /* icon-map-sleep.png in Resources */,
 				A0C5D96E16D4FAD30090B697 /* icon-map-sleep@2x.png in Resources */,
+				DCBBFBFE179CF99A00A9D49C /* Button-CheckIn.png in Resources */,
 				DC84E4DA17041A2600D6EF8D /* btn-done-login.png in Resources */,
 				DC84E4DC17041AF000D6EF8D /* btn-skip-login.png in Resources */,
 				DC84E4E3170440E800D6EF8D /* btn-facebook-login.png in Resources */,
 				DC84E4E4170440E800D6EF8D /* btn-twitter-login.png in Resources */,
 				DC84E4E617044B3A00D6EF8D /* btn-four-login.png in Resources */,
+				DCBBFC27179CF99A00A9D49C /* MessageCenter-AlertButton.png in Resources */,
 				DC514F9A176990F400978873 /* gear.png in Resources */,
 				DC84E4E817045C0000D6EF8D /* bg-rate.png in Resources */,
+				DCBBFC0C179CF99A00A9D49C /* Categories-Drinks.png in Resources */,
 				DC84E4EA17045D0000D6EF8D /* rate-upper-sign.png in Resources */,
 				DC84E4EC170460E600D6EF8D /* rate-review.png in Resources */,
 				DC84E4EF1704616B00D6EF8D /* rate-down.png in Resources */,
 				DC84E4F01704616B00D6EF8D /* rate-up.png in Resources */,
+				DCBBFC2D179CF99A00A9D49C /* Tab-Popular.png in Resources */,
 				DCC0980A17055B9600E35FC1 /* btn-cancel-review.png in Resources */,
 				DCC0980C17055BD700E35FC1 /* img-review-down.png in Resources */,
 				DCC0980E17055C2A00E35FC1 /* review-shape.png in Resources */,
@@ -2668,6 +2925,8 @@
 				DC8934FC17435776008922EC /* skip_button.png in Resources */,
 				DC8934FE17435937008922EC /* twitter_sign_login.png in Resources */,
 				DC89350117435A5F008922EC /* 4s_login.png in Resources */,
+				DCBBFC1E179CF99A00A9D49C /* Icon-Facebook-Small.png in Resources */,
+				DCBBFC04179CF99A00A9D49C /* Button-Go.png in Resources */,
 				DC89350217435A5F008922EC /* 4s_sign_login.png in Resources */,
 				DC89350717435C44008922EC /* done_button.png in Resources */,
 				DC89350817435C44008922EC /* rate_screen_upper_sign.png in Resources */,
@@ -2676,13 +2935,16 @@
 				DC89350E17435F1C008922EC /* review_close.png in Resources */,
 				DC89350F17435F1C008922EC /* review_thumbs_down.png in Resources */,
 				DC89351017435F1C008922EC /* review_thumbs_up.png in Resources */,
+				DCBBFBFC179CF99A00A9D49C /* Button-Call.png in Resources */,
 				DC89351517436206008922EC /* drink_button.png in Resources */,
 				DC89351617436206008922EC /* eat_button.png in Resources */,
 				DC89351717436206008922EC /* happy_hour_button.png in Resources */,
 				DC89351817436206008922EC /* stay_button.png in Resources */,
+				DCBBFC17179CF99A00A9D49C /* Checkbox-Empty.png in Resources */,
 				DC89351A17436E07008922EC /* review_thumbs_down_.png in Resources */,
 				DC89351F17437347008922EC /* back_button.png in Resources */,
 				DC89352017437347008922EC /* expand_button.png in Resources */,
+				DCBBFC0F179CF99A00A9D49C /* Categories-Stay.png in Resources */,
 				DC89352117437347008922EC /* go_button.png in Resources */,
 				DC89352217437347008922EC /* surpriseme_button.png in Resources */,
 				DC89352417437445008922EC /* collapse_button.png in Resources */,
@@ -2690,16 +2952,20 @@
 				DC89352A17438F54008922EC /* directions_button_place_details.png in Resources */,
 				DC89352B17438F54008922EC /* reserve_button_place_details.png in Resources */,
 				DC89352C17438F54008922EC /* review_button_place_details.png in Resources */,
+				DCBBFC02179CF99A00A9D49C /* Button-EnterLocation.png in Resources */,
 				DC89352F1743936C008922EC /* update_button.png in Resources */,
 				DC8935301743936C008922EC /* background_for_linked_accounts.png in Resources */,
 				DC3AD30A1769DF5F00C65E87 /* button_home_active@2x.png in Resources */,
 				DCB5E72A1744E0EF002F7F59 /* RCReviewInDetailsViewController.h in Resources */,
 				DCB5E72E1744E118002F7F59 /* RCReviewInDetailsViewController.xib in Resources */,
 				DCB5E7301744E20F002F7F59 /* review_indetails_back.png in Resources */,
+				DCBBFBF4179CF99A00A9D49C /* Bottombar-Button-MyPlaces-Grey.png in Resources */,
 				DC3AD3131769DF5F00C65E87 /* button_share.png in Resources */,
 				DCB5E7351744E332002F7F59 /* cancel_button.png in Resources */,
 				DCB5E7361744E332002F7F59 /* submit_button.png in Resources */,
+				DCBBFC2A179CF99A00A9D49C /* Popup-Icon-X.png in Resources */,
 				DCB5E73C1744E698002F7F59 /* what_areyoudoing_button.png in Resources */,
+				DCBBFC05179CF99A00A9D49C /* Button-Left.png in Resources */,
 				DCB5E73D1744E698002F7F59 /* add_friend_button.png in Resources */,
 				DCB5E73E1744E698002F7F59 /* write_review_button.png in Resources */,
 				DCB5E7421744E92E002F7F59 /* go_green_button.png in Resources */,
@@ -2717,8 +2983,10 @@
 				DC60167F176C6D0D00C0B5E4 /* bubbleSomeone@2x.png in Resources */,
 				DC601680176C6D0D00C0B5E4 /* missingAvatar.png in Resources */,
 				DC601681176C6D0D00C0B5E4 /* missingAvatar@2x.png in Resources */,
+				DCBBFC1B179CF99A00A9D49C /* Icon-Dislike-Grey.png in Resources */,
 				DC601682176C6D0D00C0B5E4 /* typingMine.png in Resources */,
 				DC601683176C6D0E00C0B5E4 /* typingMine@2x.png in Resources */,
+				DCBBFC23179CF99A00A9D49C /* Icon-Star-Grey.png in Resources */,
 				DC601684176C6D0E00C0B5E4 /* typingSomeone.png in Resources */,
 				DC601685176C6D0E00C0B5E4 /* typingSomeone@2x.png in Resources */,
 				DC60168A176C6D6D00C0B5E4 /* VibeViewController.xib in Resources */,

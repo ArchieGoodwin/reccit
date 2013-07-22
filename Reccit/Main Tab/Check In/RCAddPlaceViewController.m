@@ -58,6 +58,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    _imgLike.hidden = YES;
+    _lblReccits.hidden = YES;
+    
+    
     self.reviewString = nil;
     self.messageVc = nil;
     //self.rateView.editable = YES;
@@ -162,7 +166,25 @@
             {
                 self.lbPhone.text = @"";
             }
-            
+            if(self.location.reccitCount > 0)
+            {
+                _lblReccits.hidden = NO;
+
+                if(self.location.reccitCount == 1)
+                {
+                    [_lblReccits setText:[NSString stringWithFormat:@"%i reccit", self.location.reccitCount]];
+                }
+                else
+                {
+                    [_lblReccits setText:[NSString stringWithFormat:@"%i reccits", self.location.reccitCount]];
+                    
+                }
+
+            }
+            if(self.location.recommendation)
+            {
+                _imgLike.hidden = NO;
+            }
             [self.rateView setRate:self.location.rating];
             if (self.location.recommendation) {
                 self.btnLike.selected = YES;
@@ -968,4 +990,9 @@
     //[self.tvReview resignFirstResponder];
 }
 
+- (void)viewDidUnload {
+    [self setLblReccits:nil];
+    [self setImgLike:nil];
+    [super viewDidUnload];
+}
 @end

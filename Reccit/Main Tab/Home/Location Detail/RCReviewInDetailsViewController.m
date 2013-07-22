@@ -16,8 +16,11 @@
 #import "RCAddPlaceViewController.h"
 #import "RCRateViewController.h"
 #import "RCVibeHelper.h"
+#import "RCAppDelegate.h"
 #define kRCAPIUpdateComment @"http://bizannouncements.com/bhavesh/reviewsupdate.php"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
+
+#define kRCAPIAddPlaceDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/checkin/checkin.svc/UpdateReview"
 #define kRCAPIUpdateCommentInRate @"http://bizannouncements.com/bhavesh/updatereview.php?userid=%@&placeid=%d&recommend=%@&rating=%lf&review=%@"
 
 @interface RCReviewInDetailsViewController ()
@@ -39,6 +42,25 @@
 {
     [super viewDidLoad];
     //_isDelta = NO;
+    
+    if(![RCCommonUtils isIphone5])
+    {
+        CGRect rect = self.tvReview.frame;
+        rect.size.height = rect.size.height - 40;
+        self.tvReview.frame = rect;
+        
+        rect = self.backForText.frame;
+        rect.size.height = rect.size.height - 40;
+        self.backForText.frame = rect;
+        
+        rect = self.btnDone.frame;
+        rect.origin.y = rect.origin.y - 40;
+        self.btnDone.frame = rect;
+    }
+    
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
     
     UIColor *bg = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     self.view.backgroundColor = bg;
@@ -81,16 +103,16 @@
 {
     if(self.location.ID > 0)
     {
-        NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, [self makeString2]];
+        NSString *urlString = [NSString stringWithFormat:@"%@",kRCAPIAddPlaceDOTNET];
         
         NSLog(@"REQUEST URL: %@", urlString);
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
         
-        NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSURL *url = [NSURL URLWithString:urlString];
         
-        if(self.isDelta == YES)
+        /*if(self.isDelta == YES)
         {
             urlString = [NSString stringWithFormat:kRCAPIUpdateCommentInRate, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], self.location.ID, self.recommendation == YES ? @"yes" : @"no", self.rateView.rate, self.tvReview.text];
             NSLog(@"REQUEST URL: %@", urlString);
@@ -98,13 +120,19 @@
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             // Start new request
             url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        }
+        }*/
         
         
         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-        [client setParameterEncoding:AFFormURLParameterEncoding];
-        [client postPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"self.location.ID = %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [client setParameterEncoding:AFJSONParameterEncoding];
+
+        NSString *dict =[NSString stringWithFormat:@"\"review\":%@",[RCCommonUtils buildReviewString:self.location]];
+        NSLog(@"%@", dict);
+        
+        
+        
+        [client postPath:@"" parameters:@{@"data":dict} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"sendReview response = %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
             NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
             NSLog(@"responseObject %@", rO);
             
@@ -121,6 +149,7 @@
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"sendReview error: %@", error.description);
             [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
@@ -129,7 +158,7 @@
     }
     else
     {
-        NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, [self makeString2]];
+        NSString *urlString = [NSString stringWithFormat:@"%@",kRCAPIAddPlaceDOTNET];
         NSLog(@"REQUEST URL kRCAPIAddPlace: %@", urlString);
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -138,8 +167,8 @@
         NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-        [client setParameterEncoding:AFFormURLParameterEncoding];
-        [client postPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [client setParameterEncoding:AFJSONParameterEncoding];
+        [client postPath:@"" parameters:@{@"\"review\"":[RCCommonUtils buildReviewString:self.location]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
             NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
             NSLog(@"other responseObject %@", rO);
@@ -160,6 +189,12 @@
 
 - (IBAction)btnSubmitTouched:(id)sender
 {
+    self.location.comment = self.tvReview.text;
+    self.location.recommendation = self.recommendation;
+    
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showButtonForMessages];
     [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
         if(result)
         {
@@ -308,6 +343,8 @@
 
 - (IBAction)btnCancelTouched:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showButtonForMessages];
     [self.vsParrent dismissSemiModalViewController:self];
 }
 
@@ -335,6 +372,8 @@
 - (void)viewDidUnload {
     [self setViewRound:nil];
     [self setLblPlaceName:nil];
+    [self setBackForText:nil];
+    [self setBtnDone:nil];
     [super viewDidUnload];
 }
 @end

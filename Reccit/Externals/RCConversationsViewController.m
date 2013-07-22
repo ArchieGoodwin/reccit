@@ -12,6 +12,7 @@
 #import "NSManagedObject+NWCoreDataHelper.h"
 #import "RCLocation.h"
 #import "RCVibeHelper.h"
+#import "RCAppDelegate.h"
 @interface RCConversationsViewController ()
 
 @end
@@ -37,6 +38,8 @@
     
     UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeMe)];
     self.navigationItem.rightBarButtonItem = barBtn;
+    
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -57,7 +60,8 @@
 -(void)closeMe
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate showButtonForMessages];
     }];
 }
 

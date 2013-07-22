@@ -25,5 +25,5 @@
 + (void)drawListLocationToPDF:(NSArray *)listLocation;
 +(BOOL)isIphone5;
 BOOL IS_IPHONE5_RETINA(void);
-
++(NSString *)buildReviewString:(RCLocation *)location;
 @end
