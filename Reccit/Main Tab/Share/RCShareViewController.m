@@ -17,12 +17,14 @@
 #import "RCMyReviewViewController.h"
 #import "AFNetworking.h"
 #import "RCAppDelegate.h"
+#import "RCReviewInDetailsViewController.h"
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
 #define kAPIListReview @"http://bizannouncements.com/Vega/services/app/profile.php?user=%@&city=%@&rating=%@&type=%@&genre=%@"
 
 @interface RCShareViewController ()
 {
     NSMutableArray *types;
+    RCReviewInDetailsViewController *reviewVc;
 }
 
 @end
@@ -575,7 +577,17 @@
     RCLocation *location = [self.listReviewResult objectAtIndex:indexPath.row];
     // TODO
     
-    [self performSegueWithIdentifier:@"PushMyReview" sender:location];
+    reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
+    reviewVc.vsParrent = self;
+    reviewVc.location = location;
+    reviewVc.shouldSendImmediately = YES;
+    reviewVc.isDelta = NO;
+    //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
+    
+    [self presentSemiModalViewController:reviewVc];
+    
+    
+    //[self performSegueWithIdentifier:@"PushMyReview" sender:location];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

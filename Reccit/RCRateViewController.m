@@ -81,7 +81,7 @@
 
 - (void)callAPIGetListLocationRate
 {
-    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationRate, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationRateDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     NSLog(@"REQUEST URL: %@", urlString);
     
     self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -101,7 +101,7 @@
         NSLog(@"%@", rO);
 
         [self.listLocation removeAllObjects];
-        for (NSDictionary *locationDic in rO)
+        for (NSDictionary *locationDic in [rO objectForKey:@"DeltaResult"])
         {
             RCLocation *location = [RCCommonUtils getLocationFromDictionary:locationDic];
             if(location)

@@ -13,6 +13,7 @@
 #import "RCLocation.h"
 #import "RCVibeHelper.h"
 #import "RCAppDelegate.h"
+#import "UIColor-Expanded.h"
 @interface RCConversationsViewController ()
 
 @end
@@ -34,12 +35,12 @@
 
     _conversations =  [[RCVibeHelper sharedInstance] getAllConversationsSortedByDate];
     
-    self.navigationItem.title  = @"Conversations";
+    self.navigationItem.title  = @"Message center";
     
     UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeMe)];
     self.navigationItem.rightBarButtonItem = barBtn;
     
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.06f green:0.10f blue:0.31f alpha:1];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

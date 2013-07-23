@@ -151,6 +151,7 @@
 								<string key="NSFrame">{{20, 235}, {101, 40}}</string>
 								<reference key="NSSuperview" ref="497831840"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="544834001"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -164,6 +165,30 @@
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">Button-Done.png</string>
+								</object>
+								<reference key="IBUIFontDescription" ref="784067117"/>
+								<reference key="IBUIFont" ref="743120133"/>
+							</object>
+							<object class="IBUIButton" id="544834001">
+								<reference key="NSNextResponder" ref="497831840"/>
+								<int key="NSvFlags">1316</int>
+								<object class="NSPSMatrix" key="NSFrameMatrix"/>
+								<string key="NSFrame">{{206, 235}, {63, 30}}</string>
+								<reference key="NSSuperview" ref="497831840"/>
+								<reference key="NSWindow"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<reference key="IBUIHighlightedTitleColor" ref="194239659"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="201263793"/>
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">btn-edit.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="784067117"/>
 								<reference key="IBUIFont" ref="743120133"/>
@@ -378,6 +403,14 @@
 					<int key="connectionID">52</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnEdit</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="544834001"/>
+					</object>
+					<int key="connectionID">55</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">btnSubmitTouched:</string>
 						<reference key="source" ref="431550840"/>
@@ -412,6 +445,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnEditTouched:</string>
+						<reference key="source" ref="544834001"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">56</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -453,6 +495,7 @@
 							<reference ref="886912667"/>
 							<reference ref="489337099"/>
 							<reference ref="431550840"/>
+							<reference ref="544834001"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -496,6 +539,11 @@
 						<reference key="object" ref="886912667"/>
 						<reference key="parent" ref="497831840"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">53</int>
+						<reference key="object" ref="544834001"/>
+						<reference key="parent" ref="497831840"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -517,6 +565,9 @@
 				<reference key="5.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="5.showNotes"/>
 				<string key="50.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<reference key="53.IBUserGuides" ref="0"/>
+				<boolean value="NO" key="53.showNotes"/>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="6.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<reference key="6.IBUserGuides" ref="0"/>
@@ -533,7 +584,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">52</int>
+			<int key="maxID">56</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -564,32 +615,10 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">RCReviewInDetailsViewController</string>
 					<string key="superclassName">RCBaseViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="btnCancelTouched:">id</string>
-						<string key="btnLikeTouched:">id</string>
-						<string key="btnSubmitTouched:">id</string>
-						<string key="btnUnLikeTouched:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="btnCancelTouched:">
-							<string key="name">btnCancelTouched:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnLikeTouched:">
-							<string key="name">btnLikeTouched:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnSubmitTouched:">
-							<string key="name">btnSubmitTouched:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnUnLikeTouched:">
-							<string key="name">btnUnLikeTouched:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="backForText">UIImageView</string>
+						<string key="btnDone">UIButton</string>
+						<string key="btnEdit">UIButton</string>
 						<string key="btnLike">UIButton</string>
 						<string key="btnUnLike">UIButton</string>
 						<string key="lblPlaceName">UILabel</string>
@@ -601,6 +630,14 @@
 						<object class="IBToOneOutletInfo" key="backForText">
 							<string key="name">backForText</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnDone">
+							<string key="name">btnDone</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnEdit">
+							<string key="name">btnEdit</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="btnLike">
 							<string key="name">btnLike</string>
@@ -644,6 +681,7 @@
 			<string key="Icon-Like.png">{71, 71}</string>
 			<string key="Popup-Icon-X.png">{27, 26}</string>
 			<string key="Popup-TextField.png">{494, 314}</string>
+			<string key="btn-edit.png">{62, 31}</string>
 			<string key="review_thumbs_down_.png">{73, 73}</string>
 			<string key="review_thumbs_up.png">{73, 73}</string>
 		</dictionary>

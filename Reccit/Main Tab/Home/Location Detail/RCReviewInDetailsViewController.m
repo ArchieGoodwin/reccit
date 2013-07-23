@@ -17,6 +17,7 @@
 #import "RCRateViewController.h"
 #import "RCVibeHelper.h"
 #import "RCAppDelegate.h"
+#import "RCShareViewController.h"
 #define kRCAPIUpdateComment @"http://bizannouncements.com/bhavesh/reviewsupdate.php"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
 
@@ -83,8 +84,21 @@
         self.btnUnLike.alpha = 1;
     }
     _lblPlaceName.text = self.location.name;
+    if([self.vsParrent isKindOfClass:[RCShareViewController class]])
+    {
+        self.tvReview.editable = NO;
+        self.rateView.editable = NO;
+        self.btnDone.hidden = YES;
+    }
+    else
+    {
+        self.btnEdit.hidden = YES;
+        [self.tvReview becomeFirstResponder];
+
+    }
     
-    [self.tvReview becomeFirstResponder];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -126,12 +140,8 @@
         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
         [client setParameterEncoding:AFJSONParameterEncoding];
 
-        NSString *dict =[NSString stringWithFormat:@"\"review\":%@",[RCCommonUtils buildReviewString:self.location]];
-        NSLog(@"%@", dict);
         
-        
-        
-        [client postPath:@"" parameters:@{@"data":dict} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [client postPath:@"" parameters:@{@"review":[RCCommonUtils buildReviewString:self.location]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"sendReview response = %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
             NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
             NSLog(@"responseObject %@", rO);
@@ -164,11 +174,11 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
         
-        NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSURL *url = [NSURL URLWithString:urlString];
         
         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
         [client setParameterEncoding:AFJSONParameterEncoding];
-        [client postPath:@"" parameters:@{@"\"review\"":[RCCommonUtils buildReviewString:self.location]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [client postPath:@"" parameters:@{@"review":[RCCommonUtils buildReviewString:self.location]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
             NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
             NSLog(@"other responseObject %@", rO);
@@ -217,7 +227,7 @@
             [self sendReview];
             
             
-            ((RCAddPlaceViewController *)self.vsParrent).reviewString = [self makeString2];
+            //((RCAddPlaceViewController *)self.vsParrent).reviewString = [RCCommonUtils buildReviewString:self.location];
             //UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been saved!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             //[alerView show];
         }
@@ -348,25 +358,62 @@
     [self.vsParrent dismissSemiModalViewController:self];
 }
 
+- (IBAction)btnEditTouched:(id)sender
+{
+    self.btnDone.hidden = NO;
+    self.btnEdit.hidden = YES;
+    self.tvReview.editable = YES;
+    self.rateView.editable = YES;
+}
+
 - (IBAction)btnLikeTouched:(id)sender
 {
-    self.btnLike.alpha = 1;
-    self.btnUnLike.alpha = 0.3;
-    self.recommendation = YES;
+    if([self.vsParrent isKindOfClass:[RCShareViewController class]] && !self.btnEdit.hidden)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please tap edit button to make any changes" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.tag = 1001;
+
+        [alert show];
+        return;
+        
+    }
+    else
+    {
+        self.btnLike.alpha = 1;
+        self.btnUnLike.alpha = 0.3;
+        self.recommendation = YES;
+    }
+
 }
 
 - (IBAction)btnUnLikeTouched:(id)sender
 {
-    self.recommendation = NO;
-    self.btnUnLike.alpha = 1;
-    self.btnLike.alpha = 0.3;
+    if([self.vsParrent isKindOfClass:[RCShareViewController class]] && !self.btnEdit.hidden)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please tap edit button to make any changes" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.tag = 1001;
+        [alert show];
+        return;
+        
+    }
+    else
+    {
+        self.recommendation = NO;
+        self.btnUnLike.alpha = 1;
+        self.btnLike.alpha = 0.3;
+    }
+
 }
 #pragma mark -
 #pragma mark - AlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self btnCancelTouched:nil];
+    if(alertView.tag != 1001)
+    {
+        [self btnCancelTouched:nil];
+
+    }
 }
 
 - (void)viewDidUnload {
@@ -374,6 +421,7 @@
     [self setLblPlaceName:nil];
     [self setBackForText:nil];
     [self setBtnDone:nil];
+    [self setBtnEdit:nil];
     [super viewDidUnload];
 }
 @end

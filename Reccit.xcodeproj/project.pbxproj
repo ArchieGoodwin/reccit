@@ -560,6 +560,7 @@
 		DCBBFC2D179CF99A00A9D49C /* Tab-Popular.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBEC179CF99A00A9D49C /* Tab-Popular.png */; };
 		DCBBFC2E179CF99A00A9D49C /* Tab-Reccits.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBED179CF99A00A9D49C /* Tab-Reccits.png */; };
 		DCBBFC2F179CF99A00A9D49C /* TextField-Search.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBBFBEE179CF99A00A9D49C /* TextField-Search.png */; };
+		DCBBFC32179D520D00A9D49C /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBBFC31179D520D00A9D49C /* UIColor-Expanded.m */; };
 		DCBDE37A1706A77E00E5C80A /* img-facebwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3771706A77E00E5C80A /* img-facebwithsign.png */; };
 		DCBDE37B1706A77E00E5C80A /* img-fourwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3781706A77E00E5C80A /* img-fourwithsign.png */; };
 		DCBDE37C1706A77E00E5C80A /* img-twitterwithsign.png in Resources */ = {isa = PBXBuildFile; fileRef = DCBDE3791706A77E00E5C80A /* img-twitterwithsign.png */; };
@@ -1318,6 +1319,8 @@
 		DCBBFBEC179CF99A00A9D49C /* Tab-Popular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tab-Popular.png"; sourceTree = "<group>"; };
 		DCBBFBED179CF99A00A9D49C /* Tab-Reccits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tab-Reccits.png"; sourceTree = "<group>"; };
 		DCBBFBEE179CF99A00A9D49C /* TextField-Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TextField-Search.png"; sourceTree = "<group>"; };
+		DCBBFC30179D520D00A9D49C /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		DCBBFC31179D520D00A9D49C /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		DCBDE3771706A77E00E5C80A /* img-facebwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-facebwithsign.png"; sourceTree = "<group>"; };
 		DCBDE3781706A77E00E5C80A /* img-fourwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-fourwithsign.png"; sourceTree = "<group>"; };
 		DCBDE3791706A77E00E5C80A /* img-twitterwithsign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-twitterwithsign.png"; sourceTree = "<group>"; };
@@ -2008,6 +2011,8 @@
 		A095E40816B32AD1007108F6 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				DCBBFC30179D520D00A9D49C /* UIColor-Expanded.h */,
+				DCBBFC31179D520D00A9D49C /* UIColor-Expanded.m */,
 				DC27DFED1776B4E8005B9CBD /* Autocomplete 2 */,
 				DC0AAC891773124C00058735 /* Autocomplete */,
 				DC601660176C6CE600C0B5E4 /* Bubbles */,
@@ -3059,6 +3064,7 @@
 				A04036EC16B5A520009F6CFB /* RCWebService.m in Sources */,
 				A0E3ED5316B5B24D002722E8 /* MKAnnotationView+WebCache.m in Sources */,
 				A0E3ED5416B5B24D002722E8 /* SDImageCache.m in Sources */,
+				DCBBFC32179D520D00A9D49C /* UIColor-Expanded.m in Sources */,
 				A0E3ED5516B5B24D002722E8 /* SDWebImageCompat.m in Sources */,
 				A0E3ED5616B5B24D002722E8 /* SDWebImageDecoder.m in Sources */,
 				A0E3ED5716B5B24D002722E8 /* SDWebImageDownloader.m in Sources */,
@@ -3250,8 +3256,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
+				PROVISIONING_PROFILE = "A7CC53F5-4D47-4470-8D62-4E82B3EB4843";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A7CC53F5-4D47-4470-8D62-4E82B3EB4843";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3279,8 +3285,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "068F8E30-EE5D-40CD-81BF-BE8F0D147E43";
+				PROVISIONING_PROFILE = "A7CC53F5-4D47-4470-8D62-4E82B3EB4843";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A7CC53F5-4D47-4470-8D62-4E82B3EB4843";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

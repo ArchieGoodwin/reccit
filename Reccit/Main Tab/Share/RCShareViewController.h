@@ -10,8 +10,8 @@
 #import "ASIHTTPRequest.h"
 #import <MessageUI/MessageUI.h>
 #import "GAITrackedViewController.h"
-
-@interface RCShareViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate>
+#import "RCBaseViewController.h"
+@interface RCShareViewController : RCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     UITextField *currentTextField;
 }

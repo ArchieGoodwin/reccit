@@ -18,7 +18,8 @@
     
     
     _placeTitle.title = self.location.name;
-   
+    _bar.tintColor = [UIColor colorWithRed:0.06f green:0.10f blue:0.31f alpha:1];
+
 
     if(self.navigationController)
     {

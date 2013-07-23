@@ -247,21 +247,28 @@
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         NSLog(@"getUserFromServer %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         
-        if([rO objectForKey:@"data"] != [NSNull null])
-        {
+
             RCUser *user = [self getUserById:userId];
             
             if(user == nil)
             {
                 user = [RCUser createEntityInContext];
                 user.userId = [NSNumber numberWithInt:userId];
-                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[[rO objectForKey:@"data"] objectForKey:@"FacebookID"]];
-                user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
+                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[NSString stringWithFormat:@"%i", userId]];
+                if([rO objectForKey:@"data"] != [NSNull null])
+                {
+                    user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
+
+                }
             }
             else
             {
-                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[[rO objectForKey:@"data"] objectForKey:@"FacebookID"]];
-                user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
+                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[NSString stringWithFormat:@"%i", userId]];
+                if([rO objectForKey:@"data"] != [NSNull null])
+                {
+                    user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
+                    
+                }
 
             }
             mess.user = user;
@@ -271,7 +278,7 @@
             {
                 completionBlock(mess, nil);
             }
-        }
+      
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

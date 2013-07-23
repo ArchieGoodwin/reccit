@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSString *stringUserCheckins;
 @property (nonatomic, strong) NSString *stringFriendsCheckins;
 @property (nonatomic, assign) NSInteger friendsCount;
-
+@property (nonatomic, strong) NSMutableArray *userCheckinsArray;
 
 
 +(id)sharedInstance;

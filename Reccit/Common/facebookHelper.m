@@ -171,7 +171,7 @@
             iterations++;
             [self buildArrays:[result objectForKey:@"data"]];
             
-            [self buildResult];
+            [self buildResultArray];
             NSLog(@"end query %@", [NSDate date]);
             [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
             
@@ -227,7 +227,7 @@
             iterations++;
             [self buildArrays:[result objectForKey:@"data"]];
             
-            [self buildResult];
+            [self buildResultArray];
             NSLog(@"end query %@", [NSDate date]);
             [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
             
@@ -649,6 +649,125 @@
 
 }
 
+
+-(void)buildResultArray
+{
+    NSMutableArray *temp = [NSMutableArray new];
+    if(_checkins.count == 0)
+    {
+        _friendsCheckinsArray = nil;
+        return;
+    }
+    [_friendsCheckinsArray removeAllObjects];
+    NSLog(@"friends checkins total count: %i", _checkins.count);
+    // int i = 0;
+    for(NSMutableDictionary *checkin in _checkins)
+    {
+        //NSLog(@"%@", checkin);
+        
+        NSDictionary *placeDict = [self getFriendPageIsFromCheckins:[checkin objectForKey:@"target_id"]];
+        //NSLog(@"%@", placeDict);
+        if(placeDict)
+        {
+            if([[checkin objectForKey:@"coords"] isKindOfClass:[NSDictionary class]])
+            {
+                NSString *placeName = [self getPlaceNameFromPlaceId:[checkin objectForKey:@"target_id"]];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                placeName = [placeName stringByReplacingOccurrencesOfString:@"," withString:@""];
+                
+                placeName = [self stringWithPercentEscape:placeName];
+                
+                
+                
+                NSDictionary *locArray = @{@"latitude":[[checkin objectForKey:@"coords"] objectForKey:@"latitude"],
+                                     @"longitude":[[checkin objectForKey:@"coords"] objectForKey:@"longitude"]
+                                           };
+                
+
+                NSMutableArray *foodStyles = [NSMutableArray new];
+                for(NSString *style in [placeDict objectForKey:@"food_styles"])
+                {
+                    NSString *s = [style stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                    s = [s stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                    s = [s stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                    
+                    
+                    
+                    [foodStyles addObject:s];
+                }
+                NSString *foodStylesStr = [foodStyles componentsJoinedByString:@","];
+                
+                NSMutableArray *categories = [NSMutableArray new];
+                for(NSDictionary *cat in [placeDict objectForKey:@"categories"])
+                {
+                    [categories addObject:[[cat objectForKey:@"name"] stringByReplacingOccurrencesOfString:@"&" withString:@""]];
+                }
+                NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
+                
+                NSMutableArray *hours = [NSMutableArray new];
+                NSDictionary *hoursString = @{@"hours":@""};
+                if([((NSDictionary *) [placeDict objectForKey:@"hours"]) respondsToSelector:@selector(allKeys)])
+                {
+                    for(NSString *hour in ((NSDictionary *)[placeDict objectForKey:@"hours"]).allKeys)
+                    {
+                        [hours addObject:[self makeStringWithKeyAndValue:hour value:[((NSDictionary *)[placeDict objectForKey:@"hours"]) objectForKey:hour]]];
+                    }
+                }
+                hoursString = @{@"hours":hours};
+                
+                NSString *phone = [placeDict objectForKey:@"phone"] == [NSNull null] ? @"" : [[placeDict objectForKey:@"phone"] stringByReplacingOccurrencesOfString:@"&" withString:@"" ];
+                NSString *street = [[placeDict objectForKey:@"location"] objectForKey:@"street"] == [NSNull null] ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"street"];
+                
+                NSDictionary *placeArray = @{@"id":[checkin objectForKey:@"target_id"],
+                                       @"location":locArray,
+                                       @"name":placeName,
+                                             @"city":[[placeDict objectForKey:@"location"] objectForKey:@"city"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"city"],
+                                             @"country":[[placeDict objectForKey:@"location"] objectForKey:@"country"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"country"],
+                                             @"state":[[placeDict objectForKey:@"location"] objectForKey:@"state"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"state"],
+                                       @"street":[self stringWithPercentEscape:[street stringByReplacingOccurrencesOfString:@"\"" withString:@""]],
+                                       
+                                             @"zip":[[placeDict objectForKey:@"location"] objectForKey:@"zip"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"zip"],
+                                       @"phone":phone,
+                                       @"type":categoriesString,
+                                             @"pic":[placeDict objectForKey:@"pic_big"] == nil ? @"" : [self stringWithPercentEscape:[placeDict objectForKey:@"pic_big"]],
+                                       
+                                             @"price_range":[placeDict objectForKey:@"price_range"] == nil ? @"" : [placeDict objectForKey:@"price_range"],
+
+                                       @"food_styles":foodStylesStr
+                                       
+                                             };
+
+                NSDictionary *item = @{@"author_uid":[checkin objectForKey:@"author_uid"],
+                                         @"checkin_id":[checkin objectForKey:@"checkin_id"],
+                                       
+                                         @"coords":locArray,
+                                        @"name":placeName,
+                                       @"page_id":[checkin objectForKey:@"target_id"],
+
+                                       @"place":placeArray};
+                
+
+                [temp addObject:item];
+                
+               
+                
+            }
+        }
+
+        
+    }
+
+    
+    NSLog(@"result for friends send count %i", temp.count);
+    
+    //_stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _friendsCheckinsArray = temp;
+    
+}
+
+
 -(NSDictionary *)getUserPageIsFromCheckins:(NSString *)pageId
 {
     for(NSDictionary *place in _userPlaces)
@@ -681,7 +800,7 @@
 
 -(void)buildResultForUser
 {
-
+    
     NSMutableArray *temp = [NSMutableArray new];
     if(_userCheckins.count == 0)
     {
@@ -691,7 +810,7 @@
     for(NSMutableDictionary *checkin in _userCheckins)
     {
         //NSLog(@"%@", checkin);
-
+        
         NSDictionary *placeDict = [self getUserPageIsFromCheckins:[checkin objectForKey:@"target_id"]];
         //NSLog(@"%@", placeDict);
         if(placeDict)
@@ -700,28 +819,28 @@
             placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
             placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
             placeName = [placeName stringByReplacingOccurrencesOfString:@"," withString:@""];
-
+            
             placeName = [self stringWithPercentEscape:placeName];
-
-
+            
+            
             NSArray *fromArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]],
-                                                           [self makeStringWithKeyAndValue:@"name" value:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookName]],
-                                                           nil];
+                                  [self makeStringWithKeyAndValue:@"name" value:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookName]],
+                                  nil];
             NSString *from = [NSString stringWithFormat:@"\"from\":{%@}", [fromArray componentsJoinedByString:@","]];
-
-
+            
+            
             NSArray *locArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[[checkin objectForKey:@"coords"] objectForKey:@"latitude"]],
-                                                          [self makeStringWithKeyAndValue:@"longitude" value:[[checkin objectForKey:@"coords"] objectForKey:@"longitude"]],
-                            nil];
-
-           //place dictionary building
+                                 [self makeStringWithKeyAndValue:@"longitude" value:[[checkin objectForKey:@"coords"] objectForKey:@"longitude"]],
+                                 nil];
+            
+            //place dictionary building
             NSMutableArray *foodStyles = [NSMutableArray new];
             for(NSString *style in [placeDict objectForKey:@"food_styles"])
             {
                 [foodStyles addObject:style];
             }
             NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":\"%@\"", [foodStyles componentsJoinedByString:@","]];
-
+            
             //place dictionary building
             NSMutableArray *categories = [NSMutableArray new];
             for(NSDictionary *cat in [placeDict objectForKey:@"categories"])
@@ -741,47 +860,151 @@
                 }
             }
             hoursString = [NSString stringWithFormat:@"\"hours\":{%@}", [hours componentsJoinedByString:@","]];
-
+            
             NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"target_id"]],
-                                                            [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
-                                                            [self makeStringWithKeyAndValue:@"name" value:placeName],
-                                                            [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
-                            [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
-                            [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
+                                   [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
+                                   [self makeStringWithKeyAndValue:@"name" value:placeName],
+                                   [self makeStringWithKeyAndValue:@"city" value:[[placeDict objectForKey:@"location"] objectForKey:@"city"]],
+                                   [self makeStringWithKeyAndValue:@"country" value:[[placeDict objectForKey:@"location"] objectForKey:@"country"]],
+                                   [self makeStringWithKeyAndValue:@"state" value:[[placeDict objectForKey:@"location"] objectForKey:@"state"]],
                                    [self makeStringWithKeyAndValue:@"street" value:[self stringWithPercentEscape:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByReplacingOccurrencesOfString:@"\"" withString:@""]]],
-                            [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
-                            [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
-                            [self makeStringWithKeyAndValue:@"type" value:categoriesString],
-                            [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic_big"]]],
-                            [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
-                            //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
-                            //hoursString,
-                            foodStyleString,
-
-                    nil];
+                                   [self makeStringWithKeyAndValue:@"zip" value:[[placeDict objectForKey:@"location"] objectForKey:@"zip"]],
+                                   [self makeStringWithKeyAndValue:@"phone" value:[placeDict objectForKey:@"phone"]],
+                                   [self makeStringWithKeyAndValue:@"type" value:categoriesString],
+                                   [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[placeDict objectForKey:@"pic_big"]]],
+                                   [self makeStringWithKeyAndValue:@"price_range" value:[placeDict objectForKey:@"price_range"]],
+                                   //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
+                                   //hoursString,
+                                   foodStyleString,
+                                   
+                                   nil];
             NSString *place = [NSString stringWithFormat:@"\"place\":{%@}", [placeArray componentsJoinedByString:@","]];
-
-
+            
+            
             NSString *item = [NSString stringWithFormat:@"{%@,%@,%@}", from, [self makeStringWithKeyAndValue2:@"id" value:[checkin objectForKey:@"checkin_id"]], place];
-
+            
             /*NSDictionary *resCheck = @{@"id": [checkin objectForKey:@"checkin_id"],
-                    @"from": @{@"name": [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookName],
-                            @"id": [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]},
-                    @"place": @{@"id": [checkin objectForKey:@"page_id"],
-                            @"name": placeName,
-                            @"location": @{@"latitude": [[checkin objectForKey:@"coords"] objectForKey:@"latitude"],
-                                            @"longitude": [[checkin objectForKey:@"coords"] objectForKey:@"longitude"]}
-
-                    }
-
-            };*/
-
-
-
+             @"from": @{@"name": [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookName],
+             @"id": [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]},
+             @"place": @{@"id": [checkin objectForKey:@"page_id"],
+             @"name": placeName,
+             @"location": @{@"latitude": [[checkin objectForKey:@"coords"] objectForKey:@"latitude"],
+             @"longitude": [[checkin objectForKey:@"coords"] objectForKey:@"longitude"]}
+             
+             }
+             
+             };*/
+            
+            
+            
             //NSLog(@"%@", item);
-
+            
             //NSLog(@"%@", placeName);
             //[checkin setObject:placeName forKey:@"name"];
+            [temp addObject:item];
+        }
+        
+        
+        
+    }
+    
+    //NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
+    NSString *data = [NSString stringWithFormat:@"[%@]",[temp componentsJoinedByString:@","]];
+    
+    
+    NSLog(@"result for user checkins %i, data:  %@", temp.count, data);
+    //_stringUserCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _stringUserCheckins = data;
+    
+    //_resultUserCheckins = @{@"fb_usercheckin" : [NSMutableDictionary dictionaryWithObject:temp forKey:@"data"]};
+}
+
+
+
+-(void)buildResultForUserDict
+{
+
+    NSMutableArray *temp = [NSMutableArray new];
+    if(_userCheckins.count == 0)
+    {
+        _userCheckinsArray = nil;
+        return;
+    }
+    [_userCheckinsArray removeAllObjects];
+    for(NSMutableDictionary *checkin in _userCheckins)
+    {
+        //NSLog(@"%@", checkin);
+
+        NSDictionary *placeDict = [self getUserPageIsFromCheckins:[checkin objectForKey:@"target_id"]];
+        //NSLog(@"%@", placeDict);
+        if(placeDict)
+        {
+            NSString *placeName = [placeDict objectForKey:@"name"];
+            placeName = [placeName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            placeName = [placeName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+            placeName = [placeName stringByReplacingOccurrencesOfString:@"," withString:@""];
+
+            placeName = [self stringWithPercentEscape:placeName];
+
+
+            NSDictionary *fromArray = @{@"id":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId],
+                                                            @"name":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookName]
+                                        };
+
+
+            NSDictionary *locArray = @{@"latitude":[[checkin objectForKey:@"coords"] objectForKey:@"latitude"],
+                                                        @"longitude":[[checkin objectForKey:@"coords"] objectForKey:@"longitude"]
+                                       };
+
+           //place dictionary building
+            NSMutableArray *foodStyles = [NSMutableArray new];
+            for(NSString *style in [placeDict objectForKey:@"food_styles"])
+            {
+                [foodStyles addObject:style];
+            }
+
+            //place dictionary building
+            NSMutableArray *categories = [NSMutableArray new];
+            for(NSDictionary *cat in [placeDict objectForKey:@"categories"])
+            {
+                [categories addObject:[[cat objectForKey:@"name"] stringByReplacingOccurrencesOfString:@"&" withString:@""]];
+            }
+            NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
+            
+            
+            NSMutableArray *hours = [NSMutableArray new];
+            NSDictionary *hoursString = @{@"hours":@""};
+            if([((NSDictionary *) [placeDict objectForKey:@"hours"]) respondsToSelector:@selector(allKeys)])
+            {
+                for(NSString *hour in ((NSDictionary *)[placeDict objectForKey:@"hours"]).allKeys)
+                {
+                    [hours addObject:[self makeStringWithKeyAndValue:hour value:[((NSDictionary *)[placeDict objectForKey:@"hours"]) objectForKey:hour]]];
+                }
+            }
+            hoursString = @{@"hours":hours};
+
+            NSDictionary *placeArray = @{@"id":[checkin objectForKey:@"target_id"],
+                                                   @"location":locArray,
+                                                   @"name":placeName,
+                                                   @"city":[[placeDict objectForKey:@"location"] objectForKey:@"city"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"city"],
+                                                   @"country":[[placeDict objectForKey:@"location"] objectForKey:@"country"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"country"],
+                                                   @"state":[[placeDict objectForKey:@"location"] objectForKey:@"state"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"state"],
+                                                   @"street":[[placeDict objectForKey:@"location"] objectForKey:@"street"] == nil ? @"" : [self stringWithPercentEscape:[[[placeDict objectForKey:@"location"] objectForKey:@"street"] stringByReplacingOccurrencesOfString:@"\"" withString:@""]],
+                                                   @"zip":[[placeDict objectForKey:@"location"] objectForKey:@"zip"] == nil ? @"" : [[placeDict objectForKey:@"location"] objectForKey:@"zip"],
+                                                   @"phone":[placeDict objectForKey:@"phone"] == nil ? @"" : [placeDict objectForKey:@"phone"],
+                                                   @"type":categoriesString,
+                                                   @"pic":[placeDict objectForKey:@"pic_big"] == nil ? @"" : [self stringWithPercentEscape:[placeDict objectForKey:@"pic_big"]],
+                                                   @"price_range":[placeDict objectForKey:@"price_range"] == nil ? @"" : [placeDict objectForKey:@"price_range"],
+                            //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
+                            //hoursString,
+                            @"food_styles":foodStyles
+
+                                         };
+
+
+            NSDictionary *item = @{@"from":fromArray,@"id":[checkin objectForKey:@"checkin_id"], @"place":placeArray};
+
+
             [temp addObject:item];
         }
 
@@ -789,13 +1012,9 @@
 
     }
 
-    //NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
-    NSString *data = [NSString stringWithFormat:@"[%@]",[temp componentsJoinedByString:@","]];
-
-
-    NSLog(@"result for user checkins %i, data:  %@", temp.count, data);
+    NSLog(@"result for user checkins %i, data:  %@", temp.count, temp);
     //_stringUserCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    _stringUserCheckins = data;
+    _userCheckinsArray = temp;
 
     //_resultUserCheckins = @{@"fb_usercheckin" : [NSMutableDictionary dictionaryWithObject:temp forKey:@"data"]};
 }
@@ -873,7 +1092,7 @@
         {
            // NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
             [self buildArraysForUser:[result objectForKey:@"data"]];
-            [self buildResultForUser];
+            [self buildResultForUserDict];
             if(completeBlockWithResult)
             {
                 completeBlockWithResult(YES, nil);
@@ -923,7 +1142,7 @@
             {
                 NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
                 [self buildArraysForUser:[result objectForKey:@"data"]];
-                [self buildResultForUser];
+                [self buildResultForUserDict];
                 if(completeBlockWithResult)
                 {
                     completeBlockWithResult(YES, nil);

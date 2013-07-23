@@ -111,7 +111,11 @@
         } else {
             location.price = 0;
         }
-        location.zipCode = [locationDic objectForKey:@"zipcode"];
+        if ([locationDic objectForKey:@"zipcode"] != nil && [locationDic objectForKey:@"zipcode"] != [NSNull null]) {
+            location.zipCode = [locationDic objectForKey:@"zipcode"];
+        } else {
+            location.zipCode = @"";
+        }
         if ([locationDic objectForKey:@"longitude"] != nil && [locationDic objectForKey:@"longitude"] != [NSNull null]) {
             location.longitude = [[locationDic objectForKey:@"longitude"] doubleValue];
             location.latitude = [[locationDic objectForKey:@"latitude"] doubleValue];
@@ -127,22 +131,47 @@
         }
         if ([locationDic objectForKey:@"street"] != nil && [locationDic objectForKey:@"street"] != [NSNull null]) {
             location.street = [locationDic objectForKey:@"street"];
-            
         }
         else
         {
             location.street = @"";
         }
         location.category =  [locationDic objectForKey:@"type"];
-        location.state = [locationDic objectForKey:@"state"];
-        location.city = [locationDic objectForKey:@"city"];
+        if ([locationDic objectForKey:@"state"] != nil && [locationDic objectForKey:@"state"] != [NSNull null]) {
+            location.state = [locationDic objectForKey:@"state"];
+            
+        }
+        else
+        {
+            location.state = @"";
+        }
+        if ([locationDic objectForKey:@"city"] != nil && [locationDic objectForKey:@"city"] != [NSNull null]) {
+            location.city = [locationDic objectForKey:@"city"];
+            
+        }
+        else
+        {
+            location.city = @"";
+        }
         
         if ([locationDic objectForKey:@"phone"] != nil && [locationDic objectForKey:@"phone"] != [NSNull null]) {
             location.phoneNumber = [locationDic objectForKey:@"phone"];
             
         }
+        else
+        {
+            location.phoneNumber = @"";
+
+        }
         location.comment = [((NSArray *)[locationDic objectForKey:@"comments"]) componentsJoinedByString:@","];
-        location.priceRange = [locationDic objectForKey:@"price_range"];
+        if ([locationDic objectForKey:@"price_range"] != nil && [locationDic objectForKey:@"price_range"] != [NSNull null]) {
+            location.priceRange = [locationDic objectForKey:@"price_range"];
+            
+        }
+        else
+        {
+            location.priceRange = @"";
+        }
         //location.recommendation = [[locationDic objectForKey:@"recommended"] intValue] == 1;
         
         if ([locationDic objectForKey:@"isReccit"] != nil && [locationDic objectForKey:@"isReccit"] != [NSNull null]) {
@@ -286,61 +315,50 @@
     
 }
 
-+(NSString *)buildReviewString:(RCLocation *)location
++(NSDictionary *)buildReviewString:(RCLocation *)location
 {
+    NSLog(@"%@  %@   %@", location.city, location.country, location.zipCode);
         CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
 
-        NSArray *locUserArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[NSString stringWithFormat:@"%f", currentLocation.latitude]],
-                         [self makeStringWithKeyAndValue:@"longitude" value:[NSString stringWithFormat:@"%f", currentLocation.longitude]],
-                         nil];
+    NSDictionary *locUserArray = @{@"latitude":[NSString stringWithFormat:@"%f", currentLocation.latitude],
+                         @"longitude":[NSString stringWithFormat:@"%f", currentLocation.longitude]
+                              };
     
     
-        NSArray *locPlaceArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[NSString stringWithFormat:@"%f", location.latitude]],
-                             [self makeStringWithKeyAndValue:@"longitude" value:[NSString stringWithFormat:@"%f", location.longitude]],
-                             nil];
+    NSDictionary *locPlaceArray = @{@"latitude":[NSString stringWithFormat:@"%f", location.latitude],
+                             @"longitude":[NSString stringWithFormat:@"%f", location.longitude]
+                               };
     
-    //[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]
-            NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"id" value:[NSString stringWithFormat:@"%i",location.ID]],
-                                  [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locPlaceArray componentsJoinedByString:@","]]],
-                                   [self makeStringWithKeyAndValue:@"city" value:location.city],
-                                   [self makeStringWithKeyAndValue:@"country" value:location.country],
-                                   [self makeStringWithKeyAndValue:@"state" value:location.state],
-                                   [self makeStringWithKeyAndValue:@"street" value:location.street],
-                                   [self makeStringWithKeyAndValue:@"zip" value:location.zipCode],
-                                   [self makeStringWithKeyAndValue:@"phone" value:location.phoneNumber],
-                                   [self makeStringWithKeyAndValue:@"type" value:location.category],
-                                   [self makeStringWithKeyAndValue:@"pic" value:@""],
-                                   [self makeStringWithKeyAndValue:@"name" value:location.name],
+    NSDictionary *placeArray = @{@"id":[NSString stringWithFormat:@"%i",location.ID],
+                                   @"location":locPlaceArray,
+                                   @"name":location.name,
+                                 @"city":location.city == nil ? @"" : location.city,
+                                 @"country":location.country == nil ? @"" : location.country,
+                                 @"state":location.state == nil ? @"" : location.state,
+                                 @"street":location.street == nil ? @"" : location.street,
+                                 @"zip":location.zipCode == nil ? @"" : location.zipCode,
+                                 @"phone":location.phoneNumber == nil ? @"" : location.phoneNumber,
+                                 @"type":location.category == nil ? @"" : location.category,
+                                   @"pic":@"",
 
-                                   [self makeStringWithKeyAndValue:@"price_range" value:location.priceRange],
-                                   [self makeStringWithKeyAndValue:@"food_styles" value:location.genre],
+                                 @"price_range":location.priceRange == nil ? @"" : location.priceRange,
+                                 @"food_styles":location.genre == nil ? @"" : location.genre
 
+                                 };
+    
+    
+    NSDictionary *userArray = @{@"user":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId],
+                                @"address":location.address == nil ? @"" : location.address,
+                                @"factual_id":location.factual_id == nil ? @"" : location.factual_id,
+                                @"comment":location.comment == nil ? @"" : location.comment,
+                           @"recommend":location.recommendation ? @"true" : @"false",
+                           @"coords":locUserArray,
+                           @"place":placeArray
+                                };
+    
 
-                                  nil];
-            
-            
-         
-    
-            NSArray *userArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"user" value:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId]],
-                           [self makeStringWithKeyAndValue:@"name" value:location.name],
-                           [self makeStringWithKeyAndValue:@"address" value:location.address],
-                           [self makeStringWithKeyAndValue:@"factual_id" value:location.factual_id],
-                           [self makeStringWithKeyAndValue:@"comment" value:location.comment],
-                           [self makeStringWithKeyAndValue:@"recommend" value:location.recommendation ? @"true" : @"false"],
-                           [self makeStringWithKeyAndValue2:@"coords" value:[NSString stringWithFormat:@"{%@}",[locUserArray componentsJoinedByString:@","]]],
-                           [self makeStringWithKeyAndValue2:@"place" value:[NSString stringWithFormat:@"{%@}",[placeArray componentsJoinedByString:@","]]],
-
-                           nil];
-    
-    
-            NSString *place = [NSString stringWithFormat:@"{%@}", [userArray componentsJoinedByString:@","]];
-            
-            
-
-    
-    //NSLog(@"result for review place:  %@", place);
-    
-    return place;
+    NSLog(@"%@", userArray);
+    return userArray;
 
 }
 

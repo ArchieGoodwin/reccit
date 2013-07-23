@@ -103,10 +103,10 @@
 
     }
     
-    /*if (self.location.phoneNumber == nil)
+    if (self.location.phoneNumber == nil || [self.location.phoneNumber isEqualToString:@""])
     {
         self.btnCall.hidden = YES;
-    }*/
+    }
     
     CLLocationCoordinate2D currentLocation = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
     MKCoordinateRegion region = {{0,0},{.001,.001}};

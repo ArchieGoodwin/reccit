@@ -458,10 +458,10 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
                     [request setHTTPBody:[AFQueryStringFromParametersWithEncoding(parameters, self.stringEncoding) dataUsingEncoding:self.stringEncoding]];
                     break;
                 case AFJSONParameterEncoding:;
-                    //[request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
-                    [request setValue:[NSString stringWithFormat:@"application/json;"] forHTTPHeaderField:@"Content-Type"];
+                    [request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+                    //[request setValue:[NSString stringWithFormat:@"application/json;"] forHTTPHeaderField:@"Content-Type"];
                     //NSLog(@"%@", parameters);
-                    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:&error]];
+                    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error]];
                     break;
                 case AFPropertyListParameterEncoding:;
                     [request setValue:[NSString stringWithFormat:@"application/x-plist; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];

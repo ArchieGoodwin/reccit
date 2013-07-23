@@ -33,4 +33,5 @@
 @property (assign) BOOL recommendation;
 @property (nonatomic, assign) BOOL isDelta;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnEdit;
 @end

@@ -280,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Web Service/RCWebService.m"
-            timestampString = "396184550.558159"
+            timestampString = "396250867.964323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "+authenticateFacebookWithToken:userId:"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,28 +296,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Web Service/RCWebService.m"
-            timestampString = "396184550.558159"
+            timestampString = "396250867.964323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "+authenticateFacebookWithToken:userId:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Home/Location Detail/RCReviewInDetailsViewController.m"
-            timestampString = "396181051.347295"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-sendReview"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
