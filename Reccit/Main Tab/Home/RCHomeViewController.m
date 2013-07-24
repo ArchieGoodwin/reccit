@@ -75,7 +75,6 @@
 
     }
    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMessagesCount:) name:@"vibes" object:nil];
 
 
     //RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -102,11 +101,6 @@
     [self.view setBackgroundColor:kRCBackgroundView];
 }
 
--(void)showMessagesCount:(NSNotification *)notification
-{
-    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate showNewMessages:notification];
-}
 
 
 -(void)closeVibes

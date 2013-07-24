@@ -27,7 +27,8 @@
 {
     [super viewDidLoad];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMessagesCount:) name:@"vibes" object:nil];
+
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showButtonForMessages];
 	// Do any additional setup after loading the view.
@@ -44,6 +45,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)showMessagesCount:(NSNotification *)notification
+{
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showNewMessages:notification];
+}
 
 
 #pragma mark -

@@ -88,6 +88,42 @@
     [self.listLocation addObjectsFromArray:temp];
 }
 
+
+-(NSString *)distanceStringFromPoint:(RCLocation *)myLocation
+{
+    CFLocaleRef userLocaleRef = CFLocaleCopyCurrent();
+    //CFShow(CFLocaleGetIdentifier(userLocaleRef));
+    NSString *loc = (NSString *)CFLocaleGetIdentifier(userLocaleRef);
+    CFRelease(userLocaleRef);
+    double kilometers = myLocation.distance;
+    //kilometers = 1.4;
+    double res = 0.0;
+    if([loc isEqualToString:@"en_US"] || [loc isEqualToString:@"en_GB"])
+    {
+        loc = @"en_US";
+    }
+    if([loc isEqualToString:@"en_US"])
+    {
+        res = kilometers / 1609.344;
+    }
+    else
+    {
+        res = kilometers / 1000;
+    }
+    
+    NSString *str  = @"";
+    if(res > 1)
+    {
+        str = [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%.1f %@", res, [loc isEqualToString:@"en_US"] ? @"miles" : @"km"]];
+    }
+    else
+    {
+        str = [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%.1f %@", (res * ([loc isEqualToString:@"en_US"] ? 5280 : 1000)), [loc isEqualToString:@"en_US"] ? @"feets" : @"m"]];
+    }
+    return str;
+}
+
+
 - (void)callAPIGetListLocation
 {
     // Start new request
@@ -130,6 +166,9 @@
                 }
                 
             }
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES];
+
+            [self.listLocation sortUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
             
             [self clearHappyHours];
         } else {
@@ -261,7 +300,8 @@
         [(UILabel *)[cell viewWithTag:997] setText:@""];
     }
     
-    
+    [(UILabel *)[cell viewWithTag:505] setText:[self distanceStringFromPoint:location]];
+
     
     [(UILabel *)[cell viewWithTag:1001] setText:location.name];
     

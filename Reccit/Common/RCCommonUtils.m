@@ -71,6 +71,21 @@
     return FALSE;
 }
 
++(double)distanceFromPoint:(double)lat lng:(double)lng
+{
+    CLLocationDegrees longitude = lng;
+    CLLocationDegrees latitude = lat;
+    CLLocation *placeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    CLLocationCoordinate2D usrLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate] getCurrentLocation];
+    CLLocation * userLocation = [[CLLocation alloc] initWithLatitude:usrLocation.latitude longitude:usrLocation.longitude];
+    
+    double kilometers = [userLocation distanceFromLocation:placeLocation];
+    
+    return kilometers;
+}
+
+
+
 + (RCLocation *)getLocationFromDictionary:(NSDictionary *)locationDic
 {
     RCLocation *location = [[RCLocation alloc] init];
@@ -119,6 +134,9 @@
         if ([locationDic objectForKey:@"longitude"] != nil && [locationDic objectForKey:@"longitude"] != [NSNull null]) {
             location.longitude = [[locationDic objectForKey:@"longitude"] doubleValue];
             location.latitude = [[locationDic objectForKey:@"latitude"] doubleValue];
+            
+            location.distance = [self distanceFromPoint:location.latitude lng:location.longitude];
+            
         }
         
         if ([locationDic objectForKey:@"address"] != nil && [locationDic objectForKey:@"address"] != [NSNull null]) {
@@ -284,6 +302,8 @@
             location.listFriendsName = listFriendName;
             location.friendsCount = location.listFriends.count;
         }
+        
+        
         
         return location;
 

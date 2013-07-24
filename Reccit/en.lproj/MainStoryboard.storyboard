@@ -854,7 +854,7 @@
                                                         <action selector="btnCheckBoxTouched:" destination="aHj-Aj-sIh" eventType="touchUpInside" id="r4l-eh-Bx9"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleToFill" id="g1V-uH-4eZ">
+                                                <imageView userInteractionEnabled="NO" tag="3003" contentMode="scaleToFill" id="g1V-uH-4eZ">
                                                     <rect key="frame" x="266" y="5" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1595,8 +1595,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-reccit.png" id="k0e-le-H7B">
-                                <rect key="frame" x="4" y="-4" width="129" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="4" y="0.0" width="129" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="What do you want to do?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JKx-SK-eOg">
                                 <rect key="frame" x="27" y="67" width="268" height="99"/>
@@ -1890,41 +1890,41 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ResultCell" id="Xgu-8H-KMk">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="75"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ResultCell" rowHeight="90" id="Xgu-8H-KMk">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1001" contentMode="left" text="place name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xQn-re-bVV">
-                                                    <rect key="frame" x="12" y="2" width="202" height="21"/>
+                                                    <rect key="frame" x="12" y="1" width="212" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="997" contentMode="left" text="# of reccs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K6d-Mh-6nX">
-                                                    <rect key="frame" x="212" y="46" width="66" height="21"/>
+                                                    <rect key="frame" x="212" y="58" width="66" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="996" contentMode="left" text="# of friends who have visited" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xqw-bt-ATH">
-                                                    <rect key="frame" x="12" y="22" width="202" height="21"/>
+                                                    <rect key="frame" x="12" y="34" width="202" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <view tag="1002" contentMode="scaleToFill" id="2eH-XU-clX" customClass="DYRateView">
-                                                    <rect key="frame" x="193" y="2" width="125" height="25"/>
+                                                    <rect key="frame" x="207" y="17" width="125" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <button opaque="NO" tag="995" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qBF-nW-cTz">
-                                                    <rect key="frame" x="284" y="39" width="37" height="37"/>
+                                                    <rect key="frame" x="284" y="54" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="review_thumbs_up.png">
@@ -1936,37 +1936,44 @@
                                                     </state>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" tag="2001" contentMode="scaleToFill" id="gN4-hK-Fs4">
-                                                    <rect key="frame" x="12" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="12" y="54" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2002" contentMode="scaleToFill" id="6JP-Eg-o46">
-                                                    <rect key="frame" x="45" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="45" y="54" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2003" contentMode="scaleToFill" id="9Xo-aS-nYi">
-                                                    <rect key="frame" x="78" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="78" y="54" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2004" contentMode="scaleToFill" id="nIS-iD-Q5f">
-                                                    <rect key="frame" x="111" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="111" y="54" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2005" contentMode="scaleToFill" id="mtu-9J-fj7">
-                                                    <rect key="frame" x="144" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="144" y="54" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2006" contentMode="scaleToFill" id="cyp-vi-yk1">
-                                                    <rect key="frame" x="177" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="177" y="54" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-hours.png" id="639-x2-5gR">
-                                                    <rect key="frame" x="200" y="19" width="112" height="25"/>
+                                                    <rect key="frame" x="207" y="33" width="112" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="6000" contentMode="left" text="Thurs 4pm-8pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g06-ep-KPm">
-                                                    <rect key="frame" x="206" y="20" width="98" height="21"/>
+                                                    <rect key="frame" x="213" y="33" width="98" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="505" contentMode="left" text="miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XZ2-TK-wvO">
+                                                    <rect key="frame" x="247" y="-1" width="69" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -2104,11 +2111,11 @@
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ResultCell" id="ZJO-Ta-yuf">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="75"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ResultCell" rowHeight="80" id="ZJO-Ta-yuf">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1001" contentMode="left" text="place name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9f-j8-J81">
@@ -2157,27 +2164,27 @@
                                                     </state>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" tag="2001" contentMode="scaleToFill" id="ayz-z3-ArT">
-                                                    <rect key="frame" x="12" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="10" y="42" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2002" contentMode="scaleToFill" id="1Im-WC-PJ9">
-                                                    <rect key="frame" x="45" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="46" y="42" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2003" contentMode="scaleToFill" id="RUr-ZA-OaH">
-                                                    <rect key="frame" x="78" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="82" y="42" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2004" contentMode="scaleToFill" id="yDl-zK-T7r">
-                                                    <rect key="frame" x="111" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="118" y="42" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2005" contentMode="scaleToFill" id="Mgh-3M-XGk">
-                                                    <rect key="frame" x="144" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="154" y="42" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2006" contentMode="scaleToFill" id="FP9-CL-HPN">
-                                                    <rect key="frame" x="177" y="42" width="30" height="30"/>
+                                                    <rect key="frame" x="190" y="42" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -2185,7 +2192,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="EmptyCell" rowHeight="107" id="dIl-uB-e79">
-                                        <rect key="frame" x="0.0" y="97" width="320" height="107"/>
+                                        <rect key="frame" x="0.0" y="102" width="320" height="107"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
@@ -2477,22 +2484,22 @@
                                 <rect key="frame" x="0.0" y="398" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1bj-Nz-dKx">
-                                <rect key="frame" x="14" y="129" width="200" height="44"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1bj-Nz-dKx">
+                                <rect key="frame" x="14" y="131" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Brazilian, Sandwiches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E9U-R9-Vvp">
-                                <rect key="frame" x="14" y="161" width="174" height="21"/>
+                                <rect key="frame" x="14" y="171" width="174" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Address" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="28F-Wa-gRi">
-                                <rect key="frame" x="14" y="175" width="200" height="46"/>
+                                <rect key="frame" x="14" y="189" width="200" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -3015,12 +3022,6 @@
         <class className="RCLocationDetailViewController" superclassName="RCBaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCLocationDetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="btnBackTouched:"/>
-                <relationship kind="action" name="btnCallTouched:"/>
-                <relationship kind="action" name="btnDirectionTouched:"/>
-                <relationship kind="action" name="btnReserveTouched:"/>
-                <relationship kind="action" name="btnReviewTouched:"/>
-                <relationship kind="action" name="btnVibeTap:"/>
                 <relationship kind="outlet" name="btnCall" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnVibe" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="imgAvatar" candidateClass="UIImageView"/>
@@ -3144,7 +3145,7 @@
                 <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="RCShareViewController" superclassName="GAITrackedViewController">
+        <class className="RCShareViewController" superclassName="RCBaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RCShareViewController.h"/>
             <relationships>
                 <relationship kind="action" name="handleTap:" candidateClass="UITapGestureRecognizer"/>
@@ -3192,8 +3193,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="SuD-zf-nKL"/>
         <segue reference="Mq5-R3-QU1"/>
+        <segue reference="SuD-zf-nKL"/>
         <segue reference="Xcg-p9-p62"/>
     </inferredMetricsTieBreakers>
 </document>

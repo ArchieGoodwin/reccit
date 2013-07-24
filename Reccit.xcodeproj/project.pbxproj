@@ -275,12 +275,6 @@
 		A0BD93F016BAFA2D00CB4381 /* btn-submit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0BD93E916BAFA2D00CB4381 /* btn-submit@2x.png */; };
 		A0BD93F116BAFA2D00CB4381 /* tabbar-home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0BD93EA16BAFA2D00CB4381 /* tabbar-home@2x.png */; };
 		A0BD93F416BAFB4100CB4381 /* RCReviewLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BD93F316BAFB4100CB4381 /* RCReviewLocationViewController.m */; };
-		A0C5D96916D4FAD30090B697 /* icon-map-drink.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C5D96316D4FAD30090B697 /* icon-map-drink.png */; };
-		A0C5D96A16D4FAD30090B697 /* icon-map-drink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C5D96416D4FAD30090B697 /* icon-map-drink@2x.png */; };
-		A0C5D96B16D4FAD30090B697 /* icon-map-eat.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C5D96516D4FAD30090B697 /* icon-map-eat.png */; };
-		A0C5D96C16D4FAD30090B697 /* icon-map-eat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C5D96616D4FAD30090B697 /* icon-map-eat@2x.png */; };
-		A0C5D96D16D4FAD30090B697 /* icon-map-sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C5D96716D4FAD30090B697 /* icon-map-sleep.png */; };
-		A0C5D96E16D4FAD30090B697 /* icon-map-sleep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C5D96816D4FAD30090B697 /* icon-map-sleep@2x.png */; };
 		A0C5D97216D4FBA00090B697 /* RCMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C5D97116D4FBA00090B697 /* RCMapAnnotation.m */; };
 		A0C5D97516D4FC010090B697 /* RCMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C5D97416D4FC000090B697 /* RCMapAnnotationView.m */; };
 		A0C5D97D16D518480090B697 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C5D97816D518480090B697 /* MapView.m */; };
@@ -434,6 +428,9 @@
 		DC6016A9176D83D600C0B5E4 /* RCConversationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016A7176D83D500C0B5E4 /* RCConversationsViewController.m */; };
 		DC6016AA176D83D600C0B5E4 /* RCConversationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC6016A8176D83D600C0B5E4 /* RCConversationsViewController.xib */; };
 		DC6016AE176D846800C0B5E4 /* RCConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016AD176D846800C0B5E4 /* RCConversation.m */; };
+		DC6F81EC179F99F10080FF82 /* icon-map-drink.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6F81E9179F99F10080FF82 /* icon-map-drink.png */; };
+		DC6F81ED179F99F10080FF82 /* icon-map-eat.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6F81EA179F99F10080FF82 /* icon-map-eat.png */; };
+		DC6F81EE179F99F10080FF82 /* icon-map-sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6F81EB179F99F10080FF82 /* icon-map-sleep.png */; };
 		DC73EBE9174F638700DBAB1C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC73EBE8174F638700DBAB1C /* FacebookSDK.framework */; };
 		DC73EBED174F63F300DBAB1C /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DC73EBEC174F63F300DBAB1C /* FacebookSDKResources.bundle */; };
 		DC73EBEF174F668D00DBAB1C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC73EBEE174F668D00DBAB1C /* Security.framework */; };
@@ -940,12 +937,6 @@
 		A0BD93EA16BAFA2D00CB4381 /* tabbar-home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-home@2x.png"; sourceTree = "<group>"; };
 		A0BD93F216BAFB4100CB4381 /* RCReviewLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCReviewLocationViewController.h; sourceTree = "<group>"; };
 		A0BD93F316BAFB4100CB4381 /* RCReviewLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCReviewLocationViewController.m; sourceTree = "<group>"; };
-		A0C5D96316D4FAD30090B697 /* icon-map-drink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-drink.png"; sourceTree = "<group>"; };
-		A0C5D96416D4FAD30090B697 /* icon-map-drink@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-drink@2x.png"; sourceTree = "<group>"; };
-		A0C5D96516D4FAD30090B697 /* icon-map-eat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-eat.png"; sourceTree = "<group>"; };
-		A0C5D96616D4FAD30090B697 /* icon-map-eat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-eat@2x.png"; sourceTree = "<group>"; };
-		A0C5D96716D4FAD30090B697 /* icon-map-sleep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-sleep.png"; sourceTree = "<group>"; };
-		A0C5D96816D4FAD30090B697 /* icon-map-sleep@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-sleep@2x.png"; sourceTree = "<group>"; };
 		A0C5D97016D4FBA00090B697 /* RCMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMapAnnotation.h; sourceTree = "<group>"; };
 		A0C5D97116D4FBA00090B697 /* RCMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMapAnnotation.m; sourceTree = "<group>"; };
 		A0C5D97316D4FC000090B697 /* RCMapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMapAnnotationView.h; sourceTree = "<group>"; };
@@ -1193,6 +1184,9 @@
 		DC6016AB176D844000C0B5E4 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		DC6016AC176D846800C0B5E4 /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
 		DC6016AD176D846800C0B5E4 /* RCConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConversation.m; sourceTree = "<group>"; };
+		DC6F81E9179F99F10080FF82 /* icon-map-drink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-drink.png"; sourceTree = "<group>"; };
+		DC6F81EA179F99F10080FF82 /* icon-map-eat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-eat.png"; sourceTree = "<group>"; };
+		DC6F81EB179F99F10080FF82 /* icon-map-sleep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-map-sleep.png"; sourceTree = "<group>"; };
 		DC73EBE8174F638700DBAB1C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		DC73EBEC174F63F300DBAB1C /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		DC73EBEE174F668D00DBAB1C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1804,15 +1798,12 @@
 				DC84E4E717045C0000D6EF8D /* bg-rate.png */,
 				DC84E4E517044B3900D6EF8D /* btn-four-login.png */,
 				DC84E4E1170440E600D6EF8D /* btn-facebook-login.png */,
+				DC6F81E9179F99F10080FF82 /* icon-map-drink.png */,
+				DC6F81EA179F99F10080FF82 /* icon-map-eat.png */,
+				DC6F81EB179F99F10080FF82 /* icon-map-sleep.png */,
 				DC84E4E2170440E700D6EF8D /* btn-twitter-login.png */,
 				DC84E4DB17041AEF00D6EF8D /* btn-skip-login.png */,
 				DC84E4D917041A2600D6EF8D /* btn-done-login.png */,
-				A0C5D96316D4FAD30090B697 /* icon-map-drink.png */,
-				A0C5D96416D4FAD30090B697 /* icon-map-drink@2x.png */,
-				A0C5D96516D4FAD30090B697 /* icon-map-eat.png */,
-				A0C5D96616D4FAD30090B697 /* icon-map-eat@2x.png */,
-				A0C5D96716D4FAD30090B697 /* icon-map-sleep.png */,
-				A0C5D96816D4FAD30090B697 /* icon-map-sleep@2x.png */,
 				A0F0D0E316CE6ED0003267A9 /* bg-hours.png */,
 				A0F0D0E416CE6ED0003267A9 /* bg-hours@2x.png */,
 				A0F0D0C416CE24A2003267A9 /* btn-edit.png */,
@@ -2889,14 +2880,8 @@
 				A0F0D0E516CE6ED0003267A9 /* bg-hours.png in Resources */,
 				A0F0D0E616CE6ED0003267A9 /* bg-hours@2x.png in Resources */,
 				DCBBFC0E179CF99A00A9D49C /* Categories-HappyHour.png in Resources */,
-				A0C5D96916D4FAD30090B697 /* icon-map-drink.png in Resources */,
 				DCBBFC1A179CF99A00A9D49C /* FilterOptions-TextField.png in Resources */,
-				A0C5D96A16D4FAD30090B697 /* icon-map-drink@2x.png in Resources */,
 				DCBBFBF3179CF99A00A9D49C /* Bottombar-Button-Discover.png in Resources */,
-				A0C5D96B16D4FAD30090B697 /* icon-map-eat.png in Resources */,
-				A0C5D96C16D4FAD30090B697 /* icon-map-eat@2x.png in Resources */,
-				A0C5D96D16D4FAD30090B697 /* icon-map-sleep.png in Resources */,
-				A0C5D96E16D4FAD30090B697 /* icon-map-sleep@2x.png in Resources */,
 				DCBBFBFE179CF99A00A9D49C /* Button-CheckIn.png in Resources */,
 				DC84E4DA17041A2600D6EF8D /* btn-done-login.png in Resources */,
 				DC84E4DC17041AF000D6EF8D /* btn-skip-login.png in Resources */,
@@ -2998,6 +2983,9 @@
 				DC6016AA176D83D600C0B5E4 /* RCConversationsViewController.xib in Resources */,
 				DC0AAC9817733E1D00058735 /* favs_tabs.png in Resources */,
 				DC0AAC9917733E1D00058735 /* reccits_tab.png in Resources */,
+				DC6F81EC179F99F10080FF82 /* icon-map-drink.png in Resources */,
+				DC6F81ED179F99F10080FF82 /* icon-map-eat.png in Resources */,
+				DC6F81EE179F99F10080FF82 /* icon-map-sleep.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3236,8 +3224,8 @@
 		A095E37B16B326FF007108F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Dikarev (U99427UVEU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergey Dikarev (U99427UVEU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3265,8 +3253,8 @@
 		A095E37C16B326FF007108F6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Dikarev (U99427UVEU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergey Dikarev (U99427UVEU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

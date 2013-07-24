@@ -30,15 +30,15 @@
         NSLog(@"%@", itAnnotation.myLocation.category);
         
         
-        if ([[itAnnotation.myLocation.type lowercaseString] rangeOfString:@"bar"].location != NSNotFound)
+        if ([[itAnnotation.myLocation.category lowercaseString] rangeOfString:@"bar"].location != NSNotFound)
         {
             imageName = @"icon-map-drink.png";
         }
-        if ([[itAnnotation.myLocation.type lowercaseString] rangeOfString:@"hotel"].location != NSNotFound)
+        if ([[itAnnotation.myLocation.category lowercaseString] rangeOfString:@"hotel"].location != NSNotFound)
         {
             imageName = @"icon-map-sleep.png";
         }
-        if ([[itAnnotation.myLocation.type lowercaseString] rangeOfString:@"restaurant"].location != NSNotFound)
+        if ([[itAnnotation.myLocation.category lowercaseString] rangeOfString:@"restaurant"].location != NSNotFound)
         {
             imageName = @"icon-map-eat.png";
         }

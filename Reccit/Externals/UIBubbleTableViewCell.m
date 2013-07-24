@@ -88,13 +88,16 @@
         NSLog(@"%@", self.data.message.user.userId);
         if(self.data.message.user.avatarUrl == nil)
         {
-            [[RCVibeHelper sharedInstance] getUserFromServer:[self.data.message.user.userId integerValue] mess:self.data.message completionBlock:^(RCMessage *result, NSError *error) {
-                
-                NSLog(@"%@", result.user.avatarUrl);
-                self.data.message = result;
-                [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.message.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
-                
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[RCVibeHelper sharedInstance] getUserFromServer:[self.data.message.user.userId integerValue] mess:self.data.message completionBlock:^(RCMessage *result, NSError *error) {
+                    
+                    NSLog(@"%@", result.user.avatarUrl);
+                    self.data.message = result;
+                    [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.message.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
+                    
+                }];
+            });
+           
         }
         else
         {

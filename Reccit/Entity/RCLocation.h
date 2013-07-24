@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSString *genre;
 @property (nonatomic, assign) int reccitCount;
 @property (nonatomic, assign) double rating;
+@property (nonatomic, assign) double distance;
+
 @property (nonatomic, assign) int ID;
 @property (nonatomic, copy) NSString *factual_id;
 @property (nonatomic, assign) int index;

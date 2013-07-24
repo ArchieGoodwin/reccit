@@ -547,11 +547,11 @@
     
     if(review.recommendation)
     {
-        ((UIImageView *)[cell viewWithTag:30]).image = [UIImage imageNamed:@"Icon-Like.png"];
+        ((UIImageView *)[cell viewWithTag:3003]).image = [UIImage imageNamed:@"Icon-Like.png"];
     }
     else
     {
-        ((UIImageView *)[cell viewWithTag:30]).image = [UIImage imageNamed:@"Icon-Dislike.png"];
+        ((UIImageView *)[cell viewWithTag:3003]).image = [UIImage imageNamed:@"Icon-Dislike.png"];
 
     }
     

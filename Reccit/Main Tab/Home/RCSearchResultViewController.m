@@ -439,6 +439,40 @@
 }
 
 
+-(NSString *)distanceStringFromPoint:(RCLocation *)myLocation
+{
+    CFLocaleRef userLocaleRef = CFLocaleCopyCurrent();
+    //CFShow(CFLocaleGetIdentifier(userLocaleRef));
+    NSString *loc = (NSString *)CFLocaleGetIdentifier(userLocaleRef);
+    CFRelease(userLocaleRef);
+    double kilometers = myLocation.distance;
+    //kilometers = 1.4;
+    double res = 0.0;
+    if([loc isEqualToString:@"en_US"] || [loc isEqualToString:@"en_GB"])
+    {
+        loc = @"en_US";
+    }
+    if([loc isEqualToString:@"en_US"])
+    {
+        res = kilometers / 1609.344;
+    }
+    else
+    {
+        res = kilometers / 1000;
+    }
+    
+    NSString *str  = @"";
+    if(res > 1)
+    {
+        str = [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%.1f %@", res, [loc isEqualToString:@"en_US"] ? @"miles" : @"km"]];
+    }
+    else
+    {
+        str = [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%.1f %@", (res * ([loc isEqualToString:@"en_US"] ? 5280 : 1000)), [loc isEqualToString:@"en_US"] ? @"feets" : @"m"]];
+    }
+    return str;
+}
+
 -(NSString *)distanceStringFromPoint:(double)lat lng:(double)lng
 {
     CLLocationDegrees longitude = lng;
@@ -481,7 +515,15 @@
     return str;
 }
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.listLocationReccit.count > 0)
+    {
+        return 80;
+    }
+    
+    return 110;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -581,7 +623,7 @@
         ((UILabel *)[cell viewWithTag:997]).hidden = YES;
     }
 
-    [(UILabel *)[cell viewWithTag:505] setText:[self distanceStringFromPoint:location.latitude lng:location.longitude]];
+    [(UILabel *)[cell viewWithTag:505] setText:[self distanceStringFromPoint:location]];
     
     
     [(UILabel *)[cell viewWithTag:1001] setText:location.name];
@@ -646,27 +688,27 @@
     UITableViewCell *cell = [self.tbResult cellForRowAtIndexPath:[NSIndexPath indexPathForRow:btn.tag inSection:0]];
     UILabel *lbl = (UILabel *)[cell viewWithTag:996];
     
-    if(btn.frame.origin.x == 12)
+    if(btn.frame.origin.x == 10)
     {
         lbl.text = location.listFriendsName[0];
     }
-    if(btn.frame.origin.x == 45)
+    if(btn.frame.origin.x == 46)
     {
         lbl.text = location.listFriendsName[1];
     }
-    if(btn.frame.origin.x == 78)
+    if(btn.frame.origin.x == 82)
     {
         lbl.text = location.listFriendsName[2];
     }
-    if(btn.frame.origin.x == 111)
+    if(btn.frame.origin.x == 118)
     {
         lbl.text = location.listFriendsName[3];
     }
-    if(btn.frame.origin.x == 144)
+    if(btn.frame.origin.x == 154)
     {
         lbl.text = location.listFriendsName[4];
     }
-    if(btn.frame.origin.x == 177)
+    if(btn.frame.origin.x == 190)
     {
         lbl.text = location.listFriendsName[5];
     }

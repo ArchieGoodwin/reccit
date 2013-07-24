@@ -84,15 +84,16 @@
     {
         _btnVibe.hidden = YES;
     }*/
+    NSLog(@"loc address: %@  ;  %@ ", self.location.address, self.location.street);
     self.lbName.text = self.location.name;
     if(self.location.city != [NSNull null] && self.location.city != nil)
     {
-        self.lbAddress.text = [NSString stringWithFormat:@"%@ %@", self.location.city, self.location.street];
+        self.lbAddress.text = [NSString stringWithFormat:@"%@ %@", self.location.city, [self.location.street isEqualToString:@""] ? self.location.address : self.location.street];
 
     }
     else
     {
-        self.lbAddress.text = self.location.street;
+        self.lbAddress.text = [self.location.street isEqualToString:@""] ? self.location.address : self.location.street;
 
     }
     

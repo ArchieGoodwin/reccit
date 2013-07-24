@@ -735,7 +735,7 @@
                                        
                                              @"price_range":[placeDict objectForKey:@"price_range"] == nil ? @"" : [placeDict objectForKey:@"price_range"],
 
-                                       @"food_styles":foodStylesStr
+                                       @"food_styles":[foodStyles componentsJoinedByString:@","]
                                        
                                              };
 
@@ -997,7 +997,7 @@
                                                    @"price_range":[placeDict objectForKey:@"price_range"] == nil ? @"" : [placeDict objectForKey:@"price_range"],
                             //[self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[placeDict objectForKey:@"website"]]],
                             //hoursString,
-                            @"food_styles":foodStyles
+                            @"food_styles":[foodStyles componentsJoinedByString:@","]
 
                                          };
 

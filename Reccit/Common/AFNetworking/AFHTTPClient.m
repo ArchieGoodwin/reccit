@@ -442,6 +442,7 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
     NSURL *url = [NSURL URLWithString:path relativeToURL:self.baseURL];
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];
+    [request setTimeoutInterval:500];
     [request setAllHTTPHeaderFields:self.defaultHeaders];
 
     if (parameters) {
@@ -646,6 +647,7 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
 	NSURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
+  
 	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
 }

@@ -80,6 +80,7 @@
                         
                         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:userCheckinUrl];
                         [client setParameterEncoding:AFJSONParameterEncoding];
+                        
                         //[client setDefaultHeader:@"Accept" value:@"application/json"];
 
                         //[client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];

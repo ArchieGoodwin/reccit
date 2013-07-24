@@ -184,14 +184,14 @@
     [self.navigationController setNavigationBarHidden:YES];
     
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
-    MKCoordinateRegion region = {{0,0},{.001,.001}};
+    MKCoordinateRegion region = {{0,0},{.003,.003}};
     region.center = currentLocation;
     [self.mapView setRegion:region animated:NO];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
 
     if ([RCDataHolder getCurrentCity] != nil) {
-        self.searchBarTxt.placeholder = [NSString stringWithFormat:@"keyword/place ^ %@", [RCDataHolder getCurrentCity]];
+        self.searchBarTxt.placeholder = [NSString stringWithFormat:@"keyword/place"];
         //self.searchDispController.searchBar.text = [RCDataHolder getCurrentCity];
         autoTextField.text = [RCDataHolder getCurrentCity];
 
@@ -268,8 +268,15 @@
     }
 
 
-    CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
-    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArround, currentLocation.latitude, currentLocation.longitude, self.categoryName];
+   // CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
+    
+    CLLocationDegrees longitude1 = self.mapView.region.center.longitude;
+    CLLocationDegrees latitude1 = self.mapView.region.center.latitude;
+    CLLocation *otherLocation = [[CLLocation alloc] initWithLatitude:latitude1 longitude:longitude1];
+    
+    
+    
+    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArround, otherLocation.coordinate.latitude, otherLocation.coordinate.longitude, self.categoryName];
     NSLog(@"REQUEST URL home: %@", urlString);
     
     NSURL *url = [NSURL URLWithString:urlString];
@@ -340,7 +347,7 @@
                 
                 
                 
-                [self centerMap2];
+                //[self centerMap2];
             }
             
             //            [RCCommonUtils zoomToFitMapAnnotations:self.mapView annotations:self.mapView.annotations];
@@ -408,7 +415,10 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id<MKAnnotation>)a
 {
-    
+    if([a isKindOfClass:[MKUserLocation class]])
+    {
+        return nil;
+    }
     if(![a isKindOfClass:[MKUserLocation class]])
     {
         MKAnnotationView* annotationView = nil;
@@ -438,6 +448,20 @@
     
    
 }
+
+
+-(void)mapView:(MKMapView *)mapView1 regionDidChangeAnimated:(BOOL)animated
+{
+
+    
+   
+
+    [self callAPIGetListLocation];
+    
+    
+    
+}
+
 
 -(IBAction)goToPlace:(id)sender
 {
