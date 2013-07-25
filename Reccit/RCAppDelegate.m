@@ -218,8 +218,8 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
             //{
             NSLog(@"%i", result);
             
-            //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:4] userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:4] userInfo:nil];
 
             /*dispatch_async(dispatch_get_main_queue(),^{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New messages!" message:@"You have unread messages in Vibe. Show?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"YES", nil];
