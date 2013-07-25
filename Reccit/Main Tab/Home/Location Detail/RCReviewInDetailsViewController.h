@@ -22,6 +22,7 @@
 @property (strong, nonatomic) RCBaseViewController *vsParrent;
 @property (weak, nonatomic) IBOutlet UIImageView *backForText;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblLettersCount;
 @property (weak, nonatomic) IBOutlet UIButton *btnDone;
 @property (weak, nonatomic) IBOutlet DYRateView *rateView;
 @property (weak, nonatomic) IBOutlet UIButton *btnLike;

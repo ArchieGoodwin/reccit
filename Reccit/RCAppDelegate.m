@@ -140,7 +140,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         }
     }
     
-    [self clearNotifications];
+    //[self clearNotifications];
 }
 
 
@@ -216,10 +216,11 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
             //store conversations in coredata
             //if(result)
             //{
+            NSLog(@"%i", result);
             
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
-            
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:4] userInfo:nil];
+
             /*dispatch_async(dispatch_get_main_queue(),^{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New messages!" message:@"You have unread messages in Vibe. Show?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"YES", nil];
                 [alert show];
@@ -235,6 +236,10 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
 }
 
+-(void)hideAlert
+{
+    [[self.window viewWithTag:7077] removeFromSuperview];
+}
 
 -(void)hideConversationButton
 {

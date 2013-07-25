@@ -92,6 +92,15 @@
     }
     else
     {
+        if([self.vsParrent isKindOfClass:[RCAddPlaceViewController class]] && !self.shouldSendImmediately)
+        {
+            //[self sendReview];
+            self.btnLike.hidden = YES;
+            self.btnUnLike.hidden = YES;
+
+        }
+        
+        
         self.btnEdit.hidden = YES;
         [self.tvReview becomeFirstResponder];
 
@@ -197,6 +206,29 @@
     }
 }
 
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    return (newLength > 140) ? NO : YES;
+}
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+	int maxChars = 140;
+	int charsLeft = maxChars - [textView.text length];
+    
+	if(charsLeft == 0) {
+		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"No more characters"
+                                                         message:[NSString stringWithFormat:@"You have reached the character limit of %d.",maxChars]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"Ok"
+                                               otherButtonTitles:nil];
+		[alert show];
+	}
+    
+	self.lblLettersCount.text = [NSString stringWithFormat:@"%d characters left",charsLeft];
+}
+
 - (IBAction)btnSubmitTouched:(id)sender
 {
     self.location.comment = self.tvReview.text;
@@ -224,12 +256,12 @@
     {
         if([self.vsParrent isKindOfClass:[RCAddPlaceViewController class]])
         {
-            [self sendReview];
+            //[self sendReview];
             
             
-            //((RCAddPlaceViewController *)self.vsParrent).reviewString = [RCCommonUtils buildReviewString:self.location];
-            //UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been saved!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            //[alerView show];
+            ((RCAddPlaceViewController *)self.vsParrent).reviewString = self.tvReview.text;
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your mention has been saved!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alerView show];
         }
     }
     

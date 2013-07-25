@@ -35,6 +35,10 @@
 
     _conversations =  [[RCVibeHelper sharedInstance] getAllConversationsSortedByDate];
     
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideAlert];
+    
     self.navigationItem.title  = @"Message center";
     
     UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeMe)];

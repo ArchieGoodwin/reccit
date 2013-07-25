@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "392187540.407131"
+            timestampString = "396424416.874017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "761"
-            endingLineNumber = "761"
+            startingLineNumber = "774"
+            endingLineNumber = "774"
             landmarkName = "-returnBack"
             landmarkType = "5">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "392187621.951012"
+            timestampString = "396424416.874017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
+            startingLineNumber = "607"
+            endingLineNumber = "607"
             landmarkName = "-sentToTwitter:"
             landmarkType = "5">
          </BreakpointContent>
@@ -232,11 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "392187625.255377"
+            timestampString = "396424416.874017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
+            startingLineNumber = "684"
+            endingLineNumber = "684"
             landmarkName = "-btnCheckInTouched:"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,28 +248,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "393068628.714768"
+            timestampString = "396424416.874017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "693"
-            endingLineNumber = "693"
+            startingLineNumber = "706"
+            endingLineNumber = "706"
             landmarkName = "-btnCheckInTouched:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "394130655.364366"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "416"
-            endingLineNumber = "416"
-            landmarkName = "-swTwitterChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

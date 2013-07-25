@@ -45,4 +45,5 @@ extern NSString *const SCSessionStateChangedNotification;
 -(void)showNewMessages:(NSNotification *)notification;
 -(void)showButtonForMessages;
 -(void)hideConversationButton;
+-(void)hideAlert;
 @end

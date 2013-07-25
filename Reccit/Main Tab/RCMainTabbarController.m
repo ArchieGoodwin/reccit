@@ -47,6 +47,9 @@
 
 -(void)showMessagesCount:(NSNotification *)notification
 {
+    int messages = [((NSNumber *) [notification object]) integerValue];
+
+    NSLog(@"%i", messages);
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showNewMessages:notification];
 }

@@ -338,7 +338,7 @@
         self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
         self.reviewVc.vsParrent = self;
         self.reviewVc.location = self.location;
-        self.reviewVc.shouldSendImmediately = NO;
+        self.reviewVc.shouldSendImmediately = YES;
         //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
         
         [self presentSemiModalViewController:self.reviewVc];
@@ -347,20 +347,28 @@
 
 - (IBAction)btnWhereTouched:(id)sender
 {
-    
-    
-    
-    
+
+    if (self.location != nil)
+    {
+
+        self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
+        self.reviewVc.vsParrent = self;
+        self.reviewVc.location = self.location;
+        self.reviewVc.shouldSendImmediately = NO;
+        //[self.reviewVc.view setBackgroundColor:[UIColor clearColor]];
+        
+        [self presentSemiModalViewController:self.reviewVc];
+    }
     
     //[self Publish:@"test"];
     //[self sentToTwitter:@"test"];
     
-    self.messageVc = [[RCWhereAmIViewController alloc] initWithNibName:@"RCWhereAmIViewController" bundle:nil];
+    /*self.messageVc = [[RCWhereAmIViewController alloc] initWithNibName:@"RCWhereAmIViewController" bundle:nil];
     self.messageVc.vsParrent = self;
     self.messageVc.shouldSendImmediately = NO;
     [self.messageVc.view setBackgroundColor:[UIColor clearColor]];
     
-    [self presentSemiModalViewController:self.messageVc];
+    [self presentSemiModalViewController:self.messageVc];*/
 }
 
 - (IBAction)btnCloseTouched:(id)sender
