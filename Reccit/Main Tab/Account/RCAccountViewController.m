@@ -121,11 +121,11 @@
 {
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
-        _btnVibe.hidden = NO;
+        /* _btnVibe.hidden = NO;
         if(!_btnVibe.hidden)
         {
             [self changeStateOFVibeButton];
-        }
+        }*/
     }
    
     

@@ -45,6 +45,10 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
     //id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
     // get current location
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;

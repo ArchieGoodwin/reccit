@@ -410,7 +410,7 @@
     NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Message/Send"];
     
     NSURL *url = [NSURL URLWithString:urlString];
-    NSLog(@"get sendMessageFromUserId url : %@", urlString);
+    NSLog(@"get sendMessageFromUserId url : %@, placeId: %i", urlString, placeId);
     
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFFormURLParameterEncoding];
@@ -438,7 +438,7 @@
     NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Participate/Add"];
     
     NSURL *url = [NSURL URLWithString:urlString];
-    NSLog(@"get addUserToPlaceTalk url : %@", urlString);
+    NSLog(@"get addUserToPlaceTalk url : %@, placeid %i", urlString, placeId);
     
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFFormURLParameterEncoding];
