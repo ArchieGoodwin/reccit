@@ -29,8 +29,8 @@
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
 
 
-
 #define kRCAPICheckInGetLocationArround @"http://bizannouncements.com/Vega/services/app/appCheckin.php?lat=%lf&long=%lf&type=%@"
+#define kRCAPICheckInGetLocationArroundDOTNET  @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/GetFactual?userfbid=%@&city=%@&type=%@&latitude=%f&longitude=%f"
 
 @interface RCSearchViewController ()
 {
@@ -77,7 +77,6 @@
     }
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
-        self.edgesForExtendedLayout = UIExtendedEdgeNone;
         self.extendedLayoutIncludesOpaqueBars = YES;
 
         CGRect frame = self.view.frame;
@@ -276,7 +275,7 @@
     
     
     
-    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArround, otherLocation.coordinate.latitude, otherLocation.coordinate.longitude, self.categoryName];
+    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArroundDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [[RCDataHolder getCurrentCity] stringByReplacingOccurrencesOfString:@" " withString:@"%20"], self.categoryName, otherLocation.coordinate.latitude, otherLocation.coordinate.longitude];
     NSLog(@"REQUEST URL home: %@", urlString);
     
     NSURL *url = [NSURL URLWithString:urlString];

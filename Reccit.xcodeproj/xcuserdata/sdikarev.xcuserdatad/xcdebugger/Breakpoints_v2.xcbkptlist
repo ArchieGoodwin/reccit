@@ -189,7 +189,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "774"
             endingLineNumber = "774"
-            landmarkName = "-returnBack"
+            landmarkName = "-checkinMe"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -280,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/RCAppDelegate.m"
-            timestampString = "396614466.338858"
+            timestampString = "396941571.444371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "-getVibes"
             landmarkType = "5">
             <Locations>
@@ -295,11 +295,11 @@
                   symbolName = "-[RCAppDelegate getVibes]"
                   moduleName = "Reccit"
                   urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/RCAppDelegate.m"
-                  timestampString = "396614889.043851"
+                  timestampString = "396941796.329937"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
+                  startingLineNumber = "223"
+                  endingLineNumber = "223"
                   offsetFromSymbolStart = "175">
                </Location>
                <Location
@@ -309,11 +309,11 @@
                   symbolName = "__25-[RCAppDelegate getVibes]_block_invoke"
                   moduleName = "Reccit"
                   urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/RCAppDelegate.m"
-                  timestampString = "396614889.044212"
+                  timestampString = "396941796.330136"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
+                  startingLineNumber = "223"
+                  endingLineNumber = "223"
                   offsetFromSymbolStart = "67">
                </Location>
             </Locations>
@@ -326,43 +326,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/RCAppDelegate.m"
-            timestampString = "396614466.338858"
+            timestampString = "396941571.444371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "-application:didReceiveRemoteNotification:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Account/RCAccountViewController.m"
-            timestampString = "396614405.358288"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/RCAppDelegate.m"
-            timestampString = "396614486.034612"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "-getVibes"
             landmarkType = "5">
          </BreakpointContent>

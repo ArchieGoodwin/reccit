@@ -18,7 +18,7 @@
 //#define kAPISearchSurprise @"http://bizannouncements.com/Vega/services/app/recommendation.php?%@"
 
 #define kAPISearchSurprise @"http://bizannouncements.com/Vega/services/app/getReccit.php?%@"
-
+#define kAPISearchSurpriseDOTNET  @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/GetFactual?%@"
 @interface RCSurpriseViewController ()
 {
     int weekday;
@@ -127,7 +127,7 @@
 - (void)callAPIGetListLocation
 {
     // Start new request
-    NSString *urlString = [NSString stringWithFormat:kAPISearchSurprise, self.querySearch];
+    NSString *urlString = [NSString stringWithFormat:kAPISearchSurpriseDOTNET, self.querySearch];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"happy hours url: %@", urlString);
@@ -137,7 +137,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"happy hours: %@", str);
+       // NSLog(@"happy hours: %@", str);
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
         /*if([str hasPrefix:@"hi"])
@@ -152,7 +152,7 @@
         self.listLocation = [[NSMutableArray alloc] init];
         if (self.isHappyHour)
         {
-            NSArray * rObject = [rO objectForKey:@"Reccits"];
+            NSArray * rObject = [rO objectForKey:@"GetFactualResult"];
             for (NSDictionary *category in rObject)
             {
                 NSLog(@"%@", category);

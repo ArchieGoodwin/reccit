@@ -154,6 +154,11 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame =  CGRectMake(280, 20, 35, 35);
     btn.backgroundColor = [UIColor clearColor];
+    [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateHighlighted];
+    [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateSelected];
+
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 23, 17, -5)];
     [btn addTarget:self action:@selector(showConversations) forControlEvents:UIControlEventTouchUpInside];
     btn.tag = 5055;
     

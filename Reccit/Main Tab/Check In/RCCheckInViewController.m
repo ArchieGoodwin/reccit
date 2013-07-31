@@ -17,7 +17,11 @@
 #import "RCMapAnnotationView.h"
 #import "RCMapAnnotation.h"
 #import "AFNetworking.h"
+#import "RCCommonUtils.h"
+#import "RCDataHolder.h"
+
 #define kRCAPICheckInGetLocationArround @"http://bizannouncements.com/Vega/services/app/appCheckin.php?lat=%lf&long=%lf"
+#define kRCAPICheckInGetLocationArroundDOTNET  @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/GetFactual?userfbid=%@&latitude=%f&longitude=%f&type="
 
 @interface RCCheckInViewController ()
 {
@@ -110,7 +114,7 @@
         self.tbLocation.hidden = YES;
     }
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
-    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArround, currentLocation.latitude, currentLocation.longitude];
+    NSString *urlString = [NSString stringWithFormat:kRCAPICheckInGetLocationArroundDOTNET,[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], currentLocation.latitude, currentLocation.longitude];
     NSLog(@"REQUEST URL callAPIGetListLocation: %@", urlString);
     
     // Start new request
@@ -130,7 +134,7 @@
         {
             for (NSDictionary *locationDic in [rO objectForKey:[category description]])
             {
-                //NSLog(@"%@", locationDic);
+                NSLog(@"%@", locationDic);
                 
                 RCLocation *location = [RCCommonUtils getLocationFromDictionary:locationDic];
 

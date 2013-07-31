@@ -480,6 +480,7 @@
 		DC89352C17438F54008922EC /* review_button_place_details.png in Resources */ = {isa = PBXBuildFile; fileRef = DC89352817438F54008922EC /* review_button_place_details.png */; };
 		DC89352F1743936C008922EC /* update_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DC89352D1743936C008922EC /* update_button.png */; };
 		DC8935301743936C008922EC /* background_for_linked_accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = DC89352E1743936C008922EC /* background_for_linked_accounts.png */; };
+		DC98F27E17A8D88600096CA2 /* vibe_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DC98F27D17A8D88600096CA2 /* vibe_icon.png */; };
 		DCB5E72A1744E0EF002F7F59 /* RCReviewInDetailsViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7291744E0EF002F7F59 /* RCReviewInDetailsViewController.h */; };
 		DCB5E72C1744E109002F7F59 /* RCReviewInDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB5E72B1744E109002F7F59 /* RCReviewInDetailsViewController.m */; };
 		DCB5E72E1744E118002F7F59 /* RCReviewInDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E72D1744E118002F7F59 /* RCReviewInDetailsViewController.xib */; };
@@ -1236,6 +1237,7 @@
 		DC89352817438F54008922EC /* review_button_place_details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = review_button_place_details.png; sourceTree = "<group>"; };
 		DC89352D1743936C008922EC /* update_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update_button.png; sourceTree = "<group>"; };
 		DC89352E1743936C008922EC /* background_for_linked_accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_for_linked_accounts.png; sourceTree = "<group>"; };
+		DC98F27D17A8D88600096CA2 /* vibe_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vibe_icon.png; sourceTree = "<group>"; };
 		DCB5E7291744E0EF002F7F59 /* RCReviewInDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCReviewInDetailsViewController.h; sourceTree = "<group>"; };
 		DCB5E72B1744E109002F7F59 /* RCReviewInDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCReviewInDetailsViewController.m; sourceTree = "<group>"; };
 		DCB5E72D1744E118002F7F59 /* RCReviewInDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCReviewInDetailsViewController.xib; sourceTree = "<group>"; };
@@ -2482,6 +2484,7 @@
 		DCBBFBAD179CF97200A9D49C /* newdesign2 */ = {
 			isa = PBXGroup;
 			children = (
+				DC98F27D17A8D88600096CA2 /* vibe_icon.png */,
 				DCBBFBAE179CF99A00A9D49C /* Alert.png */,
 				DCBBFBAF179CF99A00A9D49C /* Bottombar-Button-CheckIn-Grey.png */,
 				DCBBFBB0179CF99A00A9D49C /* Bottombar-Button-CheckIn.png */,
@@ -2905,6 +2908,7 @@
 				DCBDE37C1706A77E00E5C80A /* img-twitterwithsign.png in Resources */,
 				DC5EA53B17080FB200579FED /* surprase.png in Resources */,
 				DC5EA556170BEC6E00579FED /* RCWhereAmIViewController.xib in Resources */,
+				DC98F27E17A8D88600096CA2 /* vibe_icon.png in Resources */,
 				DC8934EE17435351008922EC /* f_login.png in Resources */,
 				DC8934F017435351008922EC /* login_with_sign.png in Resources */,
 				DC8934F117435351008922EC /* t_login.png in Resources */,

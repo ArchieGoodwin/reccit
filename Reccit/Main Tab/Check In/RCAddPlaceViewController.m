@@ -146,9 +146,9 @@
             }
             
             self.lbName.text = self.location.name;
-            if(self.location.address)
+            if(self.location.street)
             {
-                self.lbAddress.text = self.location.address;
+                self.lbAddress.text = self.location.street;
 
             }
             else
