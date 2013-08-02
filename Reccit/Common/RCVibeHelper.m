@@ -94,36 +94,43 @@
     {
         hasNew = 1;
         //create message
-        
-        RCMessage *message = [RCMessage createEntityInContext];
-        
-        NSString *dateStr = [dict objectForKey:@"CreateDt"];
-
-        if([dateStr hasPrefix:@"\/Date("])
+        if([dict objectForKey:@"Text"] != [NSNull null])
         {
-
-            dateStr = [dateStr substringFromIndex:6];
-            dateStr = [dateStr substringToIndex:13];
-            NSLog(@"%@", dateStr);
-
+            RCMessage *message = [RCMessage createEntityInContext];
+            
+            NSString *dateStr = [dict objectForKey:@"CreateDt"];
+            
+            if([dateStr hasPrefix:@"\/Date("])
+            {
+                
+                dateStr = [dateStr substringFromIndex:6];
+                dateStr = [dateStr substringToIndex:13];
+                NSLog(@"%@", dateStr);
+                
+            }
+            NSLog(@"%f    - %@",[[dict objectForKey:@"CreateDt"] doubleValue],[NSDate dateWithTimeIntervalSince1970:([dateStr doubleValue] /1000)]);
+            message.messageDate = [NSDate dateWithTimeIntervalSince1970:([dateStr doubleValue] /1000)];
+            
+            message.messageId = [dict objectForKey:@"Id"];
+            message.messageText = [dict objectForKey:@"Text"];
+            message.conversationId = conv.conversationId;
+            message.conversation = conv;
+            
+            RCUser *user = [self getUserById:[dict objectForKey:@"UserId"]];
+            
+            if(user == nil)
+            {
+                user = [RCUser createEntityInContext];
+                user.userId = [NSNumber numberWithInt:[[dict objectForKey:@"UserId"] integerValue]];
+            }
+            
+            message.user = user;
         }
-        NSLog(@"%f    - %@",[[dict objectForKey:@"CreateDt"] doubleValue],[NSDate dateWithTimeIntervalSince1970:([dateStr doubleValue] /1000)]);
-        message.messageDate = [NSDate dateWithTimeIntervalSince1970:([dateStr doubleValue] /1000)];
-
-        message.messageId = [dict objectForKey:@"Id"];
-        message.messageText = [dict objectForKey:@"Text"];
-        message.conversationId = conv.conversationId;
-        message.conversation = conv;
-        
-        RCUser *user = [self getUserById:[dict objectForKey:@"UserId"]];
-        
-        if(user == nil)
+        else
         {
-            user = [RCUser createEntityInContext];
-            user.userId = [NSNumber numberWithInt:[[dict objectForKey:@"UserId"] integerValue]];
+            hasNew = 0;
         }
         
-        message.user = user;
         
     }
     

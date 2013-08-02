@@ -37,6 +37,7 @@
     
     
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
     [appDelegate hideAlert];
     
     self.navigationItem.title  = @"Message center";

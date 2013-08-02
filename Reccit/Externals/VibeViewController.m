@@ -62,7 +62,9 @@
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     [bubbleTable reloadData];
 
-    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
+    //[appDelegate hideAlert];
     [self refreshConversaton];
     
     // Keyboard events
