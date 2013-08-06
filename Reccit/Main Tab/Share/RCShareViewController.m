@@ -43,8 +43,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        CGRect rect =  self.btnShare.frame;
+        rect.origin.y = rect.origin.y - 40;
+        self.btnShare.frame = rect;
+        
+        
+        rect = self.tbReview.frame;
+        rect.size.height = rect.size.height - 40;
+        self.tbReview.frame = rect;
+    }
+	// Do any additional setup after loading the view.
+   /* if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
         self.extendedLayoutIncludesOpaqueBars = YES;
         
@@ -53,7 +66,7 @@
         frame.origin.y = 20;
         self.view.frame = frame;
     }
-
+*/
     
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
@@ -444,11 +457,11 @@
     {
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         mailer.mailComposeDelegate = self;
-        [mailer setSubject:@"Share list place reviewed"];
+        [mailer setSubject:@"My recommendations"];
         NSArray *toRecipients = [NSArray arrayWithObjects:nil];
         [mailer setToRecipients:toRecipients];
         
-        NSString *emailBody = @"All place reviewed in pdf file attached!";
+        NSString *emailBody = @"";
         [mailer setMessageBody:emailBody isHTML:NO];
         
         NSArray* documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES);

@@ -344,7 +344,6 @@
                          @"longitude":[NSString stringWithFormat:@"%f", currentLocation.longitude]
                               };
     
-    
     NSDictionary *locPlaceArray = @{@"latitude":[NSString stringWithFormat:@"%f", location.latitude],
                              @"longitude":[NSString stringWithFormat:@"%f", location.longitude]
                                };
@@ -412,15 +411,15 @@
     pdfItem1.font = fontHeader;
     pdfItem1.widthPercentage = 15;
     
-    PDFItem * pdfItem2 = [[PDFItem alloc] init];
-    pdfItem2.text = @"Ratings";
-    pdfItem2.font = fontHeader;
-    pdfItem2.widthPercentage = 8;
+    //PDFItem * pdfItem2 = [[PDFItem alloc] init];
+    //pdfItem2.text = @"Ratings";
+    //pdfItem2.font = fontHeader;
+    //pdfItem2.widthPercentage = 8;
     
     PDFItem * pdfItem3 = [[PDFItem alloc] init];
     pdfItem3.text = @"Reviews";
     pdfItem3.font = fontHeader;
-    pdfItem3.widthPercentage = 45;
+    pdfItem3.widthPercentage = 53;
     
     PDFItem * pdfItem4 = [[PDFItem alloc] init];
     pdfItem4.text = @"Recommend it?";
@@ -432,7 +431,7 @@
     pdfItem5.font = fontHeader;
     pdfItem5.widthPercentage = 10;
     
-    NSArray * arrHeader = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem2, pdfItem3, pdfItem4, pdfItem5, nil];
+    NSArray * arrHeader = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem3, pdfItem4, pdfItem5, nil];
     
     [[PDFService defaultService] startSectionWithColumn: arrHeader];
     [[PDFService defaultService] drawPageNumber];

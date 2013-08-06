@@ -66,13 +66,10 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     if (localNotif) {
         NSDictionary *itemName = [localNotif objectForKey:@"aps"];
         NSLog(@"dict: %@, aps: %@", localNotif, itemName);
-        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
-        {
-            [self getVibes];
-            
-        }
+
+        [self getVibes];
+
     }
-    application.applicationIconBadgeNumber = 0;
     
     
     NSLog(@"Registering for push notifications...");
@@ -220,6 +217,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 {
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
         [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
             //check if there are new messages in conversations
             //store conversations in coredata

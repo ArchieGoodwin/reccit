@@ -75,7 +75,21 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+    {
+        [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
+        //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+        
+        
+    }
+    else
+    {
+        [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
+        
+        //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
+        
+        
+    }
 	// Do any additional setup after loading the view.
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];

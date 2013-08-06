@@ -30,6 +30,7 @@
 #import "AFNetworking.h"
 #define kGSAPIAddNewPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php?user=%@&rating=%d&friends=%@&recommend=%@&comment=%@&auth=%@&name=%@&address=%@&city=%@&state=%@&zipcode=%@&country=%@&lat=%lf&long=%lf"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
+#define kRCAPIAddPlaceDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/checkin/checkin.svc/UpdateReview"
 
 @interface RCAddPlaceViewController ()
 {
@@ -771,17 +772,20 @@
 
 -(void)checkinMe
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, self.reviewString];
-    NSLog(@"REQUEST URL kRCAPIAddPlace: %@", urlString);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@",kRCAPIAddPlaceDOTNET];
+    
+    NSLog(@"REQUEST URL: %@", urlString);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    
-    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
+    NSURL *url = [NSURL URLWithString:urlString];
+
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-    [client setParameterEncoding:AFFormURLParameterEncoding];
-    [client postPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [client setParameterEncoding:AFJSONParameterEncoding];
+    
+    
+    [client postPath:@"" parameters:@{@"review":[RCCommonUtils buildReviewString:self.location]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         NSLog(@"responseObject %@", rO);
@@ -789,18 +793,16 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Checkin successful!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         alert.tag = 101;
         [alert show];
-                
+        
         [self performSelector:@selector(returnBack) withObject:nil afterDelay:1.5];
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"sendReview error: %@", error.description);
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-    
-    
-    
-   
+
 }
 
 

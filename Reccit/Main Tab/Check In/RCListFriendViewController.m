@@ -16,6 +16,7 @@
 #import "RCFriendCell.h"
 #import "AFNetworking.h"
 #define kRCAPIListFriend @"http://bizannouncements.com/Vega/services/app/friends.php?user=%@"
+#define kRCAPIListFriendDOTNET  @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/Friends?userfbid=%@"
 
 @interface RCListFriendViewController ()
 {
@@ -80,7 +81,7 @@
     
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *urlString = [NSString stringWithFormat:kRCAPIListFriend, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    NSString *urlString = [NSString stringWithFormat:kRCAPIListFriendDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     NSLog(@"REQUEST URL: %@", urlString);
     
     // Start new request
@@ -95,26 +96,24 @@
         NSLog(@"%@", rO);
         
         [self.listFriends removeAllObjects];
-        for (NSDictionary *category in rO)
+
+        for (NSDictionary *rs in [rO objectForKey:@"GetFriendsResult"])
         {
-            for (NSDictionary *dic in [rO objectForKey:[category description]])
+            RCPerson *friend = [[RCPerson alloc] init];
+            friend.name = [NSString stringWithFormat:@"%@", [rs objectForKey:@"FirstName"]];
+            friend.ID = [rs objectForKey:@"FBUserId"];
+            friend.photo = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[rs objectForKey:@"FBUserId"]];
+            
+            if ([[rs objectForKey:@"Source"] isEqualToString:@"facebook"])
             {
-                NSDictionary *rs = [dic objectForKey:@"friend"];
-                RCPerson *friend = [[RCPerson alloc] init];
-                friend.name = [NSString stringWithFormat:@"%@ %@", [rs objectForKey:@"firstname"], [rs objectForKey:@"lastname"]];
-                friend.ID = [rs objectForKey:@"id"];
-                friend.photo = [rs objectForKey:@"photo"];
-                
-                if ([[category description] isEqualToString:@"FacebookFriends"])
-                {
-                    friend.source = RCFriendSourceFacebook;
-                } else {
-                    friend.source = RCFriendSourceTwitter;
-                }
-                
-                [self.listFriends addObject:friend];
+                friend.source = RCFriendSourceFacebook;
+            } else {
+                friend.source = RCFriendSourceTwitter;
             }
+            
+            [self.listFriends addObject:friend];
         }
+    
         
         [self.listFriends sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             RCPerson *friend1 = (RCPerson *)obj1;
@@ -209,7 +208,7 @@
     } else {
         [cell.imgSource setImage:[UIImage imageNamed:@"ic_twitter.ong"]];
     }
-    NSLog(@"%@",person.photo);
+    //NSLog(@"%@",person.photo);
     [cell.imgAva setImageWithURL:[NSURL URLWithString:person.photo] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
     cell.checkBox.tag = indexPath.row;

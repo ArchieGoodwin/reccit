@@ -422,7 +422,7 @@
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFFormURLParameterEncoding];
     
-    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"PlaceId":[NSNumber numberWithInt:placeId],@"Text":messageText,@"Subject":@""};
+    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"PlaceId":[NSNumber numberWithInt:placeId],@"Text":messageText == nil ? @"" : messageText,@"Subject":@""};
     [client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
     [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

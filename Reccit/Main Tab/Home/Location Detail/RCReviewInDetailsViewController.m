@@ -124,8 +124,7 @@
 
 -(void)sendReview
 {
-    if(self.location.ID > 0)
-    {
+
         NSString *urlString = [NSString stringWithFormat:@"%@",kRCAPIAddPlaceDOTNET];
         
         NSLog(@"REQUEST URL: %@", urlString);
@@ -173,37 +172,7 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
         
-        
-    }
-    else
-    {
-        NSString *urlString = [NSString stringWithFormat:@"%@",kRCAPIAddPlaceDOTNET];
-        NSLog(@"REQUEST URL kRCAPIAddPlace: %@", urlString);
-        
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        
-        NSURL *url = [NSURL URLWithString:urlString];
-        
-        AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-        [client setParameterEncoding:AFJSONParameterEncoding];
-        [client postPath:@"" parameters:@{@"review":[RCCommonUtils buildReviewString:self.location]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-            NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-            NSLog(@"other responseObject %@", rO);
-            
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            
-            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alerView show];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        }];
-        
-        
-        
-    }
+
 }
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

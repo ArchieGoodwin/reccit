@@ -183,22 +183,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "396424416.874017"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "774"
-            endingLineNumber = "774"
-            landmarkName = "-checkinMe"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Home/Location Detail/RCReviewLocationViewController.m"
             timestampString = "392187573.077554"
             startingColumnNumber = "9223372036854775807"
@@ -216,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "396424416.874017"
+            timestampString = "397482231.669719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
+            startingLineNumber = "608"
+            endingLineNumber = "608"
             landmarkName = "-sentToTwitter:"
             landmarkType = "5">
          </BreakpointContent>
@@ -232,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "396424416.874017"
+            timestampString = "397482231.669719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "684"
-            endingLineNumber = "684"
+            startingLineNumber = "685"
+            endingLineNumber = "685"
             landmarkName = "-btnCheckInTouched:"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,90 +232,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "396424416.874017"
+            timestampString = "397482231.669719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "706"
-            endingLineNumber = "706"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
             landmarkName = "-btnCheckInTouched:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/RCMainTabbarController.m"
-            timestampString = "396614012.567678"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "-showMessagesCount:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/RCAppDelegate.m"
-            timestampString = "396941571.444371"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "-getVibes"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RCAppDelegate getVibes]"
-                  moduleName = "Reccit"
-                  urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/RCAppDelegate.m"
-                  timestampString = "396943580.206366"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "223"
-                  endingLineNumber = "223"
-                  offsetFromSymbolStart = "175">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__25-[RCAppDelegate getVibes]_block_invoke"
-                  moduleName = "Reccit"
-                  urlString = "file://localhost/Users/sdikarev/Dropbox/Incoding/Apple%20coding/Reccit/Reccit/RCAppDelegate.m"
-                  timestampString = "396943580.206739"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "223"
-                  endingLineNumber = "223"
-                  offsetFromSymbolStart = "67">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/RCAppDelegate.m"
-            timestampString = "396941571.444371"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-getVibes"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

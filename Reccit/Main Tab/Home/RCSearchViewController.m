@@ -75,14 +75,12 @@
         _viewGenre.frame = frame;
         
     }
+
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
-        self.extendedLayoutIncludesOpaqueBars = YES;
-
-        CGRect frame = self.view.frame;
-        frame.size.height = frame.size.height - 20;
-        frame.origin.y = 20;
-        self.view.frame = frame;
+        CGRect rect =  self.btnGo.frame;
+        rect.origin.y = rect.origin.y - 30;
+        self.btnGo.frame = rect;
     }
     
 
@@ -179,6 +177,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+
     
     [self.navigationController setNavigationBarHidden:YES];
     
