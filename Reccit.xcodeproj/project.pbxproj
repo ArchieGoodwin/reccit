@@ -565,6 +565,8 @@
 		DCC0980A17055B9600E35FC1 /* btn-cancel-review.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC0980917055B9600E35FC1 /* btn-cancel-review.png */; };
 		DCC0980C17055BD700E35FC1 /* img-review-down.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC0980B17055BD700E35FC1 /* img-review-down.png */; };
 		DCC0980E17055C2A00E35FC1 /* review-shape.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC0980D17055C2A00E35FC1 /* review-shape.png */; };
+		DCD85FF217BA623C00A6D994 /* conversations_upper_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DCD85FF117BA623C00A6D994 /* conversations_upper_bar.png */; };
+		DCD85FF417BA64FD00A6D994 /* conversations_upper_bar_vibe.png in Resources */ = {isa = PBXBuildFile; fileRef = DCD85FF317BA64FD00A6D994 /* conversations_upper_bar_vibe.png */; };
 		DCEB8140174738AF0048FE92 /* review_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = DCEB813F174738AF0048FE92 /* review_upper.png */; };
 /* End PBXBuildFile section */
 
@@ -1323,6 +1325,8 @@
 		DCC0980917055B9600E35FC1 /* btn-cancel-review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-cancel-review.png"; sourceTree = "<group>"; };
 		DCC0980B17055BD700E35FC1 /* img-review-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-review-down.png"; sourceTree = "<group>"; };
 		DCC0980D17055C2A00E35FC1 /* review-shape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "review-shape.png"; sourceTree = "<group>"; };
+		DCD85FF117BA623C00A6D994 /* conversations_upper_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conversations_upper_bar.png; sourceTree = "<group>"; };
+		DCD85FF317BA64FD00A6D994 /* conversations_upper_bar_vibe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conversations_upper_bar_vibe.png; sourceTree = "<group>"; };
 		DCEB813F174738AF0048FE92 /* review_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = review_upper.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2406,6 +2410,7 @@
 		DC601671176C6D0D00C0B5E4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				DCD85FF317BA64FD00A6D994 /* conversations_upper_bar_vibe.png */,
 				DC601672176C6D0D00C0B5E4 /* bubbleMine.png */,
 				DC601673176C6D0D00C0B5E4 /* bubbleMine@2x.png */,
 				DC601674176C6D0D00C0B5E4 /* bubbleSomeone.png */,
@@ -2484,6 +2489,7 @@
 		DCBBFBAD179CF97200A9D49C /* newdesign2 */ = {
 			isa = PBXGroup;
 			children = (
+				DCD85FF117BA623C00A6D994 /* conversations_upper_bar.png */,
 				DC98F27D17A8D88600096CA2 /* vibe_icon.png */,
 				DCBBFBAE179CF99A00A9D49C /* Alert.png */,
 				DCBBFBAF179CF99A00A9D49C /* Bottombar-Button-CheckIn-Grey.png */,
@@ -2873,6 +2879,7 @@
 				DCBBFBEF179CF99A00A9D49C /* Alert.png in Resources */,
 				DC514F9C176990F400978873 /* gearinactive.png in Resources */,
 				A085F09016C5516100C40786 /* tos.html in Resources */,
+				DCD85FF217BA623C00A6D994 /* conversations_upper_bar.png in Resources */,
 				A085F09316C552EE00C40786 /* txt-about.png in Resources */,
 				DCBBFBFD179CF99A00A9D49C /* Button-Call2.png in Resources */,
 				A085F09416C552EE00C40786 /* txt-about@2x.png in Resources */,
@@ -2963,6 +2970,7 @@
 				DCB5E73D1744E698002F7F59 /* add_friend_button.png in Resources */,
 				DCB5E73E1744E698002F7F59 /* write_review_button.png in Resources */,
 				DCB5E7421744E92E002F7F59 /* go_green_button.png in Resources */,
+				DCD85FF417BA64FD00A6D994 /* conversations_upper_bar_vibe.png in Resources */,
 				DCB5E7441744E982002F7F59 /* checkin_new_button.png in Resources */,
 				DCB5E7461745FA1A002F7F59 /* review_indetails_labels.png in Resources */,
 				DCEB8140174738AF0048FE92 /* review_upper.png in Resources */,
@@ -3248,8 +3256,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B44CBC3A-2C49-42FA-8DBA-316A58B5BB06";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B44CBC3A-2C49-42FA-8DBA-316A58B5BB06";
+				PROVISIONING_PROFILE = "CD78E13B-CFB0-493D-9DEE-563CCE1DCD8C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CD78E13B-CFB0-493D-9DEE-563CCE1DCD8C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3277,8 +3285,8 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B44CBC3A-2C49-42FA-8DBA-316A58B5BB06";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B44CBC3A-2C49-42FA-8DBA-316A58B5BB06";
+				PROVISIONING_PROFILE = "CD78E13B-CFB0-493D-9DEE-563CCE1DCD8C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CD78E13B-CFB0-493D-9DEE-563CCE1DCD8C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

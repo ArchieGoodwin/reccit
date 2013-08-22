@@ -455,6 +455,8 @@
     [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"addUserToPlaceTalk %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        completionBlock(YES, nil);
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error addUserToPlaceTalk %@", [error description]);
         
@@ -462,6 +464,34 @@
     }];
     
 }
+
+
+-(void)removeUserFromPlaceTalk:(NSInteger)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock
+{
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Participate/Add"];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSLog(@"get removeUserFromPlaceTalk url : %@, placeid %i   user %i", urlString, placeId, userId);
+    
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [client setParameterEncoding:AFFormURLParameterEncoding];
+    
+    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"PlaceId":[NSNumber numberWithInt:placeId], @"Exclude":@"true"};
+    [client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
+    [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"removeUserFromPlaceTalk %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        completionBlock(YES, nil);
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error removeUserFromPlaceTalk %@", [error description]);
+        
+        completionBlock(NO, error);
+    }];
+    
+}
+
 
 -(void)registerUser:(NSInteger)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock
 {

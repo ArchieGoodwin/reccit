@@ -16,6 +16,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RCDefine.h"
 #import "AFNetworking.h"
+#import "RCAppDelegate.h"
 #define kRCAPICheckInGetLocationRate @"http://bizannouncements.com/bhavesh/deltaservice.php?userid=%@"
 #define kRCAPICheckInGetLocationRateDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/delta?userfbid=%@"
 
@@ -34,10 +35,23 @@
     }
     return self;
 }
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
 	// Do any additional setup after loading the view.
 
     if(![[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin])
@@ -98,7 +112,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"%@", rO);
+        NSLog(@"callAPIGetListLocationRate %@", rO);
 
         [self.listLocation removeAllObjects];
         for (NSDictionary *locationDic in [rO objectForKey:@"DeltaResult"])
@@ -131,6 +145,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         [self performSelector:@selector(noRateLocation) withObject:nil afterDelay:0.0];
     }];
     
     [operation start];

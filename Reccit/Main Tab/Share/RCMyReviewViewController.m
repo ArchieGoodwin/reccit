@@ -46,17 +46,28 @@
 {
     self.lbName.text = self.location.name;
     self.rateView.rate = self.location.rating;
-    NSLog(@"%d, %f", self.location.recommendation, self.location.rating);
+    NSLog(@"%@, %f", self.location.recommendation, self.location.rating);
     NSLog(@"%@", self.location.comment);
     self.txtComment.text = self.location.comment;
     
-    if (self.location.recommendation == YES )
+    if ([self.location.recommendation isEqualToString:@"YES"] )
     {
         self.btnReccit.alpha = 1;
         self.btnNotReccit.alpha = 0.3;
     } else {
-        self.btnReccit.alpha = 0.3;
-        self.btnNotReccit.alpha = 1;
+        if([self.location.recommendation isEqualToString:@"NO"])
+        {
+            self.btnReccit.alpha = 0.3;
+            self.btnNotReccit.alpha = 1;
+            
+        }
+        else
+        {
+            self.btnReccit.alpha = 0.3;
+            self.btnNotReccit.alpha = 0.3;
+
+        }
+        
     }
     
     self.txtComment.editable = NO;

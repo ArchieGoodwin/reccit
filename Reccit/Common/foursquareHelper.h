@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSMutableArray *checkins;
 @property (nonatomic, strong) NSMutableArray *places;
 @property (nonatomic, strong) NSString *stringUserCheckins;
+@property (nonatomic, strong) NSMutableArray *checkinsArray;
+
 
 +(id)sharedInstance;
 -(void)getCheckins:(NSString *)token completionBlock:(RCCompleteBlockWithResult)completionBlock;

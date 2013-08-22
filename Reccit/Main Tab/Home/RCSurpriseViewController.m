@@ -137,7 +137,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-       // NSLog(@"happy hours: %@", str);
+       //NSLog(@"happy hours: %@", str);
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
         /*if([str hasPrefix:@"hi"])

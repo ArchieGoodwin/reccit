@@ -44,6 +44,8 @@
     [super viewDidLoad];
     //_isDelta = NO;
     
+    
+    
     if(![RCCommonUtils isIphone5])
     {
         CGRect rect = self.tvReview.frame;
@@ -73,15 +75,24 @@
     
     self.recommendation = YES;
     self.rateView.editable = YES;
-    if(self.location.recommendation)
+    if([self.location.recommendation isEqualToString:@"YES"])
     {
         self.btnLike.alpha = 1;
         self.btnUnLike.alpha = 0.3;
     }
     else
     {
-        self.btnLike.alpha = 0.3;
-        self.btnUnLike.alpha = 1;
+        if([self.location.recommendation isEqualToString:@"NO"])
+        {
+            self.btnLike.alpha = 0.3;
+            self.btnUnLike.alpha = 1;
+        }
+        else
+        {
+            self.btnLike.alpha = 0.3;
+            self.btnUnLike.alpha = 0.3;
+        }
+      
     }
     _lblPlaceName.text = self.location.name;
     if([self.vsParrent isKindOfClass:[RCShareViewController class]])
@@ -89,6 +100,7 @@
         self.tvReview.editable = NO;
         self.rateView.editable = NO;
         self.btnDone.hidden = YES;
+        self.tvReview.text = self.location.comment;
     }
     else
     {
@@ -162,7 +174,11 @@
                 [((RCRateViewController *)self.vsParrent) callAPIGetListLocationRate];
                 
             }
-            
+            if([self.vsParrent isKindOfClass:[RCShareViewController class]])
+            {
+                [((RCShareViewController *)self.vsParrent) startRequest];
+                
+            }
             
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
@@ -201,8 +217,7 @@
 - (IBAction)btnSubmitTouched:(id)sender
 {
     self.location.comment = self.tvReview.text;
-    self.location.recommendation = self.recommendation;
-    
+    NSLog(@"btnSubmitTouched %@", self.location.comment);
     
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showButtonForMessages];
@@ -220,6 +235,7 @@
     if(self.shouldSendImmediately)
     {
         [self sendReview];
+        
     }
     else
     {
@@ -383,6 +399,8 @@
         self.btnLike.alpha = 1;
         self.btnUnLike.alpha = 0.3;
         self.recommendation = YES;
+        self.location.recommendation = @"YES";
+        
     }
 
 }
@@ -400,6 +418,7 @@
     else
     {
         self.recommendation = NO;
+        self.location.recommendation = @"NO";
         self.btnUnLike.alpha = 1;
         self.btnLike.alpha = 0.3;
     }

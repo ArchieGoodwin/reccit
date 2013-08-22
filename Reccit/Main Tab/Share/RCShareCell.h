@@ -10,7 +10,7 @@
 
 @interface RCShareCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *lbName;
-@property (weak, nonatomic) IBOutlet UIButton *checkBox;
-
+@property (strong, nonatomic) IBOutlet UILabel *lbName;
+@property (strong, nonatomic) IBOutlet UIButton *checkBox;
+@property (strong, nonatomic) IBOutlet UIImageView *imgLike;
 @end

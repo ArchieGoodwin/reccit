@@ -29,4 +29,5 @@
 -(void)getUserFromServer:(NSInteger)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock;
 -(void)registerUser:(NSInteger)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(NSArray *)getAllConversationsSortedByDate;
+-(void)removeUserFromPlaceTalk:(NSInteger)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock;
 @end

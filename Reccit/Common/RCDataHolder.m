@@ -7,12 +7,24 @@
 //
 
 #import "RCDataHolder.h"
-
+#import <MapKit/MapKit.h>
 @implementation RCDataHolder
 
-
+static CLPlacemark *placemark;
 static NSString *currentCityText;
 static NSArray *listAllCountry;
+
+
+
++ (void)setPlacemark:(CLPlacemark *)p
+{
+    placemark = p;
+}
++ (CLPlacemark *)getPlacemark
+{
+    return placemark;
+}
+
 
 + (void)setListCountry:(NSArray *)listCountry
 {

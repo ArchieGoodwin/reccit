@@ -12,6 +12,7 @@
 #import "PDFItem.h"
 #import "RCAppDelegate.h"
 #import "RCDefine.h"
+#import "RCDataHolder.h"
 @implementation RCCommonUtils
 
 + (double)distanceBeetween:(CLLocationCoordinate2D)locationA andLocation:(CLLocationCoordinate2D)locationB {
@@ -181,7 +182,20 @@
             location.phoneNumber = @"";
 
         }
-        location.comment = [((NSArray *)[locationDic objectForKey:@"comments"]) componentsJoinedByString:@","];
+        if([locationDic objectForKey:@"Comments"] != [NSNull null])
+        {
+            if([[locationDic objectForKey:@"Comments"] isKindOfClass:[NSArray class]])
+            {
+                location.comment = [((NSArray *)[locationDic objectForKey:@"Comments"]) componentsJoinedByString:@","];
+
+            }
+            else
+            {
+                location.comment =[locationDic objectForKey:@"Comments"];
+            }
+
+        }
+        
         if ([locationDic objectForKey:@"price_range"] != nil && [locationDic objectForKey:@"price_range"] != [NSNull null]) {
             location.priceRange = [locationDic objectForKey:@"price_range"];
             
@@ -196,13 +210,17 @@
             //NSLog(@"reccit : %i",[[locationDic objectForKey:@"reccit"] integerValue]);
             if( [[locationDic objectForKey:@"isReccit"] integerValue] == 1)
             {
-                location.recommendation = YES;
+                location.recommendation = @"YES";
             }
             else
             {
-                location.recommendation = NO;
+                location.recommendation = @"NO";
 
             }
+        }
+        else
+        {
+            location.recommendation = @"NULL";
         }
         
         if ([locationDic objectForKey:@"happyhours"] != [NSNull null])
@@ -292,7 +310,7 @@
                     
                   // NSLog(@"Friend Image: %@", [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[friend objectForKey:@"FBUserId"]]);
                     [listFriend addObject:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[friend objectForKey:@"FBUserId"]]];
-                    [listFriendName addObject:[NSString stringWithFormat:@"%@ %@",[friend objectForKey:@"FirstName"], [friend objectForKey:@"LastName"]]];
+                    [listFriendName addObject:friend];
                     
                 }
 
@@ -367,16 +385,16 @@
     
     
     NSDictionary *userArray = @{@"user":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId],
-                                @"address":location.address == nil ? @"" : location.address,
+                                @"address":[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] == nil ? @"" : [[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@","],
                                 @"factual_id":location.factual_id == nil ? @"" : location.factual_id,
                                 @"comment":location.comment == nil ? @"" : location.comment,
-                           @"recommend":location.recommendation ? @"true" : @"false",
+                           @"recommend":[location.recommendation isEqualToString:@"YES"] ? @"true" : @"false",
                            @"coords":locUserArray,
                            @"place":placeArray
                                 };
     
 
-    NSLog(@"%@", userArray);
+    NSLog(@"buildReviewString %@", userArray);
     return userArray;
 
 }

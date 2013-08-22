@@ -536,6 +536,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     RCShareCell *cell = (RCShareCell *)[tableView dequeueReusableCellWithIdentifier:@"RCShareCell"];
     
     RCLocation *review = [self.listReviewResult objectAtIndex:indexPath.row];
@@ -557,13 +559,27 @@
         [cell.contentView setBackgroundColor:kRCBackgroundView];
     }
     
-    if(review.recommendation)
+    if([review.recommendation isEqualToString:@"YES"])
     {
-        ((UIImageView *)[cell viewWithTag:3003]).image = [UIImage imageNamed:@"Icon-Like.png"];
+        //((UIImageView *)[cell viewWithTag:3003]).image = [UIImage imageNamed:@"Icon-Like.png"];
+        cell.imgLike.hidden = NO;
+        cell.imgLike.image = [UIImage imageNamed:@"Icon-Like.png"];
     }
     else
     {
-        ((UIImageView *)[cell viewWithTag:3003]).image = [UIImage imageNamed:@"Icon-Dislike.png"];
+        if([review.recommendation isEqualToString:@"NO"])
+        {
+            cell.imgLike.hidden = NO;
+            //((UIImageView *)[cell viewWithTag:3003]).image = [UIImage imageNamed:@"Icon-Dislike.png"];
+             cell.imgLike.image = [UIImage imageNamed:@"Icon-Dislike.png"];
+
+        }
+        else
+        {
+            //((UIImageView *)[cell viewWithTag:3003]).hidden = YES;
+            cell.imgLike.hidden = YES;
+
+        }
 
     }
     

@@ -35,6 +35,7 @@
 
 #define kSendUserChekins @"http://bizannouncements.com/bhavesh/getUser.php?auth=fbook&user=%@&type=usercheckin&token=%@&device=ios"
 #define kSendUserChekinsDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/checkin/checkin.svc/CheckinPlaces?auth=facebook&fbid=%@&type=usercheckin&token=%@"
+#define kSendUserChekins4sDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/checkin/checkin.svc/CheckinPlaces?auth=foursquare&fbid=%@&type=usercheckin&token=%@"
 
 #define kSendFriendsChekins @"http://bizannouncements.com/bhavesh/getUser.php?auth=fbook&user=%@&type=friendcheckin&token=%@&device=ios"
 #define kSendFriendsChekinsDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/checkin/checkin.svc/CheckinFriendPlaces?auth=facebook&fbid=%@&type=friendschekin&token=%@"

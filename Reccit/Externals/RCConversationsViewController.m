@@ -14,26 +14,20 @@
 #import "RCVibeHelper.h"
 #import "RCAppDelegate.h"
 #import "UIColor-Expanded.h"
+#import "NSManagedObject+NWCoreDataHelper.h"
 @interface RCConversationsViewController ()
 
 @end
 
 @implementation RCConversationsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    _conversations =  [[RCVibeHelper sharedInstance] getAllConversationsSortedByDate];
+    _conversations =  [[[RCVibeHelper sharedInstance] getAllConversationsSortedByDate] mutableCopy];
     
     
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -57,13 +51,13 @@
 {
     
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     
 
 }
 
--(void)closeMe
+-(IBAction)closeMe
 {
     [self dismissViewControllerAnimated:YES completion:^{
         RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -99,12 +93,64 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    
+    if (indexPath.row % 2 == 0) {
+        [cell.contentView setBackgroundColor:kRCCheckInCellColorHighLight];
+    } else {
+        [cell.contentView setBackgroundColor:kRCBackgroundView];
+    }
     // Configure the cell...
     RCConversation *rcc = _conversations[indexPath.row];
     
+    cell.textLabel.textColor = [UIColor grayColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",rcc.placeName == nil ?  @"Loading place name..." : rcc.placeName];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",rcc.placeName == nil ?  @"Some place" : rcc.placeName];
+    if(rcc.placeName == nil)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self getPlace:rcc cell:cell];
+        });
+    }
+   
+    
+    UIButton *btnRemoveChat = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnRemoveChat.frame = CGRectMake(280, 7, 27, 26);
+    [btnRemoveChat setImage:[UIImage imageNamed:@"Popup-Icon-X.png"] forState:UIControlStateNormal];
+    btnRemoveChat.tag = indexPath.row;
+    [btnRemoveChat addTarget:self action:@selector(removeChat:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:btnRemoveChat];
+    
     return cell;
+}
+
+
+-(void)getPlace:(RCConversation *)conv cell:(UITableViewCell *)cell
+{
+    [[RCVibeHelper sharedInstance] getPlaceFromServer:conv.placeId.integerValue conv:conv completionBlock:^(BOOL result, NSError *error) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",conv.placeName == nil ?  @"Loading place name..." : conv.placeName];
+    }];
+    
+}
+
+
+-(IBAction)removeChat:(id)sender
+{
+    
+    UIButton *btn = (UIButton *)sender;
+    
+    RCConversation *rcc = _conversations[btn.tag];
+
+    
+    [[RCVibeHelper sharedInstance] removeUserFromPlaceTalk:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] placeId:rcc.placeId.integerValue completionBlock:^(BOOL result, NSError *error) {
+        
+        [_conversations removeObject:rcc];
+        [RCConversation deleteInContext:rcc];
+        [RCConversation saveDefaultContext];
+        [self.table reloadData];
+    }];
+    
+    
 }
 
 /*
@@ -154,6 +200,7 @@
     RCConversation *rcc = _conversations[indexPath.row];
     vibe.convsersation = rcc;
     vibe.location = [[RCLocation alloc] init];
+    vibe.placeNameTxt =  [NSString stringWithFormat:@"%@",rcc.placeName == nil ?  @"Loading place name..." : rcc.placeName];
     vibe.location.ID = [rcc.placeId integerValue];
     
     [self.navigationController pushViewController:vibe animated:YES];

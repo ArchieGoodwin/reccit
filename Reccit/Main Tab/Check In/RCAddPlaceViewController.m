@@ -28,6 +28,7 @@
 #import <MapKit/MapKit.h>
 #import "RCAppDelegate.h"
 #import "AFNetworking.h"
+#import "RCDataHolder.h"
 #define kGSAPIAddNewPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php?user=%@&rating=%d&friends=%@&recommend=%@&comment=%@&auth=%@&name=%@&address=%@&city=%@&state=%@&zipcode=%@&country=%@&lat=%lf&long=%lf"
 #define kRCAPIAddPlace @"http://bizannouncements.com/Vega/services/app/appCheckin.php"
 #define kRCAPIAddPlaceDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/checkin/checkin.svc/UpdateReview"
@@ -230,7 +231,7 @@
             
             self.imgLocation.hidden = YES;
             self.mapView.hidden = NO;
-            self.viewInfo.hidden = YES;
+            self.viewInfo.hidden = NO;
             
             [self.rateView setRate:0];
             CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
@@ -256,9 +257,33 @@
                     self.location.city = [placemark.addressDictionary objectForKey:@"City"];
                     self.location.state = [placemark.addressDictionary objectForKey:@"State"];
 
-                    //self.location.address = ABCreateStringWithAddressDictionary([[placemarks objectAtIndex:0] addressDictionary], NO);
+                    self.location.address = [[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] == nil ? @"" : [[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@","];
+                    self.location.street = [[RCDataHolder getPlacemark].addressDictionary objectForKey:@"Street"] == nil ? @"" : [[RCDataHolder getPlacemark].addressDictionary objectForKey:@"Street"];
 
                     self.location.zipCode = [placemark.addressDictionary objectForKey:@"ZIP"];
+                    
+                    
+                    self.lbName.text = self.location.name;
+                    if(self.location.street)
+                    {
+                        self.lbAddress.text = self.location.street;
+                        
+                    }
+                    else
+                    {
+                        self.lbAddress.text = @"";
+                    }
+                    
+                    self.lbCity.text= self.location.city;
+                    if(self.location.phoneNumber)
+                    {
+                        self.lbPhone.text = [NSString stringWithFormat:@"Phone: %@", self.location.phoneNumber];
+                        
+                    }
+                    else
+                    {
+                        self.lbPhone.text = @"";
+                    }
                 }
             }];
             
@@ -655,109 +680,36 @@
 {
     
 
-    
-    if (self.isAddNew)
+    if(!self.reviewString)
     {
-       
-        if(!self.reviewString)
+        self.reviewString = [self makeString2];
+    }
+    
+    if(self.swTwitter.isOn)
+    {
+        if(self.messageString)
         {
-            self.reviewString = [self makeString2];
-        }
-        
-        if(self.swTwitter.isOn)
-        {
-            if(self.messageString)
-            {
-                [self sentToTwitter:[NSString stringWithFormat:@"%@. At %@", self.messageString, self.location.name]];
-            }
-            else
-            {
-                [self sentToTwitter:[NSString stringWithFormat:@"at %@", self.location.name]];
-            }
-        }
-        if(self.swFacebook.isOn)
-        {
-            if(self.messageString)
-            {
-                [self Publish:[NSString stringWithFormat:@"%@. At %@", self.messageString, self.location.name]];
-            }
-            else
-            {
-                [self Publish:[NSString stringWithFormat:@"at %@", self.location.name]];
-            }
-        }
-        NSString *urlString = [NSString stringWithFormat:@"%@?%@",kRCAPIAddPlace, self.reviewString];
-        NSLog(@"REQUEST URL kRCAPIAddPlace: %@", urlString);
-
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-
-        NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-        [client setParameterEncoding:AFFormURLParameterEncoding];
-        [client postPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-            NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-            NSLog(@"responseObject %@", rO);
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Checkin successful!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            alert.tag = 101;
-            [alert show];
-            
-            [self performSelector:@selector(returnBack) withObject:nil afterDelay:1.5];
-            
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        }];
-
-
-
-    } else {
-        /*if(!self.reviewString)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please leave a review for this place!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            alert.tag = 101;
-            [alert show];
-            return;
-        }*/
-        if(!self.reviewString)
-        {
-            self.reviewString = [self makeString2];
-        }
-        
-        if(self.swTwitter.isOn)
-        {
-            if(self.messageString)
-            {
-                [self sentToTwitter:[NSString stringWithFormat:@"%@. At %@", self.messageString, self.location.name]];
-            }
-            else
-            {
-                [self sentToTwitter:[NSString stringWithFormat:@"at %@", self.location.name]];
-            }
-        }
-        if(self.swFacebook.isOn)
-        {
-            if(self.messageString)
-            {
-                [self Publish:[NSString stringWithFormat:@"%@. At %@", self.messageString, self.location.name]];
-            }
-            else
-            {
-                [self Publish:[NSString stringWithFormat:@"at %@", self.location.name]];
-            }
+            [self sentToTwitter:[NSString stringWithFormat:@"%@. At %@", self.messageString, self.location.name]];
         }
         else
         {
-            [self checkinMe];
-
+            [self sentToTwitter:[NSString stringWithFormat:@"at %@", self.location.name]];
         }
-        
-        
-        
+    }
+    if(self.swFacebook.isOn)
+    {
+        if(self.messageString)
+        {
+            [self Publish:[NSString stringWithFormat:@"%@. At %@", self.messageString, self.location.name]];
+        }
+        else
+        {
+            [self Publish:[NSString stringWithFormat:@"at %@", self.location.name]];
+        }
+    }
+    else
+    {
+        [self checkinMe];
         
     }
     

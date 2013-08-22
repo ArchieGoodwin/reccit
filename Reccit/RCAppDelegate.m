@@ -58,6 +58,9 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
     _initalStoryboard = self.window.rootViewController.storyboard;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNewMessages:) name:@"vibes" object:nil];
+
+    
     NSDictionary *localNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     NSLog(@"launchOptions: %@", launchOptions);
@@ -67,8 +70,12 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         NSDictionary *itemName = [localNotif objectForKey:@"aps"];
         NSLog(@"dict: %@, aps: %@", localNotif, itemName);
 
-        [self getVibes];
+        //[self getVibes];
 
+    }
+    else
+    {
+        //[self getVibesSilent];
     }
     
     
@@ -96,7 +103,6 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 
     [self clearNotifications];
 
-    
     return YES;
 }
 -(void)clearNotifications
@@ -191,6 +197,9 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
             
             cont.tag = 7077;
             [self.window addSubview:cont];
+            
+            UIButton *btn = (UIButton *)[self.window viewWithTag:5055];
+            [btn setImage:nil forState:UIControlStateNormal];
         }
         else
         {
@@ -213,19 +222,39 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 }
 
 
+-(void)getVibesSilent
+{
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
+
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"] && [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] != nil)
+    {
+        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
+          
+            NSLog(@"%i", result);
+            
+        }];
+    }
+
+}
+
 -(void)getVibes
 {
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
+        
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
         [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
             //check if there are new messages in conversations
             //store conversations in coredata
             //if(result)
             //{
             NSLog(@"%i", result);
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
+            if(result > 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
+
+            }
             //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:4] userInfo:nil];
 
             /*dispatch_async(dispatch_get_main_queue(),^{

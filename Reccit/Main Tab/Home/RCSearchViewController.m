@@ -262,7 +262,7 @@
     
     if (![RCCommonUtils isLocationServiceOn])
     {
-        [RCCommonUtils showMessageWithTitle:@"Warning" andContent:@"You must enable Location Service on App Setting to using this function!"];
+        [RCCommonUtils showMessageWithTitle:@"Warning" andContent:@"You must enable Location Service on iOS Settings to using this function!"];
         return;
     }
 
@@ -718,6 +718,13 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
+    [appDelegate hideAlert];
+    
+    
+    
     cancelGesture = [UITapGestureRecognizer new];
     [cancelGesture addTarget:self action:@selector(backgroundTouched:)];
     [self.view addGestureRecognizer:cancelGesture];
@@ -758,6 +765,10 @@
 
 -(void)shiftViewBack
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showButtonForMessages];
+
+    
     [UIView animateWithDuration:0.4 animations:^{
         CGRect frame = self.view.frame;
         frame.origin.y = 0;
@@ -780,6 +791,9 @@
         frame.origin.y = 0;
         self.view.frame = frame;
     }];
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showButtonForMessages];
 }
 
 -(void) backgroundTouched:(id) sender {
@@ -838,6 +852,10 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+
+    //[appDelegate hideAlert];
+    
+    
     if (currentTextField == self.tfGenre)
     {
         if (row == 0)

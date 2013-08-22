@@ -84,6 +84,16 @@
     {
         _btnVibe.hidden = YES;
     }*/
+    if(self.location.ID > 0)
+    {
+        _btnVibe.hidden = NO;
+        
+    }
+    else
+    {
+        _btnVibe.hidden = YES;
+    }
+    
     NSLog(@"loc address: %@  ;  %@ ", self.location.address, self.location.street);
     self.lbName.text = self.location.name;
     if(self.location.city != [NSNull null] && self.location.city != nil)

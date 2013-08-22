@@ -23,14 +23,20 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMessagesCount:) name:@"vibes" object:nil];
 
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showButtonForMessages];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMessagesCount:) name:@"vibes" object:nil];
+
+
+    [appDelegate getVibes];
 	// Do any additional setup after loading the view.
     self.btnTab1.selected = YES;
     

@@ -17,8 +17,8 @@
     [super viewDidLoad];
     
     
-    _placeTitle.title = self.location.name;
-    _bar.tintColor = [UIColor colorWithRed:0.06f green:0.10f blue:0.31f alpha:1];
+//    _lblPlaceName.text = self.location.name;
+    //_bar.tintColor = [UIColor colorWithRed:0.06f green:0.10f blue:0.31f alpha:1];
 
 
     if(self.navigationController)
@@ -27,14 +27,8 @@
     }
     else
     {
-        //hide:  barbuttonItem.width = 0.01;
-        //show:  barbuttonItem.width = 0; //(0 defaults to text width)
-
-        NSMutableArray *items = [_bar.items mutableCopy];
-        [items removeObject:_btnBack];
-        _bar.items = items;
-        
-       // _btnBack.width = 0.01;
+        _btnBackButton.hidden = YES;
+      
     }
     
     //bubbleData = [[RCVibeHelper sharedInstance] getConversationFromArray:@[@{@"UserId":@577},@{@"UserId":@577}] myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
@@ -62,8 +56,8 @@
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     [bubbleTable reloadData];
 
-    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate hideConversationButton];
+    //RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    //[appDelegate hideConversationButton];
     //[appDelegate hideAlert];
     [self refreshConversaton];
     
@@ -71,6 +65,18 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+ 
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
+    [appDelegate hideAlert];
+    
+    _lblPlaceName.text = self.location.name == nil ? self.placeNameTxt : self.location.name;
 }
 
 -(void)refreshConversaton
@@ -199,7 +205,6 @@
 
 - (void)viewDidUnload {
     [self setBtnBack:nil];
-    [self setBar:nil];
     [self setPlaceTitle:nil];
     [super viewDidUnload];
 }

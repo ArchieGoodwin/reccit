@@ -21,12 +21,15 @@
     IBOutlet UITextField *textField;
     
     NSMutableArray *bubbleData;
+    
 }
+@property (weak, nonatomic) IBOutlet UIButton *btnBackButton;
+@property (nonatomic, strong) NSString *placeNameTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lblPlaceName;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *placeTitle;
-@property (weak, nonatomic) IBOutlet UIToolbar *bar;
+//@property (weak, nonatomic) IBOutlet UIToolbar *bar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnBack;
 
 @property (nonatomic, strong) RCLocation *location;
 @property (nonatomic, strong) RCConversation *convsersation;
-@property (nonatomic, weak) IBOutlet UINavigationItem *lblPlaceName;
 @end

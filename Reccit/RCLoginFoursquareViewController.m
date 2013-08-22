@@ -93,8 +93,8 @@
     HUD.labelFont = [UIFont boldSystemFontOfSize:12];
     HUD.labelText = @"Login Successful!";
     
-    
-    
+    [[NSUserDefaults standardUserDefaults] setObject:foursquare.accessToken forKey:@"4stoken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     // Call Webservice
     [RCWebService authenticateFoursquareWithToken:foursquare.accessToken userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];

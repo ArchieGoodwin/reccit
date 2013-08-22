@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tfBackGenre;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
-@property (weak, nonatomic) IBOutlet UITableView *tbReview;
+@property (strong, nonatomic) IBOutlet UITableView *tbReview;
 
 @property (weak, nonatomic) IBOutlet UITextField *tfPrice;
 @property (weak, nonatomic) IBOutlet UITextField *tfType;
@@ -36,4 +36,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *bkgImage;
 - (IBAction)handleTap:(UITapGestureRecognizer *)sender;
+
+- (void)startRequest;
 @end

@@ -39,29 +39,42 @@
     return self;
 }
 
-/*-(UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleDefault;
-}
-
-
-- (UIViewController *)childViewControllerForStatusBarHidden
-{
-    return self;
-}
 
 
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
-}*/
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    
+    
+    
+    //test!!!!!
+    //[RCWebService authenticateFoursquareWithToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"4stoken"] userId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+
+    
+    
+    
+    //viewDidload
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
+    
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+    
+        self.automaticallyAdjustsScrollViewInsets = YES;
         //self.edgesForExtendedLayout = UIExtendedEdgeNone;
         //self.extendedLayoutIncludesOpaqueBars = YES;
         CGRect frame = self.view.frame;
@@ -157,7 +170,7 @@
     int period = [[NSDate date] timeIntervalSinceDate:date];
     //period = 320000;
     
-    //period = 864000;
+    period = 8640000;
     int numberOfDays = period / 86400;
     NSLog(@"%i %i", period, numberOfDays);
     if(numberOfDays < 1) return;
@@ -231,7 +244,7 @@
             //            [RCDataHolder setCurrentCity:[NSString stringWithFormat:@"%@,%@", [[placemarks objectAtIndex:0] locality], [[placemarks objectAtIndex:0] country]]];
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             NSLog(@"%@", placemark.addressDictionary);
-        
+            [RCDataHolder setPlacemark:placemark];
             [RCDataHolder setCurrentCity:[[placemarks objectAtIndex:0] locality]];
             //self.location.address = ABCreateStringWithAddressDictionary([[placemarks objectAtIndex:0] addressDictionary], NO);
             

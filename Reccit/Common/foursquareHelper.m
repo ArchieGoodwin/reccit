@@ -180,32 +180,18 @@
         
         
         NSDictionary *loc = [[checkin objectForKey:@"venue"] objectForKey:@"location"];
-        NSArray *locArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"latitude" value:[loc objectForKey:@"lat"]],
-                             [self makeStringWithKeyAndValue:@"longitude" value:[loc objectForKey:@"lng"]],
-                             nil];
         
-        
-        NSArray *fromArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"id" value:userid],
-                              [self makeStringWithKeyAndValue:@"name" value:userName],
-                              nil];
-        NSString *from = [NSString stringWithFormat:@"\"from\":{%@}", [fromArray componentsJoinedByString:@","]];
-        
+        NSDictionary *locArray = @{@"latitude":[loc objectForKey:@"lat"],
+                                   @"longitude":[loc objectForKey:@"lng"]
+                                   };
 
+    
         
         
         
-        /*NSArray *friendCheckinArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue2:@"author_uid" value:@"2"],//[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]],
-                                       [self makeStringWithKeyAndValue:@"checkin_id" value:[checkin objectForKey:@"id"]],
-                                       [self makeStringWithKeyAndValue:@"name" value:[placeName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]],
-                                       [self makeStringWithKeyAndValue:@"page_id" value:[[checkin objectForKey:@"venue"] objectForKey:@"id"]],
-                                       [self makeStringWithKeyAndValue2:@"coords" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
-                                       nil];
-        */
-        //place dictionary building
         NSMutableArray *foodStyles = [NSMutableArray new];
         for(NSDictionary *style in [[checkin objectForKey:@"venue"] objectForKey:@"categories"])
         {
-            
             NSString *s = [[style objectForKey:@"shortName"] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
             s = [s stringByReplacingOccurrencesOfString:@"&" withString:@""];
             s = [s stringByReplacingOccurrencesOfString:@"/" withString:@""];
@@ -214,11 +200,12 @@
             
             [foodStyles addObject:s];
         }
-        NSString *foodStyleString = [NSString stringWithFormat:@"\"food_styles\":\"%@\"", [foodStyles componentsJoinedByString:@","]];
+        NSString *foodStylesStr = [foodStyles componentsJoinedByString:@","];
+        
         
         
         NSMutableArray *categories = [NSMutableArray new];
-
+        
         for(NSDictionary *style in [[checkin objectForKey:@"venue"] objectForKey:@"categories"])
         {
             for(NSString *str in  [style objectForKey:@"parents"])
@@ -228,56 +215,57 @@
                 s = [s stringByReplacingOccurrencesOfString:@"/" withString:@""];
                 
                 [categories addObject:s];
-
+                
             }
         }
         NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
         
-        
 
         
-        NSString *hoursString = [NSString stringWithFormat:@"\"hours\":{%@}", @""];
-
         NSString *phone = @"";
-        if([[[checkin objectForKey:@"venue"] objectForKey:@"contact"] respondsToSelector:@selector(objectForKey:)])
+        if([[[checkin objectForKey:@"venue"] objectForKey:@"contact"] objectForKey:@"phone"] != nil)
         {
             phone = [[[checkin objectForKey:@"venue"] objectForKey:@"contact"] objectForKey:@"phone"];
         }
         
-        NSArray *placeArray = [NSArray arrayWithObjects:[self makeStringWithKeyAndValue:@"id" value:[[checkin objectForKey:@"venue"] objectForKey:@"id"]],
-                               [self makeStringWithKeyAndValue2:@"location" value:[NSString stringWithFormat:@"{%@}",[locArray componentsJoinedByString:@","]]],
-                               [self makeStringWithKeyAndValue:@"name" value:placeName],
-                               [self makeStringWithKeyAndValue:@"city" value:[loc objectForKey:@"city"]],
-                               [self makeStringWithKeyAndValue:@"country" value:[loc objectForKey:@"country"]],
-                               [self makeStringWithKeyAndValue:@"state" value:[loc objectForKey:@"state"]],
-                               [self makeStringWithKeyAndValue:@"street" value:[[self stringWithPercentEscape:[loc objectForKey:@"address"]] stringByReplacingOccurrencesOfString:@"\"" withString:@""]],
-                               [self makeStringWithKeyAndValue:@"zip" value:[loc objectForKey:@"postalCode"]],
-                               [self makeStringWithKeyAndValue:@"phone" value:phone],
-                               [self makeStringWithKeyAndValue:@"type" value:categoriesString],
-                               [self makeStringWithKeyAndValue:@"pic" value:[self stringWithPercentEscape:[[checkin objectForKey:@"venue"] objectForKey:@"canonicalUrl"]]],
-                               [self makeStringWithKeyAndValue:@"price_range" value:@""],
-                               [self makeStringWithKeyAndValue:@"website" value:[self stringWithPercentEscape:[[checkin objectForKey:@"venue"] objectForKey:@"url"]]],
-                               hoursString,
-                               foodStyleString,
-                               
-                               nil];
-        NSString *place = [NSString stringWithFormat:@"\"place\":{%@}", [placeArray componentsJoinedByString:@","]];
+       
+        NSDictionary *placeArray = @{@"id":[[checkin objectForKey:@"venue"] objectForKey:@"id"],
+                                     @"location":locArray,
+                                     @"name":placeName,
+                                     @"city":[loc objectForKey:@"city"] == nil ? @"" : [loc objectForKey:@"city"],
+                                     @"country":[loc objectForKey:@"country"] == nil ? @"" : [loc objectForKey:@"country"],
+                                     @"state":[loc objectForKey:@"state"] == nil ? @"" : [loc objectForKey:@"state"],
+                                     @"street":[loc objectForKey:@"address"] == nil ? @"" : [[self stringWithPercentEscape:[loc objectForKey:@"address"]] stringByReplacingOccurrencesOfString:@"\"" withString:@""],
+                                     
+                                     @"zip":[loc objectForKey:@"postalCode"] == nil ? @"" : [loc objectForKey:@"postalCode"],
+                                     @"phone":phone,
+                                     @"type":categoriesString,
+                                     @"pic":[self stringWithPercentEscape:[[checkin objectForKey:@"venue"] objectForKey:@"canonicalUrl"]],
+                                     @"price_range":@"",
+                                     
+                                    @"food_styles":foodStylesStr
+                                     
+                                     };
         
-        NSString *item = [NSString stringWithFormat:@"{%@,%@,%@}", from, [self makeStringWithKeyAndValue:@"id" value:[checkin objectForKey:@"id"]], place];
+        NSDictionary *item = @{@"author_uid":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId],
+                               @"checkin_id":[checkin objectForKey:@"id"],
+                               
+                               @"coords":locArray,
+                               @"name":placeName,
+                               @"page_id":[[checkin objectForKey:@"venue"] objectForKey:@"id"],
+                               
+                               @"place":placeArray};
+        
         [temp addObject:item];
-
         
     }
-    
-    
-    NSString *data = [NSString stringWithFormat:@"fb_usercheckin={\"data\":[%@]}",[temp componentsJoinedByString:@","]];
-    
-   // NSLog(@"result for friends 4s send count %i: %@", temp.count, data);
+
+    _checkinsArray = temp;
     NSLog(@"result for friends 4s send count %i:", temp.count);
 
-    _stringUserCheckins = data;
     
 }
+
 
 
 

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RCConversationsViewController : UITableViewController
+@interface RCConversationsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *table;
 
-@property (nonatomic, strong) NSArray *conversations;
+@property (nonatomic, strong) NSMutableArray *conversations;
 @end

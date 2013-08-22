@@ -35,6 +35,7 @@
 #import "RCCommonUtils.h"
 #import "RCDataHolder.h"
 #import "RCSearchViewController.h"
+#import "RCAppDelegate.h"
 @interface TRAutocompleteView () <UITableViewDelegate, UITableViewDataSource>
 {
     float txtY;
@@ -125,6 +126,12 @@
 {
     if([_queryTextField isFirstResponder])
     {
+        
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate hideConversationButton];
+        [appDelegate hideAlert];
+        
+        
         [_contextController shiftView];
         
         NSDictionary *info = [notification userInfo];

@@ -34,7 +34,7 @@
 @property (nonatomic, copy) NSString *factual_id;
 @property (nonatomic, assign) int index;
 @property (nonatomic, assign) int price;
-@property (nonatomic, assign) BOOL recommendation;
+@property (nonatomic, strong) NSString *recommendation;
 @property (nonatomic, assign) BOOL isMark;
 @property (nonatomic, copy) NSMutableArray *happyhours;
 @property (nonatomic, copy) NSMutableArray *listFriends;

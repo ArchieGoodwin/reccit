@@ -1066,17 +1066,27 @@
     {
         down_t = millis - (86400 * 10);
     }
-    NSLog(@"getFacebookUserCheckinsRecent2 period: %li   %li   , current time %li", down_t, upper_t, upper_t - down_t);
+    NSLog(@"getFacebookUserCheckinsRecent2 period: %li   %li   , current time %li, numberOfDays %i", down_t, upper_t, upper_t - down_t, numberOfDays);
 
     
-    NSString *query = [NSString stringWithFormat:
+    /*NSString *query = [NSString stringWithFormat:
                        @"{"
                        @"'query1':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li AND timestamp < %li',"
                        @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
                        "phone, pic, price_range, website, pic_big "
                        "from page where type in (\"RESTAURANT/CAFE\", "
                        "\"BAR\", "
-                       "\"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
+                       "\"HOTEL\", \"LOCAL BUSINESS\", \"PLACE\") and page_id in (SELECT page_id, "
+                       "name, type "
+                       " FROM place WHERE page_id IN (SELECT target_id FROM #query1))',"
+                       @"}", down_t, upper_t];*/
+    
+    NSString *query = [NSString stringWithFormat:
+                       @"{"
+                       @"'query1':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li AND timestamp < %li',"
+                       @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
+                       "phone, pic, price_range, website, pic_big "
+                       "from page where page_id in (SELECT page_id, "
                        "name, type "
                        " FROM place WHERE page_id IN (SELECT target_id FROM #query1))',"
                        @"}", down_t, upper_t];
@@ -1090,7 +1100,7 @@
     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if(!error)
         {
-           // NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
+            NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
             [self buildArraysForUser:[result objectForKey:@"data"]];
             [self buildResultForUserDict];
             if(completeBlockWithResult)
@@ -1126,7 +1136,7 @@
                            "phone, pic, price_range, website, pic_big "
                            "from page where type in (\"RESTAURANT/CAFE\", "
                            "\"BAR\", "
-                           "\"HOTEL\", \"LOCAL BUSINESS\") and page_id in (SELECT page_id, "
+                           "\"HOTEL\", \"LOCAL BUSINESS\", \"PLACE\") and page_id in (SELECT page_id, "
                            "name, type "
                            " FROM place WHERE page_id IN (SELECT target_id FROM #query1))',"
                            @"}"];

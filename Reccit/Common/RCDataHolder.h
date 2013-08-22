@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <MapKit/MapKit.h>
 @interface RCDataHolder : NSObject
+
++(void)setPlacemark:(CLPlacemark *)p;
++ (CLPlacemark *)getPlacemark;
+
 
 + (void)setListCountry:(NSArray *)listCountry;
 + (NSArray *)getListCountry;

@@ -85,7 +85,7 @@
         
         if ([self.searchBar.text length] > 0)
         {
-            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+            query = [NSString stringWithFormat:@"%@&searchstring=%@", query, self.searchBar.text];
         }
         
         self.querySearch = query;
@@ -209,6 +209,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         //NSLog(@"callAPIGetListReccit %@", rO);
+        NSLog(@"reccits request done");
         self.listLocationReccit = [[NSMutableArray alloc] init];
         
         
@@ -260,7 +261,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-       // NSLog(@"favs: %@", rO);
+        NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
         NSArray *listLocation = [rO objectForKey:@"PopularResult"];
@@ -312,7 +313,7 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        //NSLog(@"popular: %@", rO);
+        NSLog(@"popular: %@", rO);
         self.listLocationPopular = [[NSMutableArray alloc] init];
         NSArray *listLocation = [rO objectForKey:@"Reccits"];
         if (listLocation != [NSNull null]){
@@ -558,24 +559,7 @@
     }
     
     
-    if(location.listFriends.count > 0)
-    {
-        if(location.listFriends.count == 1)
-        {
-            [(UILabel *)[cell viewWithTag:996] setText:[NSString stringWithFormat:@"%i of your friends has been here", location.listFriends.count]];
-
-        }
-        else
-        {
-            [(UILabel *)[cell viewWithTag:996] setText:[NSString stringWithFormat:@"%i of your friends have been here", location.listFriends.count]];
-
-        }
-
-    }
-    else
-    {
-        [(UILabel *)[cell viewWithTag:996] setText:@""];
-    }
+   
     ((UIImageView *)[cell viewWithTag:995]).hidden = YES;
 
     if(self.currentTab == 1)
@@ -642,27 +626,92 @@
         UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
         imgView.image = nil;
     }
-    if (location.listFriends != nil && [location.listFriends count] > 0)
+    
+    if(self.currentTab == 1)
     {
-        for (int i = 0; i < [location.listFriends count]; ++i)
+        if(location.listFriends.count > 0)
         {
-            NSString *imgUrl = [location.listFriends objectAtIndex:i];
-            if(imgUrl != [NSNull null])
-            {
-                UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
-                [imgView setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
-                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-                btn.frame = imgView.frame;
-                [btn setBackgroundColor:[UIColor clearColor]];
-                btn.tag = indexPath.row;
-                [btn addTarget:self action:@selector(showFriendName:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.contentView addSubview:btn];
-            }
-           
             
+            if(location.listFriends.count == 1)
+            {
+                [(UILabel *)[cell viewWithTag:996] setText:[NSString stringWithFormat:@"%i of your friends has been here", location.listFriends.count]];
+                
+            }
+            else
+            {
+                [(UILabel *)[cell viewWithTag:996] setText:[NSString stringWithFormat:@"%i of your friends have been here", location.listFriends.count]];
+                
+            }
+            
+            
+            for (int i = 0; i < [location.listFriends count]; ++i)
+            {
+                NSString *imgUrl = [location.listFriends objectAtIndex:i];
+                if(imgUrl != [NSNull null])
+                {
+                    UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
+                    [imgView setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
+                    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                    btn.frame = imgView.frame;
+                    [btn setBackgroundColor:[UIColor clearColor]];
+                    btn.tag = indexPath.row;
+                    [btn addTarget:self action:@selector(showFriendName:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.contentView addSubview:btn];
+                }
+
+            }
             
         }
+        else
+        {
+            [(UILabel *)[cell viewWithTag:996] setText:@""];
+        }
+        
+        
     }
+    else
+    {
+        if(location.listFriends.count > 0)
+        {
+            
+            if(location.listFriends.count == 1)
+            {
+                [(UILabel *)[cell viewWithTag:996] setText:[NSString stringWithFormat:@"%i person has been here", location.listFriends.count]];
+                
+            }
+            else
+            {
+                [(UILabel *)[cell viewWithTag:996] setText:[NSString stringWithFormat:@"%i people have been here", location.listFriends.count]];
+                
+            }
+            
+            
+            for (int i = 0; i < [location.listFriends count]; ++i)
+            {
+                NSString *imgUrl = [location.listFriends objectAtIndex:i];
+                if(imgUrl != [NSNull null])
+                {
+                    UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
+                    [imgView setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
+                    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                    btn.frame = imgView.frame;
+                    [btn setBackgroundColor:[UIColor clearColor]];
+                    btn.tag = indexPath.row;
+                    [btn addTarget:self action:@selector(showFriendName:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.contentView addSubview:btn];
+                }
+                
+            }
+            
+        }
+        else
+        {
+            [(UILabel *)[cell viewWithTag:996] setText:@""];
+        }
+    }
+    
+    
+    
 
     
     return cell;
@@ -687,30 +736,62 @@
     UITableViewCell *cell = [self.tbResult cellForRowAtIndexPath:[NSIndexPath indexPathForRow:btn.tag inSection:0]];
     UILabel *lbl = (UILabel *)[cell viewWithTag:996];
     
-    if(btn.frame.origin.x == 10)
+    if(self.currentTab == 1)
     {
-        lbl.text = location.listFriendsName[0];
+        if(btn.frame.origin.x == 10)
+        {
+            lbl.text = [location.listFriendsName[0] objectForKey:@"FirstName"];
+        }
+        if(btn.frame.origin.x == 46)
+        {
+            lbl.text = [location.listFriendsName[1] objectForKey:@"FirstName"];
+        }
+        if(btn.frame.origin.x == 82)
+        {
+            lbl.text = [location.listFriendsName[2] objectForKey:@"FirstName"];
+        }
+        if(btn.frame.origin.x == 118)
+        {
+            lbl.text = [location.listFriendsName[3] objectForKey:@"FirstName"];
+        }
+        if(btn.frame.origin.x == 154)
+        {
+            lbl.text = [location.listFriendsName[4] objectForKey:@"FirstName"];
+        }
+        if(btn.frame.origin.x == 190)
+        {
+            lbl.text = [location.listFriendsName[5] objectForKey:@"FirstName"];
+        }
     }
-    if(btn.frame.origin.x == 46)
+    else
     {
-        lbl.text = location.listFriendsName[1];
+        if(btn.frame.origin.x == 10)
+        {
+            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[0] objectForKey:@"FirstName"], [location.listFriendsName[0] objectForKey:@"Relation"]];
+        }
+        if(btn.frame.origin.x == 46)
+        {
+            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[1] objectForKey:@"FirstName"], [location.listFriendsName[1] objectForKey:@"Relation"]];
+        }
+        if(btn.frame.origin.x == 82)
+        {
+            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[2] objectForKey:@"FirstName"], [location.listFriendsName[2] objectForKey:@"Relation"]];
+        }
+        if(btn.frame.origin.x == 118)
+        {
+            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[3] objectForKey:@"FirstName"], [location.listFriendsName[3] objectForKey:@"Relation"]];
+        }
+        if(btn.frame.origin.x == 154)
+        {
+            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[4] objectForKey:@"FirstName"], [location.listFriendsName[4] objectForKey:@"Relation"]];
+        }
+        if(btn.frame.origin.x == 190)
+        {
+            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[5] objectForKey:@"FirstName"], [location.listFriendsName[5] objectForKey:@"Relation"]];
+        }
     }
-    if(btn.frame.origin.x == 82)
-    {
-        lbl.text = location.listFriendsName[2];
-    }
-    if(btn.frame.origin.x == 118)
-    {
-        lbl.text = location.listFriendsName[3];
-    }
-    if(btn.frame.origin.x == 154)
-    {
-        lbl.text = location.listFriendsName[4];
-    }
-    if(btn.frame.origin.x == 190)
-    {
-        lbl.text = location.listFriendsName[5];
-    }
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

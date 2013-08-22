@@ -366,50 +366,33 @@
 
 + (void)authenticateFoursquareWithToken:(NSString *)token userId:(NSString *)userId
 {
-    NSString *urlString = [NSString stringWithFormat:kRCAPIFoursquareAuthenticate, token];
-    if (userId != nil)
-    {
-        urlString = [NSString stringWithFormat:@"%@&user=%@", [NSString stringWithFormat:kRCAPIFoursquareAuthenticate, token], userId];
-    }
-    NSURL *url = [NSURL URLWithString:urlString];
-    __strong ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    
-    [request setCompletionBlock:^{
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
-        NSLog(@"%@", responseObject);
+
         
         [[foursquareHelper sharedInstance] getCheckins:token completionBlock:^(BOOL result, NSError *error) {
             //result
             
             if(result)
             {
-                if([[foursquareHelper sharedInstance] stringUserCheckins])
+                if([[foursquareHelper sharedInstance] checkinsArray])
                 {
-                    NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
-                    NSLog(@"get userCheckinRequest 4s: %@", [NSString stringWithFormat:kSendUserChekins, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId],  @"null"]);
-                    __strong ASIHTTPRequest *userCheckinRequest = [ASIHTTPRequest requestWithURL:userCheckinUrl];
-                    [userCheckinRequest setRequestMethod:@"POST"];
-                    userCheckinRequest.timeOutSeconds = 720;
+                    NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekins4sDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                    NSLog(@"get userCheckinRequest 4s: %@", [NSString stringWithFormat:kSendUserChekins4sDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId],  @"null"]);
+                    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:userCheckinUrl];
+                    [client setParameterEncoding:AFJSONParameterEncoding];
 
-                    [userCheckinRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
-                    [userCheckinRequest addRequestHeader:@"Content-Length" value:[NSString stringWithFormat:@"%d", [[foursquareHelper sharedInstance] stringUserCheckins].length]];
-                    [userCheckinRequest setPostBody:[[[[foursquareHelper sharedInstance] stringUserCheckins] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
-                    
-                    [userCheckinRequest setFailedBlock:^{
-                        //[[NSNotificationCenter defaultCenter] postNotificationName:@"fLogin" object:self userInfo:nil];
-                        NSLog(@"[userCheckinRequest responseData]  4s error: %@", [[NSString alloc] initWithData:[userCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
+                    [client postPath:@"" parameters:@{@"data":[[foursquareHelper sharedInstance] checkinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"[userCheckinRequest 4s responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 
-                    }];
-                    [userCheckinRequest setCompletionBlock:^{
-                        
-                        
-                        NSLog(@"[userCheckinRequest responseData]  4s: %@", [[NSString alloc] initWithData:[userCheckinRequest responseData] encoding:NSUTF8StringEncoding]);
 
-                        
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"error userCheckinRequest 4s %@", [error description]);
+
+
                     }];
                     
                     
-                    [userCheckinRequest startAsynchronous];
+                    
+                   
                 }
                 else
                 {
@@ -420,10 +403,7 @@
             
         }];
         
-        
-    }];
-    
-    [request startAsynchronous];
+
 }
 
 @end
