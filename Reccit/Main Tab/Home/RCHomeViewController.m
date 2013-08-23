@@ -170,7 +170,7 @@
     int period = [[NSDate date] timeIntervalSinceDate:date];
     //period = 320000;
     
-    period = 8640000;
+    //period = 8640000;
     int numberOfDays = period / 86400;
     NSLog(@"%i %i", period, numberOfDays);
     if(numberOfDays < 1) return;

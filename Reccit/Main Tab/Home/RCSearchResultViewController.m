@@ -236,7 +236,7 @@
         }
         [self.tbResult reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:error.description];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     

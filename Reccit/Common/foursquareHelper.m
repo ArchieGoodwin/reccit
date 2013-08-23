@@ -185,10 +185,6 @@
                                    @"longitude":[loc objectForKey:@"lng"]
                                    };
 
-    
-        
-        
-        
         NSMutableArray *foodStyles = [NSMutableArray new];
         for(NSDictionary *style in [[checkin objectForKey:@"venue"] objectForKey:@"categories"])
         {
@@ -201,7 +197,6 @@
             [foodStyles addObject:s];
         }
         NSString *foodStylesStr = [foodStyles componentsJoinedByString:@","];
-        
         
         
         NSMutableArray *categories = [NSMutableArray new];
@@ -220,7 +215,6 @@
         }
         NSString *categoriesString = [NSString stringWithFormat:@"%@", [categories componentsJoinedByString:@","]];
         
-
         
         NSString *phone = @"";
         if([[[checkin objectForKey:@"venue"] objectForKey:@"contact"] objectForKey:@"phone"] != nil)
@@ -246,13 +240,11 @@
                                     @"food_styles":foodStylesStr
                                      
                                      };
+
         
-        NSDictionary *item = @{@"author_uid":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId],
-                               @"checkin_id":[checkin objectForKey:@"id"],
-                               
-                               @"coords":locArray,
-                               @"name":placeName,
-                               @"page_id":[[checkin objectForKey:@"venue"] objectForKey:@"id"],
+        NSDictionary *item = @{@"from":@{@"id":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId],@"name":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookName]},
+                               @"id":[checkin objectForKey:@"id"],
+
                                
                                @"place":placeArray};
         
