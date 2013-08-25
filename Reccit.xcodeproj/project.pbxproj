@@ -565,6 +565,9 @@
 		DCC0980A17055B9600E35FC1 /* btn-cancel-review.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC0980917055B9600E35FC1 /* btn-cancel-review.png */; };
 		DCC0980C17055BD700E35FC1 /* img-review-down.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC0980B17055BD700E35FC1 /* img-review-down.png */; };
 		DCC0980E17055C2A00E35FC1 /* review-shape.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC0980D17055C2A00E35FC1 /* review-shape.png */; };
+		DCC2773817C9E71000E9277C /* JSTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2773317C9E71000E9277C /* JSTokenField.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DCC2773917C9E71000E9277C /* JSTokenButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2773517C9E71000E9277C /* JSTokenButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DCC2773A17C9E71000E9277C /* JSBackspaceReportingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2773717C9E71000E9277C /* JSBackspaceReportingTextField.m */; };
 		DCD85FF217BA623C00A6D994 /* conversations_upper_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DCD85FF117BA623C00A6D994 /* conversations_upper_bar.png */; };
 		DCD85FF417BA64FD00A6D994 /* conversations_upper_bar_vibe.png in Resources */ = {isa = PBXBuildFile; fileRef = DCD85FF317BA64FD00A6D994 /* conversations_upper_bar_vibe.png */; };
 		DCEB8140174738AF0048FE92 /* review_upper.png in Resources */ = {isa = PBXBuildFile; fileRef = DCEB813F174738AF0048FE92 /* review_upper.png */; };
@@ -1325,6 +1328,12 @@
 		DCC0980917055B9600E35FC1 /* btn-cancel-review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-cancel-review.png"; sourceTree = "<group>"; };
 		DCC0980B17055BD700E35FC1 /* img-review-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-review-down.png"; sourceTree = "<group>"; };
 		DCC0980D17055C2A00E35FC1 /* review-shape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "review-shape.png"; sourceTree = "<group>"; };
+		DCC2773217C9E71000E9277C /* JSTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTokenField.h; sourceTree = "<group>"; };
+		DCC2773317C9E71000E9277C /* JSTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTokenField.m; sourceTree = "<group>"; };
+		DCC2773417C9E71000E9277C /* JSTokenButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTokenButton.h; sourceTree = "<group>"; };
+		DCC2773517C9E71000E9277C /* JSTokenButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTokenButton.m; sourceTree = "<group>"; };
+		DCC2773617C9E71000E9277C /* JSBackspaceReportingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBackspaceReportingTextField.h; sourceTree = "<group>"; };
+		DCC2773717C9E71000E9277C /* JSBackspaceReportingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBackspaceReportingTextField.m; sourceTree = "<group>"; };
 		DCD85FF117BA623C00A6D994 /* conversations_upper_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conversations_upper_bar.png; sourceTree = "<group>"; };
 		DCD85FF317BA64FD00A6D994 /* conversations_upper_bar_vibe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conversations_upper_bar_vibe.png; sourceTree = "<group>"; };
 		DCEB813F174738AF0048FE92 /* review_upper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = review_upper.png; sourceTree = "<group>"; };
@@ -2008,6 +2017,7 @@
 		A095E40816B32AD1007108F6 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				DCC2773117C9E70000E9277C /* Tokens */,
 				DCBBFC30179D520D00A9D49C /* UIColor-Expanded.h */,
 				DCBBFC31179D520D00A9D49C /* UIColor-Expanded.m */,
 				DC27DFED1776B4E8005B9CBD /* Autocomplete 2 */,
@@ -2560,6 +2570,19 @@
 			name = newdesign2;
 			sourceTree = "<group>";
 		};
+		DCC2773117C9E70000E9277C /* Tokens */ = {
+			isa = PBXGroup;
+			children = (
+				DCC2773217C9E71000E9277C /* JSTokenField.h */,
+				DCC2773317C9E71000E9277C /* JSTokenField.m */,
+				DCC2773417C9E71000E9277C /* JSTokenButton.h */,
+				DCC2773517C9E71000E9277C /* JSTokenButton.m */,
+				DCC2773617C9E71000E9277C /* JSBackspaceReportingTextField.h */,
+				DCC2773717C9E71000E9277C /* JSBackspaceReportingTextField.m */,
+			);
+			name = Tokens;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3015,6 +3038,7 @@
 				A095E44516B32AD1007108F6 /* ASIDataDecompressor.m in Sources */,
 				A095E44616B32AD1007108F6 /* ASIDownloadCache.m in Sources */,
 				A095E44716B32AD1007108F6 /* ASIFormDataRequest.m in Sources */,
+				DCC2773817C9E71000E9277C /* JSTokenField.m in Sources */,
 				A095E44816B32AD1007108F6 /* ASIHTTPRequest.m in Sources */,
 				A095E44916B32AD1007108F6 /* ASIInputStream.m in Sources */,
 				A095E44A16B32AD1007108F6 /* ASINetworkQueue.m in Sources */,
@@ -3113,6 +3137,7 @@
 				D54CAEE1C55E38AA7AF9E61B /* AFImageRequestOperation.m in Sources */,
 				D54CA52EE39E300ECEC539C3 /* AFURLConnectionOperation.m in Sources */,
 				D54CA8DF2A6216F3CA4A5B58 /* UIImageView+AFNetworking.m in Sources */,
+				DCC2773A17C9E71000E9277C /* JSBackspaceReportingTextField.m in Sources */,
 				D54CA45917C38897365BDA23 /* AFPropertyListRequestOperation.m in Sources */,
 				D54CAC2DA5402954F3E153A2 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				DC5EA557170BEC6E00579FED /* RCWhereAmIViewController.m in Sources */,
@@ -3123,6 +3148,7 @@
 				DC5AE42717365F9D00773A13 /* MGTwitterMiscYAJLParser.m in Sources */,
 				DC5AE42817365F9D00773A13 /* MGTwitterSearchYAJLParser.m in Sources */,
 				DC5AE42917365F9D00773A13 /* MGTwitterStatusesYAJLParser.m in Sources */,
+				DCC2773917C9E71000E9277C /* JSTokenButton.m in Sources */,
 				DC5AE42A17365F9D00773A13 /* MGTwitterUsersYAJLParser.m in Sources */,
 				DC5AE42B17365F9D00773A13 /* MGTwitterYAJLParser.m in Sources */,
 				DC5AE4451736600F00773A13 /* yajl.c in Sources */,

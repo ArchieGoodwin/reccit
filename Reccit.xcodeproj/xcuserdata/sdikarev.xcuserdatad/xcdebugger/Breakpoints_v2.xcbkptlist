@@ -200,28 +200,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "397634368.738313"
+            timestampString = "399101934.237326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "633"
-            endingLineNumber = "633"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "-sentToTwitter:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Home/RCSurpriseViewController.m"
-            timestampString = "397981336.959547"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "-callAPIGetListLocation"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

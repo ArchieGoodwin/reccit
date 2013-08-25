@@ -179,11 +179,16 @@
                 [((RCShareViewController *)self.vsParrent) startRequest];
                 
             }
+            RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate showButtonForMessages];
             
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"sendReview error: %@", error.description);
+            
+            //RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+            //[appDelegate showButtonForMessages];
             [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
@@ -219,8 +224,7 @@
     self.location.comment = self.tvReview.text;
     NSLog(@"btnSubmitTouched %@", self.location.comment);
     
-    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate showButtonForMessages];
+
     [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
         if(result)
         {
@@ -247,6 +251,8 @@
             ((RCAddPlaceViewController *)self.vsParrent).reviewString = self.tvReview.text;
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your mention has been saved!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
+            RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate showButtonForMessages];
         }
     }
     

@@ -1348,10 +1348,6 @@
                                 <rect key="frame" x="25" y="498" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon-Like.png" id="QmU-OY-LSH">
-                                <rect key="frame" x="164" y="240" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_twitter.png" id="5gn-Mv-oYa">
                                 <rect key="frame" x="107" y="498" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1480,7 +1476,6 @@
                     <navigationItem key="navigationItem" id="Vj9-PZ-UUZ"/>
                     <connections>
                         <outlet property="imgAvatar" destination="ERr-5z-Lj1" id="Zvr-Dh-uXJ"/>
-                        <outlet property="imgLike" destination="QmU-OY-LSH" id="Pof-ow-CEE"/>
                         <outlet property="imgLocation" destination="uL1-nN-eYZ" id="E1O-wq-qvO"/>
                         <outlet property="lbAddress" destination="gFT-CU-XSl" id="3H3-mE-qNC"/>
                         <outlet property="lbCity" destination="RRA-qN-8It" id="2td-im-IWp"/>
@@ -2832,7 +2827,6 @@
         <image name="Button-Vibe.png" width="202" height="81"/>
         <image name="Button-WhatRUDoing.png" width="300" height="81"/>
         <image name="CheckIn-ContentBackground.png" width="640" height="895"/>
-        <image name="Icon-Like.png" width="71" height="71"/>
         <image name="IphoneRetinaBknd.jpg" width="640" height="1136"/>
         <image name="Tab-Popular.png" width="322" height="53"/>
         <image name="Tab-Reccits.png" width="324" height="53"/>

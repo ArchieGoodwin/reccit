@@ -183,17 +183,23 @@
                 }
 
             }
-            if(self.location.recommendation)
+            /*if(self.location.recommendation != nil)
             {
-                _imgLike.hidden = NO;
-            }
+                if (self.location.recommendation) {
+                    _imgLike.hidden = NO;
+//                } else {
+                    _imgLike.hidden = YES;
+
+                }
+                
+            }*/
             [self.rateView setRate:self.location.rating];
-            if (self.location.recommendation) {
+            /*if (self.location.recommendation) {
                 self.btnLike.selected = YES;
             } else {
                 self.btnUnLike.selected = NO;
             }
-            
+            */
             CLLocationCoordinate2D currentLocation = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
             MKCoordinateRegion region = {{0,0},{.001,.001}};
             region.center = currentLocation;
