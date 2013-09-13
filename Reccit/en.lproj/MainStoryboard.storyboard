@@ -1181,12 +1181,12 @@
                                     <action selector="btnCloseTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="wim-Mh-DhU"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-direction.png" id="0Wj-qm-ydD">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-direction.png" id="0Wj-qm-ydD">
                                 <rect key="frame" x="0.0" y="93" width="320" height="539.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yG8-6p-G4T">
-                                <rect key="frame" x="0.0" y="54" width="320" height="437"/>
+                                <rect key="frame" x="0.0" y="54" width="320" height="421"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1201,7 +1201,7 @@
                                                     <rect key="frame" x="45" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" tag="103" contentMode="scaleAspectFill" image="ic_me.png" id="fbb-RD-nsv">
+                                                <imageView userInteractionEnabled="NO" tag="103" contentMode="scaleAspectFit" image="ic_me.png" id="fbb-RD-nsv">
                                                     <rect key="frame" x="6" y="4" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1244,7 +1244,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Ei-ti-YQj">
-                                <rect key="frame" x="118" y="509" width="99" height="39"/>
+                                <rect key="frame" x="111" y="476" width="99" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="done_button.png">
@@ -1258,7 +1258,7 @@
                                     <action selector="btnDoneTouched:" destination="pym-pZ-4SM" eventType="touchUpInside" id="ZMD-QU-ttC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X2x-ji-HB7">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X2x-ji-HB7">
                                 <rect key="frame" x="227" y="3" width="65" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1273,11 +1273,11 @@
                                     <action selector="btnGoTouched:" destination="pym-pZ-4SM" eventType="touchUpInside" id="R5i-Pb-eQu"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-search-box.png" id="h1Y-NO-MDN">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-search-box.png" id="h1Y-NO-MDN">
                                 <rect key="frame" x="53" y="9" width="164" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="search for friends" minimumFontSize="17" id="1c3-qi-b2m">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="search for friends" minimumFontSize="17" id="1c3-qi-b2m">
                                 <rect key="frame" x="64" y="8" width="143" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1291,6 +1291,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xLL-6v-H0a"/>
                     <connections>
+                        <outlet property="btnDone" destination="3Ei-ti-YQj" id="Reg-Wh-sHA"/>
                         <outlet property="tbFriends" destination="yG8-6p-G4T" id="fJq-ZG-rjT"/>
                         <outlet property="tfSearch" destination="1c3-qi-b2m" id="5nA-tl-qax"/>
                     </connections>
@@ -1308,50 +1309,57 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="CheckIn-ContentBackground.png" id="wZd-71-PVc">
-                                <rect key="frame" x="0.0" y="49" width="320" height="448"/>
+                                <rect key="frame" x="0.0" y="60" width="320" height="448"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-checkin-friend.png" id="3AW-b9-z45">
-                                <rect key="frame" x="0.0" y="492" width="323" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N63-eo-qCX">
-                                <rect key="frame" x="162" y="526" width="150" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="Button-CheckIn.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCheckInTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="5ms-rU-xdK"/>
-                                </connections>
-                            </button>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="pNC-Wz-IEl">
-                                <rect key="frame" x="18" y="530" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="swFacebookChange:" destination="U8i-Vf-cQO" eventType="valueChanged" id="IWq-sD-VJI"/>
-                                </connections>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qDo-t2-UfM">
-                                <rect key="frame" x="100" y="530" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="swTwitterChange:" destination="U8i-Vf-cQO" eventType="valueChanged" id="jxW-G1-Bck"/>
-                                </connections>
-                            </switch>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_facebook.png" id="D4y-dm-mfh">
-                                <rect key="frame" x="25" y="498" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_twitter.png" id="5gn-Mv-oYa">
-                                <rect key="frame" x="107" y="498" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" id="31L-M6-f0R">
+                                <rect key="frame" x="0.0" y="442" width="320" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-checkin-friend.png" id="3AW-b9-z45">
+                                        <rect key="frame" x="-2" y="0.0" width="323" height="76"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N63-eo-qCX">
+                                        <rect key="frame" x="162" y="32" width="150" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" backgroundImage="Button-CheckIn.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCheckInTouched:" destination="U8i-Vf-cQO" eventType="touchUpInside" id="5ms-rU-xdK"/>
+                                        </connections>
+                                    </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="pNC-Wz-IEl">
+                                        <rect key="frame" x="19" y="36" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <connections>
+                                            <action selector="swFacebookChange:" destination="U8i-Vf-cQO" eventType="valueChanged" id="IWq-sD-VJI"/>
+                                        </connections>
+                                    </switch>
+                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qDo-t2-UfM">
+                                        <rect key="frame" x="97" y="36" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <connections>
+                                            <action selector="swTwitterChange:" destination="U8i-Vf-cQO" eventType="valueChanged" id="jxW-G1-Bck"/>
+                                        </connections>
+                                    </switch>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_facebook.png" id="D4y-dm-mfh">
+                                        <rect key="frame" x="26" y="2" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ic_twitter.png" id="5gn-Mv-oYa">
+                                        <rect key="frame" x="104" y="2" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jeY-DW-IaN">
                                 <rect key="frame" x="162" y="244" width="150" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1475,6 +1483,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Vj9-PZ-UUZ"/>
                     <connections>
+                        <outlet property="downView" destination="31L-M6-f0R" id="zRX-E1-w8Q"/>
                         <outlet property="imgAvatar" destination="ERr-5z-Lj1" id="Zvr-Dh-uXJ"/>
                         <outlet property="imgLocation" destination="uL1-nN-eYZ" id="E1O-wq-qvO"/>
                         <outlet property="lbAddress" destination="gFT-CU-XSl" id="3H3-mE-qNC"/>
@@ -2100,15 +2109,15 @@
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ResultCell" rowHeight="80" id="ZJO-Ta-yuf">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="80"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ResultCell" rowHeight="90" id="ZJO-Ta-yuf">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZJO-Ta-yuf" id="Cqz-j0-Azu">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1001" contentMode="left" text="place name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9f-j8-J81">
-                                                    <rect key="frame" x="12" y="2" width="247" height="21"/>
+                                                    <rect key="frame" x="5" y="2" width="257" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2129,7 +2138,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="996" contentMode="left" text="# of friends who have visited" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6b5-bW-gxr">
-                                                    <rect key="frame" x="12" y="22" width="257" height="21"/>
+                                                    <rect key="frame" x="5" y="22" width="263" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2153,34 +2162,34 @@
                                                     </state>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" tag="2001" contentMode="scaleToFill" id="ayz-z3-ArT">
-                                                    <rect key="frame" x="10" y="42" width="33" height="33"/>
+                                                    <rect key="frame" x="5" y="42" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2002" contentMode="scaleToFill" id="1Im-WC-PJ9">
-                                                    <rect key="frame" x="46" y="42" width="33" height="33"/>
+                                                    <rect key="frame" x="47" y="42" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2003" contentMode="scaleToFill" id="RUr-ZA-OaH">
-                                                    <rect key="frame" x="82" y="42" width="33" height="33"/>
+                                                    <rect key="frame" x="89" y="42" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2004" contentMode="scaleToFill" id="yDl-zK-T7r">
-                                                    <rect key="frame" x="118" y="42" width="33" height="33"/>
+                                                    <rect key="frame" x="131" y="42" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2005" contentMode="scaleToFill" id="Mgh-3M-XGk">
-                                                    <rect key="frame" x="154" y="42" width="33" height="33"/>
+                                                    <rect key="frame" x="173" y="42" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="2006" contentMode="scaleToFill" id="FP9-CL-HPN">
-                                                    <rect key="frame" x="190" y="42" width="33" height="33"/>
+                                                    <rect key="frame" x="215" y="42" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="EmptyCell" rowHeight="107" id="dIl-uB-e79">
-                                        <rect key="frame" x="0.0" y="102" width="320" height="107"/>
+                                        <rect key="frame" x="0.0" y="112" width="320" height="107"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dIl-uB-e79" id="RRB-Zm-c4t">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>

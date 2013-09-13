@@ -19,6 +19,7 @@
 #import "GAI.h"
 #import "RCVibeHelper.h"
 #import "RCConversationsViewController.h"
+#import "NSManagedObject+NWCoreDataHelper.h"
 NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStateChangedNotification";
 
 @implementation RCAppDelegate
@@ -58,7 +59,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
     _initalStoryboard = self.window.rootViewController.storyboard;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNewMessages:) name:@"vibes" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNewMessages:) name:@"vibes" object:nil];
 
     
     NSDictionary *localNotif =
@@ -243,33 +244,20 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
         
-        //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
         [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
-            //check if there are new messages in conversations
-            //store conversations in coredata
-            //if(result)
-            //{
+
             NSLog(@"%i", result);
+            [RCConversation saveDefaultContext];
+
             if(result > 0)
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
 
             }
-            //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:4] userInfo:nil];
-
-            /*dispatch_async(dispatch_get_main_queue(),^{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New messages!" message:@"You have unread messages in Vibe. Show?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"YES", nil];
-                [alert show];
-                
-            });*/
-            //}
+          
         }];
     }
-    
-    
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:99] userInfo:nil];
 
-    
 }
 
 -(void)hideAlert
@@ -284,15 +272,19 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 
 -(void)showConversations
 {
-    [[self.window viewWithTag:5055] removeFromSuperview];
+    /*[[self.window viewWithTag:5055] removeFromSuperview];
     
-    RCConversationsViewController *contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
+    contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contr];
     
     [self.window.rootViewController presentViewController:nav animated:YES completion:^{
         
-    }];
+    }];*/
+    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showvibes" object:nil userInfo:nil];
+
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -375,12 +367,12 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         }
         if ([controller isKindOfClass:[RCMainTabbarController class]]) {
             NSLog(@"%@", ((RCMainTabbarController *)controller).selectedViewController);
-            for (UIViewController *contr in ((UINavigationController *)((RCMainTabbarController *)controller).selectedViewController).viewControllers)
+            for (UIViewController *contrr in ((UINavigationController *)((RCMainTabbarController *)controller).selectedViewController).viewControllers)
             {
-                if([contr isKindOfClass:[RCLinkedAccountsViewController class]])
+                if([contrr isKindOfClass:[RCLinkedAccountsViewController class]])
                 {
                     
-                    BZFoursquare *foursquare = ((RCLinkedAccountsViewController *)contr).foursquare;
+                    BZFoursquare *foursquare = ((RCLinkedAccountsViewController *)contrr).foursquare;
                     return [foursquare handleOpenURL:url];
                 }
             }

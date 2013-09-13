@@ -355,47 +355,94 @@
 
 +(NSDictionary *)buildReviewString:(RCLocation *)location
 {
-    NSLog(@"%@  %@   %@", location.city, location.country, location.zipCode);
+    if([location.recommendation isEqualToString:@"null"])
+    {
+        NSLog(@"%@  %@   %@", location.city, location.country, location.zipCode);
         CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
-
-    NSDictionary *locUserArray = @{@"latitude":[NSString stringWithFormat:@"%f", currentLocation.latitude],
-                         @"longitude":[NSString stringWithFormat:@"%f", currentLocation.longitude]
-                              };
+        
+        NSDictionary *locUserArray = @{@"latitude":[NSString stringWithFormat:@"%f", currentLocation.latitude],
+                                       @"longitude":[NSString stringWithFormat:@"%f", currentLocation.longitude]
+                                       };
+        
+        NSDictionary *locPlaceArray = @{@"latitude":[NSString stringWithFormat:@"%f", location.latitude],
+                                        @"longitude":[NSString stringWithFormat:@"%f", location.longitude]
+                                        };
+        
+        NSDictionary *placeArray = @{@"id":[NSString stringWithFormat:@"%i",location.ID],
+                                     @"location":locPlaceArray,
+                                     @"name":location.name,
+                                     @"city":location.city == nil ? @"" : location.city,
+                                     @"country":location.country == nil ? @"" : location.country,
+                                     @"state":location.state == nil ? @"" : location.state,
+                                     @"street":location.street == nil ? @"" : location.street,
+                                     @"zip":location.zipCode == nil ? @"" : location.zipCode,
+                                     @"phone":location.phoneNumber == nil ? @"" : location.phoneNumber,
+                                     @"type":location.category == nil ? @"" : location.category,
+                                     @"pic":@"",
+                                     
+                                     @"price_range":location.priceRange == nil ? @"" : location.priceRange,
+                                     @"food_styles":location.genre == nil ? @"" : location.genre
+                                     
+                                     };
+        
+        
+        NSDictionary *userArray = @{@"user":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId],
+                                    @"address":[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] == nil ? @"" : [[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@","],
+                                    @"factual_id":location.factual_id == nil ? @"" : location.factual_id,
+                                    @"comment":location.comment == nil ? @"" : location.comment,
+                                    @"coords":locUserArray,
+                                    @"place":placeArray
+                                    };
+        
+        
+        NSLog(@"buildReviewString %@", userArray);
+        return userArray;
+    }
+    else
+    {
+        NSLog(@"%@  %@   %@", location.city, location.country, location.zipCode);
+        CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate]getCurrentLocation];
+        
+        NSDictionary *locUserArray = @{@"latitude":[NSString stringWithFormat:@"%f", currentLocation.latitude],
+                                       @"longitude":[NSString stringWithFormat:@"%f", currentLocation.longitude]
+                                       };
+        
+        NSDictionary *locPlaceArray = @{@"latitude":[NSString stringWithFormat:@"%f", location.latitude],
+                                        @"longitude":[NSString stringWithFormat:@"%f", location.longitude]
+                                        };
+        
+        NSDictionary *placeArray = @{@"id":[NSString stringWithFormat:@"%i",location.ID],
+                                     @"location":locPlaceArray,
+                                     @"name":location.name,
+                                     @"city":location.city == nil ? @"" : location.city,
+                                     @"country":location.country == nil ? @"" : location.country,
+                                     @"state":location.state == nil ? @"" : location.state,
+                                     @"street":location.street == nil ? @"" : location.street,
+                                     @"zip":location.zipCode == nil ? @"" : location.zipCode,
+                                     @"phone":location.phoneNumber == nil ? @"" : location.phoneNumber,
+                                     @"type":location.category == nil ? @"" : location.category,
+                                     @"pic":@"",
+                                     
+                                     @"price_range":location.priceRange == nil ? @"" : location.priceRange,
+                                     @"food_styles":location.genre == nil ? @"" : location.genre
+                                     
+                                     };
+        
+        
+        NSDictionary *userArray = @{@"user":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId],
+                                    @"address":[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] == nil ? @"" : [[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@","],
+                                    @"factual_id":location.factual_id == nil ? @"" : location.factual_id,
+                                    @"comment":location.comment == nil ? @"" : location.comment,
+                                    @"recommend":[location.recommendation isEqualToString:@"null"] ? @"null" : [location.recommendation isEqualToString:@"YES"] ? @"true" : @"false",
+                                    @"coords":locUserArray,
+                                    @"place":placeArray
+                                    };
+        
+        
+        NSLog(@"buildReviewString %@", userArray);
+        return userArray;
+    }
     
-    NSDictionary *locPlaceArray = @{@"latitude":[NSString stringWithFormat:@"%f", location.latitude],
-                             @"longitude":[NSString stringWithFormat:@"%f", location.longitude]
-                               };
-    
-    NSDictionary *placeArray = @{@"id":[NSString stringWithFormat:@"%i",location.ID],
-                                   @"location":locPlaceArray,
-                                   @"name":location.name,
-                                 @"city":location.city == nil ? @"" : location.city,
-                                 @"country":location.country == nil ? @"" : location.country,
-                                 @"state":location.state == nil ? @"" : location.state,
-                                 @"street":location.street == nil ? @"" : location.street,
-                                 @"zip":location.zipCode == nil ? @"" : location.zipCode,
-                                 @"phone":location.phoneNumber == nil ? @"" : location.phoneNumber,
-                                 @"type":location.category == nil ? @"" : location.category,
-                                   @"pic":@"",
-
-                                 @"price_range":location.priceRange == nil ? @"" : location.priceRange,
-                                 @"food_styles":location.genre == nil ? @"" : location.genre
-
-                                 };
-    
-    
-    NSDictionary *userArray = @{@"user":[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserFacebookId],
-                                @"address":[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] == nil ? @"" : [[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@","],
-                                @"factual_id":location.factual_id == nil ? @"" : location.factual_id,
-                                @"comment":location.comment == nil ? @"" : location.comment,
-                           @"recommend":[location.recommendation isEqualToString:@"YES"] ? @"true" : @"false",
-                           @"coords":locUserArray,
-                           @"place":placeArray
-                                };
-    
-
-    NSLog(@"buildReviewString %@", userArray);
-    return userArray;
 
 }
 

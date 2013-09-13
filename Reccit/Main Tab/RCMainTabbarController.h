@@ -17,4 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnTab3;
 @property (weak, nonatomic) IBOutlet UIButton *btnTab4;
 
+
+-(void)dismissMe;
 @end

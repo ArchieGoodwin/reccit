@@ -21,6 +21,7 @@
 #import "NSManagedObject+NWCoreDataHelper.h"
 #import "RCMapAnnotationView.h"
 #import "RCMapAnnotation.h"
+#import "RCAppDelegate.h"
 #define kAPIGetComment @"http://bizannouncements.com/Vega/data/places/comments.php?place_id=%d&user_id=%@"
 #define kAPIGetCommentDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/GetComments?userfbid=%@&placeid=%d"
 @interface RCLocationDetailViewController ()
@@ -38,9 +39,23 @@
     return self;
 }
 
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
 	// Do any additional setup after loading the view.
     
     self.mapView.delegate = self;
@@ -421,7 +436,7 @@
     {
         UIFont *cellFont = [UIFont boldSystemFontOfSize:fontSize];
         CGSize constraintSize = CGSizeMake(243, MAXFLOAT);
-        CGSize labelSize = [text sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+        CGSize labelSize = [text sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
         
         return labelSize.height;
     }

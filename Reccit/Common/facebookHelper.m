@@ -8,7 +8,7 @@
 #import "facebookHelper.h"
 #import "RCDefine.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "TestFlight.h"
+//#import "TestFlight.h"
 #import <FacebookSDK/FacebookSDK.h>
 @implementation facebookHelper {
     int iterations;
@@ -56,7 +56,7 @@
             {
                 [self buildResult];
                 NSLog(@"end query %@", [NSDate date]);
-                [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+                //[TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
 
                 if(completionBlock)
                 {
@@ -116,7 +116,7 @@
             {
                 [self buildResult];
                 NSLog(@"end query %@", [NSDate date]);
-                [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+                //[TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
                 
                 if(completionBlock)
                 {
@@ -173,7 +173,7 @@
             
             [self buildResultArray];
             NSLog(@"end query %@", [NSDate date]);
-            [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+            //[TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
             
             if(completionBlock)
             {
@@ -229,7 +229,7 @@
             
             [self buildResultArray];
             NSLog(@"end query %@", [NSDate date]);
-            [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+            //[TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
             
             if(completionBlock)
             {
@@ -271,7 +271,7 @@
     iterations = 0;
     maxIterations = 3;
     NSLog(@"start query %@", [NSDate date]);
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"start facebook query %@", [NSDate date]]];
+    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"start facebook query %@", [NSDate date]]];
 
     FBRequest* friendsRequest = [FBRequest requestForMyFriends];
     friendsRequest.session = FBSession.activeSession;
@@ -317,7 +317,7 @@
                         {
                            // NSLog(@"getFacebookQuery < 300 : %@", [result objectForKey:@"data"]);
                             NSLog(@"end query %@", [NSDate date]);
-                            [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
+                           // [TestFlight passCheckpoint:[NSString stringWithFormat:@"end facebook query %@", [NSDate date]]];
 
                             [self buildArrays:[result objectForKey:@"data"]];
                             [self buildResult];
@@ -697,7 +697,7 @@
                     
                     [foodStyles addObject:s];
                 }
-                NSString *foodStylesStr = [foodStyles componentsJoinedByString:@","];
+                //NSString *foodStylesStr = [foodStyles componentsJoinedByString:@","];
                 
                 NSMutableArray *categories = [NSMutableArray new];
                 for(NSDictionary *cat in [placeDict objectForKey:@"categories"])

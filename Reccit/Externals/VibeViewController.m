@@ -12,6 +12,11 @@
 #import "RCAppDelegate.h"
 @implementation VibeViewController
 
+
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -20,6 +25,14 @@
 //    _lblPlaceName.text = self.location.name;
     //_bar.tintColor = [UIColor colorWithRed:0.06f green:0.10f blue:0.31f alpha:1];
 
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
 
     if(self.navigationController)
     {
@@ -30,6 +43,9 @@
         _btnBackButton.hidden = YES;
       
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshConversaton) name:@"vibes" object:nil];
+
     
     //bubbleData = [[RCVibeHelper sharedInstance] getConversationFromArray:@[@{@"UserId":@577},@{@"UserId":@577}] myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue]];
@@ -79,24 +95,33 @@
     _lblPlaceName.text = self.location.name == nil ? self.placeNameTxt : self.location.name;
 }
 
+-(void)getBubbles
+{
+    bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue]];
+    [bubbleTable reloadData];
+    
+    if (bubbleTable.contentSize.height > bubbleTable.frame.size.height)
+    {
+        CGPoint offset = CGPointMake(0, bubbleTable.contentSize.height - bubbleTable.frame.size.height);
+        [bubbleTable setContentOffset:offset animated:YES];
+    }
+    [bubbleTable reloadData];
+
+}
+
+
 -(void)refreshConversaton
 {
+    [self getBubbles];
+
+    
     [[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
         if(result != nil)
         {
             self.convsersation = result;
-            bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue]];
-            [bubbleTable reloadData];
-            
-            if (bubbleTable.contentSize.height > bubbleTable.frame.size.height)
-            {
-                CGPoint offset = CGPointMake(0, bubbleTable.contentSize.height - bubbleTable.frame.size.height);
-                [bubbleTable setContentOffset:offset animated:YES];
-            }
+            [self getBubbles];
         }
-       
 
-        
     }];
 }
 

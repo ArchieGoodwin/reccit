@@ -39,11 +39,20 @@
 
 @implementation RCSearchResultViewController
 
+
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
+        
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
         self.extendedLayoutIncludesOpaqueBars = YES;
         
         CGRect frame = self.view.frame;
@@ -519,7 +528,7 @@
 {
     if(self.listLocationReccit.count > 0)
     {
-        return 80;
+        return 90;
     }
     
     return 110;
@@ -738,54 +747,54 @@
     
     if(self.currentTab == 1)
     {
-        if(btn.frame.origin.x == 10)
+        if(btn.frame.origin.x == 5)
         {
             lbl.text = [location.listFriendsName[0] objectForKey:@"FirstName"];
         }
-        if(btn.frame.origin.x == 46)
+        if(btn.frame.origin.x == 47)
         {
             lbl.text = [location.listFriendsName[1] objectForKey:@"FirstName"];
         }
-        if(btn.frame.origin.x == 82)
+        if(btn.frame.origin.x == 89)
         {
             lbl.text = [location.listFriendsName[2] objectForKey:@"FirstName"];
         }
-        if(btn.frame.origin.x == 118)
+        if(btn.frame.origin.x == 131)
         {
             lbl.text = [location.listFriendsName[3] objectForKey:@"FirstName"];
         }
-        if(btn.frame.origin.x == 154)
+        if(btn.frame.origin.x == 173)
         {
             lbl.text = [location.listFriendsName[4] objectForKey:@"FirstName"];
         }
-        if(btn.frame.origin.x == 190)
+        if(btn.frame.origin.x == 215)
         {
             lbl.text = [location.listFriendsName[5] objectForKey:@"FirstName"];
         }
     }
     else
     {
-        if(btn.frame.origin.x == 10)
+        if(btn.frame.origin.x == 5)
         {
             lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[0] objectForKey:@"FirstName"], [location.listFriendsName[0] objectForKey:@"Relation"]];
         }
-        if(btn.frame.origin.x == 46)
+        if(btn.frame.origin.x == 47)
         {
             lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[1] objectForKey:@"FirstName"], [location.listFriendsName[1] objectForKey:@"Relation"]];
         }
-        if(btn.frame.origin.x == 82)
+        if(btn.frame.origin.x == 89)
         {
             lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[2] objectForKey:@"FirstName"], [location.listFriendsName[2] objectForKey:@"Relation"]];
         }
-        if(btn.frame.origin.x == 118)
+        if(btn.frame.origin.x == 131)
         {
             lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[3] objectForKey:@"FirstName"], [location.listFriendsName[3] objectForKey:@"Relation"]];
         }
-        if(btn.frame.origin.x == 154)
+        if(btn.frame.origin.x == 173)
         {
             lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[4] objectForKey:@"FirstName"], [location.listFriendsName[4] objectForKey:@"Relation"]];
         }
-        if(btn.frame.origin.x == 190)
+        if(btn.frame.origin.x == 215)
         {
             lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[5] objectForKey:@"FirstName"], [location.listFriendsName[5] objectForKey:@"Relation"]];
         }

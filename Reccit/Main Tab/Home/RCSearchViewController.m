@@ -55,11 +55,24 @@
     return self;
 }
 
-
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //viewDidload
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
     mapRect = self.mapView.frame;
 
     self.listLocation = [NSMutableArray new];

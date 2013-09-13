@@ -15,6 +15,7 @@
 #import "DYRateView.h"
 #import "RCLocationDetailViewController.h"
 #import "AFNetworking.h"
+#import "RCAppDelegate.h"
 //#define kAPISearchSurprise @"http://bizannouncements.com/Vega/services/app/recommendation.php?%@"
 
 #define kAPISearchSurprise @"http://bizannouncements.com/Vega/services/app/getReccit.php?%@"
@@ -27,10 +28,22 @@
 
 @implementation RCSurpriseViewController
 
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
+    
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     [gregorian setFirstWeekday:1];
@@ -136,7 +149,7 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        //NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
        //NSLog(@"happy hours: %@", str);
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         

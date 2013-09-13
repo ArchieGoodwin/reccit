@@ -10,7 +10,7 @@
 
 @interface RCConversationsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *table;
+@property (strong, nonatomic) IBOutlet UITableView *table;
 
 @property (nonatomic, strong) NSMutableArray *conversations;
 @end

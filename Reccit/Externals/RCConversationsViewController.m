@@ -15,19 +15,33 @@
 #import "RCAppDelegate.h"
 #import "UIColor-Expanded.h"
 #import "NSManagedObject+NWCoreDataHelper.h"
+#import "RCMessage.h"
+#import "NSBubbleData.h"
 @interface RCConversationsViewController ()
 
 @end
 
 @implementation RCConversationsViewController
 
-
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    _conversations =  [[[RCVibeHelper sharedInstance] getAllConversationsSortedByDate] mutableCopy];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
+    
     
     
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -40,6 +54,10 @@
     self.navigationItem.rightBarButtonItem = barBtn;
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.06f green:0.10f blue:0.31f alpha:1];
+    
+    
+
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -49,11 +67,12 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    
-    
+    self.conversations =  [[[RCVibeHelper sharedInstance] getAllConversationsSortedByDate] mutableCopy];
+
+    //[self.table reloadData];
 
 }
 
@@ -82,13 +101,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _conversations.count;
+    return self.conversations.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell = nil;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
@@ -100,11 +120,9 @@
         [cell.contentView setBackgroundColor:kRCBackgroundView];
     }
     // Configure the cell...
-    RCConversation *rcc = _conversations[indexPath.row];
+    RCConversation *rcc = self.conversations[indexPath.row];
     
-    cell.textLabel.textColor = [UIColor grayColor];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",rcc.placeName == nil ?  @"Loading place name..." : rcc.placeName];
+
     
     if(rcc.placeName == nil)
     {
@@ -121,15 +139,79 @@
     [btnRemoveChat addTarget:self action:@selector(removeChat:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:btnRemoveChat];
     
+    NSLog(@"step 0 %i", indexPath.row);
+
+
+    cell.textLabel.textColor = [UIColor grayColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",rcc.placeName == nil ?  @"Loading place name..." : rcc.placeName];
+    
+    NSLog(@"step 1 %i  %@", indexPath.row, rcc.messagesCount);
+
+    
+    if([rcc respondsToSelector:@selector(messagesCount)])
+    {
+        NSLog(@"step 1 %i  %i", indexPath.row, [rcc.messagesCount integerValue]);
+
+        if([rcc.messagesCount integerValue] > 0)
+        {
+            NSArray *bubbleData = [[RCVibeHelper sharedInstance] getMessagesSorted:rcc];
+            
+            RCMessage *mess = [bubbleData objectAtIndex:(bubbleData.count - 1)];
+            
+            
+            if(mess.user.userId.integerValue != [[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue])
+            {
+                UIImageView *newMess = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MessageCenter-AlertButton.png"]];
+                newMess.frame = CGRectMake(210, 7, 60, 27);
+                newMess.tag = 701;
+                [cell.contentView addSubview:newMess];
+                
+                UILabel *lblMess = [[UILabel alloc] initWithFrame:CGRectMake(218, 10, 45, 20)];
+                lblMess.backgroundColor = [UIColor clearColor];
+                lblMess.textColor = [UIColor whiteColor];
+                lblMess.font = [UIFont systemFontOfSize:12];
+                lblMess.text = [NSString stringWithFormat:@"%i new", [rcc.messagesCount integerValue]];
+                lblMess.tag = 702;
+                [cell.contentView addSubview:lblMess];
+                NSLog(@"step 2 %i", indexPath.row);
+                
+            }
+            
+            
+            
+        }
+        else
+        {
+            if([cell.contentView viewWithTag:701])[[cell.contentView viewWithTag:701] removeFromSuperview];
+            
+            if([cell.contentView viewWithTag:702])[[cell.contentView viewWithTag:702] removeFromSuperview];
+        }
+    }
+    
+        
+
+    
+    
+    
     return cell;
 }
 
 
 -(void)getPlace:(RCConversation *)conv cell:(UITableViewCell *)cell
 {
-    [[RCVibeHelper sharedInstance] getPlaceFromServer:conv.placeId.integerValue conv:conv completionBlock:^(BOOL result, NSError *error) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",conv.placeName == nil ?  @"Loading place name..." : conv.placeName];
-    }];
+    if(conv.placeId != nil)
+    {
+        [[RCVibeHelper sharedInstance] getPlaceFromServer:conv.placeId.integerValue conv:conv completionBlock:^(NSString *result, NSError *error) {
+             if(cell != nil)
+             {
+                 
+                 cell.textLabel.text = [NSString stringWithFormat:@"%@",result == nil ?  @"Loading place name..." : result];
+
+             }
+        }];
+    }
+   
     
 }
 
@@ -196,12 +278,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     VibeViewController *vibe = [[VibeViewController alloc] initWithNibName:@"VibeViewController" bundle:nil];
-    RCConversation *rcc = _conversations[indexPath.row];
+    RCConversation *rcc = self.conversations[indexPath.row];
+    rcc.messagesCount = @"0";
+    [RCConversation saveDefaultContext];
     vibe.convsersation = rcc;
     vibe.location = [[RCLocation alloc] init];
     vibe.placeNameTxt =  [NSString stringWithFormat:@"%@",rcc.placeName == nil ?  @"Loading place name..." : rcc.placeName];
     vibe.location.ID = [rcc.placeId integerValue];
+    
+    [self.table reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
     
     [self.navigationController pushViewController:vibe animated:YES];
 }

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ASIHTTPRequest.h"
 #import "GAITrackedViewController.h"
-
+#import "JSTokenField.h"
 @class RCAddPlaceViewController;
-@interface RCListFriendViewController : GAITrackedViewController <UITextFieldDelegate>
+@interface RCListFriendViewController : GAITrackedViewController <UITextFieldDelegate, JSTokenFieldDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tbFriends;
 @property (weak, nonatomic) IBOutlet UITextField *tfSearch;
@@ -22,5 +22,9 @@
 
 
 @property (strong, nonatomic) RCAddPlaceViewController *fatherVc;
+@property (strong , nonatomic) NSString *keyword;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnDone;
+
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring;
 @end

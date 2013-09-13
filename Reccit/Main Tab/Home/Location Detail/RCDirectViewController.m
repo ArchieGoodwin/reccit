@@ -34,9 +34,25 @@
     return self;
 }
 
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        //}];
+        
+    }
+    
 	// Do any additional setup after loading the view.
     _mode = 1;
     _instructions = [NSMutableArray new];
@@ -213,7 +229,6 @@
     //create MKMapItem out of coordinates
     MKPlacemark* placeMark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
     MKMapItem* destination =  [[MKMapItem alloc] initWithPlacemark:placeMark];
-    
     if([destination respondsToSelector:@selector(openInMapsWithLaunchOptions:)])
     {
         //using iOS6 native maps app

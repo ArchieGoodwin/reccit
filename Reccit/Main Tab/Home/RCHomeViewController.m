@@ -23,7 +23,6 @@
 #import "Sequencer.h"
 #import "facebookHelper.h"
 #import "AFNetworking.h"
-#import "TestFlight.h"
 @interface RCHomeViewController ()
 
 @end
@@ -191,11 +190,11 @@
                 [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] userCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"[userCheckinRequest responseData] last: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 
-                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                     //completion([NSNumber numberWithBool:YES]);
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"error userCheckinRequest last%@", [error description]);
-                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest last %@  %@", [NSDate date], [error description]]];
+                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest last %@  %@", [NSDate date], [error description]]];
 
                 }];
                 
@@ -212,10 +211,10 @@
                     [client setParameterEncoding:AFJSONParameterEncoding];
                     [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] friendsCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"[frCheckinRequest last responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-                        [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                        //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"error frCheckinRequest last %@", [error description]);
-                        [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest last %@  %@", [NSDate date], [error description]]];
+                        //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest last %@  %@", [NSDate date], [error description]]];
                     }];
                     
                 }

@@ -64,7 +64,6 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
     label.backgroundColor = [UIColor clearColor];
     
 #if !__has_feature(objc_arc)
-    [label autorelease];
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
@@ -101,7 +100,6 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 
     
 #if !__has_feature(objc_arc)
-    [imageView autorelease];
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);

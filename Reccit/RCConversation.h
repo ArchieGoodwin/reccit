@@ -2,7 +2,7 @@
 //  RCConversation.h
 //  Reccit
 //
-//  Created by Nero Wolfe on 6/16/13.
+//  Created by Nero Wolfe on 9/13/13.
 //  Copyright (c) 2013 Incoding. All rights reserved.
 //
 
@@ -14,8 +14,10 @@
 @interface RCConversation : NSManagedObject
 
 @property (nonatomic, retain) NSString * conversationId;
+@property (nonatomic, retain) NSString * newMessagesCount;
 @property (nonatomic, retain) NSNumber * placeId;
 @property (nonatomic, retain) NSString * placeName;
+@property (nonatomic, retain) NSString * messagesCount;
 @property (nonatomic, retain) NSSet *messages;
 @end
 

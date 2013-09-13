@@ -15,13 +15,18 @@
 #import "UIImageView+WebCache.h"
 #import "RCFriendCell.h"
 #import "AFNetworking.h"
+#import "RCAppDelegate.h"
+#import "JSTokenField.h"
+#import "JSTokenButton.h"
 #define kRCAPIListFriend @"http://bizannouncements.com/Vega/services/app/friends.php?user=%@"
 #define kRCAPIListFriendDOTNET  @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/Friends?userfbid=%@"
 
 @interface RCListFriendViewController ()
 {
     UIGestureRecognizer *cancelGesture;
-    NSString *keyword;
+    NSMutableArray *_toRecipients;
+    JSTokenField *_toField;
+
 }
 
 @end
@@ -36,15 +41,56 @@
     }
     return self;
 }
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    keyword = nil;
+    
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        
+        //}];
+        
+    }
+    else
+    {
+        CGRect frame = self.btnDone.frame;
+        frame.origin.y = frame.origin.y + 54;
+        self.btnDone.frame = frame;
+        
+        frame = self.tbFriends.frame;
+        frame.size.height = frame.size.height + 50;
+        self.tbFriends.frame = frame;
+    }
+    
+    _keyword = nil;
 	// Do any additional setup after loading the view.
     
     self.listFriends = [[NSMutableArray alloc] init];
     self.listFriendsFilter = [[NSMutableArray alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(handleTokenFieldFrameDidChange:)
+												 name:JSTokenFieldFrameDidChangeNotification
+											   object:nil];
+	
+	_toRecipients = [[NSMutableArray alloc] init];
+
+	
+	_toField = [[JSTokenField alloc] initWithFrame:CGRectMake(40, 10, 270, 31)];
+    [_toField textField].placeholder = @"Search friends";
+	[[_toField label] setText:@""];
+	[_toField setDelegate:self];
+	[self.view addSubview:_toField];
+    
     
     [self.tbFriends setSeparatorColor:[UIColor clearColor]];
     
@@ -57,6 +103,10 @@
 {
     [super viewWillAppear:animated];
     
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
+    [appDelegate hideAlert];
+    
     [self callAPIGetListFriends];
 }
 
@@ -65,6 +115,127 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)removePerson:(RCPerson *)person
+{
+    [_toField removeTokenForString:person.name];
+
+}
+
+-(BOOL)checkPerson:(RCPerson *)person
+{
+    
+    for(JSTokenButton *pers in _toField.tokens)
+    {
+        if([pers.titleLabel.text isEqualToString:person.name])
+        {
+            return YES;
+            
+        }
+    }
+    return NO;
+}
+
+
+#pragma mark -
+#pragma mark JSTokenFieldDelegate
+
+- (void)tokenField:(JSTokenField *)tokenField didAddToken:(NSString *)title representedObject:(id)obj
+{
+	NSDictionary *recipient = [NSDictionary dictionaryWithObject:obj forKey:title];
+	[_toRecipients addObject:recipient];
+	NSLog(@"Added token for < %@ : %@ >\n%@", title, obj, _toRecipients);
+    
+}
+
+-(void)tokenField:(JSTokenField *)tokenField didRemoveToken:(NSString *)title representedObject:(id)obj
+{
+    NSLog(@"Deleted token %@", _toRecipients);
+    
+    for(RCPerson *pers in self.listFriends)
+    {
+        if (pers.isMark && [pers isEqual:obj])
+        {
+            //[self.listFriends removeObject:pers];
+            pers.isMark = !pers.isMark;
+            [self.tbFriends reloadData];
+            break;
+        }
+    }
+    
+}
+
+- (void)tokenField:(JSTokenField *)tokenField didRemoveTokenAtIndex:(NSUInteger)index
+{
+	[_toRecipients removeObjectAtIndex:index];
+	NSLog(@"Deleted token %d\n%@", index, _toRecipients);
+}
+
+- (BOOL)tokenFieldShouldReturn:(JSTokenField *)tokenField {
+    /*NSMutableString *recipient = [NSMutableString string];
+	
+	NSMutableCharacterSet *charSet = [[NSCharacterSet whitespaceCharacterSet] mutableCopy];
+	[charSet formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
+	
+    NSString *rawStr = [[tokenField textField] text];
+	for (int i = 0; i < [rawStr length]; i++)
+	{
+		if (![charSet characterIsMember:[rawStr characterAtIndex:i]])
+		{
+			[recipient appendFormat:@"%@",[NSString stringWithFormat:@"%c", [rawStr characterAtIndex:i]]];
+		}
+	}
+    
+    
+    
+    */
+    [tokenField textField].text = @"";
+    if(self.listFriendsFilter.count == 1)
+    {
+        RCPerson *person = nil;
+        person = [self.listFriendsFilter objectAtIndex:0];
+        
+        
+        person.isMark = !person.isMark;
+        
+        [_toField addTokenWithTitle:person.name representedObject:person];
+        
+        [[_toField textField] resignFirstResponder];
+    }
+
+    
+    [tokenField textField].text = @"";
+    _keyword = nil;
+    [self.tbFriends reloadData];
+    
+    return NO;
+}
+
+- (void)handleTokenFieldFrameDidChange:(NSNotification *)note
+{
+	if ([[note object] isEqual:_toField])
+	{
+		[UIView animateWithDuration:0.0
+						 animations:^{
+                             
+                             CGRect frame = self.tbFriends.frame;
+                             NSLog(@"BEFORE %@", NSStringFromCGRect(frame));
+                             frame.origin.y = [_toField frame].size.height + [_toField frame].origin.y + 5;
+                             frame.size.height = self.view.frame.size.height - 8 - [_toField frame].size.height - 5 - 70;
+                             
+                             NSLog(@"AFTER %@", NSStringFromCGRect(frame));
+                             self.tbFriends.frame = frame;
+							 //[_ccField setFrame:CGRectMake(0, [_toField frame].size.height + [_toField frame].origin.y, [_ccField frame].size.width, [_ccField frame].size.height)];
+						 }
+						 completion:nil];
+	}
+}
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [[_toField textField] resignFirstResponder];
+}
+
+
 
 #pragma mark -
 #pragma mark - Webservice
@@ -140,6 +311,9 @@
 
 - (IBAction)btnBackTouched:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showButtonForMessages];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -153,6 +327,8 @@
         }
     }
     
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showButtonForMessages];
     self.fatherVc.listFriends = listFriend;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -181,7 +357,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (keyword == nil)
+    if (_keyword == nil)
     return [self.listFriends count];
     
     return [self.listFriendsFilter count];
@@ -193,7 +369,7 @@
     
     RCPerson *person = nil;
     
-    if (keyword == nil  ) {
+    if (_keyword == nil  ) {
         person = [self.listFriends objectAtIndex:indexPath.row];
     } else {
         person = [self.listFriendsFilter objectAtIndex:indexPath.row];
@@ -233,13 +409,27 @@
     UIButton *btn = (UIButton *)sender;
     
     RCPerson *person = nil;
-    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0) {
+    if (_keyword == nil) {
         person = [self.listFriends objectAtIndex:btn.tag];
     } else {
         person = [self.listFriendsFilter objectAtIndex:btn.tag];
+        _keyword = nil;
     }
-    
+
     person.isMark = !person.isMark;
+    
+    if(![self checkPerson:person])
+    {
+        [_toField addTokenWithTitle:person.name representedObject:person];
+        [_toField textField].text = @"";
+    }
+    else
+    {
+        [self removePerson:person];
+        [_toField textField].text = @"";
+    }
+
+    [[_toField textField] resignFirstResponder];
     [self.tbFriends reloadData];
 }
 
@@ -249,14 +439,34 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCPerson *person = nil;
-    if (self.tfSearch.text == nil || [self.tfSearch.text length] == 0) {
+    if (_keyword == nil) {
         person = [self.listFriends objectAtIndex:indexPath.row];
     } else {
         person = [self.listFriendsFilter objectAtIndex:indexPath.row];
+        _keyword = nil;
     }
-
+    
+    
     person.isMark = !person.isMark;
-    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+    //[_toField addTokenWithTitle:person.name representedObject:person];
+    //[_toField textField].text = @"";
+    if(![self checkPerson:person])
+    {
+        [_toField addTokenWithTitle:person.name representedObject:person];
+        [_toField textField].text = @"";
+    }
+    else
+    {
+        [self removePerson:person];
+        [_toField textField].text = @"";
+    }
+    
+   
+    
+    [[_toField textField] resignFirstResponder];
+    
+     [self.tbFriends reloadData];
+    //[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark
@@ -284,7 +494,7 @@
     if([substring isEqualToString:@""])
     {
         self.tfSearch.text = @"";
-        keyword = nil;
+        _keyword = nil;
     }
     
     [self.tbFriends reloadData];
@@ -296,7 +506,7 @@
 {
     NSString *substring = [NSString stringWithString:textField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
-    keyword = substring;
+    _keyword = substring;
     [self searchAutocompleteEntriesWithSubstring:substring];
     return YES;
 }

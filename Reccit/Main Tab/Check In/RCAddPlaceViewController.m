@@ -56,9 +56,33 @@
     return self;
 }
 
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  
+    //viewDidload
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+      
+        //}];
+        
+    }
+    else
+    {
+        CGRect frame = self.downView.frame;
+        frame.origin.y = frame.origin.y + 54;
+        self.downView.frame = frame;
+        
+    }
 	// Do any additional setup after loading the view.
     _imgLike.hidden = YES;
     _lblReccits.hidden = YES;
@@ -731,6 +755,23 @@
 -(void)checkinMe
 {
     
+    
+    if(!self.isAddNew)
+    {
+        
+        [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
+            if(result)
+            {
+                NSLog(@"Success!");
+                
+            }
+            else
+            {
+                NSLog(@"error in addUserToPlaceTalk %@", error.description);
+            }
+        }];
+    }
+    
     NSString *urlString = [NSString stringWithFormat:@"%@",kRCAPIAddPlaceDOTNET];
     
     NSLog(@"REQUEST URL: %@", urlString);
@@ -742,6 +783,7 @@
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFJSONParameterEncoding];
     
+    self.location.recommendation = @"null";
     
     [client postPath:@"" parameters:@{@"review":[RCCommonUtils buildReviewString:self.location]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);

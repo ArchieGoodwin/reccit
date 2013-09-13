@@ -12,7 +12,6 @@
 #import "facebookHelper.h"
 #import "foursquareHelper.h"
 #import "twitterHelper.h"
-#import "TestFlight.h"
 #import "Sequencer.h"
 #import "AFNetworking.h"
 #import "RCCommonUtils.h"
@@ -44,7 +43,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         NSLog(@"register user %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"register user %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]]];
+        //[TestFlight passCheckpoint:[NSString stringWithFormat:@"register user %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]]];
         NSString *userFromServer = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if(!userId)
         {
@@ -92,12 +91,12 @@
                             
                             [[NSUserDefaults standardUserDefaults] setObject:@"fcheckin" forKey:@"fcheckin"];
                             [[NSUserDefaults standardUserDefaults] synchronize];
-                            [TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                            //[TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                             completion([NSNumber numberWithBool:YES]);
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                             NSLog(@"error userCheckinRequest %@", [error description]);
-                            [TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest %@  %@", [NSDate date], [error description]]];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
+                            //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest %@  %@", [NSDate date], [error description]]];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error.description userInfo:nil];
                             
                             completion([NSNumber numberWithBool:YES]);
                         }];
@@ -132,13 +131,13 @@
                          [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] friendsCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                              NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                              //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                              iterations++;
                              completion([NSNumber numberWithBool:YES]);
                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                              NSLog(@"error frCheckinRequest %@", [error description]);
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
-                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error.description userInfo:nil];
                              iterations++;
                              completion([NSNumber numberWithBool:YES]);
                          }];
@@ -171,13 +170,13 @@
                              NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                              //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                              
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                              iterations++;
                              completion([NSNumber numberWithBool:YES]);
                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                              NSLog(@"error frCheckinRequest %@", [error description]);
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
-                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error.description userInfo:nil];
                              iterations++;
                              completion([NSNumber numberWithBool:YES]);
                          }];
@@ -210,12 +209,12 @@
                              NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                              //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                              iterations++;
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                              completion([NSNumber numberWithBool:YES]);
                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                              NSLog(@"error frCheckinRequest %@", [error description]);
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
-                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error.description userInfo:nil];
                              iterations++;
                              completion([NSNumber numberWithBool:YES]);
                          }];
@@ -247,12 +246,12 @@
                              NSLog(@"[frCheckinRequest responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                              //NSLog(@"userCheckinRequest:  %@",responseObjectUser);
                              iterations++;
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest  %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                              completion([NSNumber numberWithBool:YES]);
                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                              NSLog(@"error frCheckinRequest %@", [error description]);
-                             [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
-                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error userInfo:nil];
+                             //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest %@  %@", [NSDate date], [error description]]];
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"fLoginError" object:error.description userInfo:nil];
                              iterations++;
                              completion([NSNumber numberWithBool:YES]);
                          }];
@@ -270,8 +269,8 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error register user %@", [error description]);
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"error register user %@  %@", [NSDate date], [error description]]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"fRegisterError" object:error userInfo:nil];
+        //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error register user %@  %@", [NSDate date], [error description]]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"fRegisterError" object:error.description userInfo:nil];
 
         
     }];
@@ -289,9 +288,40 @@
 + (void)authenticateTwitterWithToken:(NSString *)token userId:(NSString *)userId
 {
 
+    
+    //http://reccit.elasticbeanstalk.com/Authentication_deploy/Auth.svc/Authenticate?oauth_token=14741188-J7YPaG77ymCr4FEFmenaNcClk9U6ReWsZn295H2oa&oauth_secret=IVcvcM78SynkcXRPAOq6Kav0tsZX3KZmgkN1GEE&type=twitter&facebookid=715246241&screenName=NeroW01fe
+    
+    //NSString *urlString  =[NSString stringWithFormat:@"http://reccit.elasticbeanstalk.com/Authentication_deploy/Auth.svc/Authenticate?oauth_token=%@&oauth_secret=%@&type=twitter&facebookid=%@&screenName=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"], [[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"], userId, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName]];
 
+    NSString *urlString  =[NSString stringWithFormat:@"http://reccit.elasticbeanstalk.com/Authentication_deploy/Auth.svc/Authenticate?oauth_token=14741188-J7YPaG77ymCr4FEFmenaNcClk9U6ReWsZn295H2oa&oauth_secret=IVcvcM78SynkcXRPAOq6Kav0tsZX3KZmgkN1GEE&type=twitter&facebookid=%@&screenName=%@",  userId, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName]];
 
-    NSString *urlString = [NSString stringWithFormat:kRCAPITwitterAuthenticate, [[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"], [[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"]];
+    
+    NSLog(@"twiter send url %@", urlString);
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [[twitterHelper sharedInstance] storeAccountWithAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"] secret:[[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"] completionBlock:^(BOOL result, NSError *error) {
+        NSLog(@"twitter account saved");
+
+    }];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"send twitter success");
+
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"send twitter failed %@", error.description);
+    }];
+    
+    
+    [operation start];
+    
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"tLogin" object:self userInfo:nil];
+    /*NSString *urlString = [NSString stringWithFormat:kRCAPITwitterAuthenticate, [[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"], [[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"]];
     NSLog(@"twitter %@", urlString);
     if (userId != nil)
     {
@@ -361,7 +391,7 @@
 
     }];
     
-    [request startAsynchronous];
+    [request startAsynchronous];*/
 }
 
 + (void)authenticateFoursquareWithToken:(NSString *)token userId:(NSString *)userId

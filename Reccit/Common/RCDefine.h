@@ -70,6 +70,7 @@
 
 typedef void (^RCCompleteBlockWithResult)  (BOOL result, NSError *error);
 typedef void (^RCCompleteBlockWithIntResult)  (int newmessages, NSError *error);
+typedef void (^RCCompleteBlockWithStringResult)  (NSString *str, NSError *error);
 
 typedef void (^RCCompleteBlockWithMessageResult)  (RCMessage *result, NSError *error);
 

@@ -30,7 +30,7 @@
 #import "JSTokenButton.h"
 #import "JSBackspaceReportingTextField.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "RCListFriendViewController.h"
 NSString *const JSTokenFieldFrameDidChangeNotification = @"JSTokenFieldFrameDidChangeNotification";
 NSString *const JSTokenFieldNewFrameKey = @"JSTokenFieldNewFrameKey";
 NSString *const JSTokenFieldOldFrameKey = @"JSTokenFieldOldFrameKey";
@@ -380,7 +380,13 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		}
 		return NO;
 	}
-	
+    
+    NSString *substring = [NSString stringWithString:textField.text];
+    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    NSLog(@"%@  %@", substring, textField.text);
+    ((RCListFriendViewController *) self.delegate).keyword = substring;
+    [((RCListFriendViewController *) self.delegate) searchAutocompleteEntriesWithSubstring:substring];
+    
 	return YES;
 }
 

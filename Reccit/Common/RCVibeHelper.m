@@ -64,10 +64,14 @@
 
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"" ascending:NO comparator:^NSComparisonResult(RCConversation *obj1, RCConversation * obj2) {
 
-        RCMessage *last1 = [self getMessagesSorted:obj1][0];
-        RCMessage *last2 = [self getMessagesSorted:obj2][0];
-
-        return [last1.messageDate compare:last2.messageDate];
+        if([self getMessagesSorted:obj1].count > 0 && [self getMessagesSorted:obj2].count > 0)
+        {
+            RCMessage *last1 = [self getMessagesSorted:obj1][0];
+            RCMessage *last2 = [self getMessagesSorted:obj2][0];
+            
+            return [last1.messageDate compare:last2.messageDate];
+        }
+        return NSOrderedSame;
     }];
     
     NSArray *result = [array sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
@@ -158,34 +162,49 @@
             }
             
             hasNew = newMessages;
+            conv.messagesCount = [NSString stringWithFormat:@"%i", hasNew];
+            /*if(conv.placeName == nil)
+            {
+                [self getPlaceFromServer:placeId conv:conv completionBlock:^(NSString *result, NSError *error) {
+                    
+                }];
+                
+            }*/
         }
         else
         {
             //create conv
             
-            RCConversation *conv = [RCConversation createEntityInContext];
-            conv.placeId = [NSNumber numberWithInt:placeId];
+            RCConversation *conv1 = [RCConversation createEntityInContext];
+            conv1.placeId = [NSNumber numberWithInt:placeId];
             int newMessages = 0;
 
             for(NSDictionary *messDict in dict)
             {
-                int isNewMessage = [self createMessageFromDict:messDict conv:conv];
+                int isNewMessage = [self createMessageFromDict:messDict conv:conv1];
                 newMessages = newMessages + isNewMessage;
 
             }
             hasNew = newMessages;
+            conv1.messagesCount = [NSString stringWithFormat:@"%i", hasNew];;
+            /*if(conv1.placeName == nil)
+            {
+                [self getPlaceFromServer:placeId conv:conv1 completionBlock:^(NSString *result, NSError *error) {
+             
+                }];
+             
+            }*/
 
         }
 
         
-        [RCConversation saveDefaultContext];
-        NSLog(@"conv.placeName = %@", conv.placeName);
-        if(conv.placeName == nil)
+       // NSLog(@"conv.placeName = %@", conv.placeName);
+        /*if(conv.placeName == nil)
         {
             [self getPlaceFromServer:placeId conv:conv completionBlock:^(BOOL result, NSError *error) {
                 
             }];
-        }
+        }*/
 
     }
     
@@ -195,46 +214,49 @@
 }
 
 
--(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithResult)completionBlock
+-(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithStringResult)completionBlock
 {
     //Message/FetchByPlace?PlaceId=value
-    
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Place/Get/%i", placeId];
-    
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSLog(@"get getPlaceFromServer url : %@", urlString);
-    
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"getPlaceFromServer %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+    if(placeId != 0)
+    {
+        NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Place/Get/%i", placeId];
         
-        if([rO objectForKey:@"data"] != [NSNull null])
-        {
-            if(conv != nil)
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSLog(@"get getPlaceFromServer url : %@", urlString);
+        
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+            NSLog(@"getPlaceFromServer %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+            
+            if([rO objectForKey:@"data"] != [NSNull null])
             {
-                conv.placeName = [[rO objectForKey:@"data"] objectForKey:@"Name"];
-                [RCConversation saveDefaultContext];
+                if(conv != nil)
+                {
+                    conv.placeName = [[rO objectForKey:@"data"] objectForKey:@"Name"];
+                    [RCConversation saveDefaultContext];
+                }
+                
+                if(completionBlock)
+                {
+                    completionBlock([[rO objectForKey:@"data"] objectForKey:@"Name"], nil);
+                }
             }
             
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             if(completionBlock)
             {
-                completionBlock(YES, nil);
+                completionBlock(nil, error);
             }
-        }
-
-      
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if(completionBlock)
-        {
-            completionBlock(NO, error);
-        }
-    }];
-    
-    [operation start];
+        }];
+        
+        [operation start];
+    }
+   
 }
 
 -(void)getUserFromServer:(NSInteger)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock
@@ -389,7 +411,7 @@
     NSMutableArray *temp = [NSMutableArray new];
     for(RCMessage *message in conversation.messages)
     {
-        NSLog(@"%i   %i    %@", [message.user.userId integerValue], myUserId,  message.messageDate );
+        //NSLog(@"%i   %i    %@", [message.user.userId integerValue], myUserId,  message.messageDate );
         if([message.user.userId integerValue] != myUserId)
         {
             NSBubbleData *someoneBubble = [NSBubbleData dataWithText:message.messageText date:message.messageDate == nil ? [NSDate date] : message.messageDate  type:BubbleTypeSomeoneElse];

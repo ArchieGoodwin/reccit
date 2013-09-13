@@ -9,7 +9,10 @@
 #import "RCMainTabbarController.h"
 #import "RCAppDelegate.h"
 @interface RCMainTabbarController ()
-
+{
+    RCConversationsViewController *contr;
+    UINavigationController *nav;
+}
 @end
 
 @implementation RCMainTabbarController
@@ -34,6 +37,7 @@
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMessagesCount:) name:@"vibes" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showConv) name:@"showvibes" object:nil];
 
 
     [appDelegate getVibes];
@@ -60,6 +64,23 @@
     [appDelegate showNewMessages:notification];
 }
 
+-(void)dismissMe
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+-(void)showConv
+{
+    contr = [[RCConversationsViewController alloc] initWithNibName:@"RCConversationsViewController" bundle:nil];
+    
+    nav = [[UINavigationController alloc] initWithRootViewController:contr];
+    
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
+}
 
 #pragma mark -
 #pragma mark - Button touched

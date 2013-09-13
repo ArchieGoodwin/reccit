@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "RCConversationsViewController.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -24,6 +24,8 @@ extern NSString *const SCSessionStateChangedNotification;
 {
     CLLocationManager *locationManager;
     CLLocationCoordinate2D currentLocation;
+    
+    RCConversationsViewController *contr;
     
 }
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

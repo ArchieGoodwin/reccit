@@ -25,9 +25,10 @@
 -(void)getConversationFromServer:(NSInteger)placeId completionBlock:(RCCompleteBlockWithConvResult)completionBlock;
 -(void)sendMessageFromUserId:(NSInteger)userId messageText:(NSString *)messageText placeId:(NSInteger)placeId subj:(NSString *)subj completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(RCConversation *)getConverationById:(NSInteger *)convId;
--(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithStringResult)completionBlock;
 -(void)getUserFromServer:(NSInteger)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock;
 -(void)registerUser:(NSInteger)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(NSArray *)getAllConversationsSortedByDate;
 -(void)removeUserFromPlaceTalk:(NSInteger)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock;
+-(NSArray *)getMessagesSorted:(RCConversation *)conversation;
 @end

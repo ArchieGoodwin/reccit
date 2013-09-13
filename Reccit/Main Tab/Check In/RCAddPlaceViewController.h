@@ -30,6 +30,7 @@
 @property (strong, nonatomic) RCWhereAmIViewController *messageVc;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIView *downView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet DYRateView *rateView;

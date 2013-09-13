@@ -63,7 +63,7 @@ static PDFService * instance = nil;
         NSString *str =  [ISStringUtil stripDoubleSpaceFrom:[writeItem text]];
         CGSize size = {widthItem,2000.0f};
         CGSize newSize = [str sizeWithFont:writeItem.font
-                         constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
+                         constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
         if (newSize.height + 10 > maxHeight) {
             maxHeight = newSize.height + 10;
         }
@@ -149,7 +149,7 @@ static PDFService * instance = nil;
             NSString *str =  [ISStringUtil stripDoubleSpaceFrom:[writeItem text]];
             CGSize size = {widthItem,2000.0f};
             newSize = [str sizeWithFont:writeItem.font
-                             constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
+                             constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
         }
         if (newSize.height + 10 > maxHeight) {
             maxHeight = newSize.height + 10;

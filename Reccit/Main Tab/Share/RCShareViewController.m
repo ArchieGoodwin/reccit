@@ -40,6 +40,12 @@
     return self;
 }
 
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,6 +61,9 @@
         rect = self.tbReview.frame;
         rect.size.height = rect.size.height - 40;
         self.tbReview.frame = rect;
+        
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
 	// Do any additional setup after loading the view.
    /* if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))

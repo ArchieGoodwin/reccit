@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="RCConversation" representedClassName="RCConversation" syncable="YES">
+        <attribute name="conversationId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="newMessages" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="placeId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="placeName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RCMessage" inverseName="conversation" inverseEntity="RCMessage" syncable="YES"/>
+    </entity>
+    <entity name="RCMessage" representedClassName="RCMessage" syncable="YES">
+        <attribute name="authorUserId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="conversationId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="messageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageText" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conversation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RCConversation" inverseName="messages" inverseEntity="RCConversation" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RCUser" inverseName="messages" inverseEntity="RCUser" syncable="YES"/>
+    </entity>
+    <entity name="RCUser" representedClassName="RCUser" syncable="YES">
+        <attribute name="avatarUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RCMessage" inverseName="user" inverseEntity="RCMessage" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RCConversation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="RCMessage" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="RCUser" positionX="0" positionY="0" width="0" height="0"/>
+    </elements>
+</model>
