@@ -157,7 +157,7 @@
         {
             NSArray *bubbleData = [[RCVibeHelper sharedInstance] getMessagesSorted:rcc];
             
-            RCMessage *mess = [bubbleData objectAtIndex:(bubbleData.count - 1)];
+            RCMessage *mess = [bubbleData objectAtIndex:0];
             
             
             if(mess.user.userId.integerValue != [[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue])

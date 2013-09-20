@@ -390,6 +390,8 @@
                                     @"address":[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] == nil ? @"" : [[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@","],
                                     @"factual_id":location.factual_id == nil ? @"" : location.factual_id,
                                     @"comment":location.comment == nil ? @"" : location.comment,
+                                    @"recommend":[location.recommendation isEqualToString:@"null"] ? [NSNull null] : [location.recommendation isEqualToString:@"YES"] ? @"true" : @"false",
+
                                     @"coords":locUserArray,
                                     @"place":placeArray
                                     };
@@ -433,7 +435,7 @@
                                     @"address":[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] == nil ? @"" : [[[RCDataHolder getPlacemark].addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@","],
                                     @"factual_id":location.factual_id == nil ? @"" : location.factual_id,
                                     @"comment":location.comment == nil ? @"" : location.comment,
-                                    @"recommend":[location.recommendation isEqualToString:@"null"] ? @"null" : [location.recommendation isEqualToString:@"YES"] ? @"true" : @"false",
+                                    @"recommend":[location.recommendation isEqualToString:@"null"] ? [NSNull null] : [location.recommendation isEqualToString:@"YES"] ? @"true" : @"false",
                                     @"coords":locUserArray,
                                     @"place":placeArray
                                     };

@@ -201,6 +201,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
             
             UIButton *btn = (UIButton *)[self.window viewWithTag:5055];
             [btn setImage:nil forState:UIControlStateNormal];
+            [self.window bringSubviewToFront:btn];
         }
         else
         {
