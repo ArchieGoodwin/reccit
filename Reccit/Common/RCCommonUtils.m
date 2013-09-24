@@ -220,7 +220,7 @@
         }
         else
         {
-            location.recommendation = @"NULL";
+            location.recommendation = @"null";
         }
         
         if ([locationDic objectForKey:@"happyhours"] != [NSNull null])

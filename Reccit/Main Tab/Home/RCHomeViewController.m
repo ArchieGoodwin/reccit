@@ -58,35 +58,19 @@
 
     
     
-    
     //viewDidload
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
         [self prefersStatusBarHidden];
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
         
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
         //}];
         
     }
     
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
-    {
-    
-        self.automaticallyAdjustsScrollViewInsets = YES;
-        //self.edgesForExtendedLayout = UIExtendedEdgeNone;
-        //self.extendedLayoutIncludesOpaqueBars = YES;
-        CGRect frame = self.view.frame;
-        frame.size.height = frame.size.height - 20;
-        frame.origin.y = 20;
-
-        self.view.frame = frame;
-        //[UIView animateWithDuration:0.4 animations:^{
-            [self.navigationController setNeedsStatusBarAppearanceUpdate];
-        //}];
-
-    }
-   
+  
 
 
     //RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];

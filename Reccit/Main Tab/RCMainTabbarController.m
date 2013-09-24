@@ -32,6 +32,8 @@
     [super viewDidLoad];
     
 
+    
+
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showButtonForMessages];
     

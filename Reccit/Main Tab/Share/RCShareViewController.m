@@ -680,6 +680,8 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     currentTextField = textField;
+    self.picker.backgroundColor = [UIColor whiteColor];
+
     [self.picker reloadAllComponents];
 }
 

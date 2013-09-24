@@ -94,6 +94,16 @@
         CGRect rect =  self.btnGo.frame;
         rect.origin.y = rect.origin.y - 30;
         self.btnGo.frame = rect;
+        
+        rect = self.viewContent.frame;
+        rect.origin.y = rect.origin.y + 20;
+        rect.size.height = rect.size.height  -20;
+        self.viewContent.frame = rect;
+        
+        rect  = self.mapView.frame;
+        rect.size.height = rect.size.height + 20;
+        mapRect = rect;
+        self.mapView.frame = rect;
     }
     
 
@@ -144,7 +154,7 @@
 {
     if(CGRectEqualToRect(self.mapView.frame, mapRect))
     {
-        self.mapView.frame = CGRectMake(0, 0, 320, [self isIphone5]  ? 508 : 420);
+        self.mapView.frame = CGRectMake(0, 0, 320, [RCCommonUtils isIphone5]  ? (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ?  518 : 508) : (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ?  430 : 420));
         _btnIncrease.hidden = YES;
         _btnReduce.hidden = NO;
         
@@ -161,31 +171,7 @@
     }
 }
 
--(BOOL)isIphone5
-{
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-        if ([[UIScreen mainScreen] respondsToSelector: @selector(scale)]) {
-            CGSize result = [[UIScreen mainScreen] bounds].size;
-            CGFloat scale = [UIScreen mainScreen].scale;
-            result = CGSizeMake(result.width * scale, result.height * scale);
-            
-            if(result.height == 960) {
-                //NSLog(@"iPhone 4 Resolution");
-                return NO;
-            }
-            if(result.height == 1136) {
-                //NSLog(@"iPhone 5 Resolution");
-                //[[UIScreen mainScreen] bounds].size =result;
-                return YES;
-            }
-        }
-        else{
-            // NSLog(@"Standard Resolution");
-            return NO;
-        }
-    }
-    return NO;
-}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -753,8 +739,8 @@
         
         return;
     }*/
-
-    
+    //self.pickerView.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
+    self.pickerView.backgroundColor = [UIColor whiteColor];
     [self.pickerView reloadAllComponents];
     
     [UIView animateWithDuration:0.4 animations:^{
@@ -815,6 +801,7 @@
 
 #pragma mark -
 #pragma mark - Picker delegate
+
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (currentTextField == self.tfGenre)

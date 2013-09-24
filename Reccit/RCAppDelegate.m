@@ -104,6 +104,17 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 
     [self clearNotifications];
 
+    
+    /*if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        [application setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.window.clipsToBounds =YES;
+        self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
+        
+        //Added on 19th Sep 2013
+        self.window.bounds = CGRectMake(0, 20, self.window.frame.size.width, self.window.frame.size.height);
+    }*/
+    
+    
     return YES;
 }
 -(void)clearNotifications
@@ -156,7 +167,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 {
     [[self.window viewWithTag:5055] removeFromSuperview];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame =  CGRectMake(280, 20, 35, 35);
+    btn.frame =  CGRectMake(280,  SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 2 : 20, 35, 35);
     btn.backgroundColor = [UIColor clearColor];
     [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateHighlighted];
@@ -178,7 +189,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         
         if(messages > 0)
         {
-            CGRect rect = CGRectMake(301, 20, 18, 18);
+            CGRect rect = CGRectMake(301, SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 2 : 20, 18, 18);
             UIView *cont = [[UIView alloc] initWithFrame:rect];
             cont.backgroundColor = [UIColor clearColor];
             

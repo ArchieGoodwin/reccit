@@ -72,7 +72,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.conversations =  [[[RCVibeHelper sharedInstance] getAllConversationsSortedByDate] mutableCopy];
 
-    //[self.table reloadData];
+    [self.table reloadData];
 
 }
 

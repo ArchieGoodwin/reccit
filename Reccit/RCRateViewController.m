@@ -40,10 +40,19 @@
     return YES;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    /*if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        self.view.frame =  CGRectMake(0,-20,self.view.frame.size.width,self.view.frame.size.height-40);
+        
+        //Added on 19th Sep 2013
+        self.view.bounds = CGRectMake(0, -20, self.view.frame.size.width, self.view.frame.size.height - 60);
+    }*/
+	// Do any additional setup after loading the view.
+
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
         [self prefersStatusBarHidden];
@@ -52,8 +61,7 @@
         //}];
         
     }
-	// Do any additional setup after loading the view.
-
+    
     if(![[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin])
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:kRCFirstTimeLogin];
