@@ -761,7 +761,7 @@
 
     
     NSLog(@"result for friends send count %i", temp.count);
-    
+    NSLog(@"%@", temp);
     //_stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     _friendsCheckinsArray = temp;
     
@@ -1128,7 +1128,8 @@
 {
 
         RCCompleteBlockWithResult completeBlockWithResult = completionBlock;
-        
+    
+    
         NSString *query = [NSString stringWithFormat:
                            @"{"
                            @"'query1':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid = me() limit 0, 100',"

@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Account/Details/RCLinkedAccountsViewController.m"
-            timestampString = "400768533.121363"
+            timestampString = "403944035.276688"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "-btnFacebookLogin:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Account/Details/RCLinkedAccountsViewController.m"
-            timestampString = "400768533.121363"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "-btnTwitterLogin:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -103,38 +87,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Reccit/RCLoginTwitterViewController.m"
-            timestampString = "390305001.319646"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-OAuthTwitterController:authenticatedWithUsername:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reccit/RCLoginViewController.m"
-            timestampString = "391857004.507507"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "-registerFailed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Home/Location Detail/RCReviewLocationViewController.m"
             timestampString = "392044886.516987"
             startingColumnNumber = "9223372036854775807"
@@ -168,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
-            timestampString = "399191122.479014"
+            timestampString = "403943531.972618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "663"
-            endingLineNumber = "663"
+            startingLineNumber = "743"
+            endingLineNumber = "743"
             landmarkName = "-sentToTwitter:"
             landmarkType = "5">
          </BreakpointContent>
@@ -183,13 +135,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Reccit/RCLoginFoursquareViewController.m"
-            timestampString = "398926746.21647"
+            filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
+            timestampString = "403943531.972618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-foursquareDidAuthorize:"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
+            landmarkName = "-parseError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -199,13 +151,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Reccit/Main Tab/Home/Location Detail/RCReviewInDetailsViewController.m"
-            timestampString = "401610341.309675"
+            filePath = "Reccit/Main Tab/Check In/RCAddPlaceViewController.m"
+            timestampString = "403943531.972618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
-            landmarkName = "-btnSubmitTouched:"
+            startingLineNumber = "830"
+            endingLineNumber = "830"
+            landmarkName = "-returnBack"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -32,6 +32,22 @@
 {
     return YES;
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(showVibe) withObject:nil afterDelay:0.3];
+    
+}
+
+-(void)showVibe
+{
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate showButtonForMessages];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -228,6 +244,9 @@
 
 - (IBAction)btnBackTouched:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
     if (self.isHappyHour)
     {
         [UIView animateWithDuration:0.5
@@ -353,6 +372,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
+    
     RCLocation *location = [self.listLocation objectAtIndex:indexPath.row];
     
     NSLog(@"%@", location.name);

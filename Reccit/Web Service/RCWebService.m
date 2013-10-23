@@ -7,7 +7,6 @@
 //
 
 #import "RCWebService.h"
-#import "ASIHTTPRequest.h"
 #import "RCDefine.h"
 #import "facebookHelper.h"
 #import "foursquareHelper.h"

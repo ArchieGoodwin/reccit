@@ -35,7 +35,7 @@
     
 
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate showButtonForMessages];
+    //[appDelegate showButtonForMessages];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMessagesCount:) name:@"vibes" object:nil];
@@ -49,6 +49,17 @@
     self.viewButton.frame = CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50);
     [self.tabBar setHidden:YES];
     [self.view addSubview:self.viewButton];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+
+    
+    //[appDelegate showButtonForMessages];
 }
 
 - (void)didReceiveMemoryWarning

@@ -92,7 +92,7 @@
 
 - (void) OAuthTwitterController: (SA_OAuthTwitterController *) controller authenticatedWithUsername: (NSString *) username {
     [[NSUserDefaults standardUserDefaults] setObject:@"OK" forKey:kRCTwitterLoggedIn];
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:kRCUserName];
+    //[[NSUserDefaults standardUserDefaults] setObject:username forKey:kRCUserName];
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelFont = [UIFont boldSystemFontOfSize:12];

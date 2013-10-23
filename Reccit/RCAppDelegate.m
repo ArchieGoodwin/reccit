@@ -20,6 +20,7 @@
 #import "RCVibeHelper.h"
 #import "RCConversationsViewController.h"
 #import "NSManagedObject+NWCoreDataHelper.h"
+#import "VibeViewController.h"
 NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStateChangedNotification";
 
 @implementation RCAppDelegate
@@ -30,7 +31,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 {
     // Override point for customization after application launch.
     //[TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-    [TestFlight takeOff:@"30310d41-d318-4141-b303-c32bcc6b81e3"];
+    [TestFlight takeOff:@"6711549d-defd-4b9c-81c5-6f3ef099473d"];
     
     // Optional: automatically send uncaught exceptions to Google Analytics.
     [GAI sharedInstance].trackUncaughtExceptions = YES;
@@ -72,6 +73,8 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         NSLog(@"dict: %@, aps: %@", localNotif, itemName);
 
         //[self getVibes];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
+
 
     }
     else
@@ -154,12 +157,36 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
         {
             //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
 
             [self getVibes];
         }
     }
     
     //[self clearNotifications];
+}
+
+- (void)facebookReconnect
+{
+    NSArray *permissions = [NSArray arrayWithObjects:@"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", nil];
+    [FBSession openActiveSessionWithReadPermissions:permissions
+                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session,
+       FBSessionState state, NSError *error) {
+         [self sessionStateChanged:session state:state error:error];
+     }];
+    
+}
+
+-(void)renewFacebookCredentials
+{
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession renewSystemCredentials:^(ACAccountCredentialRenewResult result,
+                                        NSError *error)
+     {
+         [self facebookReconnect];
+     }];
 }
 
 
@@ -178,6 +205,14 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     btn.tag = 5055;
     
     [self.window addSubview:btn];
+    
+    
+    if([self.window viewWithTag:7077] != nil)
+    {
+        [self.window viewWithTag:7077].hidden = NO;
+        [self.window bringSubviewToFront:[self.window viewWithTag:7077]];
+    }
+    
 }
 
 -(void)showNewMessages:(NSNotification *)notification
@@ -189,16 +224,39 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         
         if(messages > 0)
         {
-            CGRect rect = CGRectMake(301, SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 2 : 20, 18, 18);
+            
+            UINavigationController *navi = (UINavigationController *)self.window.rootViewController;
+            for (UIViewController *controller in navi.viewControllers)
+            {
+               
+                if ([controller isKindOfClass:[RCMainTabbarController class]]) {
+                    NSLog(@"%@", ((RCMainTabbarController *)controller).selectedViewController);
+                    if([controller.presentedViewController isKindOfClass:[UINavigationController class]])
+                    {
+                        UINavigationController *nav = (UINavigationController *)controller.presentedViewController;
+                        for(UIViewController *contr1 in nav.viewControllers)
+                        {
+                            if([contr1 isKindOfClass:[RCConversationsViewController class]] || [contr1 isKindOfClass:[VibeViewController class]])
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    
+                    
+                }
+            }
+
+            CGRect rect = CGRectMake(300, SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 0 : 19, 21, 21);
             UIView *cont = [[UIView alloc] initWithFrame:rect];
             cont.backgroundColor = [UIColor clearColor];
             
             //[cont addSubview:[self showButtonForMessages]];
             
             UIImageView *alert = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Alert.png"]];
-            alert.frame = CGRectMake(0, 0, 18, 18);
+            alert.frame = CGRectMake(0, 0, 21, 21);
             [cont addSubview:alert];
-            UILabel *lblMess = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
+            UILabel *lblMess = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 21, 21)];
             lblMess.backgroundColor = [UIColor clearColor];
             lblMess.textColor = [UIColor whiteColor];
             lblMess.textAlignment = NSTextAlignmentCenter;
@@ -210,9 +268,9 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
             cont.tag = 7077;
             [self.window addSubview:cont];
             
-            UIButton *btn = (UIButton *)[self.window viewWithTag:5055];
-            [btn setImage:nil forState:UIControlStateNormal];
-            [self.window bringSubviewToFront:btn];
+            //UIButton *btn = (UIButton *)[self.window viewWithTag:5055];
+            //[btn setImage:nil forState:UIControlStateNormal];
+            //[self.window bringSubviewToFront:btn];
         }
         else
         {
@@ -258,7 +316,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         
         [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
 
-            NSLog(@"%i", result);
+            NSLog(@"getVibes getConversationsFormServer %i", result);
             [RCConversation saveDefaultContext];
 
             if(result > 0)
@@ -280,6 +338,12 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 -(void)hideConversationButton
 {
      [[self.window viewWithTag:5055] removeFromSuperview];
+    
+    if([self.window viewWithTag:7077] != nil)
+    {
+        [self.window viewWithTag:7077].hidden = YES;
+    }
+    
 }
 
 -(void)showConversations
@@ -513,7 +577,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
     */
     
-    return [FBSession openActiveSessionWithReadPermissions:[NSArray arrayWithObjects:@"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", nil] allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+    return [FBSession openActiveSessionWithReadPermissions:[NSArray arrayWithObjects:@"read_friendlists", @"user_status", @"friends_status", @"user_checkins", @"friends_checkins", @"read_stream", nil] allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
        
         [self sessionStateChanged:session state:status error:error];
 

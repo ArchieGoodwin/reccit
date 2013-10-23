@@ -44,6 +44,14 @@
     return YES;
 }
 
+
+-(void)showVibe
+{
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate showButtonForMessages];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -86,6 +94,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
+    [self performSelector:@selector(showVibe) withObject:nil afterDelay:0.3];
+    
     _btnVibe.hidden = NO;
     /*if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
@@ -162,7 +174,6 @@
     
     //[self centerMap2];
     
-    [super viewWillAppear:animated];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id<MKAnnotation>)a
@@ -325,11 +336,18 @@
 
 - (IBAction)btnBackTouched:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)btnReviewTouched:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
     self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
     self.reviewVc.vsParrent = self;
     self.reviewVc.location = self.location;
@@ -386,6 +404,9 @@
 
 - (IBAction)btnDirectionTouched:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
     [self performSegueWithIdentifier:@"PushDirection" sender:nil];
 }
 
@@ -420,7 +441,7 @@
     RCReview *review = [self.listComment objectAtIndex:indexPath.row];
 
     
-    return [self getLabelSize:review.content fontSize:13] + 15;
+    return [self getLabelSize:review.content fontSize:13] + 18;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -457,7 +478,7 @@
     if (review.content != [NSNull null]) {
         [(UILabel *)[cell viewWithTag:1003] setText:review.content];
         
-        ((UILabel *)[cell viewWithTag:1003]).frame = CGRectMake(((UILabel *)[cell viewWithTag:1003]).frame .origin.x, ((UILabel *)[cell viewWithTag:1003]).frame .origin.y, 243, [self getLabelSize:review.content fontSize:13]);
+        ((UILabel *)[cell viewWithTag:1003]).frame = CGRectMake(((UILabel *)[cell viewWithTag:1003]).frame .origin.x, ((UILabel *)[cell viewWithTag:1003]).frame .origin.y, 243, [self getLabelSize:review.content fontSize:13] + 3);
         
         
         UIImageView *img = (UIImageView *)[cell viewWithTag:1001];

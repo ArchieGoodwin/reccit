@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIHTTPRequest.h"
 #import <MessageUI/MessageUI.h>
 #import "GAITrackedViewController.h"
 #import "RCBaseViewController.h"

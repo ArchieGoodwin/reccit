@@ -486,7 +486,7 @@
     PDFItem * pdfItem3 = [[PDFItem alloc] init];
     pdfItem3.text = @"Reviews";
     pdfItem3.font = fontHeader;
-    pdfItem3.widthPercentage = 53;
+    pdfItem3.widthPercentage = 30;
     
     PDFItem * pdfItem4 = [[PDFItem alloc] init];
     pdfItem4.text = @"Recommend it?";
@@ -498,7 +498,13 @@
     pdfItem5.font = fontHeader;
     pdfItem5.widthPercentage = 10;
     
-    NSArray * arrHeader = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem3, pdfItem4, pdfItem5, nil];
+    PDFItem * pdfItem6 = [[PDFItem alloc] init];
+    pdfItem6.text = @"Address";
+    pdfItem6.font = fontHeader;
+    pdfItem6.widthPercentage = 23;
+
+    
+    NSArray * arrHeader = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem3, pdfItem4, pdfItem5, pdfItem6, nil];
     
     [[PDFService defaultService] startSectionWithColumn: arrHeader];
     [[PDFService defaultService] drawPageNumber];

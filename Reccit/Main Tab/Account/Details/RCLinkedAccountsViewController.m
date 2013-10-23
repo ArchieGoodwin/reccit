@@ -38,7 +38,20 @@
     return YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(showVibe) withObject:nil afterDelay:0.3];
+    
+}
 
+-(void)showVibe
+{
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate showButtonForMessages];
+}
 
 - (void)viewDidLoad
 {
@@ -111,12 +124,21 @@
 
 - (IBAction)btnBackTouched:(id)sender
 {
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)btnFoursquareTouched:(id)sender
 {
+    
+    
     if (![self.foursquare isSessionValid]) {
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate hideConversationButton];
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.foursquare startAuthorization];
     } else {
@@ -129,9 +151,12 @@
 {
     if (FBSession.activeSession.isOpen) {
     } else {
+        
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate hideConversationButton];
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
-        RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
         [appDelegate openSessionWithAllowLoginUI:YES];
     }
 }
@@ -153,6 +178,9 @@
     
     
     RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
+    
     [appDelegate resetWindowToInitialView];
     
 }
@@ -167,9 +195,13 @@
 	
 	UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine: _engine delegate: self];
 	
-	if (controller)
+	if (controller){
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+        [appDelegate hideConversationButton];
 		[self presentViewController:controller animated:YES completion:^{
         }];
+    }
 	else {
 		[_engine sendUpdate: [NSString stringWithFormat: @"Already Updated. %@", [NSDate date]]];
 	}
@@ -217,10 +249,10 @@
 
 - (void) OAuthTwitterController: (SA_OAuthTwitterController *) controller authenticatedWithUsername: (NSString *) username {
     [[NSUserDefaults standardUserDefaults] setObject:@"OK" forKey:kRCTwitterLoggedIn];
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:kRCUserName];
+    //[[NSUserDefaults standardUserDefaults] setObject:username forKey:kRCUserName];
     
-    NSString *img = [NSString stringWithFormat:@"https://api.twitter.com/1/users/profile_image?screen_name=%@&size=bigger", username];
-    [[NSUserDefaults standardUserDefaults] setObject:img forKey:kRCUserImageUrl];
+    //NSString *img = [NSString stringWithFormat:@"https://api.twitter.com/1/users/profile_image?screen_name=%@&size=bigger", username];
+    //[[NSUserDefaults standardUserDefaults] setObject:img forKey:kRCUserImageUrl];
     
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     HUD.mode = MBProgressHUDModeCustomView;

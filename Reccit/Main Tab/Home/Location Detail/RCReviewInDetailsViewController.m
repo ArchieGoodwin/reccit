@@ -44,6 +44,12 @@
     return YES;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
+}
 
 - (void)viewDidLoad
 {
@@ -75,8 +81,7 @@
     }
     
     
-    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate hideConversationButton];
+   
     
     UIColor *bg = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     self.view.backgroundColor = bg;
@@ -192,8 +197,10 @@
                 [((RCShareViewController *)self.vsParrent) startRequest];
                 
             }
-            RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-            [appDelegate showButtonForMessages];
+            
+           
+            
+
             
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
@@ -252,6 +259,7 @@
     if(self.shouldSendImmediately)
     {
         [self sendReview];
+     
         
     }
     else
@@ -261,11 +269,10 @@
             //[self sendReview];
             
             
-            ((RCAddPlaceViewController *)self.vsParrent).reviewString = self.tvReview.text;
+            ((RCAddPlaceViewController *)self.vsParrent).messageString = self.tvReview.text;
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your mention has been saved!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
-            RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-            [appDelegate showButtonForMessages];
+           
         }
     }
     
@@ -389,8 +396,14 @@
 
 - (IBAction)btnCancelTouched:(id)sender
 {
-    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate showButtonForMessages];
+    
+    if(![self.vsParrent isKindOfClass:[RCRateViewController class]])
+    {
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate showButtonForMessages];
+        
+    }
+   
     [self.vsParrent dismissSemiModalViewController:self];
 }
 
@@ -450,6 +463,12 @@
 {
     if(alertView.tag != 1001)
     {
+        if(![self.vsParrent isKindOfClass:[RCRateViewController class]])
+        {
+            RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate showButtonForMessages];
+            
+        }
         [self btnCancelTouched:nil];
 
     }

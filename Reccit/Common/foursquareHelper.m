@@ -221,7 +221,7 @@
         {
             phone = [[[checkin objectForKey:@"venue"] objectForKey:@"contact"] objectForKey:@"phone"];
         }
-        
+        NSLog(@"phone = %@", phone);
        
         NSDictionary *placeArray = @{@"id":[[checkin objectForKey:@"venue"] objectForKey:@"id"],
                                      @"location":locArray,
@@ -234,7 +234,7 @@
                                      @"zip":[loc objectForKey:@"postalCode"] == nil ? @"" : [loc objectForKey:@"postalCode"],
                                      @"phone":phone,
                                      @"type":categoriesString,
-                                     @"pic":[self stringWithPercentEscape:[[checkin objectForKey:@"venue"] objectForKey:@"canonicalUrl"]],
+                                     @"pic":[[checkin objectForKey:@"venue"] objectForKey:@"canonicalUrl"] == nil ? @"" : [self stringWithPercentEscape:[[checkin objectForKey:@"venue"] objectForKey:@"canonicalUrl"]],
                                      @"price_range":@"",
                                      
                                     @"food_styles":foodStylesStr

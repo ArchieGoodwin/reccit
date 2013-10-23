@@ -45,6 +45,21 @@
     return YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(showVibe) withObject:nil afterDelay:0.3];
+    
+}
+
+-(void)showVibe
+{
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate showButtonForMessages];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -88,6 +103,10 @@
     
     if(self.searchBar.text.length > 0)
     {
+        
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate hideConversationButton];
         _isSearch = YES;
         
         NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
@@ -124,13 +143,17 @@
     
     if(self.searchBar.text.length > 0)
     {
+        
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate hideConversationButton];
         _isSearch = YES;
         
         NSString *query = [NSString stringWithFormat:@"city=%@&type=%@", self.tfLocation, self.categoryName];
         
         if ([self.searchBar.text length] > 0)
         {
-            query = [NSString stringWithFormat:@"%@&search=%@", query, self.searchBar.text];
+            query = [NSString stringWithFormat:@"%@&searchstring=%@", query, self.searchBar.text];
         }
         
         self.querySearch = query;
@@ -363,6 +386,10 @@
 
 - (IBAction)btnBackTouched:(id)sender
 {
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -805,6 +832,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     RCLocation *location = nil;
     switch (self.currentTab) {
         case 1:{
@@ -834,6 +862,10 @@
     }
     if(location != nil)
     {
+        
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate hideConversationButton];
         location.type = self.category;
         NSLog(@"%@ %@ %@", location.name, location.type, location.category);
         [self performSegueWithIdentifier:@"PushDetail" sender:location];

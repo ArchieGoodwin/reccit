@@ -45,6 +45,26 @@
     return YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    
+    
+    [appDelegate showButtonForMessages];
+    
+    
+    //[self performSelector:@selector(testMe) withObject:nil afterDelay:5];
+
+}
+
+-(void)testMe
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:30] userInfo:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -73,8 +93,8 @@
   
 
 
-    //RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    //[appDelegate getVibes];
+   // RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+   // [appDelegate getVibes];
     
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
@@ -153,7 +173,7 @@
     int period = [[NSDate date] timeIntervalSinceDate:date];
     //period = 320000;
     
-    //period = 8640000;
+    //period = 864000;
     int numberOfDays = period / 86400;
     NSLog(@"%i %i", period, numberOfDays);
     if(numberOfDays < 1) return;
@@ -163,49 +183,77 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastDate"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    Sequencer *sequencer = [[Sequencer alloc] init];
+    
+    
+    [sequencer enqueueStep:^(id result, SequencerCompletion completion) {
+        
         [[facebookHelper sharedInstance] getFacebookUserCheckinsRecent2:iterations *period completionBlock:^(BOOL result, NSError *error) {
             if([[facebookHelper sharedInstance] userCheckinsArray])
             {
+                NSLog(@"userCheckinsArray last %@", [[facebookHelper sharedInstance] userCheckinsArray]);
                 NSURL *userCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendUserChekinsDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
                 NSLog(@"get recent userCheckinRequest: %@", [NSString stringWithFormat:kSendUserChekinsDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
-
+                
                 AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:userCheckinUrl];
                 [client setParameterEncoding:AFJSONParameterEncoding];
                 [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] userCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"[userCheckinRequest responseData] last: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-
+                    
                     //[TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
                     //completion([NSNumber numberWithBool:YES]);
+                    
+                    completion([NSNumber numberWithBool:YES]);
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"error userCheckinRequest last%@", [error description]);
                     //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest last %@  %@", [NSDate date], [error description]]];
+                    completion([NSNumber numberWithBool:YES]);
+                }];
+                
+            }
+            else
+            {
+                completion([NSNumber numberWithBool:YES]);
+
+            }
+            
+            
+        }];
+    }];
+    
+    [sequencer enqueueStep:^(id result, SequencerCompletion completion) {
+        [[facebookHelper sharedInstance] facebookQueryWithTimePagingRecent:iterations *period completionBlock:^(BOOL result, NSError *error) {
+            if([[facebookHelper sharedInstance] friendsCheckinsArray])
+            {
+                NSLog(@"friendsCheckinsArray last %@", [[facebookHelper sharedInstance] friendsCheckinsArray]);
+                
+                NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekinsDOTNET,
+                                                            [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
+                NSLog(@"get frCheckinRequest last: %@", [NSString stringWithFormat:kSendFriendsChekinsDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
+                
+                AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:frCheckinUrl];
+                [client setParameterEncoding:AFJSONParameterEncoding];
+                [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] friendsCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"[frCheckinRequest last responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                    completion([NSNumber numberWithBool:YES]);
+
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"error frCheckinRequest last %@", [error description]);
+                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest last %@  %@", [NSDate date], [error description]]];
+                    completion([NSNumber numberWithBool:YES]);
 
                 }];
                 
             }
-            [[facebookHelper sharedInstance] facebookQueryWithTimePagingRecent:iterations *period completionBlock:^(BOOL result, NSError *error) {
-                if([[facebookHelper sharedInstance] friendsCheckinsArray])
-                {
-                    
-                    NSURL *frCheckinUrl = [NSURL URLWithString:[NSString stringWithFormat:kSendFriendsChekinsDOTNET,
-                                                                [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]];
-                    NSLog(@"get frCheckinRequest last: %@", [NSString stringWithFormat:kSendFriendsChekinsDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], @"null"]);
-                    
-                    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:frCheckinUrl];
-                    [client setParameterEncoding:AFJSONParameterEncoding];
-                    [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] friendsCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSLog(@"[frCheckinRequest last responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-                        //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"error frCheckinRequest last %@", [error description]);
-                        //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest last %@  %@", [NSDate date], [error description]]];
-                    }];
-                    
-                }
-                
-            }];
             
         }];
+        
+    }];
+    
+    [sequencer run];
+
+    
 
 }
 
@@ -250,6 +298,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+
+    
+    
     if ([segue.identifier isEqualToString:@"PushSearch"])
     {
         RCSearchViewController *search = (RCSearchViewController *)segue.destinationViewController;
@@ -272,6 +323,10 @@
 
 - (IBAction)btnMenuTouched:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
+    
     UIButton *btn = (UIButton *)sender;
     NSString *category = @"";
     

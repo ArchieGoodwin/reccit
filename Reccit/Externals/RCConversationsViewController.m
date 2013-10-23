@@ -282,6 +282,7 @@
     
     VibeViewController *vibe = [[VibeViewController alloc] initWithNibName:@"VibeViewController" bundle:nil];
     RCConversation *rcc = self.conversations[indexPath.row];
+    rcc.lastDate = [NSDate date];
     rcc.messagesCount = @"0";
     [RCConversation saveDefaultContext];
     vibe.convsersation = rcc;

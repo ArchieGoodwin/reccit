@@ -41,6 +41,21 @@
     [button setFrame:boundsForText];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(showVibe) withObject:nil afterDelay:0.3];
+    
+}
+
+-(void)showVibe
+{
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate showButtonForMessages];
+}
+
 -(void)showHideVibe
 {
     if(_btnVibe.hidden)
@@ -86,7 +101,8 @@
     [vibeGesture addTarget:self action:@selector(showHideVibe)];
     //[self.view addGestureRecognizer:vibeGesture];
     
-    
+    _btnVibe.hidden = YES;
+    _btnVibe1.hidden = YES;
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -174,7 +190,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kRCFoursquareLoggedIn];
 
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"fcheckin"];
-
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"lastDate"];
     
     [[NSUserDefaults standardUserDefaults]  synchronize];
     
@@ -242,6 +258,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
+    
     if ([segue.identifier isEqualToString:@"PushAbout"])
     {
         RCTermsViewController *terms = (RCTermsViewController *)segue.destinationViewController;

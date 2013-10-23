@@ -10,7 +10,6 @@
 #import "RCLocation.h"
 #import "DYRateView.h"
 #import "RCBaseViewController.h"
-#import "ASIHTTPRequest.h"
 
 @interface RCReviewLocationViewController : RCBaseViewController <UITextViewDelegate, UIAlertViewDelegate>
 

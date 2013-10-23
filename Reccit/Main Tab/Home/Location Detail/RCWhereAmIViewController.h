@@ -10,7 +10,6 @@
 #import "RCLocation.h"
 #import "DYRateView.h"
 #import "RCBaseViewController.h"
-#import "ASIHTTPRequest.h"
 #import "GAITrackedViewController.h"
 
 @interface RCWhereAmIViewController : RCBaseViewController <UITextViewDelegate, UIAlertViewDelegate>
@@ -26,7 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *tvReview;
 
-@property (strong, nonatomic) ASIHTTPRequest *request;
 @property (nonatomic, assign) BOOL shouldSendImmediately;
 @property (assign) BOOL recommendation;
 

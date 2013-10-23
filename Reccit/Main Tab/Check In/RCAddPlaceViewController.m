@@ -62,6 +62,21 @@
     return YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(showVibe) withObject:nil afterDelay:0.3];
+    
+}
+
+-(void)showVibe
+{
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate showButtonForMessages];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -388,7 +403,9 @@
     if (self.location != nil)
     {
 
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
         
+        [appDelegate hideConversationButton];
         
         
         self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
@@ -406,7 +423,10 @@
 
     if (self.location != nil)
     {
-
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate hideConversationButton];
+        
         self.reviewVc = [[RCReviewInDetailsViewController alloc] initWithNibName:@"RCReviewInDetailsViewController" bundle:nil];
         self.reviewVc.vsParrent = self;
         self.reviewVc.location = self.location;
@@ -429,11 +449,22 @@
 
 - (IBAction)btnCloseTouched:(id)sender
 {
+    
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate hideConversationButton];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)btnAddFriendTouched:(id)sender
 {
+    
+    
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate hideConversationButton];
+    
+    
     [self performSegueWithIdentifier:@"PushListFriends" sender:nil];
 }
 
@@ -441,14 +472,30 @@
 {
     RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-    //[appDelegate openSessionWithAllowLoginUI:NO];
     
     if (self.swFacebook.isOn)
     {
         
-        
-        //[appDelegate openSessionWithAllowLoginUI:NO];
        if (FBSession.activeSession.isOpen) {
+           
+          /* [FBSession.activeSession requestNewPublishPermissions:@[@"publish_actions"]
+                                                 defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                                                     NSLog(@"error %@", error.description);
+                                                     if(error)
+                                                     {
+                                                         
+                                                         dispatch_async(dispatch_get_main_queue(), ^(void) {
+                                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                             [alert show];
+                                                         });
+                                                     }
+                                                 }];
+           */
+           
+        
+           
+           
+            
         } else {
             //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
@@ -479,6 +526,21 @@
     }
 }
 
+-(NSString *)parseError:(NSError *)error
+{
+    
+    NSInteger errCode = [[[[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"] objectForKey:@"code"] integerValue];
+    switch (errCode) {
+        case 506:
+        case 100:
+            return @"Duplicate status mesage. Please add some text to checkin.";
+            break;
+            
+        default:
+            break;
+    }
+    return @"Unknown error. Please try again later.";
+}
 
 - (void)Publish:(NSString *)message {
     // Show the activity indicator.
@@ -496,6 +558,7 @@
     CLLocationCoordinate2D currentLocation = [(RCAppDelegate *)[[UIApplication sharedApplication] delegate] getCurrentLocation];
     if(FBSession.activeSession.isOpen)
     {
+
         FBRequest *postLocRequest = [FBRequest requestForPlacesSearchAtCoordinate:currentLocation radiusInMeters:1000 resultsLimit:1 searchText:self.location.name];
         postLocRequest.session = FBSession.activeSession;
         
@@ -508,8 +571,14 @@
                 if(array.count > 0)
                 {
                     NSDictionary *res = array[0];
-                    NSString *coor = [NSString stringWithFormat:@"{\"latitude\":\"%f\", \"longitude\":\"%f\"}", currentLocation.latitude, currentLocation.longitude];
+                    //NSString *coor = [NSString stringWithFormat:@"{\"latitude\":\"%f\", \"longitude\":\"%f\"}", currentLocation.latitude, currentLocation.longitude];
                     NSMutableDictionary * params = [NSMutableDictionary new];
+                    
+                    //NSDictionary *place = @{@"name":[res objectForKey:@"name"], @"id":[res objectForKey:@"id"]};//, @"location":[res objectForKey:@"location"] };
+                    
+                    //NSDictionary *place = @{@"id":[res objectForKey:@"id"]};//, @"location":[res objectForKey:@"location"] };
+
+                    
                     if(fArray.count > 0)
                     {
                         params = [NSMutableDictionary dictionaryWithObjectsAndKeys: message, @"message",[fArray componentsJoinedByString:@","], @"tags",  [res objectForKey:@"id"], @"place", nil];
@@ -517,28 +586,32 @@
                     }
                     else
                     {
-                        params = [NSMutableDictionary dictionaryWithObjectsAndKeys: message, @"message", [res objectForKey:@"id"], @"place", coor, @"coordinates", nil];
+                        params = [NSMutableDictionary dictionaryWithObjectsAndKeys: message, @"message", [res objectForKey:@"id"], @"place", nil];
                         
                     }
                     
+                    //params = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"test", @"message", nil];
+
+                    NSLog(@"%@", params);
                     FBRequest *postRequest = [FBRequest requestWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"];
                     postRequest.session = FBSession.activeSession;
-                    
-                    if(![postRequest.session.permissions containsObject:@"publish_actions"])
+                    if(![postRequest.session.permissions containsObject:@"publish_stream"])
                     {
-                        [postRequest.session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                        
+                        [postRequest.session requestNewPublishPermissions:@[@"publish_stream", @"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                             [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                                 NSLog(@"error %@", error.description);
                                 if(error)
                                 {
+                                    
                                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook error" message:[self parseError:error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                         [alert show];
                                     });
                                 }
                                 NSLog(@"%@", result);
                                 
-                                [self checkinMe];
+                                //[self checkinMe];
                                 
                             }];
                         }];
@@ -549,13 +622,16 @@
                             NSLog(@"error %@", error.description);
                             if(error)
                             {
+                                //NSLog(@"%@", [[[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"] objectForKey:@"code"]);
+
+                                
                                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook error" message:[self parseError:error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                     [alert show];
                                 });
                             }
                             NSLog(@"%@", result);
-                            [self checkinMe];
+                            //[self checkinMe];
                             
                         }];
                     }
@@ -567,19 +643,21 @@
                     postRequest.session = FBSession.activeSession;
                     
                     
-                    if(![postRequest.session.permissions containsObject:@"publish_actions"])
+                    if(![postRequest.session.permissions containsObject:@"publish_stream"])
                     {
-                        [postRequest.session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                        [postRequest.session requestNewPublishPermissions:@[@"publish_stream", @"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                             [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                                 if(error)
                                 {
+                                    //NSLog(@"%d", error.fberrorCategory);
+
                                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook error" message:[self parseError:error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                         [alert show];
                                     });
                                 }
                                 NSLog(@"%@", result);
-                                [self checkinMe];
+                                //[self checkinMe];
                                 
                             }];
                         }];
@@ -589,13 +667,15 @@
                         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                             if(error)
                             {
+                                //NSLog(@"%d", error.fberrorCategory);
+
                                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook error" message:[self parseError:error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                     [alert show];
                                 });
                             }
                             NSLog(@"%@", [error description]);
-                            [self checkinMe];
+                            //[self checkinMe];
                             
                         }];
                     }
@@ -613,13 +693,13 @@
                 postRequest.session = FBSession.activeSession;
                 
                 
-                if(![postRequest.session.permissions containsObject:@"publish_actions"])
+                if(![postRequest.session.permissions containsObject:@"publish_stream"])
                 {
-                    [postRequest.session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
+                    [postRequest.session requestNewPublishPermissions:@[@"publish_stream", @"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
                         [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                             
                             NSLog(@"%@", [error description]);
-                            [self checkinMe];
+                            //[self checkinMe];
                             
                         }];
                     }];
@@ -629,7 +709,7 @@
                     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         
                         NSLog(@"%@", [error description]);
-                        [self checkinMe];
+                        //[self checkinMe];
                         
                     }];
                 }
@@ -641,7 +721,7 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Could not send checkin to Facebook. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Could not send checkin to Facebook. Try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         alert.tag = 101;
         [alert show];
     }
@@ -689,7 +769,7 @@
     else {
         [_engine sendUpdate: value];
         
-        [self checkinMe];
+        //[self checkinMe];
     }
     
     /*if(_engine.isAuthorized)
@@ -730,18 +810,16 @@
     {
         if(self.messageString)
         {
-            [self Publish:[NSString stringWithFormat:@"%@. At %@", self.messageString, self.location.name]];
+            [self Publish:[NSString stringWithFormat:@"%@. ", self.messageString]];
         }
         else
         {
-            [self Publish:[NSString stringWithFormat:@"at %@", self.location.name]];
+            [self Publish:[NSString stringWithFormat:@" "]];
         }
     }
-    else
-    {
-        [self checkinMe];
-        
-    }
+
+    [self checkinMe];
+    
     
     
     
@@ -749,6 +827,9 @@
 
 -(void)returnBack
 {
+    RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideConversationButton];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -790,9 +871,12 @@
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         NSLog(@"responseObject %@", rO);
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Checkin successful!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Checkin with Reccit successful!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         alert.tag = 101;
         [alert show];
+        
+        RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate hideConversationButton];
         
         [self performSelector:@selector(returnBack) withObject:nil afterDelay:1.5];
         

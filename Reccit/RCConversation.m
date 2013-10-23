@@ -2,7 +2,7 @@
 //  RCConversation.m
 //  Reccit
 //
-//  Created by Nero Wolfe on 9/13/13.
+//  Created by Nero Wolfe on 23/10/13.
 //  Copyright (c) 2013 Incoding. All rights reserved.
 //
 
@@ -13,10 +13,11 @@
 @implementation RCConversation
 
 @dynamic conversationId;
+@dynamic messagesCount;
 @dynamic newMessagesCount;
 @dynamic placeId;
 @dynamic placeName;
-@dynamic messagesCount;
+@dynamic lastDate;
 @dynamic messages;
 
 @end

@@ -48,4 +48,5 @@ extern NSString *const SCSessionStateChangedNotification;
 -(void)showButtonForMessages;
 -(void)hideConversationButton;
 -(void)hideAlert;
+-(void)renewFacebookCredentials;
 @end

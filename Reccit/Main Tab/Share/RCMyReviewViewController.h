@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RCLocation.h"
 #import "DYRateView.h"
-#import "ASIHTTPRequest.h"
 #import "GAITrackedViewController.h"
 
 @interface RCMyReviewViewController : GAITrackedViewController <UITextViewDelegate>

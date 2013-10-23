@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "ASIHTTPRequest.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "GAITrackedViewController.h"
 @interface RCCheckInViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, UIAlertViewDelegate>

@@ -10,7 +10,6 @@
 #import "DYRateView.h"
 #import <MapKit/MapKit.h>
 #import "RCLocation.h"
-#import "ASIHTTPRequest.h"
 #import "RCBaseViewController.h"
 #import <MapKit/MapKit.h>
 @class RCReviewInDetailsViewController;

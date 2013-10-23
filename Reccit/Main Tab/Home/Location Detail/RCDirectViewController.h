@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RCLocation.h"
 #import <MapKit/MapKit.h>
-#import "ASIHTTPRequest.h"
 #import "MapView.h"
 #import "GAITrackedViewController.h"
 

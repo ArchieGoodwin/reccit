@@ -22,7 +22,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.reccit.beta</string>
+	<string>com.reccit.app</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -46,7 +46,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>p05</string>
+	<string>q06</string>
 	<key>FacebookAppID</key>
 	<string>343928219036680</string>
 	<key>LSRequiresIPhoneOS</key>

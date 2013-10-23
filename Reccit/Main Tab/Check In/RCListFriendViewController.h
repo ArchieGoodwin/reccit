@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIHTTPRequest.h"
 #import "GAITrackedViewController.h"
 #import "JSTokenField.h"
 @class RCAddPlaceViewController;

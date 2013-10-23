@@ -15,6 +15,7 @@
 #import "RCDefine.h"
 #import "NSManagedObject+NWCoreDataHelper.h"
 #import "RCUser.h"
+#import "NSDate-Utilities.h"
 @implementation RCVibeHelper
 
 
@@ -76,6 +77,17 @@
     
     NSArray *result = [array sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
 
+    for(RCConversation *conv in result)
+    {
+        if(conv.messages.count == 0)
+        {
+            [RCConversation deleteInContext:conv];
+        }
+    }
+    
+    [RCConversation saveDefaultContext];
+    
+    
     return result;
 }
 
@@ -141,6 +153,35 @@
     return hasNew;
 }
 
+
+-(NSInteger)getNewMessagesFromConversationFromDate:(NSDate *)date conv:(RCConversation *)conv
+{
+    if(conv.lastDate != nil)
+    {
+        NSInteger i = 0;
+        for(RCMessage *mess in [self getMessagesSorted:conv])
+        {
+            if([mess.messageDate isLaterThanDate:date])
+            {
+                i++;
+            }
+        }
+        
+        return i;
+    }
+    return conv.messages.count;
+}
+
+
+
+- (NSDate *)dateToGMT:(NSDate *)sourceDate {
+    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
+    NSDate* destinationDate = [[NSDate alloc] initWithTimeInterval:destinationGMTOffset sinceDate:sourceDate];
+    return destinationDate;
+}
+
+
 -(int)createConversationFromDict:(NSArray *)dict placeId:(NSInteger)placeId
 {
     int hasNew = 0;
@@ -152,7 +193,16 @@
 
         if(conv != nil)
         {
-            //check messages
+            for(RCMessage *mess in conv.messages)
+            {
+                NSLog(@"%@ %@ %i", mess.messageDate, [[NSDate date] dateBySubtractingHours:6], [mess.messageDate minutesBeforeDate:[NSDate date]]);
+                if([mess.messageDate minutesBeforeDate:[NSDate date]] > 360)
+                {
+                    [RCMessage deleteInContext:mess];
+
+                }
+                
+            }
             int newMessages = 0;
             for(NSDictionary *messDict in dict)
             {
@@ -162,19 +212,23 @@
             }
             
             hasNew = newMessages;
-            conv.messagesCount = [NSString stringWithFormat:@"%i", hasNew];
-            /*if(conv.placeName == nil)
+            if(conv.lastDate == nil)
             {
-                [self getPlaceFromServer:placeId conv:conv completionBlock:^(NSString *result, NSError *error) {
-                    
-                }];
-                
-            }*/
+                conv.lastDate = [NSDate date];
+                conv.messagesCount = [NSString stringWithFormat:@"%i", conv.messages.count];
+            }
+            else
+            {
+                conv.messagesCount = [NSString stringWithFormat:@"%i", [self getNewMessagesFromConversationFromDate:conv.lastDate conv:conv]];
+                //conv.lastDate = [NSDate date];
+
+            }
+
+            return conv.messagesCount.integerValue;
         }
         else
         {
             //create conv
-            
             RCConversation *conv1 = [RCConversation createEntityInContext];
             conv1.placeId = [NSNumber numberWithInt:placeId];
             int newMessages = 0;
@@ -186,30 +240,18 @@
 
             }
             hasNew = newMessages;
-            conv1.messagesCount = [NSString stringWithFormat:@"%i", hasNew];;
-            /*if(conv1.placeName == nil)
-            {
-                [self getPlaceFromServer:placeId conv:conv1 completionBlock:^(NSString *result, NSError *error) {
-             
-                }];
-             
-            }*/
+            conv1.messagesCount = [NSString stringWithFormat:@"%i", conv1.messages.count];
+            conv1.lastDate = [NSDate date];
+
+            return conv1.messagesCount.integerValue;
+
 
         }
 
-        
-       // NSLog(@"conv.placeName = %@", conv.placeName);
-        /*if(conv.placeName == nil)
-        {
-            [self getPlaceFromServer:placeId conv:conv completionBlock:^(BOOL result, NSError *error) {
-                
-            }];
-        }*/
 
     }
     
-    
-    return hasNew;
+    return 0;
     
 }
 
@@ -396,6 +438,7 @@
             completionBlock(hasNew, nil);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error with getConversationsFormServer : %@", error.description);
         if(completionBlock)
         {
             completionBlock(0, error);

@@ -44,7 +44,7 @@
       
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshConversaton) name:@"vibes" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshConversaton2) name:@"vibes" object:nil];
 
     
     //bubbleData = [[RCVibeHelper sharedInstance] getConversationFromArray:@[@{@"UserId":@577},@{@"UserId":@577}] myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
@@ -115,14 +115,29 @@
     [self getBubbles];
 
     
-    [[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
+    /*[[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
         if(result != nil)
         {
             self.convsersation = result;
             [self getBubbles];
         }
 
-    }];
+    }];*/
+}
+
+
+-(void)refreshConversaton2
+{
+    
+    
+    [[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
+     if(result != nil)
+     {
+         self.convsersation = result;
+         [self getBubbles];
+     }
+     
+     }];
 }
 
 - (IBAction)backAction:(id)sender {

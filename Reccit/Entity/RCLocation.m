@@ -64,7 +64,7 @@
     PDFItem * pdfItem3 = [[PDFItem alloc] init];
     pdfItem3.text = self.comment;
     pdfItem3.font = fontHeader;
-    pdfItem3.widthPercentage = 53;
+    pdfItem3.widthPercentage = 30;
     
     PDFItem * pdfItem4 = [[PDFItem alloc] init];
     pdfItem4.text = self.recommendation ? @"Yes" : @"No";
@@ -72,11 +72,17 @@
     pdfItem4.widthPercentage = 17;
     
     PDFItem * pdfItem5 = [[PDFItem alloc] init];
-    pdfItem5.text = self.priceRange;
+    pdfItem5.text = [NSString stringWithFormat:@"%i", self.price];
     pdfItem5.font = fontHeader;
     pdfItem5.widthPercentage = 10;
     
-    NSArray * arrPDFItem = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem3, pdfItem4, pdfItem5, nil];
+    
+    PDFItem * pdfItem6 = [[PDFItem alloc] init];
+    pdfItem6.text = [NSString stringWithFormat:@"%@, %@",self.city, self.street == nil ? (self.address == nil ? @"" : self.address ) : self.street];
+    pdfItem6.font = fontHeader;
+    pdfItem6.widthPercentage = 23;
+    
+    NSArray * arrPDFItem = [NSArray arrayWithObjects:pdfItem, pdfItem1, pdfItem3, pdfItem4, pdfItem5, pdfItem6, nil];
     [[PDFService defaultService] writeObjects:arrPDFItem drawBorder:YES];
 }
 

@@ -57,7 +57,7 @@
     {
         [self prefersStatusBarHidden];
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
-        
+        self.tbLocation.separatorInset = UIEdgeInsetsZero;
         //}];
         
     }
