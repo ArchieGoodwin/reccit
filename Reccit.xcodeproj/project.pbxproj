@@ -417,8 +417,6 @@
 		DC60168D176C729700C0B5E4 /* RCVibeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC60168C176C729700C0B5E4 /* RCVibeHelper.m */; };
 		DC601699176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC601698176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.m */; };
 		DC60169C176C913700C0B5E4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC60169A176C913700C0B5E4 /* Model.xcdatamodeld */; };
-		DC60169F176C92CF00C0B5E4 /* RCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DC60169E176C92CF00C0B5E4 /* RCMessage.m */; };
-		DC6016A5176C92D000C0B5E4 /* RCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016A4176C92D000C0B5E4 /* RCUser.m */; };
 		DC6016A9176D83D600C0B5E4 /* RCConversationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016A7176D83D500C0B5E4 /* RCConversationsViewController.m */; };
 		DC6016AA176D83D600C0B5E4 /* RCConversationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC6016A8176D83D600C0B5E4 /* RCConversationsViewController.xib */; };
 		DC6F81EC179F99F10080FF82 /* icon-map-drink.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6F81E9179F99F10080FF82 /* icon-map-drink.png */; };
@@ -472,7 +470,9 @@
 		DC8935301743936C008922EC /* background_for_linked_accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = DC89352E1743936C008922EC /* background_for_linked_accounts.png */; };
 		DC8D95A417CCA6D7007FD2A4 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A037C4B916B338D900CC4124 /* libz.1.2.5.dylib */; };
 		DC98F27E17A8D88600096CA2 /* vibe_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DC98F27D17A8D88600096CA2 /* vibe_icon.png */; };
-		DCA691351817A37200F0EDAB /* RCConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA691341817A37200F0EDAB /* RCConversation.m */; };
+		DC9C488918192EB000A92E20 /* RCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C488818192EB000A92E20 /* RCUser.m */; };
+		DC9C488C18192EB000A92E20 /* RCConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C488B18192EB000A92E20 /* RCConversation.m */; };
+		DC9C488F18192EB000A92E20 /* RCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C488E18192EB000A92E20 /* RCMessage.m */; };
 		DCA691381817A40500F0EDAB /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA691371817A40500F0EDAB /* NSDate-Utilities.m */; };
 		DCB5E72A1744E0EF002F7F59 /* RCReviewInDetailsViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = DCB5E7291744E0EF002F7F59 /* RCReviewInDetailsViewController.h */; };
 		DCB5E72C1744E109002F7F59 /* RCReviewInDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB5E72B1744E109002F7F59 /* RCReviewInDetailsViewController.m */; };
@@ -1163,10 +1163,6 @@
 		DC601697176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+NWCoreDataHelper.h"; sourceTree = "<group>"; };
 		DC601698176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+NWCoreDataHelper.m"; sourceTree = "<group>"; };
 		DC60169B176C913700C0B5E4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		DC60169D176C92CF00C0B5E4 /* RCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessage.h; sourceTree = "<group>"; };
-		DC60169E176C92CF00C0B5E4 /* RCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMessage.m; sourceTree = "<group>"; };
-		DC6016A3176C92D000C0B5E4 /* RCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUser.h; sourceTree = "<group>"; };
-		DC6016A4176C92D000C0B5E4 /* RCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCUser.m; sourceTree = "<group>"; };
 		DC6016A6176D83D500C0B5E4 /* RCConversationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversationsViewController.h; sourceTree = "<group>"; };
 		DC6016A7176D83D500C0B5E4 /* RCConversationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConversationsViewController.m; sourceTree = "<group>"; };
 		DC6016A8176D83D600C0B5E4 /* RCConversationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCConversationsViewController.xib; sourceTree = "<group>"; };
@@ -1223,9 +1219,14 @@
 		DC89352E1743936C008922EC /* background_for_linked_accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_for_linked_accounts.png; sourceTree = "<group>"; };
 		DC8D95A117CCA4C7007FD2A4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		DC98F27D17A8D88600096CA2 /* vibe_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vibe_icon.png; sourceTree = "<group>"; };
+		DC9C488618192E8100A92E20 /* Model 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Model 7.xcdatamodel"; sourceTree = "<group>"; };
+		DC9C488718192EB000A92E20 /* RCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUser.h; sourceTree = "<group>"; };
+		DC9C488818192EB000A92E20 /* RCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCUser.m; sourceTree = "<group>"; };
+		DC9C488A18192EB000A92E20 /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
+		DC9C488B18192EB000A92E20 /* RCConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConversation.m; sourceTree = "<group>"; };
+		DC9C488D18192EB000A92E20 /* RCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessage.h; sourceTree = "<group>"; };
+		DC9C488E18192EB000A92E20 /* RCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMessage.m; sourceTree = "<group>"; };
 		DCA691321817A30C00F0EDAB /* Model 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 6.xcdatamodel"; sourceTree = "<group>"; };
-		DCA691331817A37200F0EDAB /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
-		DCA691341817A37200F0EDAB /* RCConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCConversation.m; sourceTree = "<group>"; };
 		DCA691361817A40500F0EDAB /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
 		DCA691371817A40500F0EDAB /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
 		DCB5E7291744E0EF002F7F59 /* RCReviewInDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCReviewInDetailsViewController.h; sourceTree = "<group>"; };
@@ -1751,13 +1752,13 @@
 				A095E36C16B326FF007108F6 /* Default.png */,
 				A095E36E16B326FF007108F6 /* Default@2x.png */,
 				A095E37016B326FF007108F6 /* Default-568h@2x.png */,
-				DCA691331817A37200F0EDAB /* RCConversation.h */,
-				DCA691341817A37200F0EDAB /* RCConversation.m */,
+				DC9C488718192EB000A92E20 /* RCUser.h */,
+				DC9C488A18192EB000A92E20 /* RCConversation.h */,
+				DC9C488B18192EB000A92E20 /* RCConversation.m */,
+				DC9C488D18192EB000A92E20 /* RCMessage.h */,
+				DC9C488E18192EB000A92E20 /* RCMessage.m */,
+				DC9C488818192EB000A92E20 /* RCUser.m */,
 				DC60169A176C913700C0B5E4 /* Model.xcdatamodeld */,
-				DC6016A3176C92D000C0B5E4 /* RCUser.h */,
-				DC6016A4176C92D000C0B5E4 /* RCUser.m */,
-				DC60169D176C92CF00C0B5E4 /* RCMessage.h */,
-				DC60169E176C92CF00C0B5E4 /* RCMessage.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3025,8 +3026,10 @@
 				A001ED3016B32D60005F0C4D /* RCHomeViewController.m in Sources */,
 				A001ED3316B32D73005F0C4D /* RCShareViewController.m in Sources */,
 				A001ED3616B32D7B005F0C4D /* RCAccountViewController.m in Sources */,
+				DC9C488C18192EB000A92E20 /* RCConversation.m in Sources */,
 				A001ED3916B32D8A005F0C4D /* RCCheckInViewController.m in Sources */,
 				A001ED4116B33140005F0C4D /* RCLocation.m in Sources */,
+				DC9C488918192EB000A92E20 /* RCUser.m in Sources */,
 				A001ED7916B33411005F0C4D /* RCCommonUtils.m in Sources */,
 				A001ED8016B336A5005F0C4D /* RCDataHolder.m in Sources */,
 				A040352816B56A9C009F6CFB /* RCLoginFacebookViewController.m in Sources */,
@@ -3132,15 +3135,13 @@
 				DCA691381817A40500F0EDAB /* NSDate-Utilities.m in Sources */,
 				DC60166D176C6D0400C0B5E4 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				DC60166E176C6D0400C0B5E4 /* UIBubbleTableView.m in Sources */,
-				DCA691351817A37200F0EDAB /* RCConversation.m in Sources */,
 				DC60166F176C6D0400C0B5E4 /* UIBubbleTableViewCell.m in Sources */,
 				DC601670176C6D0400C0B5E4 /* UIBubbleTypingTableViewCell.m in Sources */,
 				DC601689176C6D6D00C0B5E4 /* VibeViewController.m in Sources */,
 				DC60168D176C729700C0B5E4 /* RCVibeHelper.m in Sources */,
 				DC601699176C910600C0B5E4 /* NSManagedObject+NWCoreDataHelper.m in Sources */,
 				DC60169C176C913700C0B5E4 /* Model.xcdatamodeld in Sources */,
-				DC60169F176C92CF00C0B5E4 /* RCMessage.m in Sources */,
-				DC6016A5176C92D000C0B5E4 /* RCUser.m in Sources */,
+				DC9C488F18192EB000A92E20 /* RCMessage.m in Sources */,
 				DC6016A9176D83D600C0B5E4 /* RCConversationsViewController.m in Sources */,
 				DC0AAC921773125A00058735 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
 				DC0AAC931773125A00058735 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
@@ -3312,6 +3313,7 @@
 		DC60169A176C913700C0B5E4 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DC9C488618192E8100A92E20 /* Model 7.xcdatamodel */,
 				DCA691321817A30C00F0EDAB /* Model 6.xcdatamodel */,
 				DC40318017E320BA00955215 /* Model 5.xcdatamodel */,
 				DC40317C17E31C3400955215 /* Model 4.xcdatamodel */,
@@ -3319,7 +3321,7 @@
 				DC6016AB176D844000C0B5E4 /* Model 2.xcdatamodel */,
 				DC60169B176C913700C0B5E4 /* Model.xcdatamodel */,
 			);
-			currentVersion = DCA691321817A30C00F0EDAB /* Model 6.xcdatamodel */;
+			currentVersion = DC9C488618192E8100A92E20 /* Model 7.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

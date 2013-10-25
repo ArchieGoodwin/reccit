@@ -99,19 +99,6 @@
     [self.imgAvatar setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserImageUrl]] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
     
     [self.tfSearch setPlaceholder:[NSString stringWithFormat:@"Search for keyword/place ^ %@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCCurrentCity]]];
-    
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"] != nil)
-    {
-        [[RCVibeHelper sharedInstance] registerUser:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] deviceToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"] completionBlock:^(BOOL result, NSError *error) {
-            
-            NSLog(@"success registerUser");
-            
-            
-            
-        }];
-    }
-   
-
 
     
     [self.view setBackgroundColor:kRCBackgroundView];

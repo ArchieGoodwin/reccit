@@ -16,6 +16,8 @@
 #import "NSManagedObject+NWCoreDataHelper.h"
 #import "RCUser.h"
 #import "NSDate-Utilities.h"
+
+#define VibePath @"http://recchat.incoding.biz/"
 @implementation RCVibeHelper
 
 
@@ -91,11 +93,11 @@
     return result;
 }
 
--(RCUser *)getUserById:(NSInteger)userId
+-(RCUser *)getUserById:(NSString *)userId
 {
     
     NSPredicate *predicate = [[NSPredicate alloc] init];
-    predicate = [NSPredicate predicateWithFormat:@"userId = %i", userId];
+    predicate = [NSPredicate predicateWithFormat:@"userId = %@", userId];
     RCUser *mess = [RCUser getSingleObjectByPredicate:predicate];
     
     return mess;
@@ -137,7 +139,7 @@
             if(user == nil)
             {
                 user = [RCUser createEntityInContext];
-                user.userId = [NSNumber numberWithInt:[[dict objectForKey:@"UserId"] integerValue]];
+                user.userId = [dict objectForKey:@"UserId"];
             }
             
             message.user = user;
@@ -261,7 +263,7 @@
     //Message/FetchByPlace?PlaceId=value
     if(placeId != 0)
     {
-        NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Place/Get/%i", placeId];
+        NSString *urlString = [NSString stringWithFormat:@"%@Place/Get/%i", VibePath, placeId];
         
         NSURL *url = [NSURL URLWithString:urlString];
         NSLog(@"get getPlaceFromServer url : %@", urlString);
@@ -301,11 +303,11 @@
    
 }
 
--(void)getUserFromServer:(NSInteger)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock
+-(void)getUserFromServer:(NSString *)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock
 {
     //Message/FetchByPlace?PlaceId=value
     
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/User/Get/%i", userId];
+    NSString *urlString = [NSString stringWithFormat:@"%@User/Get/%@", VibePath, userId];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"get getUserFromServer url : %@", urlString);
@@ -324,8 +326,8 @@
             if(user == nil)
             {
                 user = [RCUser createEntityInContext];
-                user.userId = [NSNumber numberWithInt:userId];
-                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[NSString stringWithFormat:@"%i", userId]];
+                user.userId = userId;
+                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[NSString stringWithFormat:@"%@", userId]];
                 if([rO objectForKey:@"data"] != [NSNull null])
                 {
                     user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
@@ -334,7 +336,7 @@
             }
             else
             {
-                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[NSString stringWithFormat:@"%i", userId]];
+                user.avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",[NSString stringWithFormat:@"%@", userId]];
                 if([rO objectForKey:@"data"] != [NSNull null])
                 {
                     user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
@@ -369,7 +371,7 @@
     
     //Message/FetchByPlace?PlaceId=value
     
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Message/FetchByPlace?PlaceId=%i", placeId];
+    NSString *urlString = [NSString stringWithFormat:@"%@Message/FetchByPlace?PlaceId=%i", VibePath, placeId];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"get getConversationFromServer url : %@", urlString);
@@ -407,9 +409,9 @@
     [operation start];
 }
 
--(void)getConversationsFormServer:(NSInteger)userId completionBlock:(RCCompleteBlockWithIntResult)completionBlock
+-(void)getConversationsFormServer:(NSString *)userId completionBlock:(RCCompleteBlockWithIntResult)completionBlock
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Message/FetchByUser?UserId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
+    NSString *urlString = [NSString stringWithFormat:@"%@Message/FetchByUser?UserId=%@", VibePath, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"get getConversationsFormServer url : %@", urlString);
@@ -424,14 +426,23 @@
         NSLog(@"getConversationsFormServer %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 
         int hasNew = 0;
+        int i = 0;
         for(NSDictionary *convDict in [rO objectForKey:@"data"])
         {
             int isNewConv = [self createConversationFromDict:[convDict objectForKey:@"Messages"] placeId:[[convDict objectForKey:@"PlaceId"] integerValue]];
             
             hasNew = hasNew + isNewConv;
-            
+            i++;
         }
-        
+        if(i == 0)
+        {
+            for(RCConversation *conv in [RCConversation getAllRecords])
+            {
+                [RCConversation deleteInContext:conv];
+            }
+            
+            [RCConversation saveDefaultContext];
+        }
         
         if(completionBlock)
         {
@@ -449,13 +460,13 @@
 }
 
 
--(NSMutableArray *)getBubblesFromConversation:(RCConversation *)conversation  myUserId:(NSInteger)myUserId
+-(NSMutableArray *)getBubblesFromConversation:(RCConversation *)conversation  myUserId:(NSString *)myUserId
 {
     NSMutableArray *temp = [NSMutableArray new];
     for(RCMessage *message in conversation.messages)
     {
         //NSLog(@"%i   %i    %@", [message.user.userId integerValue], myUserId,  message.messageDate );
-        if([message.user.userId integerValue] != myUserId)
+        if(![message.user.userId isEqual:myUserId])
         {
             NSBubbleData *someoneBubble = [NSBubbleData dataWithText:message.messageText date:message.messageDate == nil ? [NSDate date] : message.messageDate  type:BubbleTypeSomeoneElse];
             someoneBubble.message = message;
@@ -476,10 +487,10 @@
     return temp;
 }
 
--(void)sendMessageFromUserId:(NSInteger)userId messageText:(NSString *)messageText placeId:(NSInteger)placeId subj:(NSString *)subj completionBlock:(RCCompleteBlockWithResult)completionBlock
+-(void)sendMessageFromUserId:(NSString *)userId messageText:(NSString *)messageText placeId:(NSInteger)placeId subj:(NSString *)subj completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Message/Send"];
+    NSString *urlString = [NSString stringWithFormat:@"%@Message/Send", VibePath];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"get sendMessageFromUserId url : %@, placeId: %i", urlString, placeId);
@@ -487,7 +498,7 @@
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFFormURLParameterEncoding];
     
-    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"PlaceId":[NSNumber numberWithInt:placeId],@"Text":messageText == nil ? @"" : messageText,@"Subject":@""};
+    NSDictionary *arr = @{@"UserId":userId,@"PlaceId":[NSNumber numberWithInt:placeId],@"Text":messageText == nil ? @"" : messageText,@"Subject":@""};
     [client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
     [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -504,10 +515,10 @@
     
 }
 
--(void)addUserToPlaceTalk:(NSInteger)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock
+-(void)addUserToPlaceTalk:(NSString *)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Participate/Add"];
+    NSString *urlString = [NSString stringWithFormat:@"%@Participate/Add", VibePath];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"get addUserToPlaceTalk url : %@, placeid %i", urlString, placeId);
@@ -515,7 +526,7 @@
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFFormURLParameterEncoding];
     
-    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"PlaceId":[NSNumber numberWithInt:placeId]};
+    NSDictionary *arr = @{@"UserId":userId,@"PlaceId":[NSNumber numberWithInt:placeId]};
     [client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
     [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -531,18 +542,18 @@
 }
 
 
--(void)removeUserFromPlaceTalk:(NSInteger)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock
+-(void)removeUserFromPlaceTalk:(NSString *)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/Participate/Add"];
+    NSString *urlString = [NSString stringWithFormat:@"%@Participate/Add", VibePath];
     
     NSURL *url = [NSURL URLWithString:urlString];
-    NSLog(@"get removeUserFromPlaceTalk url : %@, placeid %i   user %i", urlString, placeId, userId);
+    NSLog(@"get removeUserFromPlaceTalk url : %@, placeid %i   user %@", urlString, placeId, userId);
     
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFFormURLParameterEncoding];
     
-    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"PlaceId":[NSNumber numberWithInt:placeId], @"Exclude":@"true"};
+    NSDictionary *arr = @{@"UserId":userId,@"PlaceId":[NSNumber numberWithInt:placeId], @"Exclude":@"true"};
     [client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
     [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -558,10 +569,10 @@
 }
 
 
--(void)registerUser:(NSInteger)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock
+-(void)registerUser:(NSString *)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock
 {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://recchat.incoding.biz/User/RegisterDevice"];
+    NSString *urlString = [NSString stringWithFormat:@"%@User/RegisterDevice", VibePath];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"get registerUser url : %@", urlString);
@@ -569,7 +580,7 @@
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client setParameterEncoding:AFFormURLParameterEncoding];
     
-    NSDictionary *arr = @{@"UserId":[NSNumber numberWithInt:userId],@"NotificationId":deviceToken};
+    NSDictionary *arr = @{@"UserId":userId,@"NotificationId":deviceToken};
     [client setDefaultHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
     [client postPath:@"" parameters:arr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

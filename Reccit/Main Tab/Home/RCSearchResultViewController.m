@@ -579,7 +579,7 @@
                 if(!_isSearch)
                 {
                     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
-                    [(UILabel *)[cell viewWithTag:300] setText:@"We don't have any Reccits for you right now, but check back as you and your friends rate more places"];
+                    [(UILabel *)[cell viewWithTag:300] setText:@"Unfortunately we do not have any reccits for you at this point based on the parameters you have chosen. Please select popular to view some of the places that match your search criteria."];
                     return cell;
                 }
                 

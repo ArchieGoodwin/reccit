@@ -10,6 +10,8 @@
 #import "RCVibeHelper.h"
 #import "RCDefine.h"
 #import "RCAppDelegate.h"
+#import "RCConversation.h"
+#import "NSManagedObject+NWCoreDataHelper.h"
 @implementation VibeViewController
 
 
@@ -21,7 +23,7 @@
 {
     [super viewDidLoad];
     
-    
+    //[self refreshConversaton2];
 //    _lblPlaceName.text = self.location.name;
     //_bar.tintColor = [UIColor colorWithRed:0.06f green:0.10f blue:0.31f alpha:1];
 
@@ -48,7 +50,7 @@
 
     
     //bubbleData = [[RCVibeHelper sharedInstance] getConversationFromArray:@[@{@"UserId":@577},@{@"UserId":@577}] myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
-    bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue]];
+    bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
 
     bubbleTable.bubbleDataSource = self;
     
@@ -97,7 +99,7 @@
 
 -(void)getBubbles
 {
-    bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue]];
+    bubbleData = [[RCVibeHelper sharedInstance] getBubblesFromConversation:self.convsersation myUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]];
     [bubbleTable reloadData];
     
     if (bubbleTable.contentSize.height > bubbleTable.frame.size.height)
@@ -129,11 +131,14 @@
 -(void)refreshConversaton2
 {
     
-    
+    [self getBubbles];
     [[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
      if(result != nil)
      {
          self.convsersation = result;
+         self.convsersation.lastDate = [NSDate date];
+         self.convsersation.messagesCount = @"0";
+         [RCConversation saveDefaultContext];
          [self getBubbles];
      }
      
@@ -212,13 +217,13 @@
 {
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
-    
-    [[RCVibeHelper sharedInstance] sendMessageFromUserId:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] messageText:textField.text placeId:self.location.ID subj:@"" completionBlock:^(BOOL result, NSError *error) {
+    NSLog(@"User %@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]);
+    [[RCVibeHelper sharedInstance] sendMessageFromUserId:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] messageText:textField.text placeId:self.location.ID subj:@"" completionBlock:^(BOOL result, NSError *error) {
         //
         
         if(result)
         {
-            [self refreshConversaton];
+            [self refreshConversaton2];
 
         }
         

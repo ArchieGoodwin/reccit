@@ -89,7 +89,7 @@
         if(self.data.message.user.avatarUrl == nil)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[RCVibeHelper sharedInstance] getUserFromServer:[self.data.message.user.userId integerValue] mess:self.data.message completionBlock:^(RCMessage *result, NSError *error) {
+                [[RCVibeHelper sharedInstance] getUserFromServer:[NSString stringWithFormat:@"%@",self.data.message.user.userId] mess:self.data.message completionBlock:^(RCMessage *result, NSError *error) {
                     
                     NSLog(@"%@", result.user.avatarUrl);
                     self.data.message = result;
@@ -109,8 +109,8 @@
 
         self.avatarImage.layer.cornerRadius = 3.0;
         self.avatarImage.layer.masksToBounds = YES;
-        self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
-        self.avatarImage.layer.borderWidth = 1.0;
+        //self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
+        //self.avatarImage.layer.borderWidth = 1.0;
         
         CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? 2 : self.frame.size.width - 52;
         CGFloat avatarY = self.frame.size.height - 50;
@@ -123,6 +123,7 @@
         
         if (type == BubbleTypeSomeoneElse) x += 54;
         if (type == BubbleTypeMine) x -= 54;
+        self.avatarImage.contentMode = UIViewContentModeScaleAspectFit;
     }
 
     [self.customView removeFromSuperview];

@@ -77,19 +77,50 @@
 }
 
 - (IBAction)btnVibeTap:(id)sender {
-    VibeViewController *controller = [[VibeViewController alloc] initWithNibName:@"VibeViewController" bundle:nil];
-    controller.location = self.location;
-    RCConversation *conv = [[RCVibeHelper sharedInstance] getConverationById:self.location.ID];;
-    if(conv.placeName == nil)
-    {
-        conv.placeName = self.location.name;
-        [RCConversation saveDefaultContext];
-    }
-    controller.convsersation = conv;
     
-    [self presentViewController:controller animated:YES completion:^{
-       
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
+        VibeViewController *controller = [[VibeViewController alloc] initWithNibName:@"VibeViewController" bundle:nil];
+        controller.location = self.location;
+        if(result != nil)
+        {
+            [RCConversation saveDefaultContext];
+            
+            if(result.placeName == nil)
+            {
+                result.placeName = self.location.name;
+            }
+            result.messagesCount = @"0";
+            result.lastDate = [NSDate date];
+            [RCConversation saveDefaultContext];
+
+            controller.convsersation = result;
+        }
+        else
+        {
+            RCConversation *conv = [[RCVibeHelper sharedInstance] getConverationById:self.location.ID];;
+            if(conv.placeName == nil)
+            {
+                conv.placeName = self.location.name;
+            }
+            conv.messagesCount = @"0";
+            conv.lastDate = [NSDate date];
+            [RCConversation saveDefaultContext];
+            controller.convsersation = conv;
+        }
+
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self presentViewController:controller animated:YES completion:^{
+            
+        }];
+        
+        
     }];
+    
+    
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -123,7 +154,7 @@
     
     NSLog(@"loc address: %@  ;  %@ ", self.location.address, self.location.street);
     self.lbName.text = self.location.name;
-    if(self.location.city != [NSNull null] && self.location.city != nil)
+    if([self.location.city isEqual:[NSNull null]] && self.location.city != nil)
     {
         self.lbAddress.text = [NSString stringWithFormat:@"%@ %@", self.location.city, [self.location.street isEqualToString:@""] ? self.location.address : self.location.street];
 

@@ -73,9 +73,9 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         NSLog(@"dict: %@, aps: %@", localNotif, itemName);
 
         //[self getVibes];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
 
-
+        //[self getVibes];
     }
     else
     {
@@ -105,7 +105,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
 #endif // TARGET_IPHONE_SIMULATOR
 
-    [self clearNotifications];
+    //[self clearNotifications];
 
     
     /*if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
@@ -157,9 +157,20 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
         {
             //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:nil userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
+            if([application applicationIconBadgeNumber] > 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:[application applicationIconBadgeNumber]] userInfo:nil];
+
+            }
+            else
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:1] userInfo:nil];
+
+            }
 
             [self getVibes];
+            
+            [self clearNotifications];
         }
     }
     
@@ -300,7 +311,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"] && [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] != nil)
     {
-        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
+        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] completionBlock:^(int result, NSError *error) {
           
             NSLog(@"%i", result);
             
@@ -314,7 +325,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
         
-        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] completionBlock:^(int result, NSError *error) {
+        [[RCVibeHelper sharedInstance] getConversationsFormServer:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] completionBlock:^(int result, NSError *error) {
 
             NSLog(@"getVibes getConversationsFormServer %i", result);
             [RCConversation saveDefaultContext];
@@ -414,6 +425,23 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     [FBSession.activeSession handleDidBecomeActive];
+    
+    if([application applicationIconBadgeNumber] > 0)
+    {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+        {
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:[application applicationIconBadgeNumber]] userInfo:nil];
+            
+            [self getVibes];
+            
+            [self clearNotifications];
+        }
+    }
+   
+    
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

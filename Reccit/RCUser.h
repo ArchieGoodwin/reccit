@@ -2,7 +2,7 @@
 //  RCUser.h
 //  Reccit
 //
-//  Created by Nero Wolfe on 6/15/13.
+//  Created by Nero Wolfe on 24/10/13.
 //  Copyright (c) 2013 Incoding. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 
 @interface RCUser : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * userId;
-@property (nonatomic, retain) NSString * userName;
 @property (nonatomic, retain) NSString * avatarUrl;
+@property (nonatomic, retain) NSString * userId;
+@property (nonatomic, retain) NSString * userName;
 @property (nonatomic, retain) NSSet *messages;
 @end
 

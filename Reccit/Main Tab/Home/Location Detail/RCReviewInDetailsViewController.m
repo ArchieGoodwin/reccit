@@ -245,7 +245,7 @@
     NSLog(@"btnSubmitTouched %@", self.location.comment);
     
 
-    [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
+    [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
         if(result)
         {
             NSLog(@"Success!");

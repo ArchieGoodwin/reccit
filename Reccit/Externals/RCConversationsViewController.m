@@ -17,8 +17,11 @@
 #import "NSManagedObject+NWCoreDataHelper.h"
 #import "RCMessage.h"
 #import "NSBubbleData.h"
+#import "RCUser.h"
 @interface RCConversationsViewController ()
-
+{
+    UIRefreshControl * refreshControl;
+}
 @end
 
 @implementation RCConversationsViewController
@@ -32,6 +35,13 @@
 {
     [super viewDidLoad];
 
+    
+    refreshControl = [[UIRefreshControl alloc]   init];
+    refreshControl.tintColor = [UIColor grayColor];
+    
+    [refreshControl addTarget:self action:@selector(refreshSchedule) forControlEvents:UIControlEventValueChanged];
+    
+    [self.table addSubview:refreshControl];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
@@ -63,6 +73,27 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+-(void)refreshSchedule
+{
+    
+    [[RCVibeHelper sharedInstance] getConversationsFormServer:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] completionBlock:^(int result, NSError *error) {
+        
+        NSLog(@"refreshSchedule getConversationsFormServer %i", result);
+        [RCConversation saveDefaultContext];
+        
+        if(result > 0)
+        {
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"vibes" object:[NSNumber numberWithInt:result] userInfo:nil];
+             self.conversations =  [[[RCVibeHelper sharedInstance] getAllConversationsSortedByDate] mutableCopy];
+            [self.table reloadData];
+        }
+        
+        [refreshControl endRefreshing];
+        
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -160,7 +191,7 @@
             RCMessage *mess = [bubbleData objectAtIndex:0];
             
             
-            if(mess.user.userId.integerValue != [[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue])
+            if(![mess.user.userId isEqual:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]])
             {
                 UIImageView *newMess = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MessageCenter-AlertButton.png"]];
                 newMess.frame = CGRectMake(210, 7, 60, 27);
@@ -224,7 +255,7 @@
     RCConversation *rcc = _conversations[btn.tag];
 
     
-    [[RCVibeHelper sharedInstance] removeUserFromPlaceTalk:[[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] integerValue] placeId:rcc.placeId.integerValue completionBlock:^(BOOL result, NSError *error) {
+    [[RCVibeHelper sharedInstance] removeUserFromPlaceTalk:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] placeId:rcc.placeId.integerValue completionBlock:^(BOOL result, NSError *error) {
         
         [_conversations removeObject:rcc];
         [RCConversation deleteInContext:rcc];

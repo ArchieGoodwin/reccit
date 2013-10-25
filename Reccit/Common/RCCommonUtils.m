@@ -220,8 +220,24 @@
         }
         else
         {
-            location.recommendation = @"null";
+            if ([locationDic objectForKey:@"reccit"] != nil && [locationDic objectForKey:@"reccit"] != [NSNull null]) {
+                //NSLog(@"reccit : %i",[[locationDic objectForKey:@"reccit"] integerValue]);
+                if( [[locationDic objectForKey:@"reccit"] integerValue] == 1)
+                {
+                    location.recommendation = @"YES";
+                }
+                else
+                {
+                    location.recommendation = @"NO";
+                    
+                }
+            }
+            else
+            {
+                location.recommendation = @"null";
+            }
         }
+        
         
         if ([locationDic objectForKey:@"happyhours"] != [NSNull null])
         {

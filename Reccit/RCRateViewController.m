@@ -322,7 +322,11 @@
         [cell.btnLike setImage:[UIImage imageNamed:@"btn-like.png"] forState:UIControlStateNormal];
         [cell.btnUnLike setImage:[UIImage imageNamed:@"btn-dislike-press.png"] forState:UIControlStateNormal];
     }*/
-    
+    if (indexPath.row % 2 == 0) {
+        [cell.contentView setBackgroundColor:kRCCheckInCellColorHighLight];
+    } else {
+        [cell.contentView setBackgroundColor:kRCBackgroundView];
+    }
     cell.selectionStyle = UITableViewCellSeparatorStyleNone;
     return cell;
 }
