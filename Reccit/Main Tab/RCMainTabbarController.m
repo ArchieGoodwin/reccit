@@ -54,11 +54,11 @@
             
         }];
     }
-    else
-    {
-        [appDelegate getVibes];
+    //else
+    //{
+    //    [appDelegate getVibes];
 
-    }
+    //}
     
     
 

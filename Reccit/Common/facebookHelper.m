@@ -8,7 +8,7 @@
 #import "facebookHelper.h"
 #import "RCDefine.h"
 #import <FacebookSDK/FacebookSDK.h>
-//#import "TestFlight.h"
+#import "TestFlight.h"
 #import <FacebookSDK/FacebookSDK.h>
 @implementation facebookHelper {
     int iterations;
@@ -202,7 +202,7 @@
     long millis = [[NSDate date] timeIntervalSince1970];
     long down_t = millis - offset;
     long upper_t = millis;
-    NSLog(@"period: %li   %li   , current time %li", down_t, upper_t, upper_t - down_t);
+    NSLog(@"facebookQueryWithTimePagingRecent period: %li   %li   , current time %li", down_t, upper_t, upper_t - down_t);
     NSString *query = [NSString stringWithFormat:
                        @"{"
                        @"'query2':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND timestamp > %li AND timestamp < %li',"
@@ -213,6 +213,8 @@
                        @"}", down_t, upper_t];
     
     
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"facebookQueryWithTimePagingRecent period: %li   %li   , current time %li,  for user:  %@", down_t, upper_t, upper_t - down_t, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+
     
     // Set up the query parameter
     NSDictionary *queryParam =
@@ -221,9 +223,14 @@
     FBRequest *postRequest = [FBRequest requestWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET"];
     postRequest.session = FBSession.activeSession;
     
+    
     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if(!error)
         {
+            
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"facebookQueryWithTimePagingRecent data received for user:  %@",[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+
+            
             iterations++;
             [self buildArrays:[result objectForKey:@"data"]];
             
@@ -239,6 +246,10 @@
         else
         {
             NSLog(@"error: %@", [error description]);
+            
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"facebookQueryWithTimePagingRecent data error:  %@ for user:  %@  ",  error.localizedDescription, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+
+            
             if(completionBlock)
             {
                 completionBlock(NO, error);
@@ -761,7 +772,12 @@
 
     
     NSLog(@"result for friends send count %i", temp.count);
-    NSLog(@"%@", temp);
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:temp options:NSJSONWritingPrettyPrinted error:nil ];
+    NSString* aStr;
+    aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"result for friends : %@", aStr);
     //_stringFriendsCheckins = [data stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     _friendsCheckinsArray = temp;
     
@@ -1068,18 +1084,8 @@
     }
     NSLog(@"getFacebookUserCheckinsRecent2 period: %li   %li   , current time %li, numberOfDays %i", down_t, upper_t, upper_t - down_t, numberOfDays);
 
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"getFacebookUserCheckinsRecent2 period: %li   %li   , current time %li, numberOfDays %i for user:  %@", down_t, upper_t, upper_t - down_t, numberOfDays, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
     
-    /*NSString *query = [NSString stringWithFormat:
-                       @"{"
-                       @"'query1':'SELECT coords, author_uid, target_id, checkin_id FROM checkin WHERE author_uid = me() AND timestamp > %li AND timestamp < %li',"
-                       @"'query2':'select page_id, name, type, food_styles, hours, location, categories, "
-                       "phone, pic, price_range, website, pic_big "
-                       "from page where type in (\"RESTAURANT/CAFE\", "
-                       "\"BAR\", "
-                       "\"HOTEL\", \"LOCAL BUSINESS\", \"PLACE\") and page_id in (SELECT page_id, "
-                       "name, type "
-                       " FROM place WHERE page_id IN (SELECT target_id FROM #query1))',"
-                       @"}", down_t, upper_t];*/
     
     NSString *query = [NSString stringWithFormat:
                        @"{"
@@ -1100,6 +1106,8 @@
     [postRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if(!error)
         {
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"getFacebookUserCheckinsRecent2 data received for user %@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+
             NSLog(@"user checkins result: %@", [result objectForKey:@"data"]);
             [self buildArraysForUser:[result objectForKey:@"data"]];
             [self buildResultForUserDict];
@@ -1113,6 +1121,10 @@
         {
             
             NSLog(@"error: %@", [error description]);
+            
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"getFacebookUserCheckinsRecent2 data error:  %@ for user:  %@  ",  error.localizedDescription, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+
+            
             if(completeBlockWithResult)
             {
                 completeBlockWithResult(NO, error);
@@ -1164,6 +1176,8 @@
             {
                 
                 NSLog(@"error: %@", [error description]);
+                
+                
                 if(completeBlockWithResult)
                 {
                     completeBlockWithResult(NO, error);

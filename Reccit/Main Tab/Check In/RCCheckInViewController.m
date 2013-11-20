@@ -217,8 +217,15 @@
                 [self.listAnnotation addObject:annotation];
             }
             
+            
+            
             //            [RCCommonUtils zoomToFitMapAnnotations:self.mapView annotations:self.mapView.annotations];
         }
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES];
+        
+        [self.listLocation sortUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.tbLocation reloadData];
@@ -251,6 +258,7 @@
 {
     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
     
+    
     [(UILabel *)[cell viewWithTag:1001] setTextColor:kRCPrefixTextCellColorHighLight];
     
     if (indexPath.row == [self.listLocation count]) {
@@ -259,6 +267,9 @@
         [(UILabel *)[cell viewWithTag:1001] setText:@"+"];
     } else {
         RCLocation *location = [self.listLocation objectAtIndex:indexPath.row];
+        NSLog(@"%f", location.distance);
+
+        
         [(UILabel *)[cell viewWithTag:1000] setText:location.name];
         [(UILabel *)[cell viewWithTag:1001] setText:[NSString stringWithFormat:@"%d.", (indexPath.row + 1)]];
         [(UILabel *)[cell viewWithTag:1000] setTextColor:kRCTextCellColorHighLight];

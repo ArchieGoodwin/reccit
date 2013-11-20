@@ -27,6 +27,8 @@
 - (void)setDate:(NSDate *)value
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //[dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *text = [dateFormatter stringFromDate:value];

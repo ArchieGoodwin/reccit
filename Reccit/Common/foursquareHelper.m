@@ -226,9 +226,9 @@
         NSDictionary *placeArray = @{@"id":[[checkin objectForKey:@"venue"] objectForKey:@"id"],
                                      @"location":locArray,
                                      @"name":placeName,
-                                     @"city":[loc objectForKey:@"city"] == nil ? @"" : [loc objectForKey:@"city"],
+                                     @"city":[loc objectForKey:@"city"] == nil ? @"" : [self stringWithPercentEscape:[loc objectForKey:@"city"]],
                                      @"country":[loc objectForKey:@"country"] == nil ? @"" : [loc objectForKey:@"country"],
-                                     @"state":[loc objectForKey:@"state"] == nil ? @"" : [loc objectForKey:@"state"],
+                                     @"state":[loc objectForKey:@"state"] == nil ? @"" : [self stringWithPercentEscape:[loc objectForKey:@"state"]],
                                      @"street":[loc objectForKey:@"address"] == nil ? @"" : [[self stringWithPercentEscape:[loc objectForKey:@"address"]] stringByReplacingOccurrencesOfString:@"\"" withString:@""],
                                      
                                      @"zip":[loc objectForKey:@"postalCode"] == nil ? @"" : [loc objectForKey:@"postalCode"],
@@ -256,6 +256,11 @@
     NSLog(@"result for friends 4s send count %i:", temp.count);
 
     
+    /*NSData *data = [NSJSONSerialization dataWithJSONObject:temp options:NSJSONWritingPrettyPrinted error:nil ];
+    NSString* aStr;
+    aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"result for friends 4s: %@", aStr);*/
 }
 
 

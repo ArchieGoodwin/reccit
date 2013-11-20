@@ -187,17 +187,21 @@
             }
             
             self.lbName.text = self.location.name;
-            if(self.location.street)
+            
+            
+            if(![self.location.city isEqual:[NSNull null]] && self.location.city != nil)
             {
-                self.lbAddress.text = self.location.street;
-
+                self.lbAddress.text = [NSString stringWithFormat:@"%@ \n%@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.city, [self.location.state isEqualToString:@""] ? @"" : self.location.state,  self.location.zipCode ];
+                
             }
             else
             {
-                self.lbAddress.text = @"";
+                self.lbAddress.text = [NSString stringWithFormat:@"%@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.state, self.location.zipCode];
+                
             }
             
-            self.lbCity.text= self.location.city;
+           
+            
             if(self.location.phoneNumber)
             {
                 self.lbPhone.text = [NSString stringWithFormat:@"Phone: %@", self.location.phoneNumber];
@@ -309,17 +313,17 @@
                     
                     
                     self.lbName.text = self.location.name;
-                    if(self.location.street)
+                    if(![self.location.city isEqual:[NSNull null]] && self.location.city != nil)
                     {
-                        self.lbAddress.text = self.location.street;
+                        self.lbAddress.text = [NSString stringWithFormat:@"%@ %@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.city, [self.location.state isEqualToString:@""] ? @"" : self.location.state,  self.location.zipCode ];
                         
                     }
                     else
                     {
-                        self.lbAddress.text = @"";
+                        self.lbAddress.text = [NSString stringWithFormat:@"%@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.state, self.location.zipCode];
+                        
                     }
                     
-                    self.lbCity.text= self.location.city;
                     if(self.location.phoneNumber)
                     {
                         self.lbPhone.text = [NSString stringWithFormat:@"Phone: %@", self.location.phoneNumber];
@@ -835,23 +839,11 @@
 
 -(void)checkinMe
 {
+ 
+   
     
     
-    if(!self.isAddNew)
-    {
-        
-        [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
-            if(result)
-            {
-                NSLog(@"Success!");
-                
-            }
-            else
-            {
-                NSLog(@"error in addUserToPlaceTalk %@", error.description);
-            }
-        }];
-    }
+   
     
     NSString *urlString = [NSString stringWithFormat:@"%@",kRCAPIAddPlaceDOTNET];
     
@@ -870,6 +862,24 @@
         NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         NSLog(@"responseObject %@", rO);
+        
+        NSInteger rplaceId = [[rO objectForKey:@"UpdateReviewResult"] integerValue];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(rplaceId > 0)
+        {
+            [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] placeId:rplaceId completionBlock:^(BOOL result, NSError *error) {
+                if(result)
+                {
+                    NSLog(@"checkinMe!");
+                    
+                }
+                else
+                {
+                    NSLog(@"error in checkinMe %@", error.description);
+                }
+            }];
+        }
+        
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Checkin with Reccit successful!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         alert.tag = 101;

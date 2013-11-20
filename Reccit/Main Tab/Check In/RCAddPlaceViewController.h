@@ -45,7 +45,6 @@
 @property (weak, nonatomic) IBOutlet UIView *viewInfo;
 @property (strong, nonatomic) NSMutableArray *listFriends;
 
-@property (weak, nonatomic) IBOutlet UILabel *lbCity;
 @property (weak, nonatomic) IBOutlet UILabel *lbName;
 @property (weak, nonatomic) IBOutlet UILabel *lbAddress;
 @property (weak, nonatomic) IBOutlet UILabel *lbPhone;

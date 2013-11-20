@@ -26,9 +26,13 @@
 -(void)sendMessageFromUserId:(NSString *)userId messageText:(NSString *)messageText placeId:(NSInteger)placeId subj:(NSString *)subj completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(RCConversation *)getConverationById:(NSInteger *)convId;
 -(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithStringResult)completionBlock;
--(void)getUserFromServer:(NSString *)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock;
+-(void)getUserFromServer:(NSString *)userId  messId:(NSString *)messId completionBlock:(RCCompleteBlockWithMessageIdResult)completionBlock;
 -(void)registerUser:(NSString *)userId deviceToken:(NSString *)deviceToken completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(NSArray *)getAllConversationsSortedByDate;
 -(void)removeUserFromPlaceTalk:(NSString *)userId placeId:(NSInteger)placeId completionBlock:(RCCompleteBlockWithResult)completionBlock;
 -(NSArray *)getMessagesSorted:(RCConversation *)conversation;
+-(void)clearConversations;
+- (NSDate *)dateToGMT:(NSDate *)sourceDate;
+-(NSDate *)dateOfLastMessage:(RCConversation *)conv;
+-(RCMessage *)getMessageById:(NSString *)messId;
 @end

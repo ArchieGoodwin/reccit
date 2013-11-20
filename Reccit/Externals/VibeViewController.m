@@ -12,6 +12,7 @@
 #import "RCAppDelegate.h"
 #import "RCConversation.h"
 #import "NSManagedObject+NWCoreDataHelper.h"
+#import "MBProgressHUD.h"
 @implementation VibeViewController
 
 
@@ -133,14 +134,17 @@
     
     [self getBubbles];
     [[RCVibeHelper sharedInstance] getConversationFromServer:self.location.ID completionBlock:^(RCConversation *result, NSError *error) {
-     if(result != nil)
-     {
-         self.convsersation = result;
-         self.convsersation.lastDate = [NSDate date];
-         self.convsersation.messagesCount = @"0";
-         [RCConversation saveDefaultContext];
-         [self getBubbles];
-     }
+         if(result != nil)
+         {
+             self.convsersation = result;
+             self.convsersation.lastDate = [[RCVibeHelper sharedInstance] dateOfLastMessage:self.convsersation];
+             self.convsersation.messagesCount = @"0";
+             [RCConversation saveDefaultContext];
+             [self getBubbles];
+             
+             
+         }
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
      
      }];
 }
@@ -215,6 +219,9 @@
 
 - (IBAction)sayPressed:(id)sender
 {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
     NSLog(@"User %@", [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]);
@@ -223,14 +230,26 @@
         
         if(result)
         {
+
             [self refreshConversaton2];
+
+            
+            
+        }
+        else
+        {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
         }
         
     }];
     
+    [bubbleTable reloadData];
     
-    NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+    textField.text = @"";
+    //[textField resignFirstResponder];
+    
+    /*NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
     [bubbleTable reloadData];
     
@@ -242,7 +261,7 @@
     {
         CGPoint offset = CGPointMake(0, bubbleTable.contentSize.height - bubbleTable.frame.size.height);
         [bubbleTable setContentOffset:offset animated:YES];
-    }
+    }*/
     
     
     

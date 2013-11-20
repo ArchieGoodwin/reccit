@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "RCTermsViewController.h"
 #import "RCAppDelegate.h"
+#import "SlideVC.h"
 @interface RCAccountViewController ()
 {
     UITapGestureRecognizer *vibeGesture;
@@ -39,6 +40,13 @@
     boundsForText.origin.x += (boundsForText.size.width - stringSize.width) / 2;
     boundsForText.size.width = stringSize.width;
     [button setFrame:boundsForText];
+}
+- (IBAction)btnShowTutorial:(id)sender {
+    
+    SlideVC *vc = [SlideVC new];
+    [self presentViewController:vc animated:YES completion:^{
+       
+    }];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -101,10 +109,10 @@
     [vibeGesture addTarget:self action:@selector(showHideVibe)];
     //[self.view addGestureRecognizer:vibeGesture];
     
-    _btnVibe.hidden = YES;
-    _btnVibe1.hidden = YES;
-    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    //_btnVibe.hidden = YES;
+    //_btnVibe1.hidden = YES;
+    //[[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
     
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
@@ -148,13 +156,15 @@
         {
             [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
             //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
-            
+            //[[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
+            //[[NSUserDefaults standardUserDefaults] synchronize];
             
         }
         else
         {
             [_btnVibe setTitle:@"Vibe Is Off" forState:UIControlStateNormal];
-            
+            //[[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"vibe"];
+            //[[NSUserDefaults standardUserDefaults] synchronize];
             //[self sizeButtonToText:_btnVibe availableSize:_btnVibe.frame.size padding:UIEdgeInsetsZero];
             
             
@@ -174,6 +184,7 @@
     }
    
     
+    
     [self.navigationController setNavigationBarHidden:YES];
 }
 
@@ -191,7 +202,8 @@
 
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"fcheckin"];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"lastDate"];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"vibe"];
+
     [[NSUserDefaults standardUserDefaults]  synchronize];
     
     [FBSession.activeSession closeAndClearTokenInformation];
@@ -227,14 +239,33 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"vibe"];
             [[NSUserDefaults standardUserDefaults] synchronize];
 
+            [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+            
+             RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate hideConversationButton];
+            
         }
         else
         {
             [_btnVibe setTitle:@"Vibe Is On" forState:UIControlStateNormal];
+            
+            
             [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
             [[NSUserDefaults standardUserDefaults] synchronize];
 
             
+            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+            {
+                NSLog(@"Registering for push notifications...");
+                [[UIApplication sharedApplication]
+                 registerForRemoteNotificationTypes:
+                 (UIRemoteNotificationTypeAlert |
+                  UIRemoteNotificationTypeBadge |
+                  UIRemoteNotificationTypeSound)];
+            }
+            
+            RCAppDelegate *appDelegate =  (RCAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate showButtonForMessages];
         }
         
     }

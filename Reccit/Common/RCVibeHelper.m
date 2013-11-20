@@ -17,7 +17,8 @@
 #import "RCUser.h"
 #import "NSDate-Utilities.h"
 
-#define VibePath @"http://recchat.incoding.biz/"
+//#define VibePath @"http://recchat.incoding.biz/"
+#define VibePath @"http://vibe.reccit.com/"
 @implementation RCVibeHelper
 
 
@@ -79,18 +80,27 @@
     
     NSArray *result = [array sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
 
+    NSMutableArray *temp = [NSMutableArray new];
+   
     for(RCConversation *conv in result)
     {
+
+        
         if(conv.messages.count == 0)
         {
             [RCConversation deleteInContext:conv];
         }
+        else
+        {
+            [temp addObject:conv];
+        }
     }
+
     
     [RCConversation saveDefaultContext];
     
     
-    return result;
+    return [temp copy];
 }
 
 -(RCUser *)getUserById:(NSString *)userId
@@ -126,7 +136,7 @@
                 NSLog(@"%@", dateStr);
                 
             }
-            NSLog(@"%f    - %@",[[dict objectForKey:@"CreateDt"] doubleValue],[NSDate dateWithTimeIntervalSince1970:([dateStr doubleValue] /1000)]);
+            NSLog(@"%@    - %@",[dict objectForKey:@"CreateDt"],[NSDate dateWithTimeIntervalSince1970:([dateStr doubleValue] /1000)]);
             message.messageDate = [NSDate dateWithTimeIntervalSince1970:([dateStr doubleValue] /1000)];
             
             message.messageId = [dict objectForKey:@"Id"];
@@ -175,6 +185,19 @@
 }
 
 
+-(void)clearConversations
+{
+    NSMutableArray *converations = [RCConversation getAllRecords];
+    for(RCConversation *conv in converations)
+    {
+        if([self getNewMessagesFromConversationFromDate:conv.lastDate conv:conv] == 0)
+        {
+            [RCConversation deleteInContext:conv];
+        }
+    }
+    [RCConversation saveDefaultContext];
+}
+
 
 - (NSDate *)dateToGMT:(NSDate *)sourceDate {
     NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
@@ -197,13 +220,9 @@
         {
             for(RCMessage *mess in conv.messages)
             {
-                NSLog(@"%@ %@ %i", mess.messageDate, [[NSDate date] dateBySubtractingHours:6], [mess.messageDate minutesBeforeDate:[NSDate date]]);
-                if([mess.messageDate minutesBeforeDate:[NSDate date]] > 360)
-                {
-                    [RCMessage deleteInContext:mess];
-
-                }
                 
+                [RCMessage deleteInContext:mess];
+
             }
             int newMessages = 0;
             for(NSDictionary *messDict in dict)
@@ -216,7 +235,7 @@
             hasNew = newMessages;
             if(conv.lastDate == nil)
             {
-                conv.lastDate = [NSDate date];
+                conv.lastDate = [self dateOfLastMessage:conv];
                 conv.messagesCount = [NSString stringWithFormat:@"%i", conv.messages.count];
             }
             else
@@ -225,6 +244,7 @@
                 //conv.lastDate = [NSDate date];
 
             }
+            NSLog(@"lastDate %@ conv.messagesCount = %@", conv.lastDate, conv.messagesCount);
 
             return conv.messagesCount.integerValue;
         }
@@ -243,8 +263,8 @@
             }
             hasNew = newMessages;
             conv1.messagesCount = [NSString stringWithFormat:@"%i", conv1.messages.count];
-            conv1.lastDate = [NSDate date];
-
+            conv1.lastDate = [self dateOfLastMessage:conv1];
+            NSLog(@"lastDate %@ conv.messagesCount = %@", conv1.lastDate, conv1.messagesCount);
             return conv1.messagesCount.integerValue;
 
 
@@ -257,6 +277,11 @@
     
 }
 
+
+-(NSDate *)dateOfLastMessage:(RCConversation *)conv
+{
+    return ((RCMessage *)[self getMessagesSorted:conv].firstObject).messageDate;
+}
 
 -(void)getPlaceFromServer:(NSInteger)placeId  conv:(RCConversation *)conv completionBlock:(RCCompleteBlockWithStringResult)completionBlock
 {
@@ -303,7 +328,7 @@
    
 }
 
--(void)getUserFromServer:(NSString *)userId  mess:(RCMessage *)mess completionBlock:(RCCompleteBlockWithMessageResult)completionBlock
+-(void)getUserFromServer:(NSString *)userId  messId:(NSString *)messId completionBlock:(RCCompleteBlockWithMessageIdResult)completionBlock
 {
     //Message/FetchByPlace?PlaceId=value
     
@@ -321,6 +346,9 @@
         NSLog(@"getUserFromServer %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         
 
+        RCMessage *mess = [self getMessageById:messId];
+        if(mess)
+        {
             RCUser *user = [self getUserById:userId];
             
             if(user == nil)
@@ -331,8 +359,11 @@
                 if([rO objectForKey:@"data"] != [NSNull null])
                 {
                     user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
-
+                    
                 }
+                
+                
+                mess.user = user;
             }
             else
             {
@@ -342,22 +373,30 @@
                     user.userName = [[rO objectForKey:@"data"] objectForKey:@"FirstName"];
                     
                 }
-
+                
             }
-            mess.user = user;
-            [RCUser saveDefaultContext];
-
             if(completionBlock)
             {
-                completionBlock(mess, nil);
+                completionBlock(messId, nil);
             }
+        }
+        else
+        {
+            if(completionBlock)
+            {
+                completionBlock(nil, nil);
+            }
+        }
+        
+
+        
       
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(completionBlock)
         {
-            completionBlock(NO, error);
+            completionBlock(nil, error);
         }
     }];
     

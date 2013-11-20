@@ -17,6 +17,7 @@
 #import "RCDefine.h"
 #import "AFNetworking.h"
 #import "RCAppDelegate.h"
+#import "SlideVC.h"
 #define kRCAPICheckInGetLocationRate @"http://bizannouncements.com/bhavesh/deltaservice.php?userid=%@"
 #define kRCAPICheckInGetLocationRateDOTNET @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/delta?userfbid=%@"
 
@@ -64,8 +65,24 @@
     
     if(![[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin])
     {
+        
+       
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:kRCFirstTimeLogin];
         [[NSUserDefaults standardUserDefaults]  synchronize];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
+        {
+            NSLog(@"Registering for push notifications...");
+            [[UIApplication sharedApplication]
+             registerForRemoteNotificationTypes:
+             (UIRemoteNotificationTypeAlert |
+              UIRemoteNotificationTypeBadge |
+              UIRemoteNotificationTypeSound)];
+        }
+        
     }
 
     
@@ -88,6 +105,7 @@
 {
     [super viewWillAppear:animated];
     
+   
     //[[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"view" withAction:@"viewWillAppear" withLabel:@"RCRateViewController" withValue:nil];
     [self callAPIGetListLocationRate];
 }
@@ -139,7 +157,7 @@
             
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             
-            [self performSelector:@selector(noRateLocation) withObject:nil afterDelay:0.0];
+            [self performSelector:@selector(noRateLocation) withObject:nil afterDelay:0.4];
             
             //self.HUD.customView = nil;
             //self.HUD.mode = MBProgressHUDModeCustomView;
@@ -212,7 +230,7 @@
 
 - (void)noRateLocation
 {
-    [MBProgressHUD hideHUDForView:self.tbLocation animated:YES];
+    //[MBProgressHUD hideHUDForView:self.tbLocation animated:YES];
     [self performSegueWithIdentifier:@"PushHome" sender:nil];
 }
 

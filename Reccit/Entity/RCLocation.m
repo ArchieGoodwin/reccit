@@ -9,7 +9,7 @@
 #import "RCLocation.h"
 #import "PDFItem.h"
 #import "PDFService.h"
-
+#define RAND_FROM_TO(min,max) (min + arc4random_uniform(max - min + 1))
 @implementation RCLocation
 
 @synthesize name;
@@ -72,7 +72,7 @@
     pdfItem4.widthPercentage = 17;
     
     PDFItem * pdfItem5 = [[PDFItem alloc] init];
-    pdfItem5.text = [NSString stringWithFormat:@"%i", self.price];
+    pdfItem5.text = [NSString stringWithFormat:@"%i", self.price == 0 ? RAND_FROM_TO(1, 3) : self.price];
     pdfItem5.font = fontHeader;
     pdfItem5.widthPercentage = 10;
     

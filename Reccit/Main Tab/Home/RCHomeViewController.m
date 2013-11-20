@@ -23,6 +23,12 @@
 #import "Sequencer.h"
 #import "facebookHelper.h"
 #import "AFNetworking.h"
+#import "TestFlight.h"
+
+
+#define SAVEFRIENDSLINK @"http://reccit.elasticbeanstalk.com/Authentication_deploy/Auth.svc/SaveFriends?oauth_token=%@&type=facebook&facebookid=%@"
+
+
 @interface RCHomeViewController ()
 
 @end
@@ -127,10 +133,10 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-    dispatch_async(dispatch_get_main_queue(),^{
+   // dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [self  getLastCheckinsFromDate:date];
         
-    });
+    //});
     
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
@@ -152,23 +158,60 @@
 }
 
 
+-(void)saveFriends
+{
+    
+     NSURL *saveF = [NSURL URLWithString:[NSString stringWithFormat:SAVEFRIENDSLINK, [[[FBSession activeSession] accessTokenData]accessToken] , [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+    NSLog(@"save friends link %@", [NSString stringWithFormat:SAVEFRIENDSLINK, [[[FBSession activeSession] accessTokenData]accessToken] , [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:saveF];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"save friends success: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error save friends  %@", [error description]);
+
+    }];
+    
+    [operation start];
+}
+
 -(void)getLastCheckinsFromDate:(NSDate *)date
 {
     //Sequencer *sequencer = [[Sequencer alloc] init];
     __block int iterations = 1;
     
-    int period = [[NSDate date] timeIntervalSinceDate:date];
-    //period = 320000;
+    NSInteger period = [[NSDate date] timeIntervalSinceDate:date];
     
-    //period = 864000;
-    int numberOfDays = period / 86400;
+    //period = 86700;
+    NSInteger numberOfDays = period / 86400;
     NSLog(@"%i %i", period, numberOfDays);
+    
+    
+    
+    
     if(numberOfDays < 1) return;
+    
+    if (FBSession.activeSession.isOpen) {
+   
+    } else {
+        //HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        RCAppDelegate *appDelegate = (RCAppDelegate*)[[UIApplication sharedApplication] delegate];
+        [appDelegate openSessionWithAllowLoginUI:NO];
+    }
+    
     
     NSLog(@"start query return last checkins %@", [NSDate date]);
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastDate"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+   
+
+    [self saveFriends];
+
+    
     
     Sequencer *sequencer = [[Sequencer alloc] init];
     
@@ -187,13 +230,12 @@
                 [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] userCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"[userCheckinRequest responseData] last: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                     
-                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
-                    //completion([NSNumber numberWithBool:YES]);
+                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"userCheckinRequest last %@ %@ with count %i", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [[facebookHelper sharedInstance] userCheckinsArray].count]];
                     
                     completion([NSNumber numberWithBool:YES]);
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    NSLog(@"error userCheckinRequest last%@", [error description]);
-                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest last %@  %@", [NSDate date], [error description]]];
+                    NSLog(@"error userCheckinRequest last error for user %@ = %@",[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [error description]);
+                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"error userCheckinRequest last error for user %@ = %@",[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [error description]]];
                     completion([NSNumber numberWithBool:YES]);
                 }];
                 
@@ -222,15 +264,20 @@
                 [client setParameterEncoding:AFJSONParameterEncoding];
                 [client postPath:@"" parameters:@{@"data":[[facebookHelper sharedInstance] friendsCheckinsArray]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"[frCheckinRequest last responseData]: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest last %@ %@", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId]]];
+                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"frCheckinRequest last %@ %@ with count %i", [NSDate date], [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [[facebookHelper sharedInstance] friendsCheckinsArray].count]];
                     completion([NSNumber numberWithBool:YES]);
 
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    NSLog(@"error frCheckinRequest last %@", [error description]);
-                    //[TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest last %@  %@", [NSDate date], [error description]]];
+                    NSLog(@"error frCheckinRequest last error for user %@ = %@",[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [error description]);
+                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"error frCheckinRequest last error for user %@ = %@",[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [error description]]];
                     completion([NSNumber numberWithBool:YES]);
 
                 }];
+                
+            }
+            else
+            {
+                completion([NSNumber numberWithBool:YES]);
                 
             }
             

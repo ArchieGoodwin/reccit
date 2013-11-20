@@ -16,7 +16,7 @@
 #import "RCWebService.h"
 #import "OAToken.h"
 #import "facebookHelper.h"
-
+#import "SlideVC.h"
 #import "twitterHelper.h"
 
 
@@ -62,6 +62,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:@"fRegisterError" object:nil];
 
+        
+       
     }
     else
     {
@@ -333,8 +335,14 @@
         [self performSegueWithIdentifier:@"PushTwitter" sender:nil];
     }
     [HUD hide:YES];
+    
+   
 
 }
+
+
+
+
 
 #pragma mark - 
 #pragma mark - Twitter Login

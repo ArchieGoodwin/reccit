@@ -14,6 +14,12 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>icon-80x80</string>
+				<string>icon-58x58</string>
+				<string>icon-29x29</string>
+				<string>icon-120x120</string>
+				<string>icon-114x114</string>
+				<string>icon-57x57</string>
 				<string>icon.png</string>
 				<string>icon@2x.png</string>
 			</array>
@@ -46,7 +52,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>r03</string>
+	<string>1.0</string>
 	<key>FacebookAppID</key>
 	<string>343928219036680</string>
 	<key>LSRequiresIPhoneOS</key>

@@ -183,8 +183,25 @@
             NSLog(@"sendReview response = %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
             NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
             NSLog(@"responseObject %@", rO);
-            
+            NSInteger rplaceId = [[rO objectForKey:@"UpdateReviewResult"] integerValue];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(rplaceId > 0)
+            {
+                [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] placeId:rplaceId completionBlock:^(BOOL result, NSError *error) {
+                    if(result)
+                    {
+                        NSLog(@"Success!");
+                        
+                    }
+                    else
+                    {
+                        NSLog(@"error in addUserToPlaceTalk %@", error.description);
+                    }
+                }];
+            }
+            
+            
+            
             
             
             if([self.vsParrent isKindOfClass:[RCRateViewController class]])
@@ -198,10 +215,7 @@
                 
             }
             
-           
-            
 
-            
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your review has been submitted!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -245,17 +259,7 @@
     NSLog(@"btnSubmitTouched %@", self.location.comment);
     
 
-    [[RCVibeHelper sharedInstance] addUserToPlaceTalk:[[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId] placeId:self.location.ID completionBlock:^(BOOL result, NSError *error) {
-        if(result)
-        {
-            NSLog(@"Success!");
-            
-        }
-        else
-        {
-            NSLog(@"error in addUserToPlaceTalk %@", error.description);
-        }
-    }];
+    
     if(self.shouldSendImmediately)
     {
         [self sendReview];
@@ -270,7 +274,7 @@
             
             
             ((RCAddPlaceViewController *)self.vsParrent).messageString = self.tvReview.text;
-            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your mention has been saved!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Successfully saved!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alerView show];
            
         }

@@ -47,8 +47,7 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
     
     //id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
-    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"vibe"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+  
     
     
     // get current location
@@ -82,13 +81,8 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
         //[self getVibesSilent];
     }
     
-    
-    NSLog(@"Registering for push notifications...");
-    [[UIApplication sharedApplication]
-     registerForRemoteNotificationTypes:
-     (UIRemoteNotificationTypeAlert |
-      UIRemoteNotificationTypeBadge |
-      UIRemoteNotificationTypeSound)];
+  
+   
     
     
 #if TARGET_IPHONE_SIMULATOR
@@ -203,26 +197,32 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 
 -(void)showButtonForMessages
 {
-    [[self.window viewWithTag:5055] removeFromSuperview];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame =  CGRectMake(280,  SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 2 : 20, 35, 35);
-    btn.backgroundColor = [UIColor clearColor];
-    [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateHighlighted];
-    [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateSelected];
-
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 23, 17, -5)];
-    [btn addTarget:self action:@selector(showConversations) forControlEvents:UIControlEventTouchUpInside];
-    btn.tag = 5055;
     
-    [self.window addSubview:btn];
-    
-    
-    if([self.window viewWithTag:7077] != nil)
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
-        [self.window viewWithTag:7077].hidden = NO;
-        [self.window bringSubviewToFront:[self.window viewWithTag:7077]];
+        [[self.window viewWithTag:5055] removeFromSuperview];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame =  CGRectMake(280,  SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 2 : 20, 35, 35);
+        btn.backgroundColor = [UIColor clearColor];
+        [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateHighlighted];
+        [btn setImage:[UIImage imageNamed:@"vibe_icon.png"] forState:UIControlStateSelected];
+        
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 23, 17, -5)];
+        [btn addTarget:self action:@selector(showConversations) forControlEvents:UIControlEventTouchUpInside];
+        btn.tag = 5055;
+        
+        [self.window addSubview:btn];
+        
+        
+        if([self.window viewWithTag:7077] != nil)
+        {
+            [self.window viewWithTag:7077].hidden = NO;
+            [self.window bringSubviewToFront:[self.window viewWithTag:7077]];
+        }
     }
+    
+   
     
 }
 
@@ -258,11 +258,16 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
                 }
             }
 
+            
+            
             CGRect rect = CGRectMake(300, SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 0 : 19, 21, 21);
             UIView *cont = [[UIView alloc] initWithFrame:rect];
             cont.backgroundColor = [UIColor clearColor];
             
             //[cont addSubview:[self showButtonForMessages]];
+            
+            
+            
             
             UIImageView *alert = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Alert.png"]];
             alert.frame = CGRectMake(0, 0, 21, 21);
@@ -275,6 +280,14 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
             lblMess.text = [NSString stringWithFormat:@"%i", messages];
             
             [cont addSubview:lblMess];
+            
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.frame =  CGRectMake(0, 0, 21, 21);
+            btn.backgroundColor = [UIColor clearColor];
+            
+            [btn addTarget:self action:@selector(showConversations) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cont addSubview:btn];
             
             cont.tag = 7077;
             [self.window addSubview:cont];
@@ -424,7 +437,19 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
+    
+    
+    
     [FBSession.activeSession handleDidBecomeActive];
+    
+    if (![FBSession activeSession].isOpen) {
+        if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
+            [[FBSession activeSession] openWithCompletionHandler:^(FBSession *session,
+                                                                   FBSessionState status,
+                                                                   NSError *error) {}];
+        }
+    }
+    
     
     if([application applicationIconBadgeNumber] > 0)
     {
@@ -438,18 +463,15 @@ NSString *const SCSessionStateChangedNotification = @"com.Potlatch:SCSessionStat
             [self clearNotifications];
         }
     }
-   
-    
-    
-    
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    [FBSession.activeSession close];
-    [self saveContext];
+    //[FBSession.activeSession close];
+    //[self saveContext];
 
 }
 

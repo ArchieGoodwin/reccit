@@ -219,7 +219,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocation count] == 0)
         {
-            [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+            [RCCommonUtils showMessageWithTitle:nil andContent:@"No results for your search."];
         }
         [self.tbResult reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

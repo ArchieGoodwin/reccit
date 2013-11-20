@@ -413,7 +413,15 @@
                                     };
         
         
-        NSLog(@"buildReviewString %@", userArray);
+       // NSLog(@"buildReviewString %@", userArray);
+        
+        
+        NSData *data = [NSJSONSerialization dataWithJSONObject:userArray options:NSJSONWritingPrettyPrinted error:nil ];
+        NSString* aStr;
+        aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"buildReviewString  : %@", aStr);
+
         return userArray;
     }
     else
@@ -457,10 +465,22 @@
                                     };
         
         
-        NSLog(@"buildReviewString %@", userArray);
+        //NSLog(@"buildReviewString %@", userArray);
+        
+        NSData *data = [NSJSONSerialization dataWithJSONObject:userArray options:NSJSONWritingPrettyPrinted error:nil ];
+        NSString* aStr;
+        aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"buildReviewString  : %@", aStr);
+        
+        
+        
         return userArray;
     }
     
+    
+    
+  
 
 }
 

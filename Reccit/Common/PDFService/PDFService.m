@@ -151,8 +151,8 @@ static PDFService * instance = nil;
             newSize = [str sizeWithFont:writeItem.font
                              constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
         }
-        if (newSize.height + 10 > maxHeight) {
-            maxHeight = newSize.height + 10;
+        if (newSize.height + 15 > maxHeight) {
+            maxHeight = newSize.height + 15;
         }
     }
     // if height to draw is larger than height of document, draw header

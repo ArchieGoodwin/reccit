@@ -64,7 +64,7 @@
         if([[NSUserDefaults standardUserDefaults] objectForKey:@"fcheckin"] == nil)
         {
             Sequencer *sequencer = [[Sequencer alloc] init];
-            __block int iterations = 1;
+            __block int iterations = 4;
             int period = 15768000;
             NSLog(@"start query %@", [NSDate date]);
             
@@ -292,7 +292,7 @@
     
     //NSString *urlString  =[NSString stringWithFormat:@"http://reccit.elasticbeanstalk.com/Authentication_deploy/Auth.svc/Authenticate?oauth_token=%@&oauth_secret=%@&type=twitter&facebookid=%@&screenName=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"tKey"], [[NSUserDefaults standardUserDefaults] objectForKey:@"tSecret"], userId, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName]];
 
-    NSString *urlString  =[NSString stringWithFormat:@"http://reccit.elasticbeanstalk.com/Authentication_deploy/Auth.svc/Authenticate?oauth_token=14741188-J7YPaG77ymCr4FEFmenaNcClk9U6ReWsZn295H2oa&oauth_secret=IVcvcM78SynkcXRPAOq6Kav0tsZX3KZmgkN1GEE&type=twitter&facebookid=%@&screenName=%@",  userId, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserName]];
+    NSString *urlString  =[NSString stringWithFormat:@"http://reccit.elasticbeanstalk.com/Authentication_deploy/Auth.svc/Authenticate?oauth_token=14741188-J7YPaG77ymCr4FEFmenaNcClk9U6ReWsZn295H2oa&oauth_secret=IVcvcM78SynkcXRPAOq6Kav0tsZX3KZmgkN1GEE&type=twitter&facebookid=%@&screenName=%@",  userId, [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterName"]];
 
     
     NSLog(@"twiter send url %@", urlString);
@@ -308,7 +308,7 @@
     }];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"send twitter success");
+        NSLog(@"send twitter success %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

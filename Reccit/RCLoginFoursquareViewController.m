@@ -11,7 +11,7 @@
 #import "MBProgressHUD.h"
 #import "RCCommonUtils.h"
 #import "RCWebService.h"
-
+#import "SlideVC.h"
 @interface RCLoginFoursquareViewController ()
 {
     MBProgressHUD *HUD;
@@ -74,12 +74,45 @@
 
 - (IBAction)btnDoneTouched:(id)sender
 {
-    [self performSegueWithIdentifier:@"PushRate" sender:nil];
+    
+    
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin])
+    {
+        
+        SlideVC *vc = [SlideVC new];
+        [self presentViewController:vc animated:YES completion:^{
+             [self performSegueWithIdentifier:@"PushRate" sender:nil];
+        }];
+        
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"PushRate" sender:nil];
+
+    }
+    
+    
+   
 }
 
 - (IBAction)btnSkipTouched:(id)sender
 {
-    [self performSegueWithIdentifier:@"PushRate" sender:nil];
+    
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin])
+    {
+        
+        SlideVC *vc = [SlideVC new];
+        [self presentViewController:vc animated:YES completion:^{
+            [self performSegueWithIdentifier:@"PushRate" sender:nil];
+        }];
+        
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"PushRate" sender:nil];
+        
+    }
+
 }
 
 #pragma mark -
@@ -117,7 +150,20 @@
 
 - (void)loginFoursquareSuccess
 {
-    [self performSegueWithIdentifier:@"PushRate" sender:nil];
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:kRCFirstTimeLogin])
+    {
+        
+        SlideVC *vc = [SlideVC new];
+        [self presentViewController:vc animated:YES completion:^{
+            [self performSegueWithIdentifier:@"PushRate" sender:nil];
+        }];
+        
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"PushRate" sender:nil];
+        
+    }
     
     
     //get checkins

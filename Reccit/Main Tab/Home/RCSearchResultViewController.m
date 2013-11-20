@@ -74,6 +74,13 @@
         frame.size.height = frame.size.height - 20;
         self.view.frame = frame;
     }
+    else
+    {
+
+            CGRect frame = self.tbResult.frame;
+            frame.size.height = frame.size.height + 50;
+            self.tbResult.frame = frame;
+    }
     firstTime = YES;
     self.listLocationReccit = nil;
     self.listLocationFriend = nil;
@@ -117,6 +124,8 @@
         }
         
         self.querySearch = query;
+        self.searchString = query;
+
         self.isSurprase = NO;
         self.showTabs = NO;
         _btn1.hidden = YES;
@@ -157,6 +166,7 @@
         }
         
         self.querySearch = query;
+        self.searchString = query;
         self.isSurprase = NO;
         self.showTabs = NO;
         _btn1.hidden = YES;
@@ -205,7 +215,20 @@
             _btn2.hidden = YES;
             _btn3.hidden = YES;
         }
-                _btnSearchInside.hidden = NO;
+        _btnSearchInside.hidden = NO;
+        
+        if(self.currentTab == 1)
+        {
+            _btn1.alpha = 1;
+            _btn2.alpha = 0.7;
+        }
+        if(self.currentTab == 2)
+        {
+            
+            _btn1.alpha = 0.7;
+            _btn2.alpha = 1;
+        }
+
         
     }
 }
@@ -220,6 +243,12 @@
     }
 }
 
+-(NSString*)stringWithPercentEscape:(NSString *)str {
+    return (NSString *) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[str mutableCopy], NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"),kCFStringEncodingUTF8));
+}
+
+
+
 #pragma mark -
 #pragma mark - Webservice
 
@@ -228,14 +257,14 @@
     // Start new request
     
     NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccitDOTNET : kAPIReccitDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    //NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccit : kAPIReccit, @"958", [self.querySearch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
+    //NSString *urlString = [NSString stringWithFormat:_isSearch ? kAPISearchReccitDOTNET : kAPIReccitDOTNET, [[NSUserDefaults standardUserDefaults] objectForKey:kRCUserId], [self stringWithPercentEscape:self.searchString]];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSLog(@"url for reccits: %@", urlString);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy  timeoutInterval:120];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -246,7 +275,7 @@
         
         
         NSArray *listLocation = _isSearch ? [rO objectForKey:@"KeywordSearchResult"] : [rO objectForKey:@"ReccitResult"];
-        if (listLocation != [NSNull null])
+        if (![listLocation isEqual:[NSNull null]])
         {
             for (NSDictionary *locationDic in listLocation)
             {
@@ -259,16 +288,24 @@
             }
         }
         
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"reccitCount" ascending:NO];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        _listLocationReccit = [[_listLocationReccit sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+        
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationReccit count] == 0)
         {
             firstTime = NO;
-            //[RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+            if(_isSearch)
+            {
+                [RCCommonUtils showMessageWithTitle:nil andContent:@"Oops! Unfortunately there exists no place that matches your search. Are you sure you spelt it correctly?"];
+
+            }
         }
         [self.tbResult reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [RCCommonUtils showMessageWithTitle:@"Error" andContent:error.description];
+        [RCCommonUtils showMessageWithTitle:@"Error" andContent:@"Network error. Please try again later!"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
@@ -293,11 +330,11 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"favs: %@", rO);
+        //NSLog(@"favs: %@", rO);
         self.listLocationFriend = [[NSMutableArray alloc] init];
         
         NSArray *listLocation = [rO objectForKey:@"PopularResult"];
-        if (listLocation != [NSNull null]){
+        if (![listLocation isEqual:[NSNull null]]){
             for (NSDictionary *locationDic in listLocation)
             {
                 //NSLog(@"%@", locationDic);
@@ -315,7 +352,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationFriend count] == 0)
         {
-            [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+            [RCCommonUtils showMessageWithTitle:nil andContent:@"No results for your search."];
         }
         [self.tbResult reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -345,10 +382,10 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *rO = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"popular: %@", rO);
+        //NSLog(@"popular: %@", rO);
         self.listLocationPopular = [[NSMutableArray alloc] init];
         NSArray *listLocation = [rO objectForKey:@"Reccits"];
-        if (listLocation != [NSNull null]){
+        if (![listLocation isEqual:[NSNull null]]){
             
             for (NSDictionary *locationDic in listLocation)
             {
@@ -366,7 +403,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self.listLocationPopular count] == 0)
         {
-            [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+            [RCCommonUtils showMessageWithTitle:nil andContent:@"No results for your search."];
         }
         [self.tbResult reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -400,8 +437,11 @@
     
     if (self.currentTab == 1)
     {
+        _btn1.alpha = 1;
+        _btn2.alpha = 0.7;
         if (self.listLocationReccit == nil)
         {
+            
             [self callAPIGetListReccit];
         } else {
             if ([self.listLocationReccit count] == 0)
@@ -413,13 +453,16 @@
     
     if (self.currentTab == 2)
     {
+        _btn1.alpha = 0.7;
+        _btn2.alpha = 1;
         if (self.listLocationFriend == nil)
         {
+           
             [self callAPIGetListFriendFav];
         } else {
             if ([self.listLocationFriend count] == 0)
             {
-                [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+                [RCCommonUtils showMessageWithTitle:nil andContent:@"No results for your search."];
             }
         }
     }
@@ -432,7 +475,7 @@
         } else {
             if ([self.listLocationPopular count] == 0)
             {
-                [RCCommonUtils showMessageWithTitle:nil andContent:@"No result for this searching."];
+                [RCCommonUtils showMessageWithTitle:nil andContent:@"No results for your search."];
             }
         }
     }
@@ -687,6 +730,8 @@
                 {
                     UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
                     [imgView setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
+                    [imgView setClipsToBounds:YES];
+
                     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                     btn.frame = imgView.frame;
                     [btn setBackgroundColor:[UIColor clearColor]];
@@ -729,6 +774,7 @@
                 {
                     UIImageView *imgView = (UIImageView *)[cell viewWithTag:2001+i];
                     [imgView setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"ic_me2.png"]];
+                    [imgView setClipsToBounds:YES];
                     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
                     btn.frame = imgView.frame;
                     [btn setBackgroundColor:[UIColor clearColor]];
@@ -758,6 +804,18 @@
     UIButton *btn = (UIButton *)sender;
     
     RCLocation *location = nil;
+     switch (self.currentTab) {
+         case 1:
+             if(self.listLocationReccit.count == 0) return;
+             break;
+         case 2:
+             if(self.listLocationFriend.count == 0) return;
+             break;
+         case 3:
+             if(self.listLocationPopular.count == 0) return;
+             break;
+     }
+
     switch (self.currentTab) {
         case 1:
             location = [self.listLocationReccit objectAtIndex:btn.tag];
@@ -776,54 +834,101 @@
     {
         if(btn.frame.origin.x == 5)
         {
-            lbl.text = [location.listFriendsName[0] objectForKey:@"FirstName"];
+            if(location.listFriendsName.count >= 1)
+            {
+                lbl.text = [location.listFriendsName[0] objectForKey:@"FirstName"];
+            }
         }
         if(btn.frame.origin.x == 47)
         {
-            lbl.text = [location.listFriendsName[1] objectForKey:@"FirstName"];
+            if(location.listFriendsName.count >= 2)
+            {
+                lbl.text = [location.listFriendsName[1] objectForKey:@"FirstName"];
+
+            }
         }
         if(btn.frame.origin.x == 89)
         {
-            lbl.text = [location.listFriendsName[2] objectForKey:@"FirstName"];
+            if(location.listFriendsName.count >= 3)
+            {
+                lbl.text = [location.listFriendsName[2] objectForKey:@"FirstName"];
+
+            }
         }
         if(btn.frame.origin.x == 131)
         {
-            lbl.text = [location.listFriendsName[3] objectForKey:@"FirstName"];
+            if(location.listFriendsName.count >= 4)
+            {
+                lbl.text = [location.listFriendsName[3] objectForKey:@"FirstName"];
+
+            }
         }
         if(btn.frame.origin.x == 173)
         {
-            lbl.text = [location.listFriendsName[4] objectForKey:@"FirstName"];
+            if(location.listFriendsName.count >= 5)
+            {
+                lbl.text = [location.listFriendsName[4] objectForKey:@"FirstName"];
+
+            }
         }
         if(btn.frame.origin.x == 215)
         {
-            lbl.text = [location.listFriendsName[5] objectForKey:@"FirstName"];
+            if(location.listFriendsName.count >=6)
+            {
+                lbl.text = [location.listFriendsName[5] objectForKey:@"FirstName"];
+
+            }
         }
     }
     else
     {
         if(btn.frame.origin.x == 5)
         {
-            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[0] objectForKey:@"FirstName"], [location.listFriendsName[0] objectForKey:@"Relation"]];
+            if(location.listFriendsName.count >=1)
+            {
+                lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[0] objectForKey:@"FirstName"], [location.listFriendsName[0] objectForKey:@"Relation"]];
+
+            }
         }
         if(btn.frame.origin.x == 47)
         {
-            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[1] objectForKey:@"FirstName"], [location.listFriendsName[1] objectForKey:@"Relation"]];
+            if(location.listFriendsName.count >=2)
+            {
+                lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[1] objectForKey:@"FirstName"], [location.listFriendsName[1] objectForKey:@"Relation"]];
+
+            }
         }
         if(btn.frame.origin.x == 89)
         {
-            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[2] objectForKey:@"FirstName"], [location.listFriendsName[2] objectForKey:@"Relation"]];
+            if(location.listFriendsName.count >=3)
+            {
+                lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[2] objectForKey:@"FirstName"], [location.listFriendsName[2] objectForKey:@"Relation"]];
+
+            }
         }
         if(btn.frame.origin.x == 131)
         {
-            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[3] objectForKey:@"FirstName"], [location.listFriendsName[3] objectForKey:@"Relation"]];
+            if(location.listFriendsName.count >=4)
+            {
+                lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[3] objectForKey:@"FirstName"], [location.listFriendsName[3] objectForKey:@"Relation"]];
+
+            }
         }
         if(btn.frame.origin.x == 173)
         {
-            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[4] objectForKey:@"FirstName"], [location.listFriendsName[4] objectForKey:@"Relation"]];
+            if(location.listFriendsName.count >=5)
+            {
+                lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[4] objectForKey:@"FirstName"], [location.listFriendsName[4] objectForKey:@"Relation"]];
+
+            }
         }
         if(btn.frame.origin.x == 215)
         {
-            lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[5] objectForKey:@"FirstName"], [location.listFriendsName[5] objectForKey:@"Relation"]];
+            if(location.listFriendsName.count >=6)
+            {
+                lbl.text =  [NSString stringWithFormat:@"%@ (friends with %@)",[location.listFriendsName[5] objectForKey:@"FirstName"], [location.listFriendsName[5] objectForKey:@"Relation"]];
+
+            }
         }
     }
     

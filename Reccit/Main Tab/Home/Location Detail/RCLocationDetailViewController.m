@@ -64,6 +64,16 @@
         //}];
         
     }
+    else
+    {
+
+            CGRect frame = self.tbReview.frame;
+            frame.size.height = frame.size.height + 50;
+            self.tbReview.frame = frame;
+
+    }
+
+   
 	// Do any additional setup after loading the view.
     
     self.mapView.delegate = self;
@@ -142,7 +152,7 @@
     {
         _btnVibe.hidden = YES;
     }*/
-    if(self.location.ID > 0)
+    if(self.location.ID > 0 && [[[NSUserDefaults standardUserDefaults] objectForKey:@"vibe"] isEqualToString:@"YES"])
     {
         _btnVibe.hidden = NO;
         
@@ -154,23 +164,31 @@
     
     NSLog(@"loc address: %@  ;  %@ ", self.location.address, self.location.street);
     self.lbName.text = self.location.name;
-    if([self.location.city isEqual:[NSNull null]] && self.location.city != nil)
+    
+    NSMutableString *textAll = [NSMutableString new];
+    if(![self.location.genre isEqual:[NSNull null]] && self.location.genre != nil)
     {
-        self.lbAddress.text = [NSString stringWithFormat:@"%@ %@", self.location.city, [self.location.street isEqualToString:@""] ? self.location.address : self.location.street];
+        [textAll appendString:self.location.genre];
+        [textAll appendString:@"\n"];
+        //self.lbCity.text = self.location.genre;
+        
+    }
+    if(![self.location.city isEqual:[NSNull null]] && self.location.city != nil)
+    {
+        
+        [textAll appendString:[NSString stringWithFormat:@"%@ \n%@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.city, [self.location.state isEqualToString:@""] ? @"" : self.location.state,  self.location.zipCode ]];
+        //self.lbAddress.text = [NSString stringWithFormat:@"%@ \n%@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.city, [self.location.state isEqualToString:@""] ? @"" : self.location.state,  self.location.zipCode ];
 
     }
     else
     {
-        self.lbAddress.text = [self.location.street isEqualToString:@""] ? self.location.address : self.location.street;
+        [textAll appendString:[NSString stringWithFormat:@"%@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.state, self.location.zipCode]];
+        //self.lbAddress.text = [NSString stringWithFormat:@"%@ %@ %@",[self.location.street isEqualToString:@""] ? self.location.address : self.location.street, self.location.state, self.location.zipCode];
 
     }
-    
+    self.lbCity.text = textAll;
     self.rateView.rate = self.location.rating;
-    if(self.location.genre != [NSNull null] && self.location.genre != nil)
-    {
-        self.lbCity.text = self.location.genre;
-
-    }
+    
     
     if (self.location.phoneNumber == nil || [self.location.phoneNumber isEqualToString:@""])
     {

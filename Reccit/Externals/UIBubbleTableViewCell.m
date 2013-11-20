@@ -16,6 +16,7 @@
 #import "RCUser.h"
 #import "RCMessage.h"
 #import "RCVibeHelper.h"
+#import "NSManagedObject+NWCoreDataHelper.h"
 @interface UIBubbleTableViewCell ()
 
 @property (nonatomic, retain) UIView *customView;
@@ -88,15 +89,25 @@
         NSLog(@"%@", self.data.message.user.userId);
         if(self.data.message.user.avatarUrl == nil)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[RCVibeHelper sharedInstance] getUserFromServer:[NSString stringWithFormat:@"%@",self.data.message.user.userId] mess:self.data.message completionBlock:^(RCMessage *result, NSError *error) {
-                    
-                    NSLog(@"%@", result.user.avatarUrl);
-                    self.data.message = result;
-                    [self.avatarImage setImageWithURL:[NSURL URLWithString:self.data.message.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
+            //dispatch_async(dispatch_get_main_queue(), ^{
+                [[RCVibeHelper sharedInstance] getUserFromServer:[NSString stringWithFormat:@"%@",self.data.message.user.userId] messId:self.data.message.messageId completionBlock:^(NSString *result, NSError *error) {
+                    if(!error)
+                    {
+                        NSLog(@"%@", result);
+                        
+                        [RCMessage saveDefaultContext];
+                        
+                        RCMessage *mess = [[RCVibeHelper sharedInstance] getMessageById:result];
+                        if(mess)
+                        {
+                            [self.avatarImage setImageWithURL:[NSURL URLWithString:mess.user.avatarUrl] placeholderImage:[UIImage imageNamed:@"missingAvatar.png"]];
+
+                        }
+                    }
+                   
                     
                 }];
-            });
+            //});
            
         }
         else

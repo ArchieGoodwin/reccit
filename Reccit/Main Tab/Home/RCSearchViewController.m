@@ -27,7 +27,7 @@
 #import "TRGoogleMapsAutocompletionCellFactory.h"
 #import "RCLocationDetailViewController.h"
 #define kAPIGetGenres @"http://bizannouncements.com/Vega/services/app/cuisines.php"
-
+#define SCROLL_UPDATE_DISTANCE          0.25
 
 #define kRCAPICheckInGetLocationArround @"http://bizannouncements.com/Vega/services/app/appCheckin.php?lat=%lf&long=%lf&type=%@"
 #define kRCAPICheckInGetLocationArroundDOTNET  @"http://reccit.elasticbeanstalk.com/Authentication_deploy/services/Reccit.svc/GetFactual?userfbid=%@&city=%@&type=%@&latitude=%f&longitude=%f"
@@ -38,6 +38,8 @@
     UITapGestureRecognizer *cancelGesture;
     CGRect viewRect;
     CGRect mapRect;
+    CLLocationCoordinate2D lastLocationCoordinate;
+    BOOL firstTime;
 }
 
 @end
@@ -79,7 +81,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    firstTime = YES;
     //viewDidload
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
@@ -418,12 +420,17 @@
     MKCoordinateRegion region;
     region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
     region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
-    region.span.latitudeDelta = 0.003; // Add a little extra space on the sides
-    region.span.longitudeDelta = 0.003; // Add a little extra space on the sides
+    region.span.latitudeDelta = 0.03; // Add a little extra space on the sides
+    region.span.longitudeDelta = 0.03; // Add a little extra space on the sides
     
     region = [_mapView regionThatFits:region];
     [_mapView setRegion:region animated:YES];
     
+}
+
+-(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    //[self centerMap2];
 }
 
 
@@ -467,10 +474,49 @@
 -(void)mapView:(MKMapView *)mapView1 regionDidChangeAnimated:(BOOL)animated
 {
 
+    NSLog(@"regionDidChangeAnimated");
+    MKCoordinateRegion mapRegion;
+    // set the center of the map region to the now updated map view center
+    mapRegion.center = mapView1.centerCoordinate;
     
+    //mapRegion.span.latitudeDelta = 0.3; // you likely don't need these... just kinda hacked this out
+    //mapRegion.span.longitudeDelta = 0.3;
+    
+    // get the lat & lng of the map region
+    double lat = mapRegion.center.latitude;
+    double lng = mapRegion.center.longitude;
+    
+    // note: I have a variable I have saved called lastLocationCoordinate. It is of type
+    // CLLocationCoordinate2D and I initially set it in the didUpdateUserLocation
+    // delegate method. I also update it again when this function is called
+    // so I always have the last mapRegion center point to compare the present one with
+    CLLocation *before = [[CLLocation alloc] initWithLatitude:lastLocationCoordinate.latitude longitude:lastLocationCoordinate.longitude];
+    CLLocation *now = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+    
+    CLLocationDistance distance = ([before distanceFromLocation:now]) * 0.000621371192;
+
+    
+    NSLog(@"Scrolled distance: %@", [NSString stringWithFormat:@"%.02f", distance]);
+    
+    if( distance > SCROLL_UPDATE_DISTANCE )
+    {
+        if(firstTime)
+        {
+            firstTime = NO;
+        }
+        else
+        {
+            [self callAPIGetListLocation];
+            // resave the last location center for the next map move event
+            lastLocationCoordinate.latitude = mapRegion.center.latitude;
+            lastLocationCoordinate.longitude = mapRegion.center.longitude;
+        }
+    }
+    
+
    
 
-    [self callAPIGetListLocation];
+   
     
     
     

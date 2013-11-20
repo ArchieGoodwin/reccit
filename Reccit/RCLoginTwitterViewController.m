@@ -100,6 +100,8 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:[_engine getAccessToken].key forKey:@"tKey"];
     [[NSUserDefaults standardUserDefaults] setObject:[_engine getAccessToken].secret forKey:@"tSecret"];
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"twitterName"];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 
